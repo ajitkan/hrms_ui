@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hrms_ui';
+  IsLogin = false;
+
+  ngOnInit(){
+    // alert("login Success");
+    // this.IsLogin = true;
+  }
+  IsLoggedin(status:any){
+    if(status)
+      this.IsLogin = true;
+  }
 }
