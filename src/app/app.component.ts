@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'hrms_ui';
   IsLogin = false;
+  isJobPostCollapsed: boolean = true;
+  // isCollapsed:boolean=false;
+
 
   ngOnInit(){
     // alert("login Success");
@@ -16,5 +19,8 @@ export class AppComponent {
   IsLoggedin(status:any){
     if(status)
       this.IsLogin = true;
+  }
+  toggleJobPostCollapse() {
+    this.isJobPostCollapsed = !this.isJobPostCollapsed;
   }
 }
