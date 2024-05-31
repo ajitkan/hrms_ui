@@ -6,19 +6,41 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { FooterComponent } from './pages/shared-components/footer/footer.component';
 import { HeaderComponent } from './pages/shared-components/header/header.component';
+import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import{ HttpClientModule } from '@angular/common/http'
+import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    JobPostComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgbModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot(),
+     NgbModule,
+     NgxPaginationModule,
+     Ng2SearchPipeModule
+    
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
