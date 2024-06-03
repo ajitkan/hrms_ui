@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { FooterComponent } from './pages/shared-components/footer/footer.component';
 import { HeaderComponent } from './pages/shared-components/header/header.component';
+import { EmployeeDataComponent } from './pages/employee-data/employee-data.component';
 import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -25,6 +26,7 @@ import { ImportAttendancesComponent } from './pages/time-and-attendance/import-a
     LoginComponent,
     FooterComponent,
     HeaderComponent,
+    EmployeeDataComponent
     JobPostComponent,
     AddAttendanceComponent,
     ImportAttendancesComponent
