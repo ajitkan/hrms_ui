@@ -1,0 +1,51 @@
+<section id="content" class="page animate-bottom" style="margin-top: 20px;">
+  
+    <div class="container-fluid">
+  
+        <!-- Import CSV File (Device) -->
+        
+  
+  
+        <!-- Import EXCEL/CSV file (Manual) -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Import EXCEL/CSV file (Manual)</h3>
+            </div>
+            <div class="card-body">
+                <h6><a href="https://hrm5.test-softwares.online/sample_file/sample_attendance.xlsx" class="btn btn-primary"> <i
+                    class="fa fa-download"></i> Download Sample File </a></h6>
+                <p class="card-text">The first line in downloaded sample file should remain as it is. Please do not change
+                    the order of columns in file.</p>
+                <p class="card-text">The correct column order is (Staff Id, Attendance Date, Clock In, Clock Out).</p>
+                <ul>
+                    <li>Date format should be (According to general settings).</li>
+                    <li>You must follow the file, otherwise you will get an error while importing the file.</li>
+                </ul>
+  
+                <form action="https://hrm5.test-softwares.online/timesheet/attendances/page/import" autocomplete="off" enctype="multipart/form-data"
+                      method="post" accept-charset="utf-8">
+                    <input type="hidden" name="_token" value="oFzLXiEe4VbtUIZ9qD6oQyMwDFLV9FF1L1trQcat">                        <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <fieldset class="form-group">
+                                    <label for="logo">Upload File</label>
+                                    <input type="file" class="form-control-file" id="file" name="file"
+                                           accept=".xlsx, .xls, .csv">
+                                    <small>Please select excel/csv file (allowed file size 2MB)</small>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <div class="form-actions box-footer">
+                            <button name="import_form" type="submit" class="btn btn-primary"><i
+                                        class="fa fa fa-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+  
+    </div>
+  </section>

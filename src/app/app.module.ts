@@ -16,6 +16,8 @@ import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
+import { ImportAttendancesComponent } from './pages/time-and-attendance/import-attendances/import-attendances.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     LoginComponent,
     FooterComponent,
     HeaderComponent,
-    JobPostComponent
+    JobPostComponent,
+    AddAttendanceComponent,
+    ImportAttendancesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ToastrModule.forRoot(),
      NgbModule,
      NgxPaginationModule,
-     Ng2SearchPipeModule
-    
+     Ng2SearchPipeModule    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
