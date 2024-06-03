@@ -1,0 +1,426 @@
+<section class="job-section">
+    <div class="container-fluid">
+        <div id="general_result"></div>
+
+        <!-- <div class="actions mb-3 mt-3 text-right">
+            
+            <button type="button" class="btn btn-info mr-2" name="create_record" id="create_record" (click)="addJobPopup()">
+                <i class="fa fa-plus"></i> Add Job
+            </button>
+            
+            <button type="button" class="btn btn-danger" name="bulk_delete" id="bulk_delete" style="display: none;">
+                <i class="fa fa-minus-circle"></i> Bulk delete
+            </button>
+        </div>
+      <div  class= "form-group">
+        <input type="text" class="form-control" placeholder="Search jobs" [(ngModel)]="searchText">
+      </div>  -->
+      <div class="actions mb-3 mt-3 d-flex justify-content-between align-items-center">
+        <!-- <div class="form-group mb-0">
+            <input type="text" class="form-control search-box" placeholder="Search jobs" [(ngModel)]="searchText">
+        </div> -->
+        <div>
+            <button type="button" class="btn btn-info mr-2" name="create_record" id="create_record" (click)="addJobPopup()">
+                <i class="fa fa-plus"></i> Add Job
+            </button>
+            <button type="button" class="btn btn-danger" name="bulk_delete" id="bulk_delete" style="display: none;">
+                <i class="fa fa-minus-circle"></i> Bulk delete
+            </button>
+        </div>
+        <div class="form-group mb-0">
+            <input type="text" class="form-control search-box" placeholder="Search jobs" [(ngModel)]="searchText">
+        </div>
+        <!-- <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-secondary" id="dropdownBasic1" ngbDropdownToggle>Items per page: {{ itemsPerPage }}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" (click)="setItemsPerPage(5)">5</button>
+                <button class="dropdown-item" (click)="setItemsPerPage(10)">10</button>
+                <button class="dropdown-item" (click)="setItemsPerPage(25)">25</button>
+            </div>
+        </div>
+         -->
+         <div class="d-flex align-items-center">
+            <!-- <span>Items per page:</span> -->
+            <div ngbDropdown class="d-inline-block">
+                <span>Items per page:</span>
+                <button class="btn btn-secondary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
+                    {{ itemsPerPage }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="compact-dropdown-menu">
+                    <button class="dropdown-item" (click)="setItemsPerPage(5)">5</button>
+                    <button class="dropdown-item" (click)="setItemsPerPage(10)">10</button>
+                    <button class="dropdown-item" (click)="setItemsPerPage(25)">25</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="table-responsive">
+            <table id="job_post-table" class="table custom-table">
+                <thead>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th >Position</th>
+                        <th>Company</th>
+                        <th>Posted Date</th>
+                        <th>Status</th>
+                        <th>Closing Date</th>
+                        <th>Action</th>
+                        
+                    </tr>
+                </thead>
+
+                <!-- <thead>
+                    <tr>
+                      <th>Sr. No</th>
+                      <th (click)="sort('jobTitle')">
+                        Position 
+                        <i class="fa" [ngClass]="{'fa-caret-up': isSortedBy('jobTitle', 'asc'), 'fa-caret-down': isSortedBy('jobTitle', 'desc')}"></i>
+                      </th>
+                      <th (click)="sort('company')">
+                        Company 
+                        <i class="fa" [ngClass]="{'fa-caret-up': isSortedBy('company', 'asc'), 'fa-caret-down': isSortedBy('company', 'desc')}"></i>
+                      </th>
+                      <th (click)="sort('postedDate')">
+                        Posted Date 
+                        <i class="fa" [ngClass]="{'fa-caret-up': isSortedBy('postedDate', 'asc'), 'fa-caret-down': isSortedBy('postedDate', 'desc')}"></i>
+                      </th>
+                      <th>Status</th>
+                      <th>Closing Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead> -->
+                  
+                <tbody>
+                    <tr *ngFor="let job of jobs | filter:searchText | paginate: { id: 'jobsPagination', itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+                        <td>{{ i + 1 + (page-1) * itemsPerPage }}</td>
+                        <td>{{ job.jobTitle }}</td>
+                        <td>{{ job.company }}</td>
+                        <td>{{ job.postedDate | date }}</td>
+                        <td>{{ job.status }}</td>
+                        <td>{{ job.closingDate | date}}</td>
+                        <!-- <td class="action-buttons">
+                            <button (click)="viewJob(job)" class="btn btn-sm btn-info mr-1">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                            <button (click)="editJob(job)" class="btn btn-sm btn-warning mr-1">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button (click)="deleteJob(job.id)" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td> -->
+                        <td class="action-buttons">
+                            <div ngbDropdown class="d-inline-block">
+                              <button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdownMenuButton{{i}}" ngbDropdownToggle>
+                                <i class="fa fa-ellipsis-v"></i>
+                              </button>
+                              <div ngbDropdownMenu attr.aria-labelledby="dropdownMenuButton{{i}}" class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" (click)="viewJob(job)">
+                                  <i class="fa fa-eye"></i> View
+                                </button>
+                                <button class="dropdown-item" (click)="editJob(job)">
+                                  <i class="fa fa-pencil"></i> Edit
+                                </button>
+                                <button class="dropdown-item" (click)="deleteJob(job.id)">
+                                  <i class="fa fa-trash"></i> Delete
+                                </button>
+                              </div>
+                            </div>
+                          </td>
+                          
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls id="jobsPagination" (pageChange)="pageChange($event)"></pagination-controls>
+    </div>
+</section>
+
+<div #formModal id="formModal" class="modal fade" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 id="exampleModalLabel" class="modal-title">Add Job</h5> -->
+                <h5 id="exampleModalLabel" class="modal-title">{{ editMode ? 'Edit Job' : 'Add Job' }}</h5>
+                <button type="button" data-bs-dismiss="modal" #closeButton id="close" aria-label="Close" class="close"
+                    (click)="closePopup()"><i class="fa fa-close"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <span id="form_result"></span>
+
+                <form autocomplete="off" (ngSubmit)="submitAddJobForm()" [formGroup]="addJobForm" method="post"
+                    id="sample_form" class="form-horizontal">
+
+                    <input type="hidden" name="_token" value="WBsSmxTBcH2zQXS8pMY4tp1HgrqqOnyOsPL2yDj7">
+                    <div class="row">
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Company">Company <span class="text-danger">*</span></label>
+                                <select name="Company" id="Company" required class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="contains" title='Select Company...'
+                                    formControlName="Company">
+                                    <option value="" disabled>Select a company</option>
+                                    <option value="Ecotech_It_Solution">Ecotech IT Solution</option>
+                                    <option value="KAN_Infocom_Solution">KAN Infocom Solution</option>
+                                </select>
+                                <div *ngIf="isInvalidAndTouched('Company')" class="text-danger">
+                                    Company is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" col-md-6 form-group">
+                            <label for="JobTitle">Job Title <span class="text-danger">*</span></label>
+                            <input type="text" formControlName="JobTitle" id="JobTitle" class="form-control"
+                                placeholder="Job Title">
+                            <div *ngIf="isInvalidAndTouched('JobTitle')" class="text-danger">
+                                Job Title is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Job Type <span class="text-danger">*</span></label>
+                            <select name="JobType" id="JobType" required class="selectpicker form-control"
+                                data-live-search="true" data-live-search-style="contains" title="Select Job Type..."
+                                formControlName="JobType">
+                                <option value="" disabled>Select Job Type</option>
+                                <option value="full_time">Full Time</option>
+                                <option value="part_time">Part Time</option>
+                                <option value="internship">Internship</option>
+                                <option value="freelance">Freelance</option>
+                            </select>
+
+                            <div *ngIf="isInvalidAndTouched('JobType')" class="text-danger">
+                                Job Type is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="JobCategory">Job Category</label>
+                                <select name="JobCategory" id="JobCategory" 
+                                    class="form-control selectpicker" data-live-search="true"
+                                    data-live-search-style="contains" title='Select Job Category'
+                                    formControlName="JobCategory">
+                                    <option value="" disabled>Select Job Category</option>
+                                    <option value="2">PHP</option>
+                                    <option value="3">Seo</option>
+                                    <option value="5">Analyst</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="NoOfVacancy">No Of Vacancy </label>
+                            <input type="number" name="NoOfVacancy" id="NoOfVacancy" class="form-control"
+                                formControlName="NoOfVacancy">
+                        </div>
+
+                        <!-- <div class="col-md-6 form-group">
+                            <label for="ClosingDate">Date Of Closing</label>
+                            <input type="date" class="form-control" placeholder=" Date" required v-model="ClosingDate"
+                                formControlName="ClosingDate">
+                        </div> -->
+
+                        <div class="col-md-6 form-group">
+                            <label for="ClosingDate">Date Of Closing</label>
+                            <input type="date" class="form-control" placeholder=" Date"  formControlName="ClosingDate">
+                        </div>
+                        
+                        <div class="col-md-6 form-group">
+                            <label for="Gender">Gender <span class="text-danger">*</span></label>
+                            <select name="Gender" id="Gender" required class="selectpicker form-control"
+                                data-live-search="true" data-live-search-style="contains" title="Select Gender..."
+                                formControlName="Gender">
+                                <option value="" disabled selected>Select Gender</option>
+                                <!-- <option value="">No Preference</option> -->
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div *ngIf="isInvalidAndTouched('Gender')" class="text-danger">
+                                gender is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="MinExperience">Minimum Experience <span class="text-danger">*</span></label>
+                            <select name="MinExperience" id="MinExperience" required class="selectpicker form-control"
+                                data-live-search="true" data-live-search-style="contains" title="Select Option..."
+                                formControlName="MinExperience">
+                                <option value="" disabled>Select your Experience</option>
+                                <option value="0">Fresh</option>
+                                <option value="1 Years">1 Years</option>
+                                <option value="2 Years">2 Years</option>
+                                <option value="3 Years">3 Years</option>
+                                <option value="4 Years">4 Years</option>
+                                <option value="5 Years">5 Years</option>
+                                <option value="6 Years">6 Years</option>
+                                <option value="7 Years">7 Years</option>
+                                <option value="8 Years">8 Years</option>
+                                <option value="9 Years">9 Years</option>
+                                <option value="10 Years">10 Years</option>
+                                <option value="+10 Years">+10 Years</option>
+                            </select>
+                            <div *ngIf="isInvalidAndTouched('MinExperience')" class="text-danger">
+                                Minimum Experience is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="IsFeatured">Is Featured? <span class="text-danger">*</span></label>
+                            <select name="IsFeatured" id="IsFeatured" required class="selectpicker form-control"
+                                data-live-search="true" data-live-search-style="contains" title="Select Option..."
+                                formControlName="IsFeatured">
+                                <option value="" disabled selected>Select Option...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                            <div *ngIf="isInvalidAndTouched('IsFeatured')" class="text-danger">
+                                IsFeatured is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="Status">Status <span class="text-danger">*</span></label>
+                            <select name="Status" id="Status" required class="selectpicker form-control"
+                                data-live-search="true" data-live-search-style="contains" title="Select Status..."
+                                formControlName="Status">
+                                <option value="" disabled selected>Select Status</option>
+                                <option value="Unpublished">Unpublished</option>
+                                <option value="Published">Published</option>
+                            </select>
+                            <div *ngIf="isInvalidAndTouched('Status')" class="text-danger">
+                                Status is required
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 form-group">
+                            <label for="ShortDescription">Short Description</label>
+                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" rows="3"
+                                formControlName="ShortDescription"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="LongDescription">Long Description</label>
+                                <textarea class="form-control" id="LongDescription" name="LongDescription" rows="3"
+                                    formControlName="LongDescription"></textarea>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="container">
+                            <div class="form-group" align="center">
+                                <input type="hidden" name="action" id="action" />
+                                <input type="hidden" name="hidden_id" id="hidden_id" />
+                                <input type="submit" name="action_button" id="action_button" class="btn btn-warning"
+                                    value=Add>
+                            </div>
+                        </div> -->
+                        <div class="container">
+                            <div class="form-group" align="center">
+                                <input type="hidden" name="action" id="action" />
+                                <input type="hidden" name="hidden_id" id="hidden_id" />
+                                <input type="submit" name="action_button" id="action_button" class="btn btn-warning"
+                                    [value]="editMode ? 'Save' : 'Add'"> <!-- Update button label based on edit mode -->
+                                <button type="button" class="btn btn-secondary" id="cancel_button" *ngIf="editMode"
+                                    (click)="cancelEdit()">Cancel</button> <!-- Show cancel button only in edit mode -->
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div id="toastr-container"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Job Details Modal --> 
+<div #jobDetailsModal id="jobDetailsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="jobDetailsModalLabel" class="modal-title">Job Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Position:</strong> {{ viewedJob?.jobTitle }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Company:</strong> {{ viewedJob?.company }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Posted Date:</strong> {{ viewedJob?.postedDate | date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Status:</strong> {{ viewedJob?.status }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Closing Date:</strong> {{ viewedJob?.closingDate | date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Job Type:</strong> {{ viewedJob?.jobType }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Job Category:</strong> {{ viewedJob?.jobCategory }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>No Of Vacancy:</strong> {{ viewedJob?.noOfVacancy }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Gender:</strong> {{ viewedJob?.gender }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Minimum Experience:</strong> {{ viewedJob?.minExperience }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Is Featured:</strong> {{ viewedJob?.isFeatured }}</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Short Description:</strong> {{ viewedJob?.shortDescription }}</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Long Description:</strong> {{ viewedJob?.longDescription }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div #deleteConfirmationModal id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="deleteConfirmationModalLabel" class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this job?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" (click)="confirmDelete()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -7,6 +7,18 @@ import { LoginComponent } from './pages/authentication/login/login.component';
 import { FooterComponent } from './pages/shared-components/footer/footer.component';
 import { HeaderComponent } from './pages/shared-components/header/header.component';
 import { EmployeeDataComponent } from './pages/employee-data/employee-data.component';
+import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import{ HttpClientModule } from '@angular/common/http'
+import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
+import { ImportAttendancesComponent } from './pages/time-and-attendance/import-attendances/import-attendances.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +27,25 @@ import { EmployeeDataComponent } from './pages/employee-data/employee-data.compo
     FooterComponent,
     HeaderComponent,
     EmployeeDataComponent
+    JobPostComponent,
+    AddAttendanceComponent,
+    ImportAttendancesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgbModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot(),
+     NgbModule,
+     NgxPaginationModule,
+     Ng2SearchPipeModule    
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
