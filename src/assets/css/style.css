@@ -13347,7 +13347,8 @@ label {
 @media (min-width: 768px) {
   .left-sidebar {
     transform: translateX(0);
-    width: 250px;
+    /* width: 250px; */
+    width: auto;
     position: relative;
     z-index: 1;
   }
@@ -13399,7 +13400,7 @@ label {
   background-color: rgba(158, 109, 224, 0.4);
 }
 .sidebar .sidebar-inner .section-title {
-  padding: 1.25rem 1.56rem 1rem;
+  /* padding: 1.25rem 1.56rem 1rem; */
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.75rem;

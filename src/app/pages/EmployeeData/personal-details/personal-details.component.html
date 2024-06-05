@@ -1,0 +1,296 @@
+<div  class="container content menu-padding"><section><div>
+<div class="row mb-12">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header cheader">
+                <img height="20px" src="static/images/icons/basic-details.png"> Personal Details
+            </div>
+            <div class="card-body cbody10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Date of Birth</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.dob}}</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Gender</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <p class="text-muted mb-0">{{personalDetails.obj.gender}}</p> -->
+                        <p class="text-muted mb-0">M</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Father/Husband Name</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.middle_name}}</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Relation</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">F</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Physically Handicapped</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">N</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">International Worker</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">N</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header cheader">
+                <img height="20px" src="static/images/icons/kyc.png"> Contact Details
+            </div>
+            <div class="card-body cbody10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.aadhar}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                    </div>
+                </div>  
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.pan}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0"> {{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                    </div>
+                </div> 
+
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK A/C Number</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.account_No}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on BANK</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.account_holderName}} </p>
+                    </div>
+                </div> 
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK IFSC</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.obj.ifsc}}</p>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header cheader">
+                <img height="20px" src="static/images/icons/basic-details.png"> Basic Details
+            </div>
+            <div class="card-body cbody10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Date of Birth</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">27-10-1997</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Gender</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">M</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Father/Husband Name</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SHIVAJI</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Relation</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">F</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Physically Handicapped</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">N</p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">International Worker</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">N</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header cheader">
+                <img height="20px" src="static/images/icons/kyc.png"> KYC Details
+            </div>
+            <div class="card-body cbody10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">455189665231 </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                    </div>
+                </div>  
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">DLOPP5390C </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                    </div>
+                </div> 
+
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK A/C Number</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">36270289642 </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on BANK</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                    </div>
+                </div> 
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK IFSC</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">SBIN0007795 </p>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div> -->      
+</div>
+</div></section></div>
