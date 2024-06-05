@@ -1,0 +1,700 @@
+<div class="container content menu-padding">
+    <section>
+        <div >                   
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+                                    <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 150px;"
+  alt="Avatar" />
+  <h5 class="my-3 color-black">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</h5>  
+                             -->
+                             <img class="rounded-circle shadow-1-strong mb-4"
+                                src={{personalDetails.obj.imgSource}} alt="avatar"
+                                style="width: 150px;margin: auto;display: flex;" />
+                            <div class="row d-flex justify-content-center">
+                                <div style="text-align: center;">
+                                <h5 class="mb-3">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</h5>
+                                <p>Photographer</p>
+                                <!-- <p class="text-muted">
+                                    <i class="fas fa-quote-left pe-2"></i>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
+                                    nesciunt sint eligendi reprehenderit reiciendis, quibusdam illo, beatae quia
+                                    fugit consequatur laudantium velit magnam error. Consectetur distinctio fugit
+                                    doloremque.
+                                </p> -->
+                                </div>
+                            </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <table id="table-cp" class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-6 border-0">
+                                                    <!-- <div class="row">
+                                                        <div class="col-sm-4"> -->
+                                                            <p class="mb-0">Date of Birth</p>
+                                                        <!-- </div> -->
+                                                        <!-- <div class="col-sm-8"> -->
+                                                            
+                                                        <!-- </div>
+                                                    </div> -->
+                                                </td>
+                                                <td class="border-0">
+                                                    <p class="text-muted mb-0">{{personalDetails.obj.dob | date}}</p>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td class="col-md-6 border-0">
+                                                    Mobile Number
+                                                </td>
+                                                <td class="border-0">
+                                                    <p class="text-muted mb-0">{{personalDetails.obj.mob}}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-6 border-0">
+                                                    Email Id
+                                                </td>
+                                                <td class="border-0">
+                                                    <p class="text-muted mb-0">{{personalDetails.obj.email}}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-6 border-0">
+                                                    UAN
+                                                </td>
+                                                <td class="border-0">
+                                                    <p class="text-muted mb-0">{{personalDetails.obj.uan}} </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-6 border-0">
+                                                    Total Experience
+                                                </td>
+                                                <td class="border-0">
+                                                    <p class="text-muted mb-0">3 Years 1 Months 0 Days </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                           
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-12">
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header cheader">
+                            <img height="20px" src="static/images/icons/basic-details.png"> Personal Details
+                        </div>
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Gender</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <!-- <p class="text-muted mb-0">{{personalDetails.obj.gender}}</p> -->
+                                    <p class="text-muted mb-0">M</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Father/Husband Name</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.middle_name}}</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Relation</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">F</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Physically Handicapped</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">N</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">International Worker</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">N</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header cheader">
+                            <img height="20px" src="static/images/icons/kyc.png"> Contact Details
+                        </div>
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Aadhaar</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.aadhar}} </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on Aadhaar</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                                </div>
+                            </div>  
+                            <hr class="hr1">                                    
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">PAN</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.pan}} </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on PAN</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0"> {{personalDetails.obj.first_name + " " + personalDetails.obj.middle_name + " " + personalDetails.obj.last_name |uppercase}}</p>
+                                </div>
+                            </div> 
+
+                            <hr class="hr1">                                    
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">BANK A/C Number</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.account_No}} </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on BANK</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.account_holderName}} </p>
+                                </div>
+                            </div> 
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">BANK IFSC</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{personalDetails.obj.ifsc}}</p>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header cheader">
+                            <img height="20px" src="static/images/icons/basic-details.png"> Basic Details
+                        </div>
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Date of Birth</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">27-10-1997</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Gender</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">M</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Father/Husband Name</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SHIVAJI</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Relation</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">F</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Physically Handicapped</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">N</p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">International Worker</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">N</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header cheader">
+                            <img height="20px" src="static/images/icons/kyc.png"> KYC Details
+                        </div>
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Aadhaar</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">455189665231 </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on Aadhaar</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                                </div>
+                            </div>  
+                            <hr class="hr1">                                    
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">PAN</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">DLOPP5390C </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on PAN</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                                </div>
+                            </div> 
+
+                            <hr class="hr1">                                    
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">BANK A/C Number</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">36270289642 </p>
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">Name as on BANK</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SHUBHAM SHIVAJI PAWAR </p>
+                                </div>
+                            </div> 
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0">BANK IFSC</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">SBIN0007795 </p>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
+                </div> -->      
+            </div>
+            <div class="row mb-12">
+                <div >
+                <!-- <div class="col-md-6"> -->
+                    <!-- <div class="card mb-4">
+                        <div class="card-header cheader">
+                            <img height="20px" src="static/images/icons/bank.png"> KYC Verification Details
+                        </div>
+                        <div class="card-body cbody10">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">BIO-Metric Verification Status</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    
+                                    <p class="text-muted mb-0">                                                
+                                        -
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">Demographic Verification Status</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    
+                                    <p class="text-muted mb-0 color-green">                                                
+                                        Success - [ Verfied on 21-JUL-23 ]
+                                    </p>
+                                    
+                                </div>
+                            </div>                                    
+                            <hr class="hr1">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">OTP based Verification Status</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    
+                                    <p class="text-muted mb-0">                                                
+                                        -
+                                    </p>
+                                    
+                                </div>
+                            </div> 
+                        </div>
+                    </div> -->
+
+                    <div class="container content menu-padding">
+                        <section>
+                            <div class="py-5">                   
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-header cheader">
+                                                <!--<img height="20px" src="static/images/icons/basic-details.png">--> 
+                                                Service Overview
+                                            </div>
+                                            <div class="card-body">                                   
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <p class="mb-0 bold texth">Total Experience</p>
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <p class="text-muted mb-0">3 Years 1 Months 0 Days</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <p class="mb-0 bold texth">Date of Joining</p>
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <p class="text-muted mb-0">06-Apr-2021</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-5 ">
+                                                        <p class="mb-0 bold texth">Total NCP Days
+                                                            <!--                                                <a tabindex="0" 
+                                                                                                               data-bs-toggle="popover" 
+                                                                                                               title="Help"
+                                                                                                               data-bs-trigger="focus"
+                                                                                                               data-bs-content="Help content here"
+                                                                                                               >
+                                                                                                                <img height="15px" src="static/images/icons/help.png">
+                                                                                                            </a>-->
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <p class="text-muted mb-0">0 Days</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="card">
+                                            <div class="card-header cheader">
+                                                <!--<img height="20px" src="static/images/icons/basic-details.png"> Service Overview-->
+                                            </div>
+                                            <div class="card-body">                                   
+                                                <div class="row">
+                                                    <canvas id="service_div" style="min-height: 200px; height: 225px; display: block; box-sizing: border-box; width: 409px;" width="409" height="225">
+                                                    </canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="card">
+                                            <div class="card-header cheader">
+                                                <!--<img height="20px" src="static/images/icons/basic-details.png">--> 
+                                                Service History
+                                            </div>
+                                            <div class="card-body"> 
+                                                <ul class="timeline">
+                                                    <li class="timeline-item mb-3">
+                                                        <p class="tlp tlp-green">Dec 2022 - Present</p>
+                                                        <p class="text-muted mb-2 bold">KAN INFOCOM SOLUTION INDIA PRIVATE LIMITED</p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Est Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">THVSH2087732000</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Member Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">THVSH20877320000010121</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">NCP Days</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">0 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Joining Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">01-Dec-2022</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Exit Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Total Service</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">1 Years 6 Months 3 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <hr class="hr">
+                                                    <li class="timeline-item mb-3">
+                                                        <p class="tlp ">Aug 2022 - Nov 2022</p>
+                                                        <p class="text-muted mb-2 bold">MPHASIS LIMITED</p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Est Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">PYBOM0016573000</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Member Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">PYBOM00165730002315863</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">NCP Days</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">0 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Joining Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">16-Aug-2022</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Exit Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">23-Nov-2022</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Total Service</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">0 Years 3 Months 7 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <hr class="hr">
+                                                    <li class="timeline-item mb-3">
+                                                        <p class="tlp ">Apr 2021 - Aug 2022</p>
+                                                        <p class="text-muted mb-2 bold">KAN INFOCOM SOLUTION INDIA PRIVATE LIMITED</p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Est Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">THVSH2087732000</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Member Id</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">THVSH20877320000010031</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">NCP Days</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">0 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Joining Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">06-Apr-2021</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Exit Date</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">13-Aug-2022</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="mb-0">Total Service</p>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-0 text-md-start">1 Years 4 Months 7 Days</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <hr class="hr">
+                                                </ul>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+            
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                                <!--                        <div class="col-md-6">
+                                                            <div class="card mb-4">
+                                                                <div class="card-header cheader">
+                                                                    <img height="20px" src="static/images/icons/nominee.png"> Nominee Details
+                                                                </div>
+                                                                <div class="card-body cbody10">
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+            </div>
+        </div>
+    </section>
+
+</div>

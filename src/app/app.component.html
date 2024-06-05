@@ -30,305 +30,195 @@
               <span class="nav-text">Analytics Dashboard</span>
             </a>
           </li>
-  <li class="section-title">
-            Apps
-          </li>
+  <!-- Employee Data Management -->
 
-          <li>
-            <a class="sidenav-item-link" href="chat.html">
-              <i class="mdi mdi-wechat"></i>
-              <span class="nav-text">Chat</span>
-            </a>
-          </li>
+  <li class="section-title sidenav-item-link">
+    <a class="sidenav-item-link" (click)="toggleCollapse('EDMSection')" href="javascript:void(0)" data-toggle="collapse" data-target="#EDMSection">
+      <!-- <i class="mdi mdi-email"></i> -->
+      <span class="nav-text">Employee Data Management</span>
+      <b class="caret"></b>
+    </a>
+  </li>
 
-          <li>
-            <a class="sidenav-item-link" href="contacts.html">
-              <i class="mdi mdi-phone"></i>
-              <span class="nav-text">Contacts</span>
-            </a>
-          </li>
+  <ul id="appSection" [ngClass]="{'collapse': collapsedStates['EDMSection']}" class="collapse" id="EDMSection" data-parent="#sidebar-menu">
+    <div class="sub-menu">
+      <li>
+        <a class="sidenav-item-link" routerLink="/employeeList">
+          <i class="mdi mdi-wechat"></i>
+          <span class="nav-text">List of Employees</span>
+        </a>
+      </li>
 
-          <li>
-            <a class="sidenav-item-link" href="team.html">
-              <i class="mdi mdi-account-group"></i>
-              <span class="nav-text">Team</span>
-            </a>
-          </li>
+      <li>
+        <a class="sidenav-item-link" routerLink="/employeeData">
+          <i class="mdi mdi-wechat"></i>
+          <span class="nav-text">Employee Details Summary</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="/emp-personal-details">
+          <i class="mdi mdi-phone"></i>
+          <span class="nav-text">Personal Details</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="/emp-employement-history">
+          <i class="mdi mdi-account-group"></i>
+          <span class="nav-text">Employment Details</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="emp-documents">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Documents</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="emp-contact-details">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Contact Details</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="emp-nominee-details">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Nomination Details</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="emp-education-details">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Education Details</span>
+        </a>
+      </li>
+    
+      <li>
+        <a class="sidenav-item-link" routerLink="emp-bank-details">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Bank Details</span>
+        </a>
+      </li>
+    </div>
+  </ul>
+  
+  <!-- Employee Data Management -->
+  <!-- App Section -->
+  <li class="section-title sidenav-item-link">
+    <a class="sidenav-item-link" (click)="toggleCollapse('appSection')" href="javascript:void(0)" data-toggle="collapse" data-target="#appSection">
+      <!-- <i class="mdi mdi-email"></i> -->
+      <span class="nav-text">Apps</span>
+      <b class="caret"></b>
+    </a>
+  </li>
+  <ul id="appSection" [ngClass]="{'collapse': collapsedStates['appSection']}" class="collapse" id="appSection" data-parent="#sidebar-menu">
+    <div class="sub-menu">
+      <li>
+        <a class="sidenav-item-link" href="chat.html">
+          <i class="mdi mdi-wechat"></i>
+          <span class="nav-text">Chat</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="sidenav-item-link" href="contacts.html">
+          <i class="mdi mdi-phone"></i>
+          <span class="nav-text">Contacts</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="sidenav-item-link" href="team.html">
+          <i class="mdi mdi-account-group"></i>
+          <span class="nav-text">Team</span>
+        </a>
+      </li>
 
-          <li>
-            <a class="sidenav-item-link" href="calendar.html">
-              <i class="mdi mdi-calendar-check"></i>
-              <span class="nav-text">Calendar</span>
-            </a>
-          </li>
+      <li>
+        <a class="sidenav-item-link" href="calendar.html">
+          <i class="mdi mdi-calendar-check"></i>
+          <span class="nav-text">Calendar</span>
+        </a>
+      </li>
+      
+      <li class="has-sub">
+        <a class="sidenav-item-link" (click)="toggleCollapse('email')" href="javascript:void(0)" data-toggle="collapse" data-target="#email"
+          aria-expanded="false" aria-controls="email">
+          <i class="mdi mdi-email"></i>
+          <span class="nav-text">email</span> <b class="caret"></b>
+        </a>
+        <ul [ngClass]="{'collapse': collapsedStates['email']}" class="collapse" id="email" data-parent="#sidebar-menu">
+          <div class="sub-menu">
+            <li>
+              <a class="sidenav-item-link" href="email-inbox.html">
+                <span class="nav-text">Email Inbox</span>
 
-          <li class="has-sub">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#email"
-              aria-expanded="false" aria-controls="email">
-              <i class="mdi mdi-email"></i>
-              <span class="nav-text">email</span> <b class="caret"></b>
-            </a>
-            <ul class="collapse" id="email" data-parent="#sidebar-menu">
-              <div class="sub-menu">
-                <li>
-                  <a class="sidenav-item-link" href="email-inbox.html">
-                    <span class="nav-text">Email Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a class="sidenav-item-link" href="email-details.html">
+                <span class="nav-text">Email Details</span>
+              </a>
+            </li>
+            <li>
+              <a class="sidenav-item-link" href="email-compose.html">
+                <span class="nav-text">Email Compose</span>
+              </a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </div>
+  </ul>
+  <!-- App Section -->
+  <!-- Recruitement Section -->      
+  <li class="section-title sidenav-item-link">
+    <a class="sidenav-item-link" (click)="toggleCollapse('RMSection')" href="javascript:void(0)" data-toggle="collapse" data-target="#RMSection">
+      <!-- <i class="mdi mdi-email"></i> -->
+      <span class="nav-text">Recruiter Management</span>
+      <b class="caret"></b>
+    </a>
+  </li>
+  <ul id="RMSection" class="collapse"  [ngClass]="{'collapse': collapsedStates['RMSection']}" id="RMSection" data-parent="#sidebar-menu">
+    <div class="sub-menu">
+      <li>
+        <a class="sidenav-item-link" routerLink="jobpost">
+          <span class="nav-text">Job Post</span>
+        </a>
+      </li>
 
-                  </a>
-                </li>
-                <li>
-                  <a class="sidenav-item-link" href="email-details.html">
-                    <span class="nav-text">Email Details</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="sidenav-item-link" href="email-compose.html">
-                    <span class="nav-text">Email Compose</span>
-                  </a>
-                </li>
-              </div>
-            </ul>
-          </li>
+      <li>
+        <a class="sidenav-item-link" routerLink="badge.html">
+          <span class="nav-text">Badge</span>
+        </a>
+      </li>
 
-          <li class="section-title">
-            Recruiter Management
-          </li>
+      <li>
+        <a class="sidenav-item-link" routerLink="breadcrumb.html">
+          <span class="nav-text">Breadcrumb</span>
+        </a>
+      </li>
 
-          <li class="has-sub">
-            <a class="sidenav-item-link"  (click)="toggleJobPostCollapse()" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements"
-              aria-expanded="false" aria-controls="ui-elements">
-              <i class="mdi mdi-folder-outline"></i>
-              <span class="nav-text" routerLink="jobpost">Job post</span> <b class="caret"></b>
-            </a>
-            <ul  [ngClass]="{'collapse': isJobPostCollapsed}" class="collapse" id="ui-elements" data-parent="#sidebar-menu">
-              <div class="sub-menu">
-
-                <li>
-                  <a class="sidenav-item-link" href="alert.html">
-                    <span class="nav-text">Alert</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="badge.html">
-                    <span class="nav-text">Badge</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="breadcrumb.html">
-                    <span class="nav-text">Breadcrumb</span>
-                  </a>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#buttons"
-                    aria-expanded="false" aria-controls="buttons">
-                    <span class="nav-text">Buttons</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="buttons">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="button-default.html">Button Default</a>
-                      </li>
-                      <li>
-                        <a href="button-dropdown.html">Button Dropdown</a>
-                      </li>
-                      <li>
-                        <a href="button-group.html">Button Group</a>
-                      </li>
-                      <li>
-                        <a href="button-social.html">Button Social</a>
-                      </li>
-                      <li>
-                        <a href="button-loading.html">Button Loading</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="card.html">
-                    <span class="nav-text">Card</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="carousel.html">
-                    <span class="nav-text">Carousel</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="collapse.html">
-                    <span class="nav-text">Collapse</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="editor.html">
-                    <span class="nav-text">Editor</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="list-group.html">
-                    <span class="nav-text">List Group</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="modal.html">
-                    <span class="nav-text">Modal</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="pagination.html">
-                    <span class="nav-text">Pagination</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="popover-tooltip.html">
-                    <span class="nav-text">Popover & Tooltip</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="progress-bar.html">
-                    <span class="nav-text">Progress Bar</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="spinner.html">
-                    <span class="nav-text">Spinner</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="switches.html">
-                    <span class="nav-text">Switches</span>
-                  </a>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#tables"
-                    aria-expanded="false" aria-controls="tables">
-                    <span class="nav-text">Tables</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="tables">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="bootstarp-tables.html">Bootstrap Tables</a>
-                      </li>
-                      <li>
-                        <a href="data-tables.html">Data Tables</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="tab.html">
-                    <span class="nav-text">Tab</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="sidenav-item-link" href="toaster.html">
-                    <span class="nav-text">Toaster</span>
-                  </a>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#icons"
-                    aria-expanded="false" aria-controls="icons">
-                    <span class="nav-text">Icons</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="icons">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="material-icons.html">Material Icon</a>
-                      </li>
-                      <li>
-                        <a href="flag-icons.html">Flag Icon</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#forms"
-                    aria-expanded="false" aria-controls="forms">
-                    <span class="nav-text">Forms</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="forms">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="basic-input.html">Basic Input</a>
-                      </li>
-                      <li>
-                        <a href="input-group.html">Input Group</a>
-                      </li>
-                      <li>
-                        <a href="checkbox-radio.html">Checkbox & Radio</a>
-                      </li>
-                      <li>
-                        <a href="form-validation.html">Form Validation</a>
-                      </li>
-                      <li>
-                        <a href="form-advance.html">Form Advance</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#maps"
-                    aria-expanded="false" aria-controls="maps">
-                    <span class="nav-text">Maps</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="maps">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="google-maps.html">Google Map</a>
-                      </li>
-                      <li>
-                        <a href="vector-maps.html">Vector Map</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li class="has-sub">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#widgets"
-                    aria-expanded="false" aria-controls="widgets">
-                    <span class="nav-text">Widgets</span> <b class="caret"></b>
-                  </a>
-                  <ul class="collapse" id="widgets">
-                    <div class="sub-menu">
-                      <li>
-                        <a href="widgets-general.html">General Widget</a>
-                      </li>
-                      <li>
-                        <a href="widgets-chart.html">Chart Widget</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-              </div>
-            </ul>
-          </li>
-          <li class="has-sub">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#charts"
-              aria-expanded="false" aria-controls="charts">
+      <li>
+        <a class="sidenav-item-link" routerLink="breadcrumb.html">
+          <span class="nav-text">Breadcrumb</span>
+        </a>
+      </li>
+    </div>
+  </ul>       
+  <!-- Recruitement Section -->
+          <!-- <li class="has-sub">
+            <a class="sidenav-item-link" (click)="toggleCollapse('charts')" href="javascript:void(0)" data-toggle="collapse" data-target="#charts"
+               aria-controls="charts">
               <i class="mdi mdi-chart-pie"></i>
               <span class="nav-text">Charts</span> <b class="caret"></b>
             </a>
-            <ul class="collapse" id="charts" data-parent="#sidebar-menu">
+            <ul [ngClass]="{'collapse': collapsedStates['charts']}" class="collapse" id="charts" data-parent="#sidebar-menu">
               <div class="sub-menu">
 
                 <li>
@@ -338,18 +228,18 @@
                 </li>
               </div>
             </ul>
-          </li>
+          </li> -->
           <li class="section-title">
             Pages
           </li>
 
           <li class="has-sub">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#users"
+            <a class="sidenav-item-link" (click)="toggleCollapse('users')" href="javascript:void(0)" data-toggle="collapse" data-target="#users"
               aria-expanded="false" aria-controls="users">
               <i class="mdi mdi-image-filter-none"></i>
               <span class="nav-text">User</span> <b class="caret"></b>
             </a>
-            <ul class="collapse" id="users" data-parent="#sidebar-menu">
+            <ul [ngClass]="{'collapse': collapsedStates['users']}" class="collapse" id="users" data-parent="#sidebar-menu">
               <div class="sub-menu">
 
                 <li>
@@ -398,12 +288,12 @@
             </ul>
           </li>
           <li class="has-sub">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#authentication"
+            <a class="sidenav-item-link" (click)="toggleCollapse('authentication')" href="javascript:void(0)" data-toggle="collapse" data-target="#authentication"
               aria-expanded="false" aria-controls="authentication">
               <i class="mdi mdi-account"></i>
               <span class="nav-text">Authentication</span> <b class="caret"></b>
             </a>
-            <ul class="collapse" id="authentication" data-parent="#sidebar-menu">
+            <ul [ngClass]="{'collapse': collapsedStates['authentication']}" class="collapse" id="authentication" data-parent="#sidebar-menu">
               <div class="sub-menu">
 
                 <li>
@@ -426,15 +316,14 @@
               </div>
             </ul>
           </li>
-          <li class="has-sub">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#other-page"
+          <!-- <li class="has-sub">
+            <a class="sidenav-item-link" (click)="toggleCollapse('otherpage')" href="javascript:void(0)" data-toggle="collapse" data-target="#other-page"
               aria-expanded="false" aria-controls="other-page">
               <i class="mdi mdi-file-multiple"></i>
               <span class="nav-text">Other pages</span> <b class="caret"></b>
             </a>
-            <ul class="collapse show" id="other-page" data-parent="#sidebar-menu">
+            <ul [ngClass]="{'collapse': collapsedStates['otherpage']}" class="collapse" id="otherpage" data-parent="#sidebar-menu">
               <div class="sub-menu">
-
                 <li>
                   <a class="sidenav-item-link" href="invoice.html">
                     <span class="nav-text">Invoice</span>
@@ -463,7 +352,7 @@
 
               </div>
             </ul>
-          </li>
+          </li> -->
 
           <li class="section-title">
             Documentation
@@ -477,12 +366,12 @@
           </li>
 
           <li class="has-sub active expand">
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#customization"
+            <a class="sidenav-item-link" (click)="toggleCollapse('customization')" href="javascript:void(0)" data-toggle="collapse" data-target="#customization"
               aria-expanded="false" aria-controls="customization">
               <i class="mdi mdi-square-edit-outline"></i>
               <span class="nav-text">Customization</span> <b class="caret"></b>
             </a>
-            <ul class="collapse show" id="customization" data-parent="#sidebar-menu">
+            <ul [ngClass]="{'collapse': collapsedStates['customization']}" class="collapse" id="customization" data-parent="#sidebar-menu">
               <div class="sub-menu">
 
                 <li class="active">

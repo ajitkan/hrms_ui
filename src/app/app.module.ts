@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { FooterComponent } from './pages/shared-components/footer/footer.component';
 import { HeaderComponent } from './pages/shared-components/header/header.component';
-import { EmployeeDataComponent } from './pages/employee-data/employee-data.component';
+import { EmployeeListDataComponent } from './pages/EmployeeData/employee-data/employee-list-data.component';
 import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import{ HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
 import { ImportAttendancesComponent } from './pages/time-and-attendance/import-attendances/import-attendances.component';
+import { EmplyeeDetailsSummaryComponent } from './pages/EmployeeData/employee-details-summary/employee-details-summary.component';
+import { PersonalDetailsComponent } from './pages/EmployeeData/personal-details/personal-details.component';
+import { EmploymentDetailsComponent } from './pages/EmployeeData/employment-details/employment-details.component';
+import { DocumentsComponent } from './pages/EmployeeData/documents/documents.component';
+import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
+import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
+import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
+import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +34,18 @@ import { ImportAttendancesComponent } from './pages/time-and-attendance/import-a
     LoginComponent,
     FooterComponent,
     HeaderComponent,
-    EmployeeDataComponent
+    EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
-    ImportAttendancesComponent
+    ImportAttendancesComponent,
+    EmplyeeDetailsSummaryComponent,
+    PersonalDetailsComponent,
+    EmploymentDetailsComponent,
+    DocumentsComponent,
+    ContactDetailsComponent,
+    NominationDetailsComponent,
+    EducationDetailsComponent,
+    BankDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +57,9 @@ import { ImportAttendancesComponent } from './pages/time-and-attendance/import-a
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
-     NgbModule,
-     NgxPaginationModule,
-     Ng2SearchPipeModule    
+    NgbModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
