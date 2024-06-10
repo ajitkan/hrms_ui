@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { FooterComponent } from './pages/shared-components/footer/footer.component';
 import { HeaderComponent } from './pages/shared-components/header/header.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { ExpensepiechatComponent } from './pages/shared-components/expensepiechat/expensepiechat.component';
+import { PrjstatuschartComponent } from './pages/shared-components/prjstatuschart/prjstatuschart.component';
+import { EmpdeptchartComponent } from './pages/shared-components/empdeptchart/empdeptchart.component';
+import { PaymentbarchartComponent } from './pages/shared-components/paymentbarchart/paymentbarchart.component';
 import { EmployeeListDataComponent } from './pages/EmployeeData/employee-data/employee-list-data.component';
 import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +43,11 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     LoginComponent,
     FooterComponent,
     HeaderComponent,
+    AdminDashboardComponent,
+    ExpensepiechatComponent,
+    PrjstatuschartComponent,
+    EmpdeptchartComponent,
+    PaymentbarchartComponent
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -73,6 +83,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
   ],
   providers: [
               DatePipe,
+              CUSTOM_ELEMENTS_SCHEMA,
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],

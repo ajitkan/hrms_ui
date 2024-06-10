@@ -1,0 +1,68 @@
+.name-row {
+    display: flex;
+    justify-content: center; 
+    /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    gap: 10px; /* Adjust the gap between the spans as needed */
+}
+.box {
+  /* border: 1px solid; */
+  height: 300px;
+  width: 496px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); /* Adjust the values as needed */
+}
+
+.Reportiesimg{
+    height: 95px;
+    width: 95px;
+}
+.borderMyApp
+{
+    /* border: 1px solid; */
+    height: 180px;
+    width:160px ;
+    column-gap: 15px;
+}
+.labelallign{
+    text-align: center;
+    display: block;
+}
+
+.pcontent{
+font-weight: bold; 
+font-size: 80px;
+text-align: center;
+}
+
+.hr-lines {
+    position: relative;
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .hr-lines:before,
+  .hr-lines:after {
+    content: "";
+    height: 2px;
+    width: 70px;
+    background: #ffc107;
+    display: block;
+    position: absolute;
+    bottom: -10px; /* Adjust as needed for spacing below the <h2> */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sepration{
+    border-left:1px solid #e2e2e2;
+  }
+  .rounded-button {
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove default button border */
+    border-radius: 20px; /* Rounded side edges */
+    background-color: rgb(0 152 69); /* Button background color */
+    color: white; /* Button text color */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}

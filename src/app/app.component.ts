@@ -70,10 +70,6 @@ export class AppComponent {
       localStorage.removeItem('LoggedIn');
     }
   }
-  // toggleJobPostCollapse() {
-  //   this.isJobPostCollapsed = !this.isJobPostCollapsed;
-  // }
-
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }
