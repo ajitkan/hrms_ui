@@ -113,6 +113,10 @@ export class ApiService {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)
   }
 
+  punchTimeApplication(data: any) {
+    return this.http.post<any>(`${environment.apiUrl}/Attendance/PunchTimeApplication`, data)
+  }
+
   getAttendanceByUserId(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/GetAttendanceByUserId`, data)
   }

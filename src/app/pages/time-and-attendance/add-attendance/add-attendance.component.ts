@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Modal } from 'bootstrap';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-attendance',
@@ -13,7 +14,7 @@ export class AddAttendanceComponent {
 
 
   @ViewChild('modalForm') modalForm !: ElementRef<any>;
-
+  attendanceForm !: FormGroup
   now: Date | undefined;
   currentDate: string | undefined;
   currentTime: string | undefined;
@@ -30,28 +31,49 @@ export class AddAttendanceComponent {
   output: any = [];
   attendanceList: any = [];
 
-  header:string ='';
+  header: string = '';
+  modalData: any = [];
+  flag : number =0;
+
+
 
   constructor(private apiService: ApiService,
-              private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private f: FormBuilder
   ) {
 
   }
 
   ngOnInit(): void {
+
+    this.attendanceForm = this.f.group({
+
+      TimeIn: ['', Validators.required],
+      TimeOut: ['', Validators.required],
+      Remark: ['', Validators.required]
+    })
+
+
     this.getAttendanceByUser('K-210')
   }
 
-  show(data : any ,flag : string) {
-
-    if(flag == '1'){
-      debugger
-      let formatDate = this.datePipe.transform(data.Shift_Date,'d MMMM y' )
-      this.header = 'Correct Attendance' + ' ( ' + formatDate  + ' ) '
+  show(data: any, flag: string) {
+    debugger
+    this.modalData = data;
+    this.flag = Number(flag)  ;
+    if (flag == '1') {
+      let formatDate = this.datePipe.transform(data.Shift_Date, 'd MMMM y')
+      this.header = 'Correct Attendance' + ' ( ' + formatDate + ' ) '
+      // if(data.Check_In != null && data.Check_Out != null){
+      //   this.attendanceForm.get('TimeIn')?.setValue(data.Check_In);
+      // }
     }
-    else{
-      let formatDate = this.datePipe.transform(data.Shift_Date,'d MMMM y' )
-      this.header = 'Attendance Details' + ' ( ' + formatDate  + ' ) '
+    if(flag == '2') {
+      let formatDate = this.datePipe.transform(data.Shift_Date, 'd MMMM y')
+      this.header = 'Attendance Details' + ' ( ' + formatDate + ' ) '
+      // if(data.Check_In != null && data.Check_Out != null){
+      //   this.attendanceForm.get('TimeIn')?.setValue(data.Check_In);
+      // }
     }
     const modal = new Modal(this.modalForm.nativeElement);
     modal.show();
@@ -74,6 +96,7 @@ export class AddAttendanceComponent {
     this.apiService.getAttendanceByUserId(input).subscribe(resp => {
       if (resp != null && resp != undefined) {
         this.attendanceList = resp.obj
+        console.log(this.attendanceList);
         this.attendanceList.forEach((element: any) => {
           if (this.isEmptyObject(element.Check_In)) {
             element.Check_In = null
@@ -85,7 +108,7 @@ export class AddAttendanceComponent {
           if (this.isEmptyObject(element.Check_Out)) {
             element.Check_Out = null
           }
-          else {       
+          else {
             element.Early = this.calTimeDiff(element.Check_Out, '18:30');
           }
 
@@ -139,7 +162,7 @@ export class AddAttendanceComponent {
 
 
   calTimeDiff(timeString: string, shiftTime: string) {
-    console.log(timeString);
+    // console.log(timeString);
     let t = timeString.split('T')[1];
     let ms = Number(t.split(':')[0]) * 60 * 60 * 1000 + Number(t.split(':')[1]) * 60 * 1000;
 
@@ -158,4 +181,28 @@ export class AddAttendanceComponent {
 
   }
 
+  correctAttendance() {
+    // console.log(this.modalData);
+    debugger
+    const data = this.attendanceForm.value;
+    let TimeIn = this.modalData.Shift_Date.replace("00:00:00","09:30");
+    let TimeOut = this.modalData.Shift_Date.replace("00:00:00", data.TimeOut);
+
+    if (this.attendanceForm.valid) {
+      var input = {
+        UserId: 'k-210',
+        CheckIn: TimeIn,
+        CheckOut: TimeOut,
+        ShiftDate : this.modalData.Shift_Date,
+        Remark: data.Remark,
+        Application : this.flag
+      }
+      console.log(input);
+      this.apiService.punchTimeApplication(input).subscribe(resp => {
+        if (resp != null && resp != undefined) {
+          console.log(resp);
+        }
+      })
+    }
+  }
 }

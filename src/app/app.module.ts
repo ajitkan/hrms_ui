@@ -27,8 +27,10 @@ import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/co
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
 import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
 import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     NominationDetailsComponent,
     EducationDetailsComponent,
     BankDetailsComponent,
+    MyApplicationComponent,
   ],
   imports: [
     BrowserModule,
