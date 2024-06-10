@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  constructor(){}
+  ngOnInit(): void {
+    const year = new Date().getFullYear();
+    document.getElementById("copy-year")!.innerHTML = year.toString();
+  }
 }

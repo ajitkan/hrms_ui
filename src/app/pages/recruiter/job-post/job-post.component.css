@@ -1,0 +1,397 @@
+/* Job Section */
+.job-section {
+     font-family: 'Roboto', sans-serif;
+     /* font-family: 'material design icon'; */
+    /* font-family: 'Helvetica', sans-serif;  */
+    /* font-family: 'Arial', sans-serif; */
+
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px; 
+}
+
+
+.job-item:hover {
+    background-color: #87f37d; /* Change to your desired hover color */
+}
+
+.job-section .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.job-section .btn {
+    padding: 9px 14px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+
+    background: white;
+    color: #6c757d;
+    border: none;
+}
+
+.job-section .btn :hover{
+    color: red;
+    
+}
+.job-section .btn-info {
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+}
+
+.job-section .btn-info:hover {
+    background-color: #0056b3;
+}
+
+.job-section .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+}
+
+.job-section .btn-danger:hover {
+    background-color: #c82333;
+}
+
+.job-section .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #f8f9fa;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.job-section .table th,
+.job-section .table td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+.job-section .table th {
+     background-color:aliceblue; 
+     color: black; 
+     /* background-color:orange; 
+     color: white;  */
+    font-weight: 600;
+}
+
+.job-section .table td {
+    background-color: #ffffff;
+    color: #343a40;
+}
+
+.job-section .table td:hover {
+    /* color:navy; */
+    color: #2199eE;
+    /* color: black; */
+    
+}
+
+.job-section .table .action-buttons button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.job-section .table .btn-info {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+}
+
+.job-section .table .btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: #343a40;
+}
+
+.job-section .table .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+}
+
+.job-section .table .btn-info:hover {
+    background-color: #0056b3;
+}
+
+.job-section .table .btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.job-section .table .btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Optional: Add responsive design */
+@media (max-width: 768px) {
+    .job-section .table-responsive {
+        overflow-x: auto;
+    }
+
+    .job-section .actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .job-section .btn {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* .action-buttons */
+/* General styles for the action buttons */
+.action-buttons {
+    position: relative;
+  }
+  .icon-view {
+    color: blue;
+}
+
+.icon-edit {
+    color: green;
+}
+
+.icon-delete {
+    color: red;
+}
+
+  
+  .action-buttons .btn {
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .action-buttons .dropdown-toggle::after {
+    display: none;
+  }
+  
+  /* Styles for the dropdown menu */
+   .dropdown-menu {
+    min-width: 8rem;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .dropdown-menu-right {
+    right: 0;
+    left: auto;
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover, .dropdown-item:focus {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  
+  .dropdown-item i {
+    margin-right: 0.5rem;
+    color: #6c757d;
+  }
+  
+/* .action-buttons */
+
+/* table {
+    font-size: 14px;
+    color: #666;
+    width: 100%;
+    background-color: white;
+} */
+
+.text-danger {
+    font-size: 14px;
+}
+.modal-dialog {
+    max-width: 800px; /* Adjust width as needed */
+}
+
+.modal-content {
+    padding: 10px;
+}
+
+.modal-header {
+    padding: 10px 15px;
+}
+
+.modal-body {
+    padding: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    /* text-align: right; */
+}
+
+.form-control, .selectpicker {
+    height: 33px;
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.modal-title {
+    font-size: 18px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin: 7px
+}
+
+textarea.form-control {
+    height: auto;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+
+
+/* View JOB Details styles for the modal */
+.modal-content {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  .modal-header {
+    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .modal-body {
+    font-size: 0.875rem;
+    color: #333;
+  }
+
+  .modal-footer {
+    background-color: #f1f1f1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #160101fa;
+  }
+
+ 
+
+  /* search start */
+
+  /* .form-group {
+    margin-bottom: 0; 
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+   
+}*/
+
+.search-box {
+    width: 100%; 
+   
+    padding: 17px 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 14px; 
+    box-sizing: border-box; 
+} 
+
+
+.search-box:hover,
+.search-box:focus {
+    border-color: #007bff; 
+    
+}
+  
+   /* search End */
+
+
+/* ::ng-deep .ngx-pagination > li.current {
+    background-color: red ;  
+} */
+
+
+
+.compact-dropdown-menu {
+    min-width: 50px;
+    padding: 0; 
+    left: auto !important; 
+    right: 0;
+}
+
+.compact-dropdown-menu .dropdown-item {
+    padding: 5px 10px; 
+    font-size: 12px; 
+}
+
+
+/* delete modal */
+.modal-sm {
+    max-width: 600px;
+}
+
+.modal-content {
+    padding: 10px;
+}
+
+.modal-body {
+    font-size: 14px;
+}
+
+.modal-header,
+.modal-footer {
+    padding: 10px;
+}
+
+.modal-header .modal-title {
+    font-size: 16px; 
+    /* color: red; */
+}
+
+
+/* toster */
+#toastr-container {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    z-index: 10000; 
+}
