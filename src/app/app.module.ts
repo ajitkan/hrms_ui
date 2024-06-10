@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -27,6 +27,8 @@ import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/co
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
 import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
 import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+import { ErrorInterceptor } from './service/error.interceptor';
+import { JwtInterceptor } from './service/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,11 @@ import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-det
     NgxPaginationModule,
     Ng2SearchPipeModule    
   ],
-  providers: [DatePipe],
+  providers: [
+              DatePipe,
+              { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+              { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
