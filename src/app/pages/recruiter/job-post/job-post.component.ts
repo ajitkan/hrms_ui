@@ -104,9 +104,11 @@ setItemsPerPage(value: number) {
     // this.updatePaginatedJobs();
   }
   loadJobs() {
+    debugger
     this.jobService.getAllJobs().subscribe(
       (response: any) => {
         this.jobs = response.data;
+        debugger
       },
       (error: any) => {
         console.error('Error fetching jobs:', error);
@@ -156,52 +158,7 @@ public findInvalidControls() {
   return invalid;
 }
 
-  
-  // submitAddJobForm() {
-  //   this.findInvalidControls();
-  
-  //   if (!this.addJobForm.valid) {
-  //     console.log('Please fill in all required fields.');
-  //     alert('Please fill in all required fields.');
-  //     return;
-  //   }
-  
-  //   const jobData = this.addJobForm.value;
-   
-  
-  //   if (this.editMode) {
-  //     this.jobService.updateJob(this.selectedJob.id, jobData).subscribe(
-  //       () => {
-  //         console.log('Job updated successfully!');
-  //         this.toastr.success('Success', 'Job updated successfully!');
-  //         this.addJobForm.reset();
-  //         this.loadJobs();
-  //         this.closePopup();
-          
-  //       },
-  //       error => {
-  //         console.error('Error updating job', error);
-  //         alert('An error occurred while updating the job. Please try again later.');
-  //       }
-  //     );
-  //   } else {
-  //     debugger
-  //     this.jobService.addJob(jobData).subscribe(
-  //       () => {
-  //         console.log('Job added successfully!');
-  //         this.toastr.success('Success', 'Job added successfully!');
-  //         this.addJobForm.reset();
-  //         this.loadJobs();
-  //         this.closePopup();
-  //         this.addJobForm.reset();
-  //       },
-  //       (error) => {
-  //         console.error('Error adding job', error);
-  //         alert('An error occurred while adding the job. Please try again later.');
-  //       }
-  //     );
-  //   }
-  // }
+
   submitAddJobForm() {
     this.findInvalidControls();
   

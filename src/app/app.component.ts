@@ -17,6 +17,8 @@ export class AppComponent {
     // tables: true,
     // icons: true,
     // forms: true,
+    Master:true,
+    RMSection:true,
     EDMSection: true,
     jobPost: true,
     appSection: true,
