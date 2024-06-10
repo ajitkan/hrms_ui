@@ -27,10 +27,10 @@ import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/co
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
 import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
 import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
-
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     NominationDetailsComponent,
     EducationDetailsComponent,
     BankDetailsComponent,
+    CompanyMasterComponent,
     MyApplicationComponent,
   ],
   imports: [
@@ -61,7 +62,11 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     FormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    ToastrModule.forRoot(),
+    // ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      // positionClass: 'toast-top-center',
+        positionClass: 'toast-bottom-center'
+    }),
     NgbModule,
     NgxPaginationModule,
     Ng2SearchPipeModule    

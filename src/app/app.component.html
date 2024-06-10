@@ -109,6 +109,43 @@
             </div>
           </ul>
 
+      <li>
+        <a class="sidenav-item-link" routerLink="breadcrumb.html">
+          <span class="nav-text">Breadcrumb</span>
+        </a>
+      </li>
+    </div>
+  </ul>       
+  <!-- Recruitement Section -->
+
+
+  <!-- masters start -->
+  <li class="section-title sidenav-item-link">
+    <a class="sidenav-item-link" (click)="toggleCollapse('Master')" href="javascript:void(0)" data-toggle="collapse" data-target="#Master">
+      <!-- <i class="mdi mdi-email"></i> -->
+      <span class="nav-text">Masters</span>
+      <b class="caret"></b>
+    </a>
+  </li>
+  <ul id="Master" class="collapse"  [ngClass]="{'collapse': collapsedStates['Master']}"  data-parent="#sidebar-menu">
+    <div class="sub-menu">
+      <li>
+        <a class="sidenav-item-link" routerLink="company-master">
+          <span class="nav-text">Company</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sidenav-item-link" routerLink="badge.html">
+          <span class="nav-text">Company Type</span>
+        </a>
+      </li>
+
+    
+      
+    </div>
+  </ul> 
+ 
           <!-- Employee Data Management -->
           <!-- App Section -->
           <li class="section-title sidenav-item-link">

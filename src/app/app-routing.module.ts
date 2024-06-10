@@ -16,9 +16,11 @@ import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/co
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
 import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
 import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
 import { AppComponent, DashboardComponent } from './app.component';
+
 
 const routes: Routes = [
   {
@@ -65,6 +67,11 @@ const routes: Routes = [
   { 
     path: 'emp-bank-details', component:  BankDetailsComponent
   },
+
+ {
+  path: 'company-master', component: CompanyMasterComponent
+ }
+
   // { 
   //   path: 'emp-contact-details', component: ContactDetailsComponent 
   // },

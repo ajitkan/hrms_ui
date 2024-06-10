@@ -11,9 +11,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 14px; 
 }
-/* .job-section:hover {
-    background-color: #f0f0f0; 
-} */
+
 
 .job-item:hover {
     background-color: #87f37d; /* Change to your desired hover color */
@@ -100,11 +98,6 @@
     /* color: black; */
     
 }
-
-
-/* .job-section.table tbody tr#job_post-table:hover td {
-    background: #2de015 !important; 
-} */
 
 .job-section .table .action-buttons button {
     margin-right: 5px;
@@ -398,7 +391,7 @@ textarea.form-control {
 /* toster */
 #toastr-container {
     position: absolute;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    z-index: 10000; /* Ensure it's above other elements */
+    top: 10px; 
+    right: 10px; 
+    z-index: 10000; 
 }

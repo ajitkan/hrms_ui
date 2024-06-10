@@ -1,0 +1,229 @@
+/* Job Section */
+.company-section {
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'material design icon'; */
+   /* font-family: 'Helvetica', sans-serif;  */
+   /* font-family: 'Arial', sans-serif; */
+
+   background-color: #ffffff;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   font-size: 14px; 
+}
+
+
+.company-item:hover {
+   background-color: #87f37d; /* Change to your desired hover color */
+}
+
+.company-section .actions {
+   display: flex;
+   justify-content: flex-end;
+   margin-bottom: 20px;
+}
+
+.company-section .btn {
+   padding: 9px 14px;
+   border-radius: 5px;
+   font-size: 14px;
+   margin-right: 10px;
+   transition: all 0.3s ease;
+
+   background: white;
+   color: #6c757d;
+   border: none;
+}
+
+.company-section .btn :hover{
+   color: red;
+   
+}
+.company-section .btn-info {
+   background-color: #007bff;
+   border: none;
+   color: #ffffff;
+}
+
+.company-section .btn-info:hover {
+   background-color: #0056b3;
+}
+
+.company-section .btn-danger {
+   background-color: #dc3545;
+   border: none;
+   color: #fff;
+}
+
+.company-section .btn-danger:hover {
+   background-color: #c82333;
+}
+
+.company-section .table {
+   width: 100%;
+   margin-bottom: 1rem;
+   color: #212529;
+   background-color: #f8f9fa;
+   border-collapse: collapse;
+   border-radius: 10px;
+   overflow: hidden;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.company-section .table th,
+.company-section .table td {
+   padding: 15px;
+   text-align: left;
+   vertical-align: middle;
+   border-top: 1px solid #dee2e6;
+}
+
+.company-section .table th {
+    background-color:aliceblue; 
+    color: black; 
+    /* background-color:orange; 
+    color: white;  */
+   font-weight: 600;
+}
+
+.company-section .table td {
+   background-color: #ffffff;
+   color: #343a40;
+}
+
+.company-section .table td:hover {
+   /* color:navy; */
+   color: #2199eE;
+   /* color: black; */
+   
+}
+
+.company-section .table .action-buttons button {
+   margin-right: 5px;
+   padding: 5px 10px;
+   font-size: 14px;
+}
+
+.company-section .table .btn-info {
+   background-color: #007bff;
+   border: none;
+   color: #fff;
+}
+
+.company-section .table .btn-warning {
+   background-color: #ffc107;
+   border: none;
+   color: #343a40;
+}
+
+.company-section .table .btn-danger {
+   background-color: #dc3545;
+   border: none;
+   color: #fff;
+}
+
+.company-section .table .btn-info:hover {
+   background-color: #0056b3;
+}
+
+.company-section .table .btn-warning:hover {
+   background-color: #e0a800;
+}
+
+.company-section .table .btn-danger:hover {
+   background-color: #c82333;
+}
+
+/* Optional: Add responsive design */
+@media (max-width: 768px) {
+    .company-section .table-responsive {
+        overflow-x: auto;
+    }
+
+    .company-section .actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .company-section .btn {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+
+/* ------------------ form-------------------------- */
+
+.text-danger {
+   font-size: 14px;
+}
+.modal-dialog {
+   max-width: 800px; /* Adjust width as needed */
+}
+
+.modal-content {
+   padding: 10px;
+}
+
+.modal-header {
+   padding: 10px 15px;
+}
+
+.modal-body {
+   padding: 15px;
+}
+
+.form-group {
+   margin-bottom: 10px;
+   /* text-align: right; */
+}
+
+.form-control, .selectpicker {
+   height: 33px;
+   padding: 5px 10px;
+   font-size: 13px;
+}
+
+.modal-title {
+   font-size: 18px;
+}
+
+label {
+   font-size: 14px;
+   margin-bottom: 5px;
+}
+
+.btn {
+   padding: 5px 10px;
+   font-size: 14px;
+   margin: 7px
+}
+
+textarea.form-control {
+   height: auto;
+   padding: 5px 10px;
+   font-size: 14px;
+}
+
+/* --------------------------------------------------- */
+
+  /* ------------search start----------------------- */
+
+
+.search-box {
+   width: 100%; 
+   padding: 17px 10px; 
+   border: 1px solid #ccc; 
+   border-radius: 5px; 
+   font-size: 14px; 
+   box-sizing: border-box; 
+} 
+
+.search-box:hover,
+.search-box:focus {
+   border-color: #007bff; 
+   
+}
+ 
+  /*-------------------- search End------------------------------ */
