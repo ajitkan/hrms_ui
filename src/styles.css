@@ -1,8 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
-
-
 /* footer{
 position: absolute;
 bottom: 0;
 width: 100%;
 } */
+.toast-top-right{
+    top: 12px;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+#toastr-container {
+    position: relative;
+    top: 120px; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+    z-index: 10000; /* Ensure it's above other elements */
+    margin: 0 auto;
+}
+footer{
+    position: relative;
+    bottom: 0;
+}
+.copyright {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+p{
+    font-weight: 400;
+    margin-bottom: 0;
+    font-size: 0.98rem;
+}
+@media (min-width: 992px) {
+    .copyright {
+        padding-left: 1.875rem;
+        padding-right: 1.875rem;
+    }
+}
+.copyright p {
+    font-weight: 500;
+}
+

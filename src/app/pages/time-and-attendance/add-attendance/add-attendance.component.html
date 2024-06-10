@@ -1,93 +1,95 @@
 <div class="content-wrapper">
-  <div class="content">
+  <div class="content">     
+        <!-- Products Inventory -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2>My Attendance</h2>
+            <button class="btn" (click)="updateAttendance()">Check In</button>
+          </div>
+          <div class="card-body">
+            <div class="row" style="margin-bottom: 5px;">
+              <div class="col-md-8">
+                <form autocomplete="off" name="update_attendance_from" id="update_attendance_from" method="get"
+                  accept-charset="utf-8">
 
-    <!-- Products Inventory -->
-    <div class="card card-default">
-      <div class="card-header">
-        <h2>My Attendance</h2>
-        <button class="btn" (click)="updateAttendance()">Check In</button>
-        <!-- <button  class="btn" (click)="updateAttendance()">Check Out</button> -->
-      </div>
-      <div class="card-body">
-        <div class="row" style="margin-bottom: 5px;">
-          <div class="col-md-8">
-            <form autocomplete="off" name="update_attendance_from" id="update_attendance_from" method="get"
-              accept-charset="utf-8">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <!-- <input class="form-control" placeholder="End Date"  id="attendance_date2" name="attendance_date2" type="text" > -->
+                        <select class="form-control" name="cars">
+                          <option value="" disabled selected>--Select Month--</option>
+                          <option value="saab">April 2024</option>
+                          <option value="opel">May 2024</option>
+                          <option value="audi">June 2024</option>
+                        </select>
+                      </div>
+                    </div>
 
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <!-- <input class="form-control" placeholder="End Date"  id="attendance_date2" name="attendance_date2" type="text" > -->
-                    <select class="form-control" name="cars">
-                      <option value="" disabled selected>--Select Month--</option>
-                      <option value="saab">April 2024</option>
-                      <option value="opel">May 2024</option>
-                      <option value="audi">June 2024</option>
-                    </select>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input class="form-control" placeholder="Search" id="attendance_date2" name="attendance_date2"
+                          type="text">
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <input class="form-control" placeholder="Search" id="attendance_date2" name="attendance_date2"
-                      type="text">
-                  </div>
-                </div>
+                </form>
               </div>
-            </form>
-          </div>
-          <div class="col-md-4">
-            <ul class="icon" style=" float: right;display: flex;column-gap: 5px; margin: 5px;">
-              <li>
-                <button class="menu"><i class="fa fa-file-excel-o"   aria-hidden="true" title="Export to excel"></i></button>
-              </li>
-              <li>
-                <button class="menu"><i class="fa fa-file-pdf-o" aria-hidden="true" title="Export to PDF"></i></button>
-              </li>
-              <li>
-                <button class="menu"><i class="fa fa-print" aria-hidden="true" title="Print"></i></button>
-              </li>
-            </ul>
+              <div class="col-md-4">
+                <ul class="icon" style=" float: right;display: flex;column-gap: 5px; margin: 5px;">
+                  <li>
+                    <button class="menu" style="background-color: blue;"><i class="fa fa-file-excel-o"
+                        aria-hidden="true" title="Export to excel"></i></button>
+                  </li>
+                  <li>
+                    <button class="menu" style="background-color: rgb(255, 115, 0);"><i class="fa fa-file-pdf-o"
+                        aria-hidden="true" title="Export to PDF"></i></button>
+                  </li>
+                  <li>
+                    <button class="menu" style="background-color: rgb(189, 52, 11);"><i class="fa fa-print"
+                        aria-hidden="true" title="Print"></i></button>
+                  </li>
+                </ul>
 
-          </div>
-          <div>
+              </div>
+              <div>
 
-          </div>
-        </div>
-        <table id="productsTable" class="table table-hover table-product" style="width:100%">
-          <thead>
-            <tr style="background-color: aliceblue;">
-              <th>Shift</th>
-              <th>Date</th>
-              <th>Shift Time</th>
-              <!-- <th>Shift In</th>
+              </div>
+            </div>
+            <table id="productsTable" class="table table-hover table-product" style="width:100%">
+              <thead>
+                <tr style="background-color: aliceblue !important;">
+                  <th>Shift</th>
+                  <th>Date</th>
+                  <th>Shift Time</th>
+                  <!-- <th>Shift In</th>
               <th>Shift Out</th> -->
-              <th>Time In</th>
-              <th>Time Out</th>
-              <th>Worked Hrs</th>
-              <th>Status</th>
-              <th>Late</th>
-              <th>Early</th>
-              <th>Application</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let data of attendanceList; let i=index">
+                  <th>Time In</th>
+                  <th>Time Out</th>
+                  <th>Worked Hrs</th>
+                  <th>Status</th>
+                  <th>Late</th>
+                  <th>Early</th>
+                  <th>Application</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let data of attendanceList; let i=index">
 
-            <tr>
-              <td>{{data.Shift_Id}}</td>
+                <tr>
+                  <td>{{data.Shift}}</td>
 
-              <td>{{data.Shift_Date | date:'d/MMM/y'}}</td>
-              <td>9:30 - 18:30</td>
-              <td>{{data.Check_In ? (data.Check_In | date:'HH:mm') : '' }}</td>
-              <!-- <td>{{data.Check_Out ? (data.Check_Out | date:'hh:mm') : '' }}</td> -->
-              <td>{{data.Check_Out ? (data.Check_Out | date :'HH:mm') : '' }}</td>
-              <td>{{data.Worked_Hrs}}</td>
-              <td>{{data.Status}}</td>
-              <td>{{data.Late}}</td>
-              <td>{{data.Early}}</td>
-              <td>{{data.Application}}</td>
-              <!-- <td>
+                  <td>{{data.Shift_Date | date:'d/MMM/y'}}</td>
+                  <td>09:30 - 18:30</td>
+                  <td>{{data.Check_In ? (data.Check_In | date:'HH:mm') : '' }}</td>
+                  <!-- <td>{{data.Check_Out ? (data.Check_Out | date:'hh:mm') : '' }}</td> -->
+                  <td>{{data.Check_Out ? (data.Check_Out | date :'HH:mm') : '' }}</td>
+                  <td>{{data.Worked_Hrs}}</td>
+                  <td>{{data.Status}}</td>
+                  <td>{{data.Late}}</td>
+                  <td>{{data.Early}}</td>
+                  <!-- <td><span style="cursor: pointer;" (click)="show(data,data.Application)">{{data.Application}}</span> -->
+                    <td>{{data.Application_Type}}</td>
+                  <!-- <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -100,75 +102,74 @@
                   </div>
                 </div>
               </td> -->
-              <td class="action-buttons">
-                <div ngbDropdown class="d-inline-block">
-                  <!-- <button class="btn btn-sm  dropdown-toggle" id="dropdownMenuButton{{i}}" ngbDropdownToggle>
+                  <td class="action-buttons">
+                    <div ngbDropdown class="d-inline-block">
+                      <!-- <button class="btn btn-sm  dropdown-toggle" id="dropdownMenuButton{{i}}" ngbDropdownToggle>
                     <i class="fa fa-ellipsis-v"></i>
                   </button> -->
-                  <a class="dropdown-toggle icon-burger-mini" role="button" id="dropdownMenuButton{{i}}"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"
-                    ngbDropdownToggle>
-                  </a>
+                      <a class="dropdown-toggle icon-burger-mini" role="button" id="dropdownMenuButton{{i}}"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"
+                        ngbDropdownToggle style="text-decoration: none;">
+                      </a>
 
-                  <div ngbDropdownMenu attr.aria-labelledby="dropdownMenuButton{{i}}"
-                    class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" (click)="show( data,'1')">
-                      <i class='fa fa-edit' style='font-size:20px'></i> Correction
-                    </button>
-                    <button class="dropdown-item" (click)="show(data,'2')">
-                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Punch Time
-                    </button>
-                    <button class="dropdown-item">
-                      <i class="fa fa-plane" aria-hidden="true"></i> Leave
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                      <div ngbDropdownMenu attr.aria-labelledby="dropdownMenuButton{{i}}"
+                        class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" (click)="show( data,'1')">
+                          <i class='fa fa-edit' style='font-size:20px'></i> Correction
+                        </button>
+                        <button class="dropdown-item" (click)="show(data,'2')">
+                          <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Punch Time
+                        </button>
+                        <button class="dropdown-item">
+                          <i class="fa fa-plane" aria-hidden="true"></i> Leave
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-      </div>
-    </div>
+          </div>
+        </div>
   </div>
 </div>
 
 
-<!-- <Request Form Start> -->
-  <div #modalForm class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content p-md-3">
-        <div class="modal-header">
-          <h4 class="modal-title">{{header}}</h4>
-          <button class="btn-close" type="button" #closebutton data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="row">
-              <div class="form-group col-lg-3" style="margin-bottom: 10px;">
-                <label class="font-weight-bold text-small" for="TimeIn">Time In<span class="astrik">*</span></label>
-                <input class="form-control" id="TimeIn" type="text" formControlName="TimeIn">
-              </div>
-              <div class="form-group col-lg-3" style="margin-bottom: 10px;">
-                <label class="font-weight-bold text-small" for="TimeOut">Time Out<span class="astrik">*</span></label>
-                <input class="form-control" id="TimeOut" type="text" formControlName="TimeOut">
-              </div>
-              <div class="form-group col-lg-6" style="margin-bottom: 10px;">
-                <label class="font-weight-bold text-small" for="phone">Remark<span class="astrik">*</span></label>
-                <input class="form-control" id="Remark" type="text" formControlName="Remark">
-              </div>
-              <div class="form-group col-lg-12" style="display: flex;justify-content: center;margin-top: 10px;">
-                <button class="btn btn-primary" type="submit"
-                  >Submit</button>
-                <!-- <button class="btn btn-secondary" style="margin-left:10px;" type="submit"
-                  data-bs-dismiss="modal">Close</button> -->
-              </div>
+<!-- <Modal Start> -->
+<div #modalForm class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content p-md-3">
+      <div class="modal-header">
+        <h4 class="modal-title">{{header}}</h4>
+        <button class="btn-close" type="button" #closebutton data-bs-dismiss="modal" aria-label="Close">
+          <!-- <i class="fa fa-close"></i> -->
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="attendanceForm">
+          <div class="row">
+            <div class="form-group col-lg-3" style="margin-bottom: 10px;">
+              <label class="font-weight-bold text-small" for="TimeIn">Time In<span class="astrik">*</span></label>
+              <input class="form-control" id="TimeIn" type="text" formControlName="TimeIn">
             </div>
-          </form>
-        </div>
+            <div class="form-group col-lg-3" style="margin-bottom: 10px;">
+              <label class="font-weight-bold text-small" for="TimeOut">Time Out<span class="astrik">*</span></label>
+              <input class="form-control" id="TimeOut" type="text" formControlName="TimeOut">
+            </div>
+            <div class="form-group col-lg-6" style="margin-bottom: 10px;">
+              <label class="font-weight-bold text-small" for="phone">Remark<span class="astrik">*</span></label>
+              <input class="form-control" id="Remark" type="text" formControlName="Remark">
+            </div>
+            <div class="form-group col-lg-12" style="display: flex;justify-content: center;margin-top: 10px;">
+              <button class="btn btn-primary" type="submit" (click)="correctAttendance()">Submit</button>
+              <!-- <button class="btn btn-secondary" style="margin-left:10px;" type="submit"
+                  data-bs-dismiss="modal">Close</button> -->
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <!-- <Request Form End> -->
-    
-
+</div>
+<!-- <Request Form End> -->

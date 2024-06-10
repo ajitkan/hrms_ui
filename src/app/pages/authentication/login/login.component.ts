@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +17,12 @@ export class LoginComponent {
   fieldTextType: boolean | undefined;
 
   constructor(private formBuilder: FormBuilder,
-              // private apiService: ApiService,
-              // private toastr : ToastrService
+               private appService: ApiService,
+               private toastr : ToastrService
   ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-
       Email: ['', [Validators.required]],
       Password: ['', [Validators.required]]
     })
@@ -39,18 +41,25 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       
-      const user = this.loginForm.value;
-      this.isLogin.emit(true);
-      // this.apiService.login(user).subscribe((resp: any) => {
-      //   if (resp != null && resp != undefined) {         
-      //     this.isLogin.emit(true);
-      //     this.toastr.success('Logged In Successfully');
-      //   }
-      //   else{
-      //     this.toastr.error('Incorrect Username or Password!');
-      //   }
-      // })
-      
+      const userPayload ={
+        "email":this.loginForm.controls['Email'].value,
+        "password":this.loginForm.controls['Password'].value
+      } 
+      // this.isLogin.emit(true);
+      this.appService.login(userPayload).pipe(first())
+      .subscribe({
+        next:  (res:any) => {
+          if (res != null && res != undefined) {         
+            this.toastr.success('Logged In Successfully');
+            this.isLogin.emit(true);
+          }
+          else{
+            this.toastr.error('Incorrect Username or Password!');
+          }
+        },
+        error: (error:any) =>{
+          this.toastr.error(error);
+        }})
     }
     else{
       this.loginForm.markAllAsTouched();

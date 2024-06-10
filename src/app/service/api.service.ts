@@ -1,17 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
+import { ToastrService } from 'ngx-toastr';
+import { User, employeeStatus } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   accurateTime: any;
+  private userSubject: BehaviorSubject<User>;  
+  public user: Observable<User>;
+  
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private toastr : ToastrService) { 
+      this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
+        this.user = this.userSubject.asObservable();
+    }
 
+  public get userValue() {
+      return this.userSubject.value;
+  }
 
   getIp() {
    return this.http.get<any>('https://api.ipify.org/?format=json')
@@ -67,13 +79,30 @@ export class ApiService {
 
 
   //Login
-  login(data: any): Observable<any> {
+  // login(data: any): Observable<any> {
 
-    return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
-      localStorage.setItem('user', JSON.stringify(user));
+  //   return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
+  //     localStorage.setItem('user', JSON.stringify(user));
+  //     return user;
+  //   }));
+  // }
+
+  login(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
+      localStorage.setItem('user', JSON.stringify(user.obj));
       return user;
     }));
   }
+
+  logout() {
+    // remove user from local storage and set current user to null
+    // sessionStorage.removeItem('user');
+    sessionStorage.clear();
+    localStorage.clear();
+    this.toastr.success("LogOut Successfully...")
+    // isLogin.status = false;
+    this.router.navigate(['/login']);
+}
 
   getAttendance() {
     return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
@@ -84,11 +113,11 @@ export class ApiService {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)
   }
 
+  punchTimeApplication(data: any) {
+    return this.http.post<any>(`${environment.apiUrl}/Attendance/PunchTimeApplication`, data)
+  }
+
   getAttendanceByUserId(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/GetAttendanceByUserId`, data)
   }
-
-
-
-
 }

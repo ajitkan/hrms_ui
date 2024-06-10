@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
+import { User } from 'src/app/models/user';
+import { EmployeeService } from 'src/app/service/employee-service.service';
 
 @Component({
   selector: 'app-emplyee-details-summary',
@@ -6,8 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./employee-details-summary.component.css']
 })
 export class EmplyeeDetailsSummaryComponent {
-
-  personalDetails = //JSON.parse(sessionStorage.getItem("personalDetails"))
+  // personalDetails:any; 
+  personalDetails =
   {
                       "status":"200",
                       "message":"",
@@ -60,4 +64,27 @@ export class EmplyeeDetailsSummaryComponent {
                             "allowToEdit":false
                         }
     }
+  // user!:User;
+    constructor(private employeeService:EmployeeService,private toastr : ToastrService){
+    }
+    user = JSON.parse(localStorage.getItem('user')as string);
+  ngOnInit(){
+    this.personalDetails = JSON.parse(sessionStorage.getItem("personalDetails")as string)
+    this.user = JSON.parse(localStorage.getItem('user')as string);
+    // if(this.personalDetails==null){
+    //   this.getEmployeeData(this.user);
+    // }
+  }
+  getEmployeeData(user:User){
+    this.employeeService.getEmployeeDetails(user.id).pipe(first())
+    .subscribe({
+      next:  (res:any) => {
+        this.personalDetails = res;
+        this.toastr.success('Logged In Successfully');
+      },
+      error: (error:any)=>{
+        this.toastr.error(error);
+      }
+    })
+  }
 }
