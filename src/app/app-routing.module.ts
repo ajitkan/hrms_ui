@@ -17,10 +17,16 @@ import { NominationDetailsComponent } from './pages/EmployeeData/nomination-deta
 import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
 import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
+import { AuthGuard } from './service/auth.guard';
+import { AppComponent, DashboardComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path:'login',component:LoginComponent
+    path:'',component:DashboardComponent,
+  },
+  {
+    path:'login',component:LoginComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'jobpost', component:JobPostComponent

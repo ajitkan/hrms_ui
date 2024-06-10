@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-  <app-login *ngIf="!IsLogin" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-login *ngIf="!IsLogin " (isLogin)="IsLoggedin($event)"></app-login>
   <!-- ====================================
     ——— LEFT SIDEBAR WITH OUT FOOTER
   ===================================== -->
@@ -8,9 +8,9 @@
     <div id="sidebar" class="sidebar sidebar-with-footer">
       <!-- Aplication Brand -->
       <div class="app-brand">
-        <a href="/index.html">
-          <img src="../assets/images/logo.png" alt="Mono">
-          <span class="brand-name">MONO</span>
+        <a href="https://kaninfos.com" target="_blank">
+          <img src="../assets/images/kanlogo1.png" alt="https://kaninfos.com">
+          <!-- <span class="brand-name">MONO</span> -->
         </a>
       </div>
       <!-- begin sidebar scrollbar -->
@@ -488,9 +488,9 @@
   <!-- ====================================
 ——— PAGE WRAPPER
 ===================================== -->
-  <div *ngIf="IsLogin" class="page-wrapper">
+  <div *ngIf="IsLogin " class="page-wrapper">
     <!-- Header -->
-    <app-header></app-header>
+    <app-header (isLogin)="IsLoggedin($event)"></app-header>
     <!-- Content Area -->
     <router-outlet></router-outlet>
     <!-- Footer -->
