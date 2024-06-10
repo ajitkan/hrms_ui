@@ -70,7 +70,7 @@ const routes: Routes = [
 
  {
   path: 'company-master', component: CompanyMasterComponent
- }
+ },
 
   // { 
   //   path: 'emp-contact-details', component: ContactDetailsComponent 
