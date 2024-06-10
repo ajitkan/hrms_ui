@@ -20,8 +20,9 @@
   
   
   <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
-  
-  
+  <!-- font- awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- MONO CSS -->
   <link id="main-css-href" rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 
@@ -29,11 +30,15 @@
 
 
   <!-- FAVICON -->
-  <link href="./favicon.ico" rel="shortcut icon" />
+  <link href="./assets/images/kanlogo1.png" rel="shortcut icon" />
 
   <script type="application/json" src="./plugins/nprogress/nprogress.js"></script>
 </head>
 <body>
   <app-root></app-root>
+  <div class="overlay-container" aria-live="polite">
+    <div id="toast-container" class="toast-top-Center toast-container">
+    </div>
+  </div>
 </body>
 </html>

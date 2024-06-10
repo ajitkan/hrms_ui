@@ -1,0 +1,124 @@
+<section class="company-section">
+    <div class="container-fluid">
+      <div class="actions mb-3 mt-3 d-flex justify-content-between align-items-center">
+        <div>
+          <button type="button" class="btn btn-info mr-2" (click)="addCompany()">
+            <i class="fa fa-plus"></i> Add Company
+          </button>
+        </div>
+        <div class="form-group mb-0">
+          
+          <input type="text" class="form-control search-box" placeholder="Search companies" [(ngModel)]="searchText">
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table id="company_master-table" class="table custom-table">
+          <thead>
+            <tr>
+              <th>Sr. No</th>
+              <th>Company Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Country</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <!-- <tbody>
+            <tr *ngFor="let company of companies | filter:searchText; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ company.companyName }}</td>
+              <td>{{ company.companyType }}</td>
+              <td>{{ company.location }}</td>
+              <td>{{ company.phone }}</td>
+              <td>{{ company.email }}</td>
+              <td class="action-buttons">
+                <button class="btn btn-sm btn-primary" (click)="editCompany(company)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteCompany(company)">Delete</button>
+              </td>
+            </tr>
+          </tbody> -->
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <div #formModal id="formModal" class="modal fade" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="exampleModalLabel" class="modal-title">{{ editMode ? 'Edit Company' : 'Add Company' }}</h5>
+                <button type="button" data-bs-dismiss="modal" #closeButton id="close" aria-label="Close" class="close" (click)="closePopup()"><i class="fa fa-close"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <span id="form_result"></span>
+
+                <form autocomplete="off" (ngSubmit)="submitForm()" [formGroup]="formGroup" method="post" id="sample_form" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="CompanyName">Company Name <span class="text-danger">*</span></label>
+                            <input type="text" formControlName="CompanyName" id="CompanyName" class="form-control" placeholder="Company Name">
+                            <div *ngIf="isInvalidAndTouched('CompanyName')" class="text-danger">
+                                Company Name is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="TradingName">Trading Name</label>
+                            <input type="text" formControlName="TradingName" id="TradingName" class="form-control" placeholder="Trading Name">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="RegistrationNumber">Registration Number</label>
+                            <input type="text" formControlName="RegistrationNumber" id="RegistrationNumber" class="form-control" placeholder="Registration Number">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="Phone">Phone</label>
+                            <input type="text" formControlName="Phone" id="Phone" class="form-control" placeholder="Phone">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="Email">Email</label>
+                            <input type="email" formControlName="Email" id="Email" class="form-control" placeholder="Email">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="Website">Website</label>
+                            <input type="url" formControlName="Website" id="Website" class="form-control" placeholder="Website">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="LocationID">Location ID</label>
+                            <input type="text" formControlName="LocationID" id="LocationID" class="form-control" placeholder="Location ID">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="TaxNumber">Tax Number</label>
+                            <input type="text" formControlName="TaxNumber" id="TaxNumber" class="form-control" placeholder="Tax Number">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="CompanyLogo">Company Logo</label>
+                            <input type="text" formControlName="CompanyLogo" id="CompanyLogo" class="form-control" placeholder="Company Logo URL">
+                        </div>
+
+                        <div class="container">
+                            <div class="form-group" align="center">
+                                <input type="hidden" name="action" id="action" />
+                                <input type="hidden" name="hidden_id" id="hidden_id" />
+                                <input type="submit" name="action_button" id="action_button" class="btn btn-warning" [value]="editMode ? 'Save' : 'Add'">
+                                <button type="button" class="btn btn-secondary" id="cancel_button" *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div id="toastr-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  

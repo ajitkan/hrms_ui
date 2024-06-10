@@ -1,4 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-login',
@@ -6,11 +10,59 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-// @Output isLogin
-@Output() isLogin = new EventEmitter();
+  // @Output isLogin
+  @Output() isLogin = new EventEmitter();
 
-  login(){
-    console.log("login Success ....")
-    this.isLogin.emit(true);
+  loginForm !: FormGroup
+  fieldTextType: boolean | undefined;
+
+  constructor(private formBuilder: FormBuilder,
+               private appService: ApiService,
+               private toastr : ToastrService
+  ) { }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      Email: ['', [Validators.required]],
+      Password: ['', [Validators.required]]
+    })
+
+  }
+
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  login() {
+
+    if (this.loginForm.valid) {
+      
+      const userPayload ={
+        "email":this.loginForm.controls['Email'].value,
+        "password":this.loginForm.controls['Password'].value
+      } 
+      // this.isLogin.emit(true);
+      this.appService.login(userPayload).pipe(first())
+      .subscribe({
+        next:  (res:any) => {
+          if (res != null && res != undefined) {         
+            this.toastr.success('Logged In Successfully');
+            this.isLogin.emit(true);
+          }
+          else{
+            this.toastr.error('Incorrect Username or Password!');
+          }
+        },
+        error: (error:any) =>{
+          this.toastr.error(error);
+        }})
+    }
+    else{
+      this.loginForm.markAllAsTouched();
+    }
   }
 }

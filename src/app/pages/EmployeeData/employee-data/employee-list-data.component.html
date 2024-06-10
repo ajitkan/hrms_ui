@@ -1,0 +1,475 @@
+<section>
+    <div class="container-fluid"><span id="general_result"></span></div>
+    <div class="container-fluid mb-3 mt-3 ">
+        <!-- <div class="row grid m-auto gap-3">
+            <button type="button" class="btn btn-info col" name="create_record" id="create_record"><i class="fa fa-plus"></i> Add Employee</button>
+            <button type="button" class="btn btn-danger col" name="bulk_delete" id="bulk_delete"><i class="fa fa-minus-circle"></i> Bulk delete</button>
+            <button class="btn btn-primary col" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-filter" aria-hidden="true"></i> Filter
+            </button>
+        </div>
+    </div>
+    <div class="col-12"> -->
+        <!-- Filtering -->
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form action="" method="GET" id="filter_form">
+                    <div class="row">
+                        <!-- Company -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="text-bold"><strong>Company</strong></label>
+                                <div class="btn-group bootstrap-select form-control dynamic"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default btn-light" data-toggle="dropdown" role="button" data-id="company_id_filter" title="Select Company..."><span class="filter-option pull-left">Select Company...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="dropdown-menu inner" role="listbox" aria-expanded="false"><a tabindex="0" class="dropdown-item" data-original-index="1"><span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false"><span class="text"></span><span class="fa fa-check check-mark"></span></span></a><a tabindex="0" class="dropdown-item" data-original-index="2"><span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false"><span class="text">HR1</span><span class="fa fa-check check-mark"></span></span></a><a tabindex="0" class="dropdown-item" data-original-index="3"><span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false"><span class="text">HR2</span><span class="fa fa-check check-mark"></span></span></a></div></div><select name="company_id" id="company_id_filter" class="form-control selectpicker dynamic" data-live-search="true" data-live-search-style="contains" data-shift_name="shift_name" data-dependent="department_name" title="Select Company..." tabindex="-98"><option class="bs-title-option" value="">Select Company...</option>
+                                    <option value=""></option>
+                                    <option value="1">HR1</option>
+                                    <option value="2">HR2</option>
+                                        </select></div>
+                            </div>
+                        </div>
+                        <!--/ Company-->
+
+                        <!-- Department-->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="text-bold"><b>Department</b></label>
+                                <div class="btn-group bootstrap-select form-control designationFilter"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default btn-light" data-toggle="dropdown" role="button" data-id="department_id_filter" title="Select Department..."><span class="filter-option pull-left">Select Department...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div></div><select name="department_id" id="department_id_filter" class="selectpicker form-control designationFilter" data-live-search="true" data-live-search-style="contains" data-designation_name="designation_name" title="Select Department..." tabindex="-98"><option class="bs-title-option" value="">Select Department...</option>
+                                </select></div>
+                            </div>
+                        </div>
+                        <!--/ Department-->
+
+                        <!-- Designation -->
+                        <div class="col-md-3 form-group">
+                            <label class="text-bold"><b>Designation</b></label>
+                            <div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default btn-light" data-toggle="dropdown" role="button" data-id="designation_id_filter" title="Select Designation..."><span class="filter-option pull-left">Select Designation...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div></div><select name="designation_id" id="designation_id_filter" class="selectpicker form-control" data-live-search="true" data-live-search-style="contains" title="Select Designation..." tabindex="-98"><option class="bs-title-option" value="">Select Designation...</option>
+                            </select></div>
+                        </div>
+                        <!--/ Designation -->
+
+                        <!-- Office Shift -->
+                        <div class="col-md-2 form-group">
+                            <label class="text-bold"><b>Office Shift</b></label>
+                            <div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default btn-light" data-toggle="dropdown" role="button" data-id="office_shift_id_filter" title="Selecting Office Shift..."><span class="filter-option pull-left">Selecting Office Shift...</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div></div><select name="office_shift_id" id="office_shift_id_filter" class="selectpicker form-control" data-live-search="true" data-live-search-style="contains" title="Selecting Office Shift..." tabindex="-98"><option class="bs-title-option" value="">Selecting Office Shift...</option>
+                            </select></div>
+                        </div>
+                        <!--/ Office Shift -->
+
+                        <div class="col-md-1">
+                            <label class="text-bold"></label><br>
+                            <button type="button" class="btn btn-dark" id="filterSubmit">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i> &nbsp; GET
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/ Filtering -->
+    </div>
+
+
+    <div class="table-responsive">
+        <div id="employee-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="row dataTables_length" id="employee-table_length">
+                    <label class="col-5">
+                        <div class="btn-group bootstrap-select form-control form-control-sm h-auto">
+                            <button type="button" class="btn dropdown-toggle btn-default btn-light" data-toggle="dropdown" role="button" title="10">
+                                <span class="filter-option pull-left">10</span>&nbsp;
+                                <span class="bs-caret">
+                                    <span class="caret"></span>
+                                </span>
+                            </button>
+                                <div class="dropdown-menu open" role="combobox">
+                                    <div class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                                        <a tabindex="0" class="dropdown-item selected" data-original-index="0">
+                                            <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="true">
+                                                <span class="text">10</span><span class="fa fa-check check-mark"></span>
+                                            </span>
+                                        </a>
+                                        <a tabindex="0" class="dropdown-item" data-original-index="1">
+                                            <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false">
+                                                <span class="text">25</span>
+                                                <span class="fa fa-check check-mark"></span>
+                                            </span>
+                                        </a>
+                                        <a tabindex="0" class="dropdown-item" data-original-index="2">
+                                            <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false">
+                                                <span class="text">50</span>
+                                                <span class="fa fa-check check-mark"></span>
+                                            </span>
+                                        </a>
+                                        <a tabindex="0" class="dropdown-item" data-original-index="3">
+                                            <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0" aria-disabled="false" aria-selected="false">
+                                                <span class="text">All</span>
+                                                <span class="fa fa-check check-mark"></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                    <select name="employee-table_length" aria-controls="employee-table" class="form-control form-control-sm m-auto" tabindex="-98">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="-1">All</option>
+                                    </select>
+                            </div> records per page
+                        </label>
+                    <span class="col-2"></span>
+                    <label class="col-5" >
+                        <input type="search" class="form-control" placeholder="Search" aria-controls="employee-table">
+                    </label>           
+                </div>
+                                        <!-- <div id="employee-table_filter" class="dataTables_filter">
+                                            <label>Search
+                                                <input type="search" class="form-control" placeholder="" aria-controls="employee-table">
+                                            </label>
+                                        </div> -->
+                                        <div class="dt-buttons btn-group">
+                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button">
+                                                <span>
+                                                    <i title="export to pdf" class="fa fa-file-pdf-o"></i>
+                                                </span>
+                                            </button> 
+                                            <button class="btn btn-secondary buttons-csv buttons-html5 export-for-device" tabindex="0" aria-controls="employee-table" type="button">
+                                                <span>
+                                                    <i title="export for device" class="fa fa-tablet"></i>
+                                                </span>
+                                            </button> 
+                                            <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="employee-table" type="button">
+                                                <span>
+                                                    <i title="print" class="fa fa-print"></i>
+                                                </span>
+                                            </button> 
+                                            <button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="employee-table" type="button" aria-haspopup="true">
+                                                <span>
+                                                    <i title="column visibility" class="fa fa-eye"></i>
+                                                </span>
+                                            </button> 
+                                        </div>
+                                    </div>
+                                    <div id="employee-table_processing" class="dataTables_processing card" style="display: none;">Processing...</div>
+                                    <table id="employee-table" class="table dataTable no-footer dt-checkboxes-select dtr-inline" role="grid" aria-describedby="employee-table_info" >
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="not-exported text-left dt-checkboxes-cell dt-checkboxes-select-all sorting_disabled" rowspan="1" colspan="1" style="width: 25px;" data-col="0" aria-label="">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" class="dt-checkboxes">
+                                                    <label class="text-bold"></label>
+                                                </div>
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1" style="width: 220px;" aria-label="Employee: activate to sort column ascending">Employee</th>
+                                            <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1" style="width: 234px;" aria-label="Company: activate to sort column ascending">Company</th>
+                                            <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1" style="width: 277px;" aria-label="Contact: activate to sort column ascending">Contact</th>
+                                            <th class="not-exported text-left sorting_disabled" rowspan="1" colspan="1" style="width: 161px;" aria-label="action">action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr id="9" role="row" class="odd">
+                                                <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="dt-checkboxes">
+                                                        <label class="text-bold"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                    <div class="mr-2">
+                                                        <img src="https://hrm5.test-softwares.online/uploads/profile_photos/staff_1616582111.jpg" class="profile-photo md" style="height:35px;width:35px"></div>
+                                                    <div>
+                                                        <span>
+                                                            <a href="employees/9" class="d-block text-bold" style="color:#24ABF2">Sahiba Khatun</a>
+                                                        </span>
+                                                        <br>
+                                                        <span>Username: staff</span>
+                                                        <br>
+                                                        <span>Staff Id: 1</span><br>
+                                                        <span>Gender: Female</span><br>
+                                                        <span>Shift: </span><br>
+                                                        <span>Salary: ₹ 500</span><br>
+                                                        <span>Payslip Type: Monthly</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="text-bold">HR1</span><br>
+                                                <span>Department : CSE</span><br>
+                                                <span>Designation : Android Developer</span>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-envelope text-muted" title="Email"></i> irfanchowdhury80@gmail.com<br>
+                                                <i class="text-muted fa fa-phone" title="Phone"></i> 387292822<br>
+                                                <i class="text-muted fa fa-skype" title="Skype"></i> Sabiha95<br>
+                                                <i class="text-muted fa fa-whatsapp" title="Whats App"></i> 123456789
+                                            </td>
+                                            <td class=" text-left">
+                                                <a href="employees/9" class="edit btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details">
+                                                    <i class="dripicons-preview"></i>
+                                                </a>&nbsp;&nbsp;&nbsp;
+                                                <a class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF" href="https://hrm5.test-softwares.online/staff/employees/pdf/9">
+                                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr id="11" role="row" class="even">
+                                            <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" class="dt-checkboxes">
+                                                    <label class="text-bold"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="mr-2">
+                                                        <img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md" style="height:35px;width:35px"></div>
+                                                    <div><span><a href="employees/11" class="d-block text-bold" style="color:#24ABF2">Neo
+                                                                Dezhi</a></span><br><span>Username: neo22</span><br><span>Staff Id: 3</span><br><span>Gender:
+                                                            Male</span><br><span>Shift: </span><br><span>Salary: ₹ 100</span><br><span>Payslip Type: Monthly</span></div>
+                                                    </div>
+                                                    </td>
+                                                    <td><span class="text-bold">HR1</span><br><span>Department : Finance</span><br><span>Designation : Finance
+                                                            Manager</span></td>
+                                                    <td><i class="fa fa-envelope text-muted" title="Email"></i> dezhi@gmail.com<br><i class="text-muted fa fa-phone"
+                                                            title="Phone"></i> 67278232<br><i class="text-muted fa fa-skype" title="Skype"></i> Deshi321<br><i
+                                                            class="text-muted fa fa-whatsapp" title="Whats App"></i> 987456</td>
+                                                    <td class=" text-left"><a href="employees/11" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                            data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                            type="button" name="delete" id="11" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                            data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                            class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                            href="https://hrm5.test-softwares.online/staff/employees/pdf/11"><i class="fa fa-file-pdf-o"
+                                                                aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="12" role="row" class="odd">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/12" class="d-block text-bold" style="color:#24ABF2">Bob
+                                                                            Hobart</a></span><br><span>Username: bob05</span><br><span>Staff Id: 4</span><br><span>Gender:
+                                                                        Male</span><br><span>Shift: </span><br><span>Salary: ₹ 100</span><br><span>Payslip Type:
+                                                                        Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : Finance</span><br><span>Designation : Finance
+                                                                Manager</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> bob@ymail.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 4678292<br><i class="text-muted fa fa-skype" title="Skype"></i> bobhober05<br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> 12354698</td>
+                                                        <td class=" text-left"><a href="employees/12" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="12" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/12"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="13" role="row" class="even">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/13" class="d-block text-bold" style="color:#24ABF2">Alice
+                                                                            Patrica</a></span><br><span>Username: alicehh4</span><br><span>Staff Id:
+                                                                        5</span><br><span>Gender: Male</span><br><span>Shift: </span><br><span>Salary: ₹
+                                                                        100</span><br><span>Payslip Type: Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : CSE</span><br><span>Designation : Senior
+                                                                Programmer</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> alicehh4@newmail.com<br><i
+                                                                class="text-muted fa fa-phone" title="Phone"></i> 8765445698<br><i class="text-muted fa fa-skype"
+                                                                title="Skype"></i> Alica123<br><i class="text-muted fa fa-whatsapp" title="Whats App"></i> 96548789</td>
+                                                        <td class=" text-left"><a href="employees/13" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="13" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/13"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="14" role="row" class="odd">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/14" class="d-block text-bold" style="color:#24ABF2">Mayank
+                                                                            Agarwal</a></span><br><span>Username: mayank06</span><br><span>Staff Id:
+                                                                        6</span><br><span>Gender: Male</span><br><span>Shift: </span><br><span>Salary: ₹
+                                                                        100</span><br><span>Payslip Type: Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : Analyst</span><br><span>Designation : Data
+                                                                Analyst</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> mayank@gmail.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 746389982<br><i class="text-muted fa fa-skype" title="Skype"></i> mayank23<br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> 465467767</td>
+                                                        <td class=" text-left"><a href="employees/14" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="14" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/14"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="15" role="row" class="even">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/15" class="d-block text-bold" style="color:#24ABF2">Mansoor
+                                                                            Ahmed</a></span><br><span>Username: mansoor</span><br><span>Staff Id: 7</span><br><span>Gender:
+                                                                        Male</span><br><span>Shift: </span><br><span>Salary: ₹ 200</span><br><span>Payslip Type:
+                                                                        Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : Finance</span><br><span>Designation : Finance
+                                                                Manager</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> mansoor@yahoo.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 67638299<br><i class="text-muted fa fa-skype" title="Skype"></i> Moonsoor<br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> 48787564</td>
+                                                        <td class=" text-left"><a href="employees/15" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="15" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/15"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="27" role="row" class="odd">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/27" class="d-block text-bold" style="color:#24ABF2">Junayet
+                                                                            Istius</a></span><br><span>Username: junayet95</span><br><span>Staff Id:
+                                                                        8</span><br><span>Gender: Male</span><br><span>Shift: </span><br><span>Salary: ₹
+                                                                        100</span><br><span>Payslip Type: Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : CSE</span><br><span>Designation : Senior
+                                                                Programmer</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> junayet@gmail.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 01829496534<br><i class="text-muted fa fa-skype" title="Skype"></i> junayet67<br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> 66456798</td>
+                                                        <td class=" text-left"><a href="employees/27" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="27" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/27"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="34" role="row" class="even">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/34" class="d-block text-bold" style="color:#24ABF2">Amzad
+                                                                            Hossain</a></span><br><span>Username: amzad95</span><br><span>Staff Id:
+                                                                        9</span><br><span>Gender: Male</span><br><span>Shift: </span><br><span>Salary: ₹
+                                                                        100</span><br><span>Payslip Type: Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : CSE</span><br><span>Designation : Android
+                                                                Developer</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> amzad@gmail.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 01521225124<br><i class="text-muted fa fa-skype" title="Skype"></i> amjad95<br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> 65412254</td>
+                                                        <td class=" text-left"><a href="employees/34" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="34" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/34"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="38" role="row" class="odd">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/38" class="d-block text-bold" style="color:#24ABF2">Anisul
+                                                                            Islam</a></span><br><span>Username: anis95</span><br><span>Staff Id: 10</span><br><span>Gender:
+                                                                        Male</span><br><span>Shift: </span><br><span>Salary: ₹ 100</span><br><span>Payslip Type:
+                                                                        Monthly</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : CSE</span><br><span>Designation : Android
+                                                                Developer</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> nasrinchowdhury198@gmail.com<br><i
+                                                                class="text-muted fa fa-phone" title="Phone"></i> 01521222842<br><i class="text-muted fa fa-skype"
+                                                                title="Skype"></i> anis95<br><i class="text-muted fa fa-whatsapp" title="Whats App"></i> 48754121</td>
+                                                        <td class=" text-left"><a href="employees/38" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="38" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/38"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <tr id="45" role="row" class="even">
+                                                        <td class=" text-left dt-checkboxes-cell" tabindex="0">
+                                                            <div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label class="text-bold"></label></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="mr-2"><img src="https://hrm5.test-softwares.online/logo/avatar.jpg" class="profile-photo md"
+                                                                        style="height:35px;width:35px"></div>
+                                                                <div><span><a href="employees/45" class="d-block text-bold" style="color:#24ABF2">Promi
+                                                                            Chy</a></span><br><span>Username: promi98</span><br><span>Staff Id: 11</span><br><span>Gender:
+                                                                        Female</span><br><span>Shift: MidDay</span><br><span>Salary: ₹ 0</span><br> </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-bold">HR1</span><br><span>Department : CSE</span><br><span>Designation : Android
+                                                                Developer</span></td>
+                                                        <td><i class="fa fa-envelope text-muted" title="Email"></i> promi98@gmail.com<br><i class="text-muted fa fa-phone"
+                                                                title="Phone"></i> 423213234<br><i class="text-muted fa fa-skype" title="Skype"></i> <br><i
+                                                                class="text-muted fa fa-whatsapp" title="Whats App"></i> </td>
+                                                        <td class=" text-left"><a href="employees/45" class="edit btn btn-primary btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="View Details"><i class="dripicons-preview"></i></a>&nbsp;&nbsp;&nbsp;<button
+                                                                type="button" name="delete" id="45" class="delete btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>&nbsp;&nbsp;&nbsp;<a
+                                                                class="download btn-sm" style="background:#FF7588; color:#fff" title="PDF"
+                                                                href="https://hrm5.test-softwares.online/staff/employees/pdf/45"><i class="fa fa-file-pdf-o"
+                                                                    aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                    </table>
+                                                    <div class="dataTables_info" id="employee-table_info" role="status" aria-live="polite">Showing 1 - 10 (15)</div>
+                                                    <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
+                                                        <ul class="pagination">
+                                                            <li class="paginate_button page-item previous disabled" id="employee-table_previous"><a href="#"
+                                                                    aria-controls="employee-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                            <li class="paginate_button page-item active"><a href="#" aria-controls="employee-table" data-dt-idx="1"
+                                                                    tabindex="0" class="page-link">1</a></li>
+                                                            <li class="paginate_button page-item "><a href="#" aria-controls="employee-table" data-dt-idx="2" tabindex="0"
+                                                                    class="page-link">2</a></li>
+                                                            <li class="paginate_button page-item next" id="employee-table_next"><a href="#" aria-controls="employee-table"
+                                                                    data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    </div>
+                    </div>
+</section>
