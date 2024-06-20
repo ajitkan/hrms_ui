@@ -59,20 +59,35 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label for="CompanyName">Company Name <span class="text-danger">*</span></label>
-                            <input type="text" formControlName="CompanyName" id="CompanyName" class="form-control" placeholder="Company Name">
+                            <input type="text" formControlName="CompanyName" id="CompanyName" class="form-control" placeholder="Company name">
                             <div *ngIf="isInvalidAndTouched('CompanyName')" class="text-danger">
-                                Company Name is required
+                                Company name is required
                             </div>
                         </div>
 
                         <div class="col-md-6 form-group">
+                          <label>Company Type *</label>
+                          <select name="company_type" id="company_type" class="form-control selectpicker"
+                                  data-live-search="true" data-live-search-style="contains"
+                                  title='Select Company Type...'>
+                              <option value="" disabled selected>Company Type</option>
+                              <option value="corporation">Corporation</option>
+                              <option value="exempt organization">Exempt Organization</option>
+                              <option value="partnership">Partnership</option>
+                              <option value="private foundation">Private Foundation</option>
+                              <option value="limited liability company">Limited Liability Company</option>
+
+                          </select>
+                      </div>
+
+                        <div class="col-md-6 form-group">
                             <label for="TradingName">Trading Name</label>
-                            <input type="text" formControlName="TradingName" id="TradingName" class="form-control" placeholder="Trading Name">
+                            <input type="text" formControlName="TradingName" id="TradingName" class="form-control" placeholder="Trading name">
                         </div>
 
                         <div class="col-md-6 form-group">
                             <label for="RegistrationNumber">Registration Number</label>
-                            <input type="text" formControlName="RegistrationNumber" id="RegistrationNumber" class="form-control" placeholder="Registration Number">
+                            <input type="text" formControlName="RegistrationNumber" id="RegistrationNumber" class="form-control" placeholder="Registration number">
                         </div>
 
                         <div class="col-md-6 form-group">
@@ -80,10 +95,27 @@
                             <input type="text" formControlName="Phone" id="Phone" class="form-control" placeholder="Phone">
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <!-- <div class="col-md-6 form-group">
                             <label for="Email">Email</label>
                             <input type="email" formControlName="Email" id="Email" class="form-control" placeholder="Email">
+                        </div> -->
+                        <!-- <div class="col-md-6 form-group">
+                          <label for="Email">Email</label>
+                          <input type="email" formControlName="Email" id="Email" class="form-control" placeholder="Email">
+                          <div *ngIf="email?.invalid && email?.dirty" class="text-danger">
+                            <div *ngIf="email?.errors?.email">Invalid email address.</div>
+                          </div>
+                        </div> -->
+                        <div class="col-md-6 form-group">
+                          <label for="Email">Email</label>
+                          <input type="email" formControlName="Email" id="Email" class="form-control" placeholder="Email" (blur)="onEmailBlur()">
+                          <div *ngIf="formGroup.get('Email')?.touched && formGroup.get('Email')?.invalid" class="text-danger">
+                            <div *ngIf="formGroup.get('Email')?.errors?.['email']">Invalid email address.</div>
+                          </div>
                         </div>
+                        
+                        
+                        
 
                         <div class="col-md-6 form-group">
                             <label for="Website">Website</label>
@@ -91,18 +123,27 @@
                         </div>
 
                         <div class="col-md-6 form-group">
-                            <label for="LocationID">Location ID</label>
-                            <input type="text" formControlName="LocationID" id="LocationID" class="form-control" placeholder="Location ID">
+                            <label for="LocationID">City</label>
+                            <input type="text" formControlName="LocationID" id="LocationID" class="form-control" placeholder="City">
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label for="State">State</label>
+                          <input type="text" formControlName="State" id="State" class="form-control" placeholder="State">
                         </div>
 
                         <div class="col-md-6 form-group">
+                          <label for="Country">Country</label>
+                          <input type="text" formControlName="Country" id="Country" class="form-control" placeholder="Country">
+                       </div>
+                        <div class="col-md-6 form-group">
                             <label for="TaxNumber">Tax Number</label>
-                            <input type="text" formControlName="TaxNumber" id="TaxNumber" class="form-control" placeholder="Tax Number">
+                            <input type="text" formControlName="TaxNumber" id="TaxNumber" class="form-control" placeholder="Tax number">
                         </div>
 
                         <div class="col-md-6 form-group">
                             <label for="CompanyLogo">Company Logo</label>
-                            <input type="text" formControlName="CompanyLogo" id="CompanyLogo" class="form-control" placeholder="Company Logo URL">
+                            <input type="file" formControlName="CompanyLogo" id="CompanyLogo" class="form-control" placeholder="Optional">
+                            <span id="store_logo"></span>
                         </div>
 
                         <div class="container">

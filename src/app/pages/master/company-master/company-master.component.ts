@@ -30,6 +30,12 @@ export class CompanyMasterComponent {
     });
   }
 
+  // get email() {
+  //   return this.formGroup.get('Email');
+  // }
+  onEmailBlur() {
+    this.formGroup.get('Email')?.markAsTouched();
+  }
   addCompany(){
     console.log('---------add company form --- ')
       const companyControl = this.formGroup.get('CompanyName');
