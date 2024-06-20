@@ -32,7 +32,8 @@ export class AppComponent {
     authentication:true,
     otherpage:true,
     customization:true,
-    email:true
+    email:true,
+    TimeSection:true
   };
 
   constructor(private router:Router){

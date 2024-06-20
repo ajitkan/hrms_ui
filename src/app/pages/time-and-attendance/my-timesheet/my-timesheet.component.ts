@@ -1,20 +1,19 @@
-
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from 'src/app/service/api.service';
-import { Modal } from 'bootstrap';
 import { DatePipe } from '@angular/common';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Modal } from 'bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
-  selector: 'app-add-attendance',
-  templateUrl: './add-attendance.component.html',
-  styleUrls: ['./add-attendance.component.css']
+  selector: 'app-my-timesheet',
+  templateUrl: './my-timesheet.component.html',
+  styleUrls: ['./my-timesheet.component.css']
 })
-export class AddAttendanceComponent {
-
+export class MyTimesheetComponent {
 
   @ViewChild('modalForm') modalForm !: ElementRef<any>;
+  @ViewChild('viewRequest') viewRequest !: ElementRef<any>;
   @ViewChild('closebutton') closebutton: any;
   attendanceForm !: FormGroup
   accountForm !: FormGroup
@@ -41,6 +40,7 @@ export class AddAttendanceComponent {
   formattedDate: any;
   accountYear: any = [];
   dates: any = [];
+  requestData :any =[];
 
   joiningDate: any = new Date("2024-03-12T11:01:42.097Z");
 
@@ -55,7 +55,6 @@ export class AddAttendanceComponent {
 
   ngOnInit(): void {
 
-    debugger
     this.attendanceForm = this.f.group({
 
       TimeIn: ['', Validators.required],
@@ -105,11 +104,10 @@ export class AddAttendanceComponent {
       this.onLoad();
     }
     else{
-      debugger
       this.getAttendanceByUser('K-210', new Date())
     }
 
-    
+    // this.getAttendanceByUser('K-210', new Date())
     // this.onLoad();
   }
 
@@ -260,6 +258,8 @@ export class AddAttendanceComponent {
 
 
   getAttendanceByUser(data: any, _date: any) {
+
+
     var input =
     {
       // "id": 0,
@@ -405,7 +405,6 @@ export class AddAttendanceComponent {
     // })
 
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    debugger
     this.apiService.getCurrentTime(timezone).subscribe((response: any) => {
       if (response != null && response != undefined) {
         this.appliedDate = response.datetime;
@@ -417,4 +416,24 @@ export class AddAttendanceComponent {
       this.accurateTime = 'Could not fetch time';
     });
   }
+
+  onView(data:any){
+    // this.requestData = data;
+
+    var input ={
+      Emp_Id : data.User_Id,
+      Shift_Date : data.Shift_Date
+    }
+     this.apiService.getApplicationByUserId(input).subscribe(resp=>{
+      if(resp != null && resp != undefined){
+        console.log(resp)
+        this.requestData = resp.obj[0];
+        console.log(this.requestData);
+        const modal = new Modal(this.viewRequest.nativeElement);
+        modal.show()
+      }
+     })
+  }
+
+
 }
