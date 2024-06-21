@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/authentication/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 
 import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
@@ -21,12 +23,18 @@ import { MyApplicationComponent } from './pages/time-and-attendance/my-applicati
 import { AuthGuard } from './service/auth.guard';
 import { AppComponent, DashboardComponent } from './app.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
+import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+
 
 
 const routes: Routes = [
   {
-    path:'',component:DashboardComponent,
+    path:'login',component:LoginComponent
   },
+  {
+    path:'home',component:DashboardComponent
+  },
+  {path:'Admin',component:AdminDashboardComponent}
   {
     path:'login',component:LoginComponent,
     canActivate: [AuthGuard]
@@ -81,8 +89,9 @@ const routes: Routes = [
   },
   { 
     path: 'salary-calculator', component: SalaryCalculatorComponent
+  {
+    path: 'my-timesheet', component: MyTimesheetComponent
   }
-
 ];
 
 @NgModule({

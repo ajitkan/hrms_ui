@@ -4,37 +4,48 @@
         <div class="card card-default">
           <div class="card-header">
             <h2>My Attendance</h2>
-            <button class="btn" (click)="updateAttendance()">Check In</button>
+            <button class="btn" (click)="updateAttendance()">Sign In</button>
           </div>
           <div class="card-body">
             <div class="row" style="margin-bottom: 5px;">
-              <div class="col-md-8">
-                <form autocomplete="off" name="update_attendance_from" id="update_attendance_from" method="get"
+              <div class="col-md-9">
+                <form autocomplete="off"  [formGroup]="accountForm"
                   accept-charset="utf-8">
 
                   <div class="row">
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <!-- <input class="form-control" placeholder="End Date"  id="attendance_date2" name="attendance_date2" type="text" > -->
-                        <select class="form-control" name="cars">
-                          <option value="" disabled selected>--Select Month--</option>
-                          <option value="saab">April 2024</option>
-                          <option value="opel">May 2024</option>
-                          <option value="audi">June 2024</option>
+                        <select class="form-select" id="year" formControlName="_year"  (change)="onYearChange()">
+                          <option value="" selected disabled>Select Account Year</option>
+                          <option *ngFor="let data of accountYear" value="{{data.id}}">{{data.fromDate | date:'MMM Y'}} - {{data.toDate | date:'MMM Y'}} </option>
+                        </select>
+                      </div>
+                    </div>  
+
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <!-- <input class="form-control" placeholder="End Date"  id="attendance_date2" name="attendance_date2" type="text" > -->
+                        <select class="form-select" name="month" formControlName ="_month" (change)="onMonthChange()">
+                          <option value="" disabled selected>Select Month</option>
+                          <option *ngFor = "let data of dates" value="{{data._date}}">{{data._date | date:'MMM Y'}}</option>
                         </select>
                       </div>
                     </div>
 
-                    <div class="col-md-4">
+                   
+                    <!-- <div class="col-md-4">
                       <div class="form-group">
                         <input class="form-control" placeholder="Search" id="attendance_date2" name="attendance_date2"
                           type="text">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </form>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <ul class="icon" style=" float: right;display: flex;column-gap: 5px; margin: 5px;">
                   <li>
                     <button class="menu" style="background-color: blue;"><i class="fa fa-file-excel-o"
@@ -65,10 +76,10 @@
               <th>Shift Out</th> -->
                   <th>Time In</th>
                   <th>Time Out</th>
-                  <th>Worked Hrs</th>
+                  <!-- <th>Worked Hrs</th> -->
                   <th>Status</th>
-                  <th>Late</th>
-                  <th>Early</th>
+                  <!-- <th>Late</th> -->
+                  <!-- <th>Early</th> -->
                   <th>Application</th>
                   <th>Action</th>
                 </tr>
@@ -83,10 +94,10 @@
                   <td>{{data.Check_In ? (data.Check_In | date:'HH:mm') : '' }}</td>
                   <!-- <td>{{data.Check_Out ? (data.Check_Out | date:'hh:mm') : '' }}</td> -->
                   <td>{{data.Check_Out ? (data.Check_Out | date :'HH:mm') : '' }}</td>
-                  <td>{{data.Worked_Hrs}}</td>
+                  <!-- <td>{{data.Worked_Hrs}}</td> -->
                   <td>{{data.Status}}</td>
-                  <td>{{data.Late}}</td>
-                  <td>{{data.Early}}</td>
+                  <!-- <td>{{data.Late}}</td> -->
+                  <!-- <td>{{data.Early}}</td> -->
                   <!-- <td><span style="cursor: pointer;" (click)="show(data,data.Application)">{{data.Application}}</span> -->
                     <td>{{data.Application_Type}}</td>
                   <!-- <td>
@@ -114,10 +125,10 @@
 
                       <div ngbDropdownMenu attr.aria-labelledby="dropdownMenuButton{{i}}"
                         class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" (click)="show( data,'1')">
+                        <!-- <button class="dropdown-item" (click)="show( data,'1')">
                           <i class='fa fa-edit' style='font-size:20px'></i> Correction
-                        </button>
-                        <button class="dropdown-item" (click)="show(data,'2')">
+                        </button> -->
+                        <button class="dropdown-item" (click)="show(data,'1')">
                           <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Punch Time
                         </button>
                         <button class="dropdown-item">
@@ -162,7 +173,7 @@
               <input class="form-control" id="Remark" type="text" formControlName="Remark">
             </div>
             <div class="form-group col-lg-12" style="display: flex;justify-content: center;margin-top: 10px;">
-              <button class="btn btn-primary" type="submit" (click)="correctAttendance()">Submit</button>
+              <button class="btn btn-primary" type="submit" (click)="punchAttendance()">Submit</button>
               <!-- <button class="btn btn-secondary" style="margin-left:10px;" type="submit"
                   data-bs-dismiss="modal">Close</button> -->
             </div>

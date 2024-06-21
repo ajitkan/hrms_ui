@@ -1,0 +1,60 @@
+.admintoprow {
+    height: 115px;
+    /* border: 1px solid; */
+    width: 170px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+}
+
+.gap-2 {
+    gap: 10px; /* Adjust the value as needed */
+}
+
+.admintoprow label{
+    margin-top: 10px;
+}
+.admintoprow:hover {
+    background-color: #f0f0f0; /* Optional: Add a hover effect */
+}
+.admintoprow p{
+    margin-top: 14px;
+    font-weight:lighter;
+    color: black;
+    font-size: 22px
+}
+
+.piechartbox
+{
+border: 1px solid;
+width: 336px;
+height: 445px;
+margin-left: 28px;}
+
+.barchart
+{
+border: 1px solid;
+width: 519px;
+height: 445px;
+margin-left: 28px;
+}
+
+.adminanouncementrow {
+    height: 97px;
+    width: 344px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+    margin-left: 11px;
+}
+
+.adminanouncementrow p{
+    margin-top: 14px;
+    font-weight:lighter;
+    color: black;
+    font-size: 22px
+}
+.adminanouncementrow label{
+    margin-top: 10px;
+    font-size: 19px;
+}
