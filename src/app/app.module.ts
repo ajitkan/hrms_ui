@@ -36,6 +36,7 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
+import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
+    MyTimesheetComponent,
   ],
   imports: [
     BrowserModule,

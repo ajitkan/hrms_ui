@@ -22,6 +22,7 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
 import { AppComponent, DashboardComponent } from './app.component';
+import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 
 
 const routes: Routes = [
@@ -83,6 +84,9 @@ const routes: Routes = [
   // },
   { 
     path: 'my-application', component: MyApplicationComponent
+  },
+  {
+    path: 'my-timesheet', component: MyTimesheetComponent
   }
 ];
 
