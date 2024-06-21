@@ -16,6 +16,11 @@ export class AppComponent {
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
 
+  // isSidebarCollapsed = false;
+
+  // onToggleSidebar() {
+  //   this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  // }
   collapsedStates: { [key: string]: boolean } = {
     // uiElements: true,
     // buttons: true,
@@ -33,6 +38,7 @@ export class AppComponent {
     otherpage:true,
     customization:true,
     email:true,
+    Payroll:true
     TimeSection:true
   };
 

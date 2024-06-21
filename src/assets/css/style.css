@@ -13475,13 +13475,27 @@ label {
   opacity: 0.5;
 }
 
-.sidebar li > a .caret:before {
+/* .sidebar li > a .caret:before {
   font-family: "Material Design Icons" !important;
   font-weight: 400;
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
+} */
+.sidebar li > a .caret:before {
+  content: "\f142"; /* Keep the same arrow icon code */
+  display: block;
+  text-align: center;
+  transition: all 0.2s linear;
+  opacity: 0.5;
+  font-family: 'Roboto', sans-serif, "Material Design Icons";
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
 }
+
+
 
 .sidebar li.active > a .caret:before,
 .sidebar li.expand > a .caret:before,
@@ -13502,7 +13516,7 @@ label {
 .sidebar li.closed > a .caret:before,
 .sidebar li.closing > a .caret:before {
   transform: rotate(0);
-}
+} 
 
 /*  sub-menu dropdowns */
 .sidebar .sub-menu {

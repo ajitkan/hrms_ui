@@ -36,6 +36,7 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
+import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
+    SalaryCalculatorComponent,
     MyTimesheetComponent,
   ],
   imports: [
@@ -77,7 +79,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     // ToastrModule.forRoot(),
     ToastrModule.forRoot({
       // positionClass: 'toast-top-center',
-        positionClass: 'toast-bottom-center'
+       
     }),
     NgbModule,
     NgxPaginationModule,
