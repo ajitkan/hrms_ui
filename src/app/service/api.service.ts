@@ -22,6 +22,7 @@ export class ApiService {
     }
 
   public get userValue() {
+      this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
       return this.userSubject.value;
   }
 

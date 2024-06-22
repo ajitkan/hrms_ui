@@ -1,1 +1,303 @@
-<p>education-details works!</p>
+<app-navbar></app-navbar>
+<div *ngIf="eduHistory!=null" class="container content menu-padding">
+    <section>
+        <div>                   
+            
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header cheader ">
+                            <!--<img height="20px" src="static/images/icons/basic-details.png">--> 
+                            <p class="m-auto text-center">
+                                <span><h3>Education Details</h3></span>
+                            </p>
+                            <!-- <hr> -->
+                        </div>
+                        <div class="card-body"> 
+                            <h4>Degrees & Certificates</h4>
+                            <ul class="timeline" *ngFor="let education of eduHistory">                                
+                                <hr class="hr">
+                                <li class="timeline-item mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                <span><h6>Branch / Specialization</h6></span>
+                                                <span><h5>{{education.specialization!=null?education.specialization:education.otherCourseSpecialization}}</h5></span> </p>
+                                        </div>
+                                        <div class="col-6">
+                                                <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                    <span><h6>CGPA/Percentage/Grade</h6></span>
+                                                    <span><h5>{{education.perOrcgpa}}</h5></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                <span><h6>Degree</h6></span>
+                                                <span><h5>{{education.courseTitle!=null?education.courseTitle:education.otherCourseTitle}} </h5></span> </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                <span><h6>University/College</h6></span>
+                                                {{education.college}} </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                <span><h6>Year of Completion</h6></span>
+                                                {{education.enddate | date}}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="text-muted mb-2 bold fs-6 fw-bold">
+                                                <span><h6>Year of Joining</h6></span>
+                                                {{education.startdate | date }} </p>
+                                        </div>
+                                        
+                                        <!-- <div class="col-md-6">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">School/College</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.college}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- <div class="col-md-4">
+                                                    <p class="mb-0">HR Mail</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div> -->
+                                                <!-- <div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.specialization}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row"> -->
+                                                <!-- <div class="col-md-4">
+                                                    <p class="mb-0">HR Contact</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div> -->
+                                                <!--<div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.college}}</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">RM Name</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.rmName}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">RM Mail</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.rmMail}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">RM Contact</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="mb-0">:</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-md-start">{{education.rmMob}}</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">Joining Date</p>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p class="mb-0 text-md-start">16-Aug-2022</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">Exit Date</p>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p class="mb-0 text-md-start">23-Nov-2022</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-0">Total Service</p>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p class="mb-0 text-md-start">0 Years 3 Months 7 Days</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <hr class="hr">
+                                </li>
+                            </ul>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+    </section>
+</div>
+<div *ngIf="eduHistory==null">
+    
+    <div class="row">
+        <!-- <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Product name</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$12</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Second product</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$8</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Third item</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>$20</strong>
+            </li>
+          </ul>
+
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Redeem</button>
+              </div>
+            </div>
+          </form>
+        </div> -->
+        <!-- <div class="col-md-2 order-md-1"></div>
+        
+        <div class="col-md-8 order-md-2">
+          <h4 class="mb-3 text-center ">Employer Details</h4><hr>
+          <form class="needs-validation" [formGroup]="employerDetailsform" novalidate="">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="companyName">Company Name</label>
+                <input type="text" class="form-control" id="companyName" placeholder="" value="" required="" formControlName="companyName">
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="designation">Designation</label>
+                <input type="text" class="form-control" id="designation" placeholder="" value="" formControlName="designation" required="">
+                <div class="invalid-feedback">
+                  Valid Designation is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="rmName">RM Name</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="rmName" placeholder="rmName" required="" formControlName="rmName">
+                <div class="invalid-feedback" style="width: 100%;">
+                  Name of Reporting Manager is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="mrMail">RM Email </label>
+                    <input type="email" class="form-control" id="mrMail" placeholder="you@example.com" formControlName="rmMail">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address of Reporting Manager.
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="rmMob">Contact No of RM</label>
+                    <input type="number" class="form-control" id="rmMob" placeholder="8787877887" required="" formControlName="rmMob">
+                    <div class="invalid-feedback">
+                        Please enter contact no of Reporting Manager.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="hrName">HR Name</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="hrName" placeholder="hrName" required="" formControlName="hrName">
+                  <div class="invalid-feedback" style="width: 100%;">
+                    Name of HR is required.
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="hrMail">HR Email </label>
+                    <input type="email" class="form-control" id="hrMail" placeholder="you@example.com" formControlName="hrMail">
+                    <div class="invalid-feedback">
+                         Please enter a valid email address HR.
+                    </div>
+                </div>
+  
+                <div class="col-md-6 mb-3">
+                    <label for="hrmob">Contact No of HR</label>
+                    <input type="number" class="form-control" id="hrmob" placeholder="8787877887" required="" formControlName="hrMob">
+                    <div class="invalid-feedback">
+                         Please enter contact no of HR.
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary float-right" (click)="createEmployee()" type="submit">Create</button>
+          </form>
+        </div>
+        <div class="col-md-2 order-md-3"></div> -->
+
+      </div>
+</div>

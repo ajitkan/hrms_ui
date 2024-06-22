@@ -29,13 +29,13 @@ export class JwtInterceptor implements HttpInterceptor {
 
         return next.handle(request).pipe(map((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
-                // debugger;
+                 debugger;
                 if(event.body.token)
                      sessionStorage.setItem('token',JSON.stringify(event.body.token ?event.body.token :event.body.value.token))
                 else if(event.body.value && event.body.value.token)
                      sessionStorage.setItem('token',JSON.stringify(event.body.token ?event.body.token :event.body.value.token))
-                else if(event.body.token == '')
-                     sessionStorage.setItem('token',JSON.stringify(sessionStorage.getItem('token')as string))
+                // else if(event.body.token == '')
+                //      sessionStorage.setItem('token',JSON.stringify(sessionStorage.getItem('token')as string))
                 
                 console.log("event occurrs:",event);
                 //event = event.clone({body: this.modifyBody(event.body)});

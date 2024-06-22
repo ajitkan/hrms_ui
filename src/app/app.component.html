@@ -18,14 +18,14 @@
         <!-- sidebar menu -->
         <ul class="nav sidebar-inner" id="sidebar-menu">
           <li>
-            <a class="sidenav-item-link" href="index.html">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/')">
               <i class="mdi mdi-briefcase-account-outline"></i>
               <span class="nav-text">Business Dashboard</span>
             </a>
           </li>
  
           <li>
-            <a class="sidenav-item-link" href="analytics.html">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/')">
               <i class="mdi mdi-chart-line"></i>
               <span class="nav-text">Analytics Dashboard</span>
             </a>
@@ -47,75 +47,113 @@
               <li>
                 <a class="sidenav-item-link" routerLink="/employeeList">
                   <i class="mdi mdi-wechat"></i>
-                  <span class="nav-text">List of Employees</span>
+                  <span class="nav-text">List of Onboard Employees</span>
                 </a>
               </li>
- 
               <li>
-                <a class="sidenav-item-link" routerLink="/employeeData">
+                <a class="sidenav-item-link" routerLink="/create-employee">
                   <i class="mdi mdi-wechat"></i>
-                  <span class="nav-text">Employee Details Summary</span>
+                  <span class="nav-text">Employee Creation</span>
                 </a>
               </li>
- 
               <li>
-                <a class="sidenav-item-link" routerLink="/emp-personal-details">
-                  <i class="mdi mdi-phone"></i>
-                  <span class="nav-text">Personal Details</span>
+                <a class="sidenav-item-link" routerLink="/import-employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Import Employee</span>
                 </a>
               </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="/emp-employement-history">
-                  <i class="mdi mdi-account-group"></i>
-                  <span class="nav-text">Employment Details</span>
+              <!-- <li>
+                <a class="sidenav-item-link" routerLink="/employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Background Verification</span>
                 </a>
-              </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="emp-documents">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Documents</span>
+              </li> -->
+              <!-- <li>
+                <a class="sidenav-item-link" routerLink="/employeeList">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">List of Onboard Employees</span>
                 </a>
-              </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="emp-contact-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Contact Details</span>
-                </a>
-              </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="emp-nominee-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Nomination Details</span>
-                </a>
-              </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="emp-education-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Education Details</span>
-                </a>
-              </li>
- 
-              <li>
-                <a class="sidenav-item-link" routerLink="emp-bank-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Bank Details</span>
-                </a>
-              </li>
+              </li> -->
             </div>
           </ul>
+
+          <!-- My Profile -->
+          <!-- <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('MyProfile')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#MyProfile">
+              <span class="nav-text">MyProfile</span>
+              <b class="caret"></b>
+            </a>
+          </li> -->
+
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeData')">
+              <span class="nav-text">MyProfile</span>
+            </a>
+          </li>
  
-      <li>
-        <a class="sidenav-item-link" routerLink="breadcrumb.html">
-          <span class="nav-text">Breadcrumb</span>
-        </a>
-      </li>
-    <!-- </div>
-  </ul>        -->
+          <!-- <ul id="appSection" [ngClass]="{'collapse': collapsedStates['MyProfile']}" class="collapse" id="MyProfile"
+            data-parent="#sidebar-menu">
+            <div class="sub-menu">
+          <li>
+            <a class="sidenav-item-link" routerLink="/employeeData">
+              <i class="mdi mdi-wechat"></i>
+              <span class="nav-text">Employee Details Summary</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="/emp-personal-details">
+              <i class="mdi mdi-phone"></i>
+              <span class="nav-text">Personal Details</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="/emp-employement-history">
+              <i class="mdi mdi-account-group"></i>
+              <span class="nav-text">Employment Details</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="emp-documents">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="nav-text">Documents</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="emp-contact-details">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="nav-text">Contact Details</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="emp-nominee-details">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="nav-text">Nomination Details</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="emp-education-details">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="nav-text">Education Details</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="sidenav-item-link" routerLink="emp-bank-details">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="nav-text">Bank Details</span>
+            </a>
+          </li>
+        </div>
+      </ul> -->
+          <!-- My Profile -->
+
   <!-- Recruitement Section -->
  
  
@@ -327,12 +365,6 @@
             </div>
           </ul>
  
- 
- 
-          <li class="section-title">
-            Pages
-          </li>
- 
           <li class="has-sub">
             <a class="sidenav-item-link" (click)="toggleCollapse('users')" href="javascript:void(0)"
               data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="users">
@@ -456,12 +488,9 @@
             </ul>
           </li> -->
  
-          <li class="section-title">
-            Documentation
-          </li>
- 
+     
           <li>
-            <a class="sidenav-item-link" href="getting-started.html">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/')">
               <i class="mdi mdi-airplane"></i>
               <span class="nav-text">Getting Started</span>
             </a>
@@ -527,7 +556,9 @@
 ===================================== -->
   <div *ngIf="IsLogin " class="page-wrapper">
     <!-- Header -->
+    <!-- <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="collapseSideMenu()"></app-header> -->
     <app-header (isLogin)="IsLoggedin($event)"></app-header>
+
     <!-- Content Area -->
     <router-outlet></router-outlet>
     <!-- Footer -->

@@ -1,11 +1,14 @@
 .app-brand a img{
-    max-width: 100%;
+    max-width: 75%;
     margin: auto;
     padding: 5px;
 }
 .app-brand a{
-    height: auto;
+    height: 100%;
 }
 .app-brand{
-    height: 5%;
+    height: 106px;
+}
+app-login{
+    width: 100%;
 }

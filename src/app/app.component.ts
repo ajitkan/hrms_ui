@@ -17,11 +17,6 @@ export class AppComponent {
   // isCollapsed:boolean=false;
 
   collapsedStates: { [key: string]: boolean } = {
-    // uiElements: true,
-    // buttons: true,
-    // tables: true,
-    // icons: true,
-    // forms: true,
     Master:true,
     RMSection:true,
     EDMSection: true,
@@ -32,7 +27,9 @@ export class AppComponent {
     authentication:true,
     otherpage:true,
     customization:true,
-    email:true
+    email:true,
+    TimeSection:true,
+    MyProfile:true
   };
 
   constructor(private router:Router){
@@ -45,7 +42,6 @@ export class AppComponent {
     if(localStorage.getItem('LoggedIn') !== null){
       this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
     }
-
   }
 
   get isAdmin() {
@@ -77,7 +73,19 @@ export class AppComponent {
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }
-}
+  collapseSideMenu(){
+    
+  }
+  setAllCollapsedStatesToFalseAndRedirectedRoute(redirectUrl:string) {
+    for (let key in this.collapsedStates) {
+      if (this.collapsedStates.hasOwnProperty(key)) {
+        this.collapsedStates[key] = true;
+      }
+    }
+    this.router.navigate([redirectUrl]);
+  }
+  
+ }
 
 @Component({
   selector: 'app-dashboard',
