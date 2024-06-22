@@ -16,6 +16,11 @@ export class AppComponent {
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
 
+  // isSidebarCollapsed = false;
+
+  // onToggleSidebar() {
+  //   this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  // }
   collapsedStates: { [key: string]: boolean } = {
     Master:true,
     RMSection:true,
@@ -30,6 +35,8 @@ export class AppComponent {
     email:true,
     TimeSection:true,
     MyProfile:true
+    Payroll:true
+    TimeSection:true
   };
 
   constructor(private router:Router){
@@ -66,10 +73,6 @@ export class AppComponent {
       localStorage.removeItem('LoggedIn');
     }
   }
-  // toggleJobPostCollapse() {
-  //   this.isJobPostCollapsed = !this.isJobPostCollapsed;
-  // }
-
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }

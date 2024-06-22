@@ -1,0 +1,139 @@
+<br/>
+<section>
+<div class="row">
+
+    <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);margin-left: 10px;">
+            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <div class="name-row">
+                <span class="font-weight-bold"><label>First Name:</label> sagar</span>
+                <span class="font-weight-bold"><label>Last Name:</label> chaudhari</span>
+            </div>
+            <div class="name-row">
+                <span class="text-black-50"><label>Email Id:</label> edogaru@mail.com</span>
+                <span class="text-black-50"><label>Phone No. :</label> 1234567890</span>
+            </div><br/>
+            <span class="text-black-50">Designation: Software Developer</span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="row " style="width: 508px;
+        ; column-gap: 5px;">
+                <div class="borderMyApp" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);">
+                    <label class="labelallign hr-lines">Mark Atendance </label>
+                    <br/>
+                    <app-dateTime></app-dateTime> 
+                    <hr>    
+                    
+                     <a href="#" [hidden]="isShow" (click)="toggleButtons()" class="rounded-button" style="margin-left: 25px;">Check In</a> 
+                    <a href="#" [hidden]="!isShow" (click)="toggleButtons()"  class="rounded-button" style="margin-left: 10px;">Check Out</a>  
+                    
+                </div>
+                <div class="borderMyApp" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);">
+                    <label class="labelallign hr-lines">My Approval</label>
+                    <p class="pcontent"> 3</p>
+                </div>
+                <div class="borderMyApp" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);"> 
+                    <!-- background: url('assets/images/dashboard/appli.png'); -->
+                  
+                    <label class="labelallign hr-lines">My Application</label>
+                    
+                    <p class="pcontent">1</p>
+                    
+                </div>
+        </div><br/>
+        <div style="
+               width:491px;
+    height: 205px;
+    
+    margin-left: -15px;
+    background: url('assets/images/dashboard/bday.png');
+    background-size: 505px 211px;background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);">
+            <label class="labelallign" style="font-size: 22px;">Celibration Alert Birthday/Work Anivarsary</label>
+            <img src="assets/images/dashboard/birthday.png" style="float: right;
+            height: 160px;">
+            <div class="row">
+                <div style="height: 158px;
+                width: 124px;
+                ">
+               <img src="assets/images/dashboard/profileimg.jpg" class="Reportiesimg"> 
+                </div>
+                <div style="height: 158px;
+                width: 289px;
+                ">
+                    <label style="font-size: 30px;text-align: center;"> HAPPY BIRTHDAY </label><br>
+                    <label style="font: size 10px;text-align: center;">XYZ</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 404px;
+    width: 334px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+    margin-left: 30px;" ><br/>
+        <label class="labelallign"  style="font-size: 20px;">KAN Community</label>
+    </div>
+
+</div>
+<br>
+    <div class="row" style="column-gap: 5px;">
+        <div class="box" style="margin-left: 25px;"><br/>
+            <label class="labelallign" style="font-size: 20px;">Direct Reportees</label>
+            <div class="row">
+                <div class="col-4">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img src="assets/images/dashboard/profileimg.jpg" class="Reportiesimg">        
+                            <span class="font-weight-bold"><label>Name:</label> Edogaru</span>                           
+                        <span class="text-black-50">Designation: Software Developer</span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img src="assets/images/dashboard/profileimg.jpg" class="Reportiesimg">        
+                            <span class="font-weight-bold"><label>Name:</label> Edogaru</span>                           
+                        <span class="text-black-50">Designation: Software Developer</span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img src="assets/images/dashboard/profileimg.jpg" class="Reportiesimg">        
+                            <span class="font-weight-bold"><label>Name:</label> Edogaru</span>                           
+                        <span class="text-black-50">Designation: Software Developer</span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+
+        <div style="width: 30%; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);">
+            <label class="labelallign" style="font-size: 20px;">Team Attendance</label>
+        </div>
+
+        <!-- <div style="width: 22%; background-color: white;"> -->
+            <!-- <label class="labelallign"> Upcomming Holidays</label> -->
+            <div class="card text-center">
+                <div class="card-header" style="width: 245px;">
+                    Upcomming Holidays
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">15th August</h5>
+                  <p class="card-text" style="font-size: 21px;">Independance Day</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+                <div class="card-footer text-muted">
+                  2 days ago
+                </div>
+              </div>
+        </div>
+    <!-- </div> -->
+
+</section>
+<br/>
