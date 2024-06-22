@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent {
+docList:any;
+constructor(){
 
 }
+ngOnInit(){
+  if(sessionStorage.getItem("documentDetails")!=null){
+    this.docList = JSON.parse(sessionStorage.getItem("documentDetails")as string)
+  }
+}}

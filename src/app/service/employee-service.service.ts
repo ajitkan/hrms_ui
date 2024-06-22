@@ -15,5 +15,11 @@ export class EmployeeService {
     
     getEmployeeDetails(id:any) {
       return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetEmployeeDetails`+id)
+    }
+    getAllEmployee() {
+      return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetAllEmployees`)
   }
+    addToHRMS(...userList:any){
+      return this.http.post<any>(`${environment.apiUrl}/UserDetails/addToHRMS`,userList);
+    }
 }

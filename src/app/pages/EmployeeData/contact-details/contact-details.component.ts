@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./contact-details.component.css']
 })
 export class ContactDetailsComponent {
+  registrationDetails = JSON.parse(sessionStorage.getItem('registration') as string)
+  personalDetails = JSON.parse(sessionStorage.getItem("personalDetails")as string)  
 
+  ngOnInit(){
+    if(sessionStorage.getItem('registration')!=null)
+        this.registrationDetails = JSON.parse(sessionStorage.getItem('registration') as string)
+    if(sessionStorage.getItem("personalDetails")!=null)
+        this.personalDetails = JSON.parse(sessionStorage.getItem("personalDetails")as string)  
+  }
 }

@@ -22,11 +22,6 @@ export class AppComponent {
   //   this.isSidebarCollapsed = !this.isSidebarCollapsed;
   // }
   collapsedStates: { [key: string]: boolean } = {
-    // uiElements: true,
-    // buttons: true,
-    // tables: true,
-    // icons: true,
-    // forms: true,
     Master:true,
     RMSection:true,
     EDMSection: true,
@@ -38,6 +33,8 @@ export class AppComponent {
     otherpage:true,
     customization:true,
     email:true,
+    TimeSection:true,
+    MyProfile:true
     Payroll:true
     TimeSection:true
   };
@@ -52,7 +49,6 @@ export class AppComponent {
     if(localStorage.getItem('LoggedIn') !== null){
       this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
     }
-
   }
 
   get isAdmin() {
@@ -80,7 +76,19 @@ export class AppComponent {
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }
-}
+  collapseSideMenu(){
+    
+  }
+  setAllCollapsedStatesToFalseAndRedirectedRoute(redirectUrl:string) {
+    for (let key in this.collapsedStates) {
+      if (this.collapsedStates.hasOwnProperty(key)) {
+        this.collapsedStates[key] = true;
+      }
+    }
+    this.router.navigate([redirectUrl]);
+  }
+  
+ }
 
 @Component({
   selector: 'app-dashboard',
