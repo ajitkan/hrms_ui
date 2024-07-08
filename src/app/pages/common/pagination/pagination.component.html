@@ -1,0 +1,15 @@
+<!-- <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div> -->
+
+
+  <nav aria-label="...">
+    <ul class="pagination pagination-sm">
+      <li class="page-item"><button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button></li>
+      <li *ngFor="let page of pageNumbers" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+      <li class="page-item"> <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button></li>
+    </ul>
+  </nav>
+

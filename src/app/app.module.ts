@@ -36,7 +36,9 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
-
+import { RoleMasterComponent } from './pages/master/role-master/role-master.component';
+import { PaginationComponent } from './pages/common/pagination/pagination.component';
+import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent
+    PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -62,6 +64,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
+    RoleMasterComponent
   ],
   imports: [
     BrowserModule,
@@ -79,13 +82,17 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     }),
     NgbModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule    
+    Ng2SearchPipeModule ,
+    PaginationModule
   ],
   providers: [
               DatePipe,
-              CUSTOM_ELEMENTS_SCHEMA,
+             
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+            ],
+            schemas: [
+              CUSTOM_ELEMENTS_SCHEMA
             ],
   bootstrap: [AppComponent]
 })
