@@ -36,6 +36,10 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
+import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
+import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
+import { AdminexitoffboardComponent } from './pages/adminexitoffboard/adminexitoffboard.component';
+import { AdminexitoffboardDetailComponent } from './pages/adminexitoffboard-detail/adminexitoffboard-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent
+    PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -62,6 +66,10 @@ import { JwtInterceptor } from './service/jwt.interceptor';
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
+    AdmincalenderComponent,
+    ExitoffboardComponent,
+    AdminexitoffboardComponent,
+    AdminexitoffboardDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +91,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
   ],
   providers: [
               DatePipe,
-              CUSTOM_ELEMENTS_SCHEMA,
+              
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],

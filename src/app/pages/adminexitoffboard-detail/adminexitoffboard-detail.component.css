@@ -1,0 +1,12 @@
+.AdminExit{
+    text-align: center;
+    font-size: 30px;    
+}
+.submitpermission
+{
+    width: 78px;
+    height: 40px;
+    color: white;
+    background-color: rgb(23, 155, 231);
+    border-color: rgb(23, 155, 231) ;
+}
