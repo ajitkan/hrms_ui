@@ -1,3 +1,4 @@
+
 <div class="wrapper">
  
   <app-login *ngIf="!IsLogin " (isLogin)="IsLoggedin($event)"></app-login>
@@ -26,7 +27,11 @@
         <ul class="nav sidebar-inner" id="sidebar-menu">
           <li>
 
+            <a class="sidenav-item-link" href="/home">
+
+
             <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/home')">
+
               <i class="mdi mdi-briefcase-account-outline"></i>
               <span class="nav-text">Business Dashboard</span>
             </a>
@@ -61,6 +66,62 @@
                 </a>
               </li>
               <li>
+
+                <a class="sidenav-item-link" routerLink="/exitoffboard">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Employee Off Boarding</span>
+                </a>
+              </li>
+              <li>
+                <a class="sidenav-item-link" routerLink="/adminexitoffboard">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Admin Employee Off Boarding</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="/employeeData">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Employee Details Summary</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="/emp-personal-details">
+                  <i class="mdi mdi-phone"></i>
+                  <span class="nav-text">Personal Details</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="/emp-employement-history">
+                  <i class="mdi mdi-account-group"></i>
+                  <span class="nav-text">Employment Details</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="emp-documents">
+                  <i class="mdi mdi-calendar-check"></i>
+                  <span class="nav-text">Documents</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="emp-contact-details">
+                  <i class="mdi mdi-calendar-check"></i>
+                  <span class="nav-text">Contact Details</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" routerLink="emp-nominee-details">
+                  <i class="mdi mdi-calendar-check"></i>
+                  <span class="nav-text">Nomination Details</span>
+                </a>
+              </li>
+ 
+
                 <a class="sidenav-item-link" routerLink="/create-employee">
                   <i class="mdi mdi-wechat"></i>
                   <span class="nav-text">Employee Creation</span>
@@ -96,19 +157,59 @@
           <ul id="Master" class="collapse" [ngClass]="{'collapse': collapsedStates['Master']}"
             data-parent="#sidebar-menu">
             <div class="sub-menu">
+
               <li>
                 <a class="sidenav-item-link" routerLink="company-master">
                   <span class="nav-text">Company</span>
                 </a>
               </li>
-
+ 
               <li>
                 <a class="sidenav-item-link" routerLink="badge.html">
                   <span class="nav-text">Company Type</span>
                 </a>
               </li>
             </div>
+
+          </ul>
+ 
+      <li>
+        <a class="sidenav-item-link" routerLink="breadcrumb.html">
+          <span class="nav-text">Breadcrumb</span>
+        </a>
+      </li>
+    <!-- </div>
+  </ul>        -->
+  <!-- Recruitement Section -->
+ 
+ 
+  <!-- masters start -->
+  <li class="section-title sidenav-item-link">
+    <a class="sidenav-item-link" (click)="toggleCollapse('Master')" href="javascript:void(0)" data-toggle="collapse" data-target="#Master">
+      <!-- <i class="mdi mdi-email"></i> -->
+      <span class="nav-text">Masters</span>
+      <b class="caret"></b>
+    </a>
+  </li>
+  <ul id="Master" class="collapse"  [ngClass]="{'collapse': collapsedStates['Master']}"  data-parent="#sidebar-menu">
+    <div class="sub-menu">
+      <li>
+        <a class="sidenav-item-link" routerLink="company-master">
+          <span class="nav-text">Company</span>
+        </a>
+      </li>
+ 
+      <li>
+        <a class="sidenav-item-link" routerLink="badge.html">
+          <span class="nav-text">Company Type</span>
+        </a>
+      </li>
+ 
+   
+     
+
           </ul>  
+
     </div>
   </ul>
  
@@ -214,7 +315,12 @@
                   <span class="nav-text">Job Interview</span>
                 </a>
               </li>
+
+ 
+              <li>
+
                <li>
+
                 <a class="sidenav-item-link" routerLink="breadcrumb.html">
                   <span class="nav-text">CMS</span>
                 </a>
@@ -328,6 +434,14 @@
             </div>
           </ul>
  
+
+ 
+ 
+          <li class="section-title">
+            Pages
+          </li>
+ 
+
           <li class="has-sub">
             <a class="sidenav-item-link" (click)="toggleCollapse('users')" href="javascript:void(0)"
               data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="users">
@@ -455,13 +569,25 @@
             </ul>
           </li> -->
 
+ 
+          <li class="section-title">
+            Documentation
+          </li>
+ 
+
+
           <li>
             <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/')">
               <i class="mdi mdi-airplane"></i>
               <span class="nav-text">Getting Started</span>
             </a>
           </li>
+
+ 
+          <li class="has-sub active expand">
+
           <li class="has-sub ">
+
             <a class="sidenav-item-link" (click)="toggleCollapse('customization')" href="javascript:void(0)"
               data-toggle="collapse" data-target="#customization" aria-expanded="false" aria-controls="customization">
               <i class="mdi mdi-square-edit-outline"></i>
@@ -516,7 +642,8 @@
       </div>
     </div>
   </aside>
-
+ 
+ 
   <!-- ====================================
 ——— PAGE WRAPPER
 ===================================== -->

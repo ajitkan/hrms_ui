@@ -19,7 +19,7 @@ export class HeaderComponent {
   }
   ngOnInit(){
     this.user = JSON.parse(localStorage.getItem("user")as string);
-    // debugger;
+
   }
   toggleCollapse() {
      this.isCollapsed =!this.isCollapsed

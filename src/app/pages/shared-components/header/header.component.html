@@ -79,7 +79,7 @@
                       </div>
                       <div class="media-body">
                         <a href="user-profile.html">
-                          <span class="title mb-0">{{user.first_name+" "+user.last_name | uppercase}}</span>
+                          <span class="title mb-0">{{user!=null?user.first_name+" "+user.last_name:'' | uppercase}}</span>
                           <span class="discribe">Extremity sweetness difficult behaviour he of. On disposal of as
                             landlord horrible. Afraid at highly months do things on at.</span>
                           <span class="time">
@@ -209,7 +209,7 @@
                       </div>
                       <div class="media-body">
                         <a href="user-profile.html">
-                          <span class="title mb-0">{{user.first_name+" "+user.last_name | uppercase}}</span>
+                          <span class="title mb-0">{{user!=null?user.first_name+" "+user.last_name:'' | uppercase}}</span>
                           <span class="discribe">Extremity sweetness difficult behaviour he of. On disposal of as
                             landlord horrible. Afraid
                             at highly months do things on at.</span>
@@ -313,7 +313,7 @@
             <button class="dropdown-toggle nav-link" (click)="toggleCollapse()" href="javascript:void(0)" data-target="#loginDropdownMenu" data-toggle="show">
               
               <img src="../assets/images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
-              <span class="d-none d-lg-inline-block">{{user.first_name+" "+user.last_name | uppercase}}</span>
+              <span class="d-none d-lg-inline-block">{{user!=null?user.first_name+" "+user.last_name:'' | uppercase}}</span>
             </button>
             <ul id="loginDropdownMenu" class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isCollapsed}">
               <li>

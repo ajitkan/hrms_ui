@@ -7,7 +7,7 @@
 }
 .box {
   /* border: 1px solid; */
-  height: 300px;
+  height: 369px;
   width: 496px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); /* Adjust the values as needed */
@@ -20,7 +20,7 @@
 .borderMyApp
 {
     /* border: 1px solid; */
-    height: 180px;
+    height: 208px;
     width:160px ;
     column-gap: 15px;
 }
@@ -65,4 +65,18 @@ text-align: center;
     color: white; /* Button text color */
     cursor: pointer; /* Show pointer cursor on hover */
     transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.profileimg{
+
+  width: 150px;
+  align-items: center;
+
+}
+.profilebox{
+  width: 245px;
+  height: 436px;
+  /* border: 1px solid; */
+  margin-left: 21px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); /* Adjust the values as needed */
 }

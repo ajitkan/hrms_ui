@@ -109,6 +109,10 @@ export class ApiService {
     return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
   }
 
+  // Get Department Clearance 
+  GetDepartmentDetails() {
+    return this.http.get<any>(`${environment.apiUrl}/Separation/GetDepartmentDetails`)
+  }
 
   updateAttendance(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)

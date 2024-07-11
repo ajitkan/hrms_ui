@@ -21,12 +21,18 @@ import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-det
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
-import { AppComponent, DashboardComponent } from './app.component';
+
+import { AppComponent} from './app.component';
+import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
+import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
+import { AdminexitoffboardComponent } from './pages/adminexitoffboard/adminexitoffboard.component';
+import { AdminexitoffboardDetailComponent } from './pages/adminexitoffboard-detail/adminexitoffboard-detail.component';
 import { User } from './models/user';
 import { user } from './constant/constant';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+
 
 const routes: Routes = [
   {
@@ -35,7 +41,9 @@ const routes: Routes = [
   {
     path:'home',component:DashboardComponent
   },
-  {path:'Admin',component:AdminDashboardComponent}
+  {
+    path:'Admin',component:AdminDashboardComponent
+  },
   {
     path:'login',component:LoginComponent,
     canActivate: [AuthGuard]
@@ -86,16 +94,35 @@ const routes: Routes = [
   path: 'company-master', component: CompanyMasterComponent
  },
 
+
+   { 
+     path: 'Admincalender', component: AdmincalenderComponent
+   },
+  
+
   { 
     path: 'create-employee', component: CreateEmployeeComponent 
+
   },
   { 
     path: 'my-application', component: MyApplicationComponent
   },
   { 
+
+    path: 'exitoffboard', component: ExitoffboardComponent
+  },
+  {
+    path: 'adminexitoffboard', component: AdminexitoffboardComponent
+  },
+  {
+    path: 'adminexitDetail', component: AdminexitoffboardDetailComponent
+  },
+  {
     path: 'salary-calculator', component: SalaryCalculatorComponent
+  },
   {
     path: 'my-timesheet', component: MyTimesheetComponent
+
   }
 ];
 

@@ -23,9 +23,9 @@ export class EmpdeptchartComponent implements OnInit {
   @ViewChild('pieChart', { static: true }) private chartContainer!: ElementRef;
 
   private data: PieData[] = [
-    { label: 'Section 1', value: 10, color: '#ff0000' }, // Red
-    { label: 'Section 2', value: 20, color: '#00ff00' }, // Green
-   
+    { label: 'Section 1', value: 10, color: '#8db8f0' }, // Red
+    { label: 'Section 2', value: 20, color: '#610327' }, // Green
+    { label: 'Section 2', value: 45, color: '#f0055f' }, 
   ];
 
   

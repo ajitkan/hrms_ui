@@ -1,7 +1,7 @@
 .admintoprow {
     height: 115px;
     /* border: 1px solid; */
-    width: 170px;
+    width: 167px;
     text-align: center;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
@@ -26,22 +26,25 @@
 
 .piechartbox
 {
-border: 1px solid;
-width: 336px;
-height: 445px;
-margin-left: 28px;}
+/* border: 1px solid; */
+width: 329px;
+height: 512px;
+margin-left: 28px;
+box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+}
 
 .barchart
 {
-border: 1px solid;
-width: 519px;
-height: 445px;
+/* border: 1px solid; */
+width: 486px;
+height: 512px;
 margin-left: 28px;
+box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
 }
 
 .adminanouncementrow {
     height: 97px;
-    width: 344px;
+    width: 332px;
     text-align: center;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
@@ -57,4 +60,9 @@ margin-left: 28px;
 .adminanouncementrow label{
     margin-top: 10px;
     font-size: 19px;
+}
+.piechartlabel
+{
+    width:28px; 
+    height: 10px;
 }

@@ -36,6 +36,12 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
+
+import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
+import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
+import { AdminexitoffboardComponent } from './pages/adminexitoffboard/adminexitoffboard.component';
+import { AdminexitoffboardDetailComponent } from './pages/adminexitoffboard-detail/adminexitoffboard-detail.component';
+
 import { subNav } from './pages/shared-components/header/navbar1.component';
 import { NoCommaNumberPipe } from './pages/customePipe/no-comma-number.pipe';
 import { NoDataFound } from './pages/shared-components/no-data-found.component';
@@ -43,6 +49,7 @@ import { NoDataFound } from './pages/shared-components/no-data-found.component';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +61,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent
+    PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -69,6 +76,12 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
+
+    AdmincalenderComponent,
+    ExitoffboardComponent,
+    AdminexitoffboardComponent,
+    AdminexitoffboardDetailComponent
+
     LoaderComponent,
     subNav,
     NoCommaNumberPipe,
@@ -76,6 +89,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     // EmployeeDataManagementComponent,
     SalaryCalculatorComponent,
     MyTimesheetComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -97,7 +111,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
   ],
   providers: [
               DatePipe,
-              CUSTOM_ELEMENTS_SCHEMA,
+              
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],
