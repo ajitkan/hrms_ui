@@ -22,6 +22,7 @@ export class ApiService {
     }
 
   public get userValue() {
+      this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
       return this.userSubject.value;
   }
 
@@ -123,5 +124,13 @@ export class ApiService {
 
   getAttendanceByUserId(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/GetAttendanceByUserId`, data)
+  }
+
+  getApplicationByUserId(data:any){
+    const params = {
+      Emp_Id : data.Emp_Id,
+      Shift_Date : data.Shift_Date
+    }
+    return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`,{params}) 
   }
 }

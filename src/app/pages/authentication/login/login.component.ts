@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
+import { user } from 'src/app/constant/constant';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -12,9 +13,10 @@ import { ApiService } from 'src/app/service/api.service';
 export class LoginComponent {
   // @Output isLogin
   @Output() isLogin = new EventEmitter();
-
+  loading:boolean =false;
   loginForm !: FormGroup
   fieldTextType: boolean | undefined;
+  // user!:User;
 
   constructor(private formBuilder: FormBuilder,
                private appService: ApiService,
@@ -38,9 +40,8 @@ export class LoginComponent {
   }
 
   login() {
-
-    if (this.loginForm.valid) {
-      
+    this.loading =true;
+    if (this.loginForm.valid) {      
       const userPayload ={
         "email":this.loginForm.controls['Email'].value,
         "password":this.loginForm.controls['Password'].value
@@ -49,8 +50,10 @@ export class LoginComponent {
       this.appService.login(userPayload).pipe(first())
       .subscribe({
         next:  (res:any) => {
+          this.loading=false;
           if (res != null && res != undefined) {         
-            this.toastr.success('Logged In Successfully');
+            this.toastr.success('Logged In Successfully');  
+            user.id = res.obj.id;          
             this.isLogin.emit(true);
           }
           else{
