@@ -18,7 +18,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -80,7 +80,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     AdmincalenderComponent,
     ExitoffboardComponent,
     AdminexitoffboardComponent,
-    AdminexitoffboardDetailComponent
+    AdminexitoffboardDetailComponent,
 
     LoaderComponent,
     subNav,
@@ -98,6 +98,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     // ToastrModule.forRoot(),

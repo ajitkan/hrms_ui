@@ -34,9 +34,9 @@ export class AppComponent {
     customization:true,
     email:true,
     TimeSection:true,
-    MyProfile:true
-    Payroll:true
-    TimeSection:true
+    MyProfile:true,
+    Payroll:true,
+    // TimeSection:true,
   };
 
   constructor(private router:Router){

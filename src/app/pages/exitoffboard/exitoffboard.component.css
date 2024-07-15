@@ -1,4 +1,4 @@
-.row {
+ .row {
     display: flex;
     gap: 10px;
 }
@@ -36,4 +36,4 @@ label {
   .textboxDetails{
     width: 62%;
     height: 72px;
-  }
+  } 

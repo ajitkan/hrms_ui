@@ -14,6 +14,8 @@ export class ApiService {
   private userSubject: BehaviorSubject<User>;  
   public user: Observable<User>;
   
+
+  apiUrlsepration!: 'https://localhost:44315/api'; 
   constructor(private http: HttpClient,
     private router: Router,
     private toastr : ToastrService) { 
@@ -77,6 +79,15 @@ export class ApiService {
     return this.http.get<any>(apiUrl);
   }
 
+  GetDepartmentDetails(): Observable<any[]>{
+    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);
+}
+
+  // GetDepartmentDetails() {
+  //   debugger
+  //   return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetDepartmentDetails`)
+    
+  // }
 
 
   //Login
@@ -110,9 +121,7 @@ export class ApiService {
   }
 
   // Get Department Clearance 
-  GetDepartmentDetails() {
-    return this.http.get<any>(`${environment.apiUrl}/Separation/GetDepartmentDetails`)
-  }
+ 
 
   updateAttendance(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)

@@ -1,4 +1,4 @@
-<br/>
+ <br/>
 <section>
     <div class="row" style="margin-left: 15px;">
         <div class="col">
@@ -38,7 +38,7 @@
 </section>
 <br/>
 <hr/>
-<br/>
+<br/> 
 <div class="AdminExit">
     <label>Employee Off  Boarding  Clearance </label>
 </div><br/><br/>
@@ -49,45 +49,17 @@
             <th scope="col">#</th>
             <th scope="col">Clearance Required</th>
             <th scope="col">Submission of Clearance</th>
-            <th scope="col"></th>
-           
+            <th scope="col"></th>           
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Regional Manager</td>
-            <td><input type="checkbox" value="sumbmit"></td>   
-            <td><input type="submit" class="submitpermission"></td>     
-           
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>IT Department</td>
-            <td><input type="checkbox" value="sumbmit"></td>        
-           <td><input type="submit" class="submitpermission"></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>HR Department</td>
-            <td><input type="checkbox" value="sumbmit"></td> 
-            <td><input type="submit" class="submitpermission"></td>                  
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Finance Department</td>
-            <td><input type="checkbox" value="sumbmit"></td>  
-            <td><input type="submit" class="submitpermission"></td>                 
-          </tr>
-          <!-- <tr>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td><input type="submit" class="submitpermission"></td>
-            </tr> -->
-        </tbody>
-       
+        </thead>        
+      <tbody>        
+          <tr *ngFor="let dept of deptNames">
+            <td>{{dept.deptId}}</td> 
+            <td>{{ dept.deptName }}</td>
+            <td><input type="checkbox" value="{{dept.deptName }}"></td>
+            <td><input type="submit" class="submitpermission" value="Submit"></td>
+          </tr>            
+        </tbody>        
     </table>
 </div>
 
