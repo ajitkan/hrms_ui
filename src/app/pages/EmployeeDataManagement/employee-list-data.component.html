@@ -9,151 +9,12 @@
   </div> -->
 <section>
     <div class="container-fluid"><span id="general_result"></span></div>
-    <div class="container-fluid mb-3 mt-3 ">
-        <!-- <div class="row grid m-auto gap-3">
-            <button type="button" class="btn btn-info col" name="create_record" id="create_record"><i class="fa fa-plus"></i> Add Employee</button>
-            <button type="button" class="btn btn-danger col" name="bulk_delete" id="bulk_delete"><i class="fa fa-minus-circle"></i> Bulk delete</button>
-            <button class="btn btn-primary col" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <i class="fa fa-filter" aria-hidden="true"></i> Filter
-            </button>
-        </div>
-    </div>
-    <div class="col-12"> -->
-        <!-- Filtering -->
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <form action="" method="GET" id="filter_form">
-                    <div class="row">
-                        <!-- Company -->
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="text-bold"><strong>Company</strong></label>
-                                <div class="btn-group bootstrap-select form-control dynamic"><button type="button"
-                                        class="btn dropdown-toggle bs-placeholder btn-default btn-light"
-                                        data-toggle="dropdown" role="button" data-id="company_id_filter"
-                                        title="Select Company..."><span class="filter-option pull-left">Select
-                                            Company...</span>&nbsp;<span class="bs-caret"><span
-                                                class="caret"></span></span></button>
-                                    <div class="dropdown-menu open" role="combobox">
-                                        <div class="bs-searchbox"><input type="text" class="form-control"
-                                                autocomplete="off" role="textbox" aria-label="Search"></div>
-                                        <div class="dropdown-menu inner" role="listbox" aria-expanded="false"><a
-                                                tabindex="0" class="dropdown-item" data-original-index="1"><span
-                                                    class="dropdown-item-inner " data-tokens="null" role="option"
-                                                    tabindex="0" aria-disabled="false" aria-selected="false"><span
-                                                        class="text"></span><span
-                                                        class="fa fa-check check-mark"></span></span></a><a tabindex="0"
-                                                class="dropdown-item" data-original-index="2"><span
-                                                    class="dropdown-item-inner " data-tokens="null" role="option"
-                                                    tabindex="0" aria-disabled="false" aria-selected="false"><span
-                                                        class="text">HR1</span><span
-                                                        class="fa fa-check check-mark"></span></span></a><a tabindex="0"
-                                                class="dropdown-item" data-original-index="3"><span
-                                                    class="dropdown-item-inner " data-tokens="null" role="option"
-                                                    tabindex="0" aria-disabled="false" aria-selected="false"><span
-                                                        class="text">HR2</span><span
-                                                        class="fa fa-check check-mark"></span></span></a></div>
-                                    </div><select name="company_id" id="company_id_filter"
-                                        class="form-control selectpicker dynamic" data-live-search="true"
-                                        data-live-search-style="contains" data-shift_name="shift_name"
-                                        data-dependent="department_name" title="Select Company..." tabindex="-98">
-                                        <option class="bs-title-option" value="">Select Company...</option>
-                                        <option value=""></option>
-                                        <option value="1">HR1</option>
-                                        <option value="2">HR2</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Company-->
-
-                        <!-- Department-->
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="text-bold"><b>Department</b></label>
-                                <div class="btn-group bootstrap-select form-control designationFilter"><button
-                                        type="button" class="btn dropdown-toggle bs-placeholder btn-default btn-light"
-                                        data-toggle="dropdown" role="button" data-id="department_id_filter"
-                                        title="Select Department..."><span class="filter-option pull-left">Select
-                                            Department...</span>&nbsp;<span class="bs-caret"><span
-                                                class="caret"></span></span></button>
-                                    <div class="dropdown-menu open" role="combobox">
-                                        <div class="bs-searchbox"><input type="text" class="form-control"
-                                                autocomplete="off" role="textbox" aria-label="Search"></div>
-                                        <div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div>
-                                    </div><select name="department_id" id="department_id_filter"
-                                        class="selectpicker form-control designationFilter" data-live-search="true"
-                                        data-live-search-style="contains" data-designation_name="designation_name"
-                                        title="Select Department..." tabindex="-98">
-                                        <option class="bs-title-option" value="">Select Department...</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Department-->
-
-                        <!-- Designation -->
-                        <div class="col-md-3 form-group">
-                            <label class="text-bold"><b>Designation</b></label>
-                            <div class="btn-group bootstrap-select form-control"><button type="button"
-                                    class="btn dropdown-toggle bs-placeholder btn-default btn-light"
-                                    data-toggle="dropdown" role="button" data-id="designation_id_filter"
-                                    title="Select Designation..."><span class="filter-option pull-left">Select
-                                        Designation...</span>&nbsp;<span class="bs-caret"><span
-                                            class="caret"></span></span></button>
-                                <div class="dropdown-menu open" role="combobox">
-                                    <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
-                                            role="textbox" aria-label="Search"></div>
-                                    <div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div>
-                                </div><select name="designation_id" id="designation_id_filter"
-                                    class="selectpicker form-control" data-live-search="true"
-                                    data-live-search-style="contains" title="Select Designation..." tabindex="-98">
-                                    <option class="bs-title-option" value="">Select Designation...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!--/ Designation -->
-
-                        <!-- Office Shift -->
-                        <div class="col-md-2 form-group">
-                            <label class="text-bold"><b>Office Shift</b></label>
-                            <div class="btn-group bootstrap-select form-control"><button type="button"
-                                    class="btn dropdown-toggle bs-placeholder btn-default btn-light"
-                                    data-toggle="dropdown" role="button" data-id="office_shift_id_filter"
-                                    title="Selecting Office Shift..."><span class="filter-option pull-left">Selecting
-                                        Office Shift...</span>&nbsp;<span class="bs-caret"><span
-                                            class="caret"></span></span></button>
-                                <div class="dropdown-menu open" role="combobox">
-                                    <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
-                                            role="textbox" aria-label="Search"></div>
-                                    <div class="dropdown-menu inner" role="listbox" aria-expanded="false"></div>
-                                </div><select name="office_shift_id" id="office_shift_id_filter"
-                                    class="selectpicker form-control" data-live-search="true"
-                                    data-live-search-style="contains" title="Selecting Office Shift..." tabindex="-98">
-                                    <option class="bs-title-option" value="">Selecting Office Shift...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!--/ Office Shift -->
-
-                        <div class="col-md-1">
-                            <label class="text-bold"></label><br>
-                            <button type="button" class="btn btn-dark" id="filterSubmit">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i> &nbsp; GET
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!--/ Filtering -->
-    </div>
-
-
     <div class="table-responsive">
         <div id="employee-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
             <div class="row">
-                <div class="row dataTables_length" id="employee-table_length">
+                <br><br><br>
+                <div class="m-auto text-center"><span><h4>List of Onboard Employees</h4></span></div><br>
+                <!-- <div class="row dataTables_length" id="employee-table_length">
                     <label class="col-5">
                         <div class="btn-group bootstrap-select form-control form-control-sm h-auto">
                             <button type="button" class="btn dropdown-toggle btn-default btn-light"
@@ -233,7 +94,7 @@
                             <i title="column visibility" class="fa fa-eye"></i>
                         </span>
                     </button>
-                </div>
+                </div> -->
             </div>
             <div id="employee-table_processing" class="dataTables_processing card" style="display: none;">Processing...
             </div>
@@ -247,6 +108,9 @@
                                 <input type="checkbox" class="dt-checkboxes" (change)="selectAll($event)">
                                 <label class="text-bold"></label>
                             </div>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                            style="width: 220px;" aria-label="Employee: activate to sort column ascending">Sr No
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
                             style="width: 220px;" aria-label="Employee: activate to sort column ascending">Employee Name
@@ -268,6 +132,13 @@
                                     (change)="onCheckboxChange($event, i)">
                                 <label class="text-bold"></label>
                             </div>
+                        </td>
+                        <td>
+                                    <span>
+                                        <a class="d-block text-bold"
+                                            style="color:#24ABF2; pointer-events: none;">{{i+1}}
+                                        </a>
+                                    </span>
                         </td>
                         <td>
                             <div class="d-flex">
@@ -600,7 +471,7 @@
             </table>
             <li class="btn btn-primary float-right" style="left: 10px;
             position: relative;"><button (click)="createEmployee()"><i class=" fa fa-plus" aria-hidden="true"></i> Create New Employee </button></li>
-            <li class="btn btn-primary float-right"><button (click)="submitSelectedEmployees()"><i class="fa fa-plus" aria-hidden="true"></i> Add to HRMS </button></li>
+            <li class="btn btn-primary float-right"><button (click)="addEmployeesToHRMS()"><i class="fa fa-plus" aria-hidden="true"></i> Add to HRMS </button></li>
             <div class="dataTables_info" id="employee-table_info" role="status" aria-live="polite">Showing 1 - 10 (15)
             </div>
             <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
@@ -618,7 +489,95 @@
             </div>
         </div>
     </div>
-
+<hr>
+<div class="table-responsive">
+    <div id="employee-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+        <div class="row">
+            <br><br><br>
+                <div class="m-auto text-center"><span><h4>List of HRMS Employees</h4></span></div><br>
+          </div> 
+        <div id="employee-table_processing" class="dataTables_processing card" style="display: none;">Processing...
+        </div>
+        <table id="employee-table" class="table dataTable no-footer dt-checkboxes-select dtr-inline" role="grid"
+            aria-describedby="employee-table_info">
+            <thead>
+                <tr role="row">
+             
+                    <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                        style="width: 220px;" aria-label="Employee: activate to sort column ascending">Sr No.
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                        style="width: 220px;" aria-label="Employee: activate to sort column ascending">Employee Id
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                        style="width: 220px;" aria-label="Employee: activate to sort column ascending">Employee Name
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                        style="width: 234px;" aria-label="Company: activate to sort column ascending">Designation
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                        style="width: 277px;" aria-label="Contact: activate to sort column ascending">Joining Date</th>
+                    <!-- <th class="not-exported text-left sorting_disabled" rowspan="1" colspan="1"
+                        style="width: 161px;" aria-label="action">action</th> -->
+                </tr>
+            </thead>
+            <tbody *ngFor="let employee of employeeHRMSList; let i=index;">
+                <tr role="row" class="odd">
+                    <td  >
+                        
+                            <span>
+                                <a class="d-block text-bold"
+                                    style="color:#24ABF2; pointer-events: none;">{{i+1}}
+                                </a>
+                            </span>
+                        
+                    </td>
+                    <td class=" d-flex" >
+                        <div>
+                            <span>
+                                <a class="d-block text-bold"
+                                    style="color:#24ABF2; pointer-events: none;">{{employee.employeeId}}
+                                </a>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <div>
+                                <span>
+                                    <a class="d-block text-bold"
+                                        style="color:#24ABF2; pointer-events: none;">{{employee.employeeName}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span>{{employee.designation}}</span>
+                    </td>
+                    <td>
+                        {{employee.joiningDate |date}}<br>
+                    </td>
+              </tr>
+             </tbody>
+        </table>
+        <div class="dataTables_info" id="employee-table_info" role="status" aria-live="polite">Showing 1 - 10 (15)
+        </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
+            <ul class="pagination">
+                <li class="paginate_button page-item previous disabled" id="employee-table_previous"><a href="#"
+                        aria-controls="employee-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                </li>
+                <li class="paginate_button page-item active"><a href="#" aria-controls="employee-table"
+                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                <li class="paginate_button page-item "><a href="#" aria-controls="employee-table" data-dt-idx="2"
+                        tabindex="0" class="page-link">2</a></li>
+                <li class="paginate_button page-item next" id="employee-table_next"><a href="#"
+                        aria-controls="employee-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
     <!-- <hr>
     <div *ngFor="let item of paginatedItems">
         {{ item.name }}
@@ -639,28 +598,11 @@
             <div class="modal-body">
                 <span id="form_result"></span>
 
-                <!-- <form autocomplete="off" (ngSubmit)="submitAddJobForm()" [formGroup]="addJobForm" method="post"
-                    id="sample_form" class="form-horizontal"> -->
-
-                <form autocomplete="off" [formGroup]="addEmployeeForm" method="post" id="sample_form"
+                 <!-- <form autocomplete="off" [formGroup]="addEmployeeForm" method="post" id="sample_form" (ngSubmit)="submitAddJobForm()" 
                     class="form-horizontal">
                     <input type="hidden" name="_token" value="WBsSmxTBcH2zQXS8pMY4tp1HgrqqOnyOsPL2yDj7">
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="Company">Company <span class="text-danger">*</span></label>
-                                <select name="Company" id="Company" required class="form-control selectpicker"
-                                    data-live-search="true" data-live-search-style="contains" title='Select Company...'
-                                    formControlName="Company">
-                                    <option value="" disabled>Select a company</option>
-                                    <option value="Ecotech_It_Solution">Ecotech IT Solution</option>
-                                    <option value="KAN_Infocom_Solution">KAN Infocom Solution</option>
-                                </select>
-                               
-                            </div>
-                        </div> -->
-
-                        <div class=" col-md-6 form-group">
+                      <div class=" col-md-6 form-group">
                             <label for="EmployeeName">Employee Name <span class="text-danger">*</span></label>
                             <input type="text" formControlName="EmployeeName" id="EmployeeName" class="form-control"
                                 placeholder="EmployeeName">                            
@@ -671,33 +613,13 @@
                             <select name="shift" id="shift" required class="selectpicker form-control"
                                 data-live-search="true" data-live-search-style="contains" title="Select shift..."
                                 formControlName="ShiftID">
-                                <option value=0 disabled>Select shift</option>
-                                <option value=1>Regular</option>
-                                <option value=2>Morning</option>
-                                <option value=3>Afternoon</option>
-                                <option value=4>Night</option>
+                                <option value="" disabled>Select shift</option>
+                                <option value="S1001">Regular</option>
+                                <option value="S1002">Morning</option>
+                                <option value="S1003">Afternoon</option>
+                                <option value="S1004">Night</option>
                             </select>
                         </div>
-
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="AttendanceCycle">AttendanceCycle</label>
-                                <select name="AttendanceCycle" id="AttendanceCycle" class="form-control selectpicker"
-                                    data-live-search="true" data-live-search-style="contains"
-                                    title='Select Job Category' formControlName="JobCategory">
-                                    <option value="" disabled>Select Job Category</option>
-                                    <option value="2">PHP</option>
-                                    <option value="3">Seo</option>
-                                    <option value="5">Analyst</option>
-                                </select>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="col-md-6 form-group">
-                            <label for="NoOfVacancy">No Of Vacancy </label>
-                            <input type="number" name="NoOfVacancy" id="NoOfVacancy" class="form-control"
-                                formControlName="NoOfVacancy">
-                        </div> -->
 
                         <div class="col-md-6 form-group">
                             <label for="JoiningDate">Date Of Joining</label>
@@ -710,14 +632,12 @@
                                 data-live-search="true" data-live-search-style="contains" title="Select Designation..."
                                 formControlName="Designation">
                                 <option value="" disabled selected>Select Designation</option>
-                                <!-- <option value="">No Preference</option> -->
                                 <option value="D1001">Software Developer</option>
                                 <option value="D1002">Software Tester</option>
                                 <option value="D1003">HR</option>
                                 <option value="D1005">Admin</option>
                                 <option value="D1006">Team Lead</option>
                                 <option value="D1000">other</option>
-                                <!-- <option value="Other">HR</option> -->
                             </select>
                         </div>
 
@@ -731,66 +651,126 @@
                                 <option value="R1001">Admin</option>
                                 <option value="R1002">HR</option>
                                 <option value="R1003">Super Admin</option>
-                                <!-- <option value="R1004">4 Years</option>
-                                <option value="R1005">5 Years</option>
-                                <option value="R1006">6 Years</option>
-                                <option value="R100">7 Years</option>
-                                <option value="R100">8 Years</option>
-                                <option value="R100">9 Years</option>
-                                <option value="R100">10 Years</option>
-                                <option value="R100">+10 Years</option> -->
                             </select>
                         </div>
 
-                        <!-- <div class="col-md-6 form-group">
-                            <label for="IsFeatured">Is Featured? <span class="text-danger">*</span></label>
-                            <select name="IsFeatured" id="IsFeatured" required class="selectpicker form-control"
-                                data-live-search="true" data-live-search-style="contains" title="Select Option..."
-                                formControlName="IsFeatured">
-                                <option value="" disabled selected>Select Option...</option>
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                          
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="Status">Status <span class="text-danger">*</span></label>
-                            <select name="Status" id="Status" required class="selectpicker form-control"
-                                data-live-search="true" data-live-search-style="contains" title="Select Status..."
-                                formControlName="Status">
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="Unpublished">Unpublished</option>
-                                <option value="Published">Published</option>
-                            </select>
-                           
-                        </div>
-
-
-                        <div class="col-md-12 form-group">
-                            <label for="ShortDescription">Short Description</label>
-                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" rows="3"
-                                formControlName="ShortDescription"></textarea>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="LongDescription">Long Description</label>
-                                <textarea class="form-control" id="LongDescription" name="LongDescription" rows="3"
-                                    formControlName="LongDescription"></textarea>
-                            </div>
-                        </div>
- -->
                         <div class="container">
                             <div class="form-group" align="center">
-                                <input type="hidden" name="action" id="action" />
-                                <input type="hidden" name="hidden_id" id="hidden_id" />
-                                <input type="submit" name="action_button" id="action_button" class="btn btn-warning"
+                                <input type="submit" name="action_button" [disabled]="!addEmployeeForm.valid" id="action_button" class="btn btn-warning"
                                     [value]="'Create Employee'"> 
                             </div>
                         </div>
                     </div>
-                </form>
+                </form> -->
+
+                <form [formGroup]="employeeForm" id="sample_form" class="form-horizontal" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class=" col-md-6 form-group">
+                            <div formGroupName="registration">
+                                <label>Title</label>
+                                <input formControlName="title" class="form-control" type="text">
+                                <label>First Name</label>
+                                <input formControlName="firstName" class="form-control" type="text">
+                                <label>Middle Name</label>
+                                <input formControlName="middleName" class="form-control" type="text">
+                                <label>Last Name</label>
+                                <input formControlName="lastName" class="form-control" type="text">
+                                <!-- Add other registration fields similarly -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div formGroupName="signUpDetails">
+                                    <label>ID</label>
+                                    <input formControlName="id" class="form-control" type="text">
+                                    <label>Roles<span class="text-danger">*</span></label>
+                                    <input formControlName="roles" class="form-control" type="text">
+                                    <label>Email<span class="text-danger">*</span></label>
+                                    <input formControlName="email" class="form-control" type="text">
+                                    <label>Designation<span class="text-danger">*</span></label>
+                                    <input formControlName="designation" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div formArrayName="educationDetails">
+                                <div *ngFor="let education of educationDetails.controls; let i=index" [formGroupName]="i">
+                                    <label>College</label>
+                                    <input formControlName="college" class="form-control" type="text">
+                                    <label>Course Title</label>
+                                    <input formControlName="courseTitle" class="form-control" type="text">
+                                    <!-- Add other education fields similarly -->
+                                </div>
+                                <button type="button" (click)="addEducationDetail()">Add Education Detail</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">                       
+                            <div formArrayName="experienceDetails">
+                                <div *ngFor="let experience of experienceDetails.controls; let i=index" [formGroupName]="i">
+                                    <label>Company Name</label>
+                                    <input formControlName="companyName" class="form-control" type="text">
+                                    <label>Designation</label>
+                                    <input formControlName="designation" class="form-control" type="text">
+                                    <!-- Add other experience fields similarly -->
+                                </div>
+                                <button type="button" (click)="addExperienceDetail()">Add Experience Detail</button>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6 form-group">
+                            <div formGroupName="personalDetails">
+                                <label>First Name</label>
+                                <input formControlName="firstName" class="form-control" type="text">
+                                <label>Last Name</label>
+                                <input formControlName="lastName" class="form-control" type="text">
+                                <!-- Add other personal details fields similarly -->
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6 form-group">
+                            <!-- <div formArrayName="documentDetails">
+                                <div *ngFor="let document of documentDetails.controls; let i=index" [formGroupName]="i">
+                                    <label>File Name</label>
+                                    <input formControlName="fileName" type="text">
+                                    <label>Company Name</label>
+                                    <input formControlName="companyName" type="text">
+                                </div>
+                                <button type="button" (click)="addDocumentDetail()">Add Document Detail</button>
+                            </div> -->
+
+                            <!-- <div formArrayName="documentDetails">
+                                <div *ngFor="let document of documentDetails.controls; let i=index" [formGroupName]="i">
+                                  <input type="file" (change)="addDocumentDetail($event)">
+                                  <label>File Name: {{ document.value.fileName }}</label>
+                                  <button type="button" (click)="removeDocumentDetail(i)">Remove</button>
+                                </div>
+                              </div> -->
+                              <!-- <div formArrayName="documentDetails">
+                                    <div *ngIf="documentDetails.length > 0">
+                                        <div *ngFor="let document of documentDetails.controls; let i=index" [formGroupName]="i">
+                                            <input type="file" (change)="addDocumentDetail($event)">
+                                            <label>File Name: {{ document.value.fileName }}</label>
+                                            <button type="button" (click)="removeDocumentDetail(i)">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="documentDetails.length === 0">
+                                    <p>No documents added yet.</p>
+                                        <input type="file" (change)="addDocumentDetail($event) ">
+                                        <label>Company Name</label>
+                                        <input formControlName="companyName" type="text">
+                                        <label>Document Type</label>
+                                        <input formControlName="docType" type="text">
+                                        <label>Document Description</label>
+                                        <textarea formControlName="docDescription"></textarea>
+                                    </div>
+                              </div> -->
+                        </div>
+                        <div class="container">
+                            <div class="form-group" align="center">
+                                <button type="submit"  class="btn btn-warning">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+                  
             </div>
         </div>
     </div>

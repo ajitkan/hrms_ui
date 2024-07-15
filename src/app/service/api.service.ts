@@ -89,7 +89,7 @@ export class ApiService {
   // }
 
   login(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
+    return this.http.post<any>(`${environment.apiUrl}/Login/Login`, data).pipe(map(user => {
       localStorage.setItem('user', JSON.stringify(user.obj));
       return user;
     }));
@@ -128,5 +128,8 @@ export class ApiService {
       Shift_Date : data.Shift_Date
     }
     return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`,{params}) 
+  }
+  createEmployee(data: any) {
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/CreateEmployee`, data)
   }
 }

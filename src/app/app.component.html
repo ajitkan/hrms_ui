@@ -25,7 +25,6 @@
       
         <ul class="nav sidebar-inner" id="sidebar-menu">
           <li>
-
             <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/home')">
               <i class="mdi mdi-briefcase-account-outline"></i>
               <span class="nav-text">Business Dashboard</span>
@@ -39,19 +38,23 @@
             </a>
           </li>
           <!-- Employee Data Management -->
- 
-          <li class="section-title sidenav-item-link">
-            <a class="sidenav-item-link" (click)="toggleCollapse('EDMSection')" href="javascript:void(0)"
-              data-toggle="collapse" data-target="#EDMSection">
-              <!-- <i class="mdi mdi-email"></i> -->
+          <li>
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeList')">
+              <i class="mdi mdi-chart-line"></i>
               <span class="nav-text">Employee Data Management</span>
-              <!-- <b class="caret"></b> -->
-              <b class="caret"
-                [ngClass]="{'rotate-down': !collapsedStates['EDMSection'], 'rotate-right': collapsedStates['EDMSection']}"></b>
             </a>
           </li>
+
+          <!-- <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('EDMSection')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#EDMSection">
+              <span class="nav-text">Employee Data Management</span>
+               <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['EDMSection'], 'rotate-right': collapsedStates['EDMSection']}"></b>
+            </a>
+          </li> -->
  
-          <ul id="appSection" [ngClass]="{'collapse': collapsedStates['EDMSection']}" class="collapse" id="EDMSection"
+          <!-- <ul id="appSection" [ngClass]="{'collapse': collapsedStates['EDMSection']}" class="collapse" id="EDMSection"
             data-parent="#sidebar-menu">
             <div class="sub-menu">
               <li>
@@ -73,7 +76,7 @@
                 </a>
               </li>
             </div>
-          </ul>
+          </ul> -->
 
           <li class="section-title sidenav-item-link">
             <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeData')">
@@ -109,8 +112,8 @@
               </li>
             </div>
           </ul>  
-    </div>
-  </ul>
+    <!-- </div>
+  </ul> -->
  
           <!-- Employee Data Management -->
           <!-- App Section -->

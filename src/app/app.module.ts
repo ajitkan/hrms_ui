@@ -43,6 +43,7 @@ import { NoDataFound } from './pages/shared-components/no-data-found.component';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+import { DesignationComponent } from './pages/EmployeeData/master/designation/designation.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent
+    PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -76,6 +77,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     // EmployeeDataManagementComponent,
     SalaryCalculatorComponent,
     MyTimesheetComponent,
+    DesignationComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
   ],
   providers: [
               DatePipe,
-              CUSTOM_ELEMENTS_SCHEMA,
+               //[CUSTOM_ELEMENTS_SCHEMA],
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],

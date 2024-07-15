@@ -16,6 +16,8 @@ export class LoginComponent {
   loading:boolean =false;
   loginForm !: FormGroup
   fieldTextType: boolean | undefined;
+  companyLogo = "../assets/images/kanlogo2.png";
+  companyUrl = "https://kaninfos.com";
   // user!:User;
 
   constructor(private formBuilder: FormBuilder,
