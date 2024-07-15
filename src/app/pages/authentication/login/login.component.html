@@ -1,25 +1,17 @@
-<div *ngIf="loginForm.invalid || loginForm.valid" class="d-flex" style="min-height: 100vh;">
-  <!-- <div class="col-1"></div> -->
-  <div class="col-7">
-    <div class="card card-default mb-0" style="border: none;height: 100%;">
-      <div class="app-brand w-100 d-flex justify-content-center border-bottom-0 row">
-        <a class="l-center pl-0" href="https://kaninfos.com">
-          <img alt="https://kaninfos.com" src="../assets/images/kanlogo2.png">
-        </a>
-      </div>
-      <div class="bg-image">
-      </div>
-    </div>
-  </div>
-  <div class="col-5" style="background-color: #4c6fbf;">
-    <div class="card card-default mb-0" style="border: none;background-color: #4c6fbf;">
-      <div class="card-header pb-0">
-        <div class="app-brand w-100 d-flex justify-content-center border-bottom-0 row">
-          <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-            {{ alertMessage }}
-            <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+<app-loader *ngIf="loading"></app-loader>
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
+  <div class="d-flex flex-column justify-content-between">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-10">
+        <div class="card card-default mb-0">
+          <div class="card-header pb-0">
+            <div class="app-brand w-100 d-flex justify-content-center border-bottom-0 row">
+              <a class="w-auto pl-0" href={{companyUrl}}>
+                <img src={{companyLogo}} alt="https://kaninfos.com">
+              </a>
+              <br>
+              <p class="brand-name text-dark justify-content-center m-auto" style="    padding: 0 10px 0 65px;">Welcome to HRMS of KAN</p>
+            </div>
           </div>
         </div>
       </div>

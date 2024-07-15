@@ -48,7 +48,7 @@ export class PaymentbarchartComponent implements OnInit {
       .padding(0.1);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(this.data, d => d.value) || 0])
+      .domain([0, d3.max(this.data, (d: { value: any; }) => d.value) || 0])
       .nice()
       .range([height, 0]);
 
@@ -57,11 +57,11 @@ export class PaymentbarchartComponent implements OnInit {
       .data(this.data)
       .enter()
       .append('rect')
-      .attr('x', d => x(d.label)!)
-      .attr('y', d => y(d.value))
+      .attr('x', (d: { label: any; }) => x(d.label)!)
+      .attr('y', (d: { value: any; }) => y(d.value))
       .attr('width', x.bandwidth())
-      .attr('height', d => height - y(d.value))
-      .attr('fill', d => d.color);
+      .attr('height', (d: { value: any; }) => height - y(d.value))
+      .attr('fill', (d: { color: any; }) => d.color);
 
     svg.append('g')
       .attr('class', 'x-axis')
@@ -78,9 +78,9 @@ export class PaymentbarchartComponent implements OnInit {
       .enter()
       .append('text')
       .attr('class', 'label')
-      .attr('x', d => x(d.label)! + x.bandwidth() / 2)
-      .attr('y', d => y(d.value) - 5)
+      .attr('x', (d: { label: any; }) => x(d.label)! + x.bandwidth() / 2)
+      .attr('y', (d: { value: any; }) => y(d.value) - 5)
       .attr('text-anchor', 'middle')
-      .text(d => d.value);
+      .text((d: { value: any; }) => d.value);
   }
 }

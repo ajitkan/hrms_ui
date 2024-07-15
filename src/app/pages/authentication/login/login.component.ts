@@ -15,51 +15,19 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
-  modalRef!: NgbModalRef;
-  email!: string;
-  passwordVisible: boolean = false;
-  forgotPasswordForm!: FormGroup;
-  unlockAccountForm!: FormGroup;
-  changePasswordForm!:FormGroup;
+  // @Output isLogin
+  @Output() isLogin = new EventEmitter();
+  loading:boolean =false;
+  loginForm !: FormGroup
+  fieldTextType: boolean | undefined;
+  companyLogo = "../assets/images/kanlogo2.png";
+  companyUrl = "https://kaninfos.com";
+  // user!:User;
 
-  captchaResponse: string | null = null;
-  siteKey = "6Lf2pA0qAAAAAD2JbsviBovs_0v17NjbY6Nz-7Pe";
-
-  expectedCaptcha: string = 'example'; 
-  captchaInput: string = '';
-  captchaInvalid: boolean = false;
- 
-
-  captchaText: string = '';
-  userInput: string = '';
-  isCaptchaValid: boolean = false;
-  errorMessage: string = '';
-  isVerificationAttempted: boolean = false;
-  @ViewChild('captchaCanvas', { static: false })
-  captchaCanvas!: ElementRef<HTMLCanvasElement>;
-
-  @ViewChild('changePasswordContent')
-  changePasswordContent!: TemplateRef<any>;
-  modalPayload: any;
-
-  alertMessage: string | null = null;
-  forgotPassAlertMessage: string | null = null;
-  alertType: 'success' | 'error' | 'info' | null = null;
-  alertTimeout:any;
-
-  // @Output() isLogin = new EventEmitter();
-  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[],notificationCount:any;}>();
-  constructor(
-    private fb: FormBuilder, 
-    private modalService: NgbModal,
-    private authService: AuthService,
-    private elRef: ElementRef,
-    private router: Router,
-    private toastr: ToastrService
-  ) { 
-    this.generateCaptcha(); 
-  }
+  constructor(private formBuilder: FormBuilder,
+               private appService: ApiService,
+               private toastr : ToastrService
+  ) { }
 
   ngOnInit(): void {
   

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments';
 
 @Injectable({
@@ -16,10 +17,25 @@ export class EmployeeService {
     getEmployeeDetails(id:any) {
       return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetEmployeeDetails`+id)
     }
-    getAllEmployee() {
+    getAllOnboardEmployee() {
       return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetAllEmployees`)
-  }
-    addToHRMS(...userList:any){
-      return this.http.post<any>(`${environment.apiUrl}/UserDetails/addToHRMS`,userList);
+    }
+    getAllHRMSEmployee() {
+      return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetAllHRMSEmployees`)
+    }
+    // addToHRMS(...userList:any){
+    //   return this.http.post<any>(`${environment.apiUrl}/EDM/addToHRMS`,JSON.stringify(userList));
+    // }
+
+    addToHRMS(selectedEmployeeIds: number[]): Observable<any> {
+      return this.http.post(`${environment.apiUrl}/EDM/addToHRMS`, selectedEmployeeIds, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+
+    uploadDocuments(formData: FormData): Observable<any> {
+      return this.http.post<any>(`${environment.apiUrl}/EDM/upload-documents`, formData);
     }
 }

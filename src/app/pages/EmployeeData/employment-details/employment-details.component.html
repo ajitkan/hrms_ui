@@ -2,11 +2,10 @@
 <div *ngIf="empHistory!=null" class="container content menu-padding">
     <section>
         <div>                   
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-header cheader">
-                            <!--<img height="20px" src="static/images/icons/basic-details.png">--> 
                             Service Overview
                         </div>
                         <div class="card-body">                                   
@@ -27,18 +26,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-5 ">
-                                    <p class="mb-0 bold texth">Total NCP Days
-                                        <!--                                                <a tabindex="0" 
-                                                                                           data-bs-toggle="popover" 
-                                                                                           title="Help"
-                                                                                           data-bs-trigger="focus"
-                                                                                           data-bs-content="Help content here"
-                                                                                           >
-                                                                                            <img height="15px" src="static/images/icons/help.png">
-                                                                                        </a>-->
-                                    </p>
-                                </div>
                                 <div class="col-sm-7">
                                     <p class="text-muted mb-0">0 Days</p>
                                 </div>
@@ -47,13 +34,14 @@
                     </div>
                     <br>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-header cheader">
                             <!--<img height="20px" src="static/images/icons/basic-details.png">--> 
-                            Service History
+                            <span><h4 class="text-center fs-4 fw-bold">Service History</h4></span>
+                            
                         </div>
                         <div class="card-body"> 
                             <ul class="timeline" *ngFor="let employer of empHistory">

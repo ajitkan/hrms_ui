@@ -94,26 +94,24 @@ export class ApiService {
     const apiUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
     return this.http.get<any>(apiUrl);
   }
-  // Get Department Details
-  GetDepartmentDetails(): Observable<any[]> {
-    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);
-  }
 
-  GetSeparationEmployeeDetails(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetSeprationEmployeeDetails`);
-  }
-  // Get  Separation Employee Details 
-  // GetSeparationEmployeeDetails(): Observable<any[]>{
-  //   debugger
-  //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
-  // } 
 
-  //   login(data: any): Observable<any> {
-  //     return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
-  //       localStorage.setItem('user', JSON.stringify(user.obj));
-  //       return user;
-  //     }));
-  //   }
+
+  //Login
+  // login(data: any): Observable<any> {
+
+  //   return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
+  //     localStorage.setItem('user', JSON.stringify(user));
+  //     return user;
+  //   }));
+  // }
+
+  login(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/Login/Login`, data).pipe(map(user => {
+      localStorage.setItem('user', JSON.stringify(user.obj));
+      return user;
+    }));
+  }
 
   //   logout() {
   //     // remove user from local storage and set current user to null
@@ -149,74 +147,9 @@ export class ApiService {
       Emp_Id: data.Emp_Id,
       Shift_Date: data.Shift_Date
     }
-    return this.http.get<any>(`${environment.apiUrl}/api/Attendance/GetApplicationByUserId`, { params })
+    return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`,{params}) 
   }
-
-  postData(token: string): Observable<any> {
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json'
-    // });
-    // const body = { token };
-
-    return this.http.post("http://localhost:54485/login", token);
+  createEmployee(data: any) {
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/CreateEmployee`, data)
   }
-
-  fetchTabs(roleID: any, screenID: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchTabs`, { roleID: roleID, screenID: screenID })
-  }
-
-  fetchUserDetailsField(payload: { roleID: number; tabID: number }): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchField`, payload);
-  }
-  fetchDropdownOptions(fieldID: number, tabID: number): Observable<any> {
-    const requestPayload = {
-      fieldID: fieldID,
-      tabID: tabID
-    };
-    return this.http.post(`${environment.apiUrl}/GetMasterDataByFieldID`, requestPayload);
-  }
-
-  // private apiUrl3 = 'https://localhost:7254/api/UserDetails';
-  insertEmployeeDetails(employeeDetails: EmployeeDetailDto[], tabID: number, recordType: any): Observable<any> {
-    const url = `https://localhost:7254/api/UserDetails/InsertEmployeeDetails?TabID=${tabID}&recordType=${recordType}`;
-    return this.http.post(url, employeeDetails).pipe(
-      catchError(this.handleError)
-    );
-  }
-  
-  saveDraftEmployeeDetails(details: any[], tabID: number, recordType: string): Observable<any> {
-    const params = new HttpParams()
-      .set('tabID', tabID.toString())
-      .set('recordType', recordType);  
-  
-    return this.http.post<any>('https://localhost:7254/api/UserDetails/SaveDraftEmployeeDetails', details, { params });
-  }
-  
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
-      console.error('Client-side error:', error.error.message);
-    } else {
-      // Server-side error
-      console.error(`Server returned code ${error.status}, body was: ${error.error}`);
-    }
-    // Return a user-facing error message
-    return throwError(() => new Error('Something went wrong; please try again later.'));
-  }
-
-
-  showAlertMessage(message: string, type?: 'success' | 'error', ismodal?:boolean): void {
-    if(!ismodal) 
-    this.alertMessage = message;
-  else
-    this.forgotPassAlertMessage =message;
-    this.alertType = type || 'info'; 
-
-    if (this.alertTimeout) {
-      clearTimeout(this.alertTimeout);
-    }
-    
-  }
-
-
 }

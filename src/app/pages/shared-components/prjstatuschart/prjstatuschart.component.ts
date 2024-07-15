@@ -43,7 +43,7 @@ export class PrjstatuschartComponent implements OnInit {
       .append('g')
       .attr('transform', `translate(${width / 2}, ${height / 2})`);
   
-    const pie = d3.pie<PieData>().value(d => d.value);
+    const pie = d3.pie<PieData>().value((d: { value: any; }) => d.value);
     const arc = d3.arc<d3.PieArcDatum<PieData>>()
       .innerRadius(radius * 0.5)
       .outerRadius(radius);
@@ -56,7 +56,7 @@ export class PrjstatuschartComponent implements OnInit {
   
     arcs.append('path')
       .attr('d', arc)
-      .attr('fill', d => d.data.color); // Use the color property
+      .attr('fill', (d: { data: { color: any; }; }) => d.data.color); // Use the color property
   
     // Add labels
     arcs.append('text')
@@ -79,7 +79,7 @@ export class PrjstatuschartComponent implements OnInit {
       })
       .attr('text-anchor', 'middle')
       .style('fill', 'white')
-      .text(d => d.data.value);
+      .text((d: { data: { value: any; }; }) => d.data.value);
   }
   /***********Expence vs Deposite chart********* */
 

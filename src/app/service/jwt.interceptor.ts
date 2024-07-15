@@ -40,19 +40,23 @@ export class JwtInterceptor implements HttpInterceptor {
         }else {
             console.warn('User token is not available or request is not to API URL. Proceeding without token.');
         }
-        return next.handle(request).pipe(
-            map((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse) {
-                    // Handle response if needed
-                    console.log("Response event:", event);
-                }
-                return event;
-            }),
 
-            catchError((error: HttpErrorResponse) => {
-                console.error("Error Response:", error);
-                return throwError(() => new Error(error.message || "Server Error"));
-            })
-        );
+        return next.handle(request).pipe(map((event: HttpEvent<any>) => {
+            if (event instanceof HttpResponse) {
+                //  debugger;
+                if(event.body.token)
+                     sessionStorage.setItem('token',JSON.stringify(event.body.token ?event.body.token :event.body.value.token))
+                else if(event.body.value && event.body.value.token)
+                     sessionStorage.setItem('token',JSON.stringify(event.body.token ?event.body.token :event.body.value.token))
+                // else if(event.body.token == '')
+                //      sessionStorage.setItem('token',JSON.stringify(sessionStorage.getItem('token')as string))
+                
+                console.log("event occurrs:",event);
+                //event = event.clone({body: this.modifyBody(event.body)});
+            }
+            return event;
+        }));
+        //return next.handle(request);
+        //debugger;
     }
 }

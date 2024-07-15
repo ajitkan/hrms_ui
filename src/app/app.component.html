@@ -2,76 +2,162 @@
 
 
 <div class="wrapper">
-  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
-  <app-change-password *ngIf="isSnapshot"></app-change-password>
-
-  <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
-
-    <div class="main-content d-flex">
-      <aside  *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
-        <div id="sidebar" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
-              <li *ngFor="let screen of screens" class="nav-item">
-                <a 
-                  class="nav-link d-flex align-items-center" 
-                  [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
-                  <i class="fas fa-icon mr-2"></i>
-                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-      
-      <aside *ngIf="isSecondSidebarVisible && tabs!=null" class="left1-sidebar sidebar-light" id="right-sidebar">
-        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column" *ngFor="let tab of tabs">
-              <li class="nav-item" (click)="selectTab(tab)">
-                <a class="nav-link d-flex align-items-center">
-                  <span class="nav-text">{{tab.tabTitle}}</span>
-                </a>
-              </li>
-            
-            </ul>
-          </div>
-        </div>
-      </aside>
-      
-      <router-outlet></router-outlet>
-    </div>
  
-  </div>
-  <app-footer></app-footer>
-</div> -->
+  <app-login *ngIf="!IsLogin " (isLogin)="IsLoggedin($event)"></app-login>
+    <!-- Add the header component here -->
+   
+  
+  <!-- ====================================
+    ——— LEFT SIDEBAR WITH OUT FOOTER
+  ===================================== -->
+  <aside *ngIf="IsLogin" class="left-sidebar sidebar-dark" id="left-sidebar">
+    
+    <div id="sidebar" class="sidebar sidebar-with-footer">
+      <!-- Aplication Brand -->
+      <div class="app-brand">
+        <a href="https://kaninfos.com" target="_blank">
+          <img src="../assets/images/kanlogo1.png" alt="https://kaninfos.com">
+          <!-- <span class="brand-name">MONO</span> -->
+        </a>
+      </div>
+      
+      <!-- begin sidebar scrollbar -->
+      <!-- <app-header (toggleSidebar)="onToggleSidebar()" ></app-header> -->
+      <div class="sidebar-left" data-simplebar style="height: 100%;">
+        <!-- sidebar menu -->
+      
+        <ul class="nav sidebar-inner" id="sidebar-menu">
+          <li>
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/home')">
+              <i class="mdi mdi-briefcase-account-outline"></i>
+              <span class="nav-text">Business Dashboard</span>
+            </a>
+          </li>
+ 
+          <li>
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/Admin')">
+              <i class="mdi mdi-chart-line"></i>
+              <span class="nav-text">Analytics Dashboard</span>
+            </a>
+          </li>
+          <!-- Employee Data Management -->
+          <li>
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeList')">
+              <i class="mdi mdi-chart-line"></i>
+              <span class="nav-text">Employee Data Management</span>
+            </a>
+          </li>
 
+          <!-- <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('EDMSection')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#EDMSection">
+              <span class="nav-text">Employee Data Management</span>
+               <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['EDMSection'], 'rotate-right': collapsedStates['EDMSection']}"></b>
+            </a>
+          </li> -->
+ 
+          <!-- <ul id="appSection" [ngClass]="{'collapse': collapsedStates['EDMSection']}" class="collapse" id="EDMSection"
+            data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <a class="sidenav-item-link" routerLink="/employeeList">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">List of Onboard Employees</span>
+                </a>
+              </li>
+              <li>
+                <a class="sidenav-item-link" routerLink="/create-employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Employee Creation</span>
+                </a>
+              </li>
+              <li>
+                <a class="sidenav-item-link" routerLink="/import-employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Import Employee</span>
+                </a>
+              </li>
+            </div>
+          </ul> -->
 
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeData')">
+              <span class="nav-text">MyProfile</span>
+            </a>
+          </li>
 
+          <!-- Recruitement Section -->
+        <!-- masters start -->
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('Master')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#Master">
+              <!-- <i class="mdi mdi-email"></i> -->
+              <span class="nav-text">Masters</span>
+              <!-- <b class="caret"></b> -->
+              <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['Master'], 'rotate-right': collapsedStates['Master']}"></b>
+            </a>
+          </li>
+          <ul id="Master" class="collapse" [ngClass]="{'collapse': collapsedStates['Master']}"
+            data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <a class="sidenav-item-link" routerLink="company-master">
+                  <span class="nav-text">Company</span>
+                </a>
+              </li>
 
-<!-- 
-<div class="wrapper">
-  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
-  <app-change-password *ngIf="isSnapshot"></app-change-password>
-
-  <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
-
-    <div class="main-content d-flex">
-      <aside *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
-        <div id="sidebar" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
-              <li *ngFor="let screen of screens" class="nav-item">
-                <a 
-                  class="nav-link d-flex align-items-center" 
-                  [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
-                  <i class="fas fa-icon mr-2"></i>
-                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
+              <li>
+                <a class="sidenav-item-link" routerLink="badge.html">
+                  <span class="nav-text">Company Type</span>
+                </a>
+              </li>
+            </div>
+          </ul>  
+    <!-- </div>
+  </ul> -->
+ 
+          <!-- Employee Data Management -->
+          <!-- App Section -->
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('appSection')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#appSection">
+              <!-- <i class="mdi mdi-email"></i> -->
+              <span class="nav-text">Apps</span>
+              <!-- <b class="caret"></b> -->
+              <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['appSection'], 'rotate-right': collapsedStates['appSection']}"></b>
+            </a>
+          </li>
+          <ul id="appSection" [ngClass]="{'collapse': collapsedStates['appSection']}" class="collapse" id="appSection"
+            data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <a class="sidenav-item-link" href="chat.html">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Chat</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" href="contacts.html">
+                  <i class="mdi mdi-phone"></i>
+                  <span class="nav-text">Contacts</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" href="team.html">
+                  <i class="mdi mdi-account-group"></i>
+                  <span class="nav-text">Team</span>
+                </a>
+              </li>
+ 
+              <li>
+                <a class="sidenav-item-link" href="calendar.html">
+                  <i class="mdi mdi-calendar-check"></i>
+                  <span class="nav-text">Calendar</span>
                 </a>
               </li>
             </ul>

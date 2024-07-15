@@ -1,189 +1,98 @@
 <app-navbar></app-navbar>
-<div class="table-responsive">
-    <div id="employee-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-        <!-- <div class="row">
-            <div class="row dataTables_length" id="employee-table_length">
-                <label class="col-5">
-                    <div class="btn-group bootstrap-select form-control form-control-sm h-auto">
-                        <button type="button" class="btn dropdown-toggle btn-default btn-light"
-                            data-toggle="dropdown" role="button" title="10">
-                            <span class="filter-option pull-left">10</span>&nbsp;
-                            <span class="bs-caret">
-                                <span class="caret"></span>
-                            </span>
-                        </button>
-                        <div class="dropdown-menu open" role="combobox">
-                            <div class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                                <a tabindex="0" class="dropdown-item selected" data-original-index="0">
-                                    <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0"
-                                        aria-disabled="false" aria-selected="true">
-                                        <span class="text">10</span><span class="fa fa-check check-mark"></span>
-                                    </span>
-                                </a>
-                                <a tabindex="0" class="dropdown-item" data-original-index="1">
-                                    <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0"
-                                        aria-disabled="false" aria-selected="false">
-                                        <span class="text">25</span>
-                                        <span class="fa fa-check check-mark"></span>
-                                    </span>
-                                </a>
-                                <a tabindex="0" class="dropdown-item" data-original-index="2">
-                                    <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0"
-                                        aria-disabled="false" aria-selected="false">
-                                        <span class="text">50</span>
-                                        <span class="fa fa-check check-mark"></span>
-                                    </span>
-                                </a>
-                                <a tabindex="0" class="dropdown-item" data-original-index="3">
-                                    <span class="dropdown-item-inner " data-tokens="null" role="option" tabindex="0"
-                                        aria-disabled="false" aria-selected="false">
-                                        <span class="text">All</span>
-                                        <span class="fa fa-check check-mark"></span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <select name="employee-table_length" aria-controls="employee-table"
-                            class="form-control form-control-sm m-auto" tabindex="-98">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="-1">All</option>
-                        </select>
-                    </div> records per page
-                </label>
-                <span class="col-2"></span>
-                <label class="col-5">
-                    <input type="search" class="form-control" placeholder="Search" aria-controls="employee-table">
-                </label>
+<div class="card">
+    <div class="card-header cheader "> <span><h4 class="text-center fs-4 fw-bold">Documents</h4></span> </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="employee-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            
+                <table id="employee-table" class="table dataTable no-footer dt-checkboxes-select dtr-inline" role="grid"
+                    aria-describedby="employee-table_info">
+                    <thead>
+                        <tr role="row">
+                        
+                            <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                                style="width: 100px;" aria-label="Employee: activate to sort column ascending">Sr No.
+                            </th>
+                            <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                                style="width: 220px;" aria-label="Employee: activate to sort column ascending">Document Name
+                            </th>
+                            <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                                style="width: 234px;" aria-label="Company: activate to sort column ascending">Document Type
+                            </th>
+                            <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
+                                style="width: 277px;" aria-label="Contact: activate to sort column ascending">School/Company Name</th>
+                            <th class="not-exported text-left sorting_disabled text-center" rowspan="1" colspan="1"
+                                style="width: 161px;" aria-label="action">action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let doc of docList; let i=index;">
+                        <tr role="row" class="odd">
+                        
+                            <td >
+                                <!-- <div class="d-flex"> -->
+                                    <div>
+                                        <span>
+                                            <a class="d-block text-bold text-center"
+                                                style="color:#24ABF2; pointer-events: none;">{{i+1}}
+                                            </a>
+                                        </span>
+                                    </div>
+                                <!-- </div> -->
+                            </td>
+                            <td>
+                                <!-- <div class="d-flex"> -->
+                                    <div>
+                                        <span>
+                                            <a class="d-block text-bold text-center"
+                                                style="color:#24ABF2; pointer-events: none;">{{doc.fileName}}
+                                            </a>
+                                        </span>
+                                    </div>
+                                <!-- </div> -->
+                            </td>
+                            <td>
+                                <div>
+                                    <span>
+                                        <a class="d-block text-bold text-center"
+                                            style="color:#24ABF2; pointer-events: none;">
+                                {{doc.docType}}</a></span></div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span>
+                                        <a class="d-block text-bold text-center"
+                                            style="color:#24ABF2; pointer-events: none;">{{doc.companyName}}<br></a></span></div>
+                            </td>
+                            <td class=" text-left">
+                                <div>
+                                    <span style="
+                                    justify-content: center;
+                                    display: flex;
+                                ">
+                                <a href={{doc.docSource}} target="_blank" class="edit btn btn-primary btn-sm text-center"
+                                    data-toggle="tooltip" data-placement="top" title="View Details">
+                                    <i class="fa fa-eye"></i>
+                                </a></span></div>
+                        </tr>
+                    </tbody>
+                </table>
+                <li class="btn btn-primary float-right" style="left: 10px;
+                position: relative;"><button ><i class=" fa fa-plus" aria-hidden="true"></i> Upload Documents </button></li>
+                
+                <!-- <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
+                    <ul class="pagination">
+                        <li class="paginate_button page-item previous disabled" id="employee-table_previous"><a href="#"
+                                aria-controls="employee-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                        </li>
+                        <li class="paginate_button page-item active"><a href="#" aria-controls="employee-table"
+                                data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="employee-table" data-dt-idx="2"
+                                tabindex="0" class="page-link">2</a></li>
+                        <li class="paginate_button page-item next" id="employee-table_next"><a href="#"
+                                aria-controls="employee-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                    </ul>
+                </div> -->
             </div>
-            <div class="dt-buttons btn-group">
-                <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                    aria-controls="employee-table" type="button">
-                    <span>
-                        <i title="export to pdf" class="fa fa-file-pdf-o"></i>
-                    </span>
-                </button>
-                <button class="btn btn-secondary buttons-csv buttons-html5 export-for-device" tabindex="0"
-                    aria-controls="employee-table" type="button">
-                    <span>
-                        <i title="export for device" class="fa fa-tablet"></i>
-                    </span>
-                </button>
-                <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="employee-table"
-                    type="button">
-                    <span>
-                        <i title="print" class="fa fa-print"></i>
-                    </span>
-                </button>
-                <button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0"
-                    aria-controls="employee-table" type="button" aria-haspopup="true">
-                    <span>
-                        <i title="column visibility" class="fa fa-eye"></i>
-                    </span>
-                </button>
-            </div>
-        </div> -->
-        <!-- <div id="employee-table_processing" class="dataTables_processing card" style="display: none;">Processing...
-        </div> -->
-        <table id="employee-table" class="table dataTable no-footer dt-checkboxes-select dtr-inline" role="grid"
-            aria-describedby="employee-table_info">
-            <thead>
-                <tr role="row">
-                    <!-- <th class="not-exported text-left dt-checkboxes-cell dt-checkboxes-select-all sorting_disabled"
-                        rowspan="1" colspan="1" style="width: 25px;" data-col="0" aria-label="">
-                        <div class="checkbox">
-                            <input type="checkbox" class="dt-checkboxes" (change)="selectAll($event)">
-                            <label class="text-bold"></label>
-                        </div>
-                    </th> -->
-                    <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
-                        style="width: 100px;" aria-label="Employee: activate to sort column ascending">Sr No.
-                    </th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
-                        style="width: 220px;" aria-label="Employee: activate to sort column ascending">Document Name
-                    </th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
-                        style="width: 234px;" aria-label="Company: activate to sort column ascending">Document Type
-                    </th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="employee-table" rowspan="1" colspan="1"
-                        style="width: 277px;" aria-label="Contact: activate to sort column ascending">School/Company Name</th>
-                    <th class="not-exported text-left sorting_disabled text-center" rowspan="1" colspan="1"
-                        style="width: 161px;" aria-label="action">action</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let doc of docList; let i=index;">
-                <tr role="row" class="odd">
-                    <!-- <td class=" text-left dt-checkboxes-cell" tabindex="0">
-                        <div class="checkbox">
-                            <input type="checkbox" class="dt-checkboxes" [(ngModel)]="doc.checked"
-                                (change)="onCheckboxChange($event, i)">
-                            <label class="text-bold"></label>
-                        </div>
-                    </td> -->
-                    <td >
-                        <!-- <div class="d-flex"> -->
-                            <div>
-                                <span>
-                                    <a class="d-block text-bold text-center"
-                                        style="color:#24ABF2; pointer-events: none;">{{i+1}}
-                                    </a>
-                                </span>
-                            </div>
-                        <!-- </div> -->
-                    </td>
-                    <td>
-                        <!-- <div class="d-flex"> -->
-                            <div>
-                                <span>
-                                    <a class="d-block text-bold text-center"
-                                        style="color:#24ABF2; pointer-events: none;">{{doc.fileName}}
-                                    </a>
-                                </span>
-                            </div>
-                        <!-- </div> -->
-                    </td>
-                    <td>
-                        <div>
-                            <span>
-                                <a class="d-block text-bold text-center"
-                                    style="color:#24ABF2; pointer-events: none;">
-                        {{doc.docType}}</a></span></div>
-                    </td>
-                    <td>
-                        <div>
-                            <span>
-                                <a class="d-block text-bold text-center"
-                                    style="color:#24ABF2; pointer-events: none;">{{doc.companyName}}<br></a></span></div>
-                    </td>
-                    <td class=" text-left">
-                        <div>
-                            <span style="
-                            justify-content: center;
-                            display: flex;
-                        ">
-                        <a href={{doc.docSource}} target="_blank" class="edit btn btn-primary btn-sm text-center"
-                            data-toggle="tooltip" data-placement="top" title="View Details">
-                            <i class="fa fa-eye"></i>
-                        </a></span></div>
-                </tr>
-            </tbody>
-        </table>
-        <li class="btn btn-primary float-right" style="left: 10px;
-        position: relative;"><button ><i class=" fa fa-plus" aria-hidden="true"></i> Upload Documents </button></li>
-        
-        <!-- <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
-            <ul class="pagination">
-                <li class="paginate_button page-item previous disabled" id="employee-table_previous"><a href="#"
-                        aria-controls="employee-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                </li>
-                <li class="paginate_button page-item active"><a href="#" aria-controls="employee-table"
-                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                <li class="paginate_button page-item "><a href="#" aria-controls="employee-table" data-dt-idx="2"
-                        tabindex="0" class="page-link">2</a></li>
-                <li class="paginate_button page-item next" id="employee-table_next"><a href="#"
-                        aria-controls="employee-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
-            </ul>
-        </div> -->
+        </div>
     </div>
 </div>

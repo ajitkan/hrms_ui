@@ -52,18 +52,7 @@ import { NoDataFound } from './pages/shared-components/no-data-found.component';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
-// import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
-import { RecaptchaModule } from 'ng-recaptcha';
-import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
-// import { CommonModule } from '@angular/common';
-import { CommanSearchEmployeeService } from './service/CommanService/comman-search-employee.service';
-import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
-import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
-import { NotificationComponent } from './pages/shared-components/notification/notification.component';
-import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
-import { ProfileComponent } from './pages/profile/profile/profile.component';
-import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
-
+import { DesignationComponent } from './pages/EmployeeData/master/designation/designation.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +64,7 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
+    PaymentbarchartComponent,
     PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
@@ -103,15 +93,7 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
     // EmployeeDataManagementComponent,
     SalaryCalculatorComponent,
     MyTimesheetComponent,
-
-    // SalaryDetailsComponent,
-    ChangePasswordComponent,
-    EmploymentDetailsComponent,
-    EmployeeSearchResultComponent,
-    NotificationComponent,
-    NotificationDetailsComponent,
-    ProfileComponent,
-    ExperienceDetailsComponent
+    DesignationComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,7 +120,7 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
   ],
   providers: [
               DatePipe,
-              
+               //[CUSTOM_ELEMENTS_SCHEMA],
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],

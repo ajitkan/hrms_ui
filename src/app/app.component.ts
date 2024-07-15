@@ -93,8 +93,10 @@ showBackButton = false;
     otherpage:true,
     customization:true,
     email:true,
+    TimeSection:true,
+    MyProfile:true,
     Payroll:true,
-    TimeSection:true
+   
   };
 
   constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
