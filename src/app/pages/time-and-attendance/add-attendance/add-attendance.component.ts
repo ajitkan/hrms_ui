@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { Modal } from 'bootstrap';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-attendance',
@@ -14,7 +15,9 @@ export class AddAttendanceComponent {
 
 
   @ViewChild('modalForm') modalForm !: ElementRef<any>;
+  @ViewChild('closebutton') closebutton: any;
   attendanceForm !: FormGroup
+  accountForm !: FormGroup
   now: Date | undefined;
   currentDate: string | undefined;
   currentTime: string | undefined;
@@ -28,39 +31,215 @@ export class AddAttendanceComponent {
   shiftTimeOut = '18:30:00'
   isoDateString!: string
   accurateTime: any;
+  appliedDate: any;
   output: any = [];
   attendanceList: any = [];
 
   header: string = '';
   modalData: any = [];
-  flag : number =0;
+  flag: number = 0;
+  formattedDate: any;
+  accountYear: any = [];
+  dates: any = [];
 
+  joiningDate: any = new Date("2024-03-12T11:01:42.097Z");
 
+  // joiningDate : any = "2024-03-12T11:01:42.097Z";
+  todayDate = new Date();
 
   constructor(private apiService: ApiService,
     private datePipe: DatePipe,
-    private f: FormBuilder
-  ) {
-
-  }
+    private f: FormBuilder,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
 
+    debugger
     this.attendanceForm = this.f.group({
 
       TimeIn: ['', Validators.required],
       TimeOut: ['', Validators.required],
       Remark: ['', Validators.required]
+
     })
 
+    this.accountForm = this.f.group({
 
-    this.getAttendanceByUser('K-210')
+      _year: [''],
+      _month: [''],
+
+    })
+
+    // const send_date=new Date();
+    // console.log(send_date); 
+    // send_date.setMonth(send_date.getMonth() + 2);
+    // this.formattedDate = send_date.toISOString().slice(0,10);
+    // console.log(this.formattedDate); 
+
+
+    //Account Year
+    // const previousDate = new Date (this.formatDate.setFullYear(this.formatDate.getFullYear() - 1));
+    const previousDate = this.subtarctYear(this.joiningDate, 1);
+    const nextDate = new Date(this.todayDate.setFullYear(this.todayDate.getFullYear() + 1))
+    let id = 1
+    while (previousDate.getFullYear() < nextDate.getFullYear()) {
+
+      const account = 'April ' + previousDate.getFullYear() + ' - ' + 'March ' + (previousDate.getFullYear() + 1)
+      var data = {
+        id: id,
+        account: account,
+        fromDate: new Date(previousDate.getFullYear() + '-' + '04' + '-' + '01'),
+        toDate: new Date((previousDate.getFullYear() + 1) + '-' + '03' + '-' + '31')
+
+      }
+      this.accountYear.push(data);
+      // this.accountForm.get('_year')?.setValue(2);
+      previousDate.setFullYear(previousDate.getFullYear() + 1);
+      id = id + 1
+    }
+    // console.log('Account Year', this.accountYear)
+    //
+
+    if (sessionStorage.getItem('accountYear') != null) {
+      this.onLoad();
+    }
+    else{
+      debugger
+      this.getAttendanceByUser('K-210', new Date())
+    }
+
+    
+    // this.onLoad();
+  }
+
+  subtarctYear(date: Date, years: number): Date {
+    const newDate = new Date(date);
+    newDate.setFullYear(newDate.getFullYear() - years);
+    return newDate;
+  }
+
+
+  onYearChange() {
+
+    let data = null;
+    // if(sessionStorage.getItem('accountYear') != null){
+    //   data = JSON.parse(sessionStorage.getItem('accountYear') || '[]')
+    //   this.accountForm.patchValue({
+    //     _year : data[0].id
+    //   })
+    // }
+    // else{
+    data = this.accountYear.filter((element: any) => element.id == this.accountForm.get('_year')?.value)
+    sessionStorage.setItem('accountYear', JSON.stringify(data));
+    // }
+    console.log(sessionStorage.getItem('accountYear'));
+
+
+    this.dates = [];
+    const fromDate = new Date(data[0].fromDate); // Create a copy of fromDate
+    const toDate = new Date(data[0].toDate); // Create a copy of toDate
+
+    let isVisible = true;
+    while (fromDate <= toDate) {
+
+
+      // const year1 = this.joiningDate.getFullYear();
+      // const month1 = this.joiningDate.getMonth();
+      // const year2 = fromDate.getFullYear();
+      // const month2 = fromDate.getMonth();
+
+      // // if (this.joiningDate.getFullYear() > fromDate.getFullYear() || (year1 === year2 && month1 > month2) {
+
+      // //   console.log('Hi')
+      // // }
+      // debugger
+      // if (year1 > year2 || (year1 === year2 && month1 > month2)) {
+      //   console.log('date1 is later')
+      //   isVisible = false
+      // } else if (year1 < year2 || (year1 === year2 && month1 < month2)) {
+
+      //   console.log('date1 is earlier');
+      // } else {
+      //   console.log('dates are the same');
+      // }
+
+      var allMonths = {
+        _date: fromDate.toLocaleString()
+      }
+      this.dates.push(allMonths);
+      fromDate.setMonth(fromDate.getMonth() + 1);  // Move to the next month
+      // console.log(this.accountYear);
+    }
+    // console.log('Dates', this.dates);
+
+
+  }
+
+  onLoad() {
+    let data = null;
+    // if (sessionStorage.getItem('accountYear') != null) {
+      data = JSON.parse(sessionStorage.getItem('accountYear') || '[]')
+      this.accountForm.patchValue({
+        _year: data[0].id
+      })
+      console.log(sessionStorage.getItem('accountYear'));
+      this.dates = [];
+      const fromDate = new Date(data[0].fromDate); // Create a copy of fromDate
+      const toDate = new Date(data[0].toDate); // Create a copy of toDate
+
+      let isVisible = true;
+      while (fromDate <= toDate) {
+
+
+        // const year1 = this.joiningDate.getFullYear();
+        // const month1 = this.joiningDate.getMonth();
+        // const year2 = fromDate.getFullYear();
+        // const month2 = fromDate.getMonth();
+
+        // // if (this.joiningDate.getFullYear() > fromDate.getFullYear() || (year1 === year2 && month1 > month2) {
+
+        // //   console.log('Hi')
+        // // }
+        // debugger
+        // if (year1 > year2 || (year1 === year2 && month1 > month2)) {
+        //   console.log('date1 is later')
+        //   isVisible = false
+        // } else if (year1 < year2 || (year1 === year2 && month1 < month2)) {
+
+        //   console.log('date1 is earlier');
+        // } else {
+        //   console.log('dates are the same');
+        // }
+
+        var allMonths = {
+          _date: fromDate.toLocaleString()
+        }
+        this.dates.push(allMonths);
+        fromDate.setMonth(fromDate.getMonth() + 1);  // Move to the next month
+
+      }
+    // }
+    if (sessionStorage.getItem('_monthData') != null) {
+      let _month = sessionStorage.getItem('_monthData');
+      this.accountForm.get('_month')?.setValue(_month);
+      if (_month != null) { 
+          this.getAttendanceByUser('k-210',  new Date(_month));
+       }
+    }
+  }
+
+  onMonthChange() {
+    const _month = this.accountForm.get('_month')?.value
+    sessionStorage.setItem('_monthData', _month);
+    this.getAttendanceByUser('k-210', new Date(_month))
+
   }
 
   show(data: any, flag: string) {
-    debugger
+
     this.modalData = data;
-    this.flag = Number(flag)  ;
+    this.flag = Number(flag);
     if (flag == '1') {
       let formatDate = this.datePipe.transform(data.Shift_Date, 'd MMMM y')
       this.header = 'Correct Attendance' + ' ( ' + formatDate + ' ) '
@@ -68,21 +247,19 @@ export class AddAttendanceComponent {
       //   this.attendanceForm.get('TimeIn')?.setValue(data.Check_In);
       // }
     }
-    if(flag == '2') {
-      let formatDate = this.datePipe.transform(data.Shift_Date, 'd MMMM y')
-      this.header = 'Attendance Details' + ' ( ' + formatDate + ' ) '
-      // if(data.Check_In != null && data.Check_Out != null){
-      //   this.attendanceForm.get('TimeIn')?.setValue(data.Check_In);
-      // }
-    }
+    // if(flag == '2') {
+    //   let formatDate = this.datePipe.transform(data.Shift_Date, 'd MMMM y')
+    //   this.header = 'Attendance Details' + ' ( ' + formatDate + ' ) '
+    //   // if(data.Check_In != null && data.Check_Out != null){
+    //   //   this.attendanceForm.get('TimeIn')?.setValue(data.Check_In);
+    //   // }
+    // }
     const modal = new Modal(this.modalForm.nativeElement);
     modal.show();
   }
 
 
-  getAttendanceByUser(data: any) {
-
-
+  getAttendanceByUser(data: any, _date: any) {
     var input =
     {
       // "id": 0,
@@ -91,26 +268,33 @@ export class AddAttendanceComponent {
       //  CheckOut: "2024-05-27T11:01:42.097Z",
       // WorkedHrs: "string",
       // ShiftId: 0,
-      //ShiftDate: "2024-05-27T11:01:42.097Z"
+      ShiftDate: _date
     }
     this.apiService.getAttendanceByUserId(input).subscribe(resp => {
       if (resp != null && resp != undefined) {
         this.attendanceList = resp.obj
         console.log(this.attendanceList);
         this.attendanceList.forEach((element: any) => {
-          if (this.isEmptyObject(element.Check_In)) {
-            element.Check_In = null
-          }
-          else {
+
+          if (element.Check_In != null) {
             element.Late = this.calTimeDiff(element.Check_In, '9:30');
           }
-
-          if (this.isEmptyObject(element.Check_Out)) {
-            element.Check_Out = null
-          }
-          else {
+          if (element.Check_Out != null) {
             element.Early = this.calTimeDiff(element.Check_Out, '18:30');
           }
+          // if (this.isEmptyObject(element.Check_In)) {
+          //   element.Check_In = null
+          // }
+          // else {
+          //   element.Late = this.calTimeDiff(element.Check_In, '9:30');
+          // }
+
+          // if (this.isEmptyObject(element.Check_Out)) {
+          //   element.Check_Out = null
+          // }
+          // else {
+          //   element.Early = this.calTimeDiff(element.Check_Out, '18:30');
+          // }
 
         });
       }
@@ -119,7 +303,9 @@ export class AddAttendanceComponent {
 
 
   updateAttendance() {
-    this.apiService.getInfo().subscribe(resp => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.apiService.getCurrentTime(timezone).subscribe((resp: any) => {
+      // this.apiService.getInfo().subscribe(resp => {
       if (resp != null && resp != undefined) {
         console.log(resp.datetime);
         var data = {
@@ -129,7 +315,7 @@ export class AddAttendanceComponent {
         this.apiService.updateAttendance(data).subscribe(resp => {
           if (resp != null && resp != undefined) {
             console.log(resp);
-            this.getAttendanceByUser('K-210')
+            this.getAttendanceByUser('K-210', new Date())
 
           }
         })
@@ -181,11 +367,10 @@ export class AddAttendanceComponent {
 
   }
 
-  correctAttendance() {
+  punchAttendance() {
     // console.log(this.modalData);
-    debugger
     const data = this.attendanceForm.value;
-    let TimeIn = this.modalData.Shift_Date.replace("00:00:00","09:30");
+    let TimeIn = this.modalData.Shift_Date.replace("00:00:00", "09:30");
     let TimeOut = this.modalData.Shift_Date.replace("00:00:00", data.TimeOut);
 
     if (this.attendanceForm.valid) {
@@ -193,16 +378,43 @@ export class AddAttendanceComponent {
         UserId: 'k-210',
         CheckIn: TimeIn,
         CheckOut: TimeOut,
-        ShiftDate : this.modalData.Shift_Date,
+        ShiftDate: this.modalData.Shift_Date,
         Remark: data.Remark,
-        Application : this.flag
+        Application_Type: this.flag,
+        AppliedDate: new Date()
       }
-      console.log(input);
       this.apiService.punchTimeApplication(input).subscribe(resp => {
         if (resp != null && resp != undefined) {
-          console.log(resp);
+          this.closebutton.nativeElement.click();
+          this.toastr.success("Application Submited Successfully!");
+
         }
       })
     }
+  }
+
+
+  getAppliedDate() {
+    // this.apiService.getInfo().subscribe(resp => {
+    //   if (resp != null && resp != undefined) {
+
+    //     this.appliedDate = resp.datetime;
+    //   }
+    // }, error => {
+    //   console.error('Error fetching time:', error);
+    // })
+
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    debugger
+    this.apiService.getCurrentTime(timezone).subscribe((response: any) => {
+      if (response != null && response != undefined) {
+        this.appliedDate = response.datetime;
+        debugger
+        console.log(this.appliedDate)
+      }
+    }, error => {
+      console.error('Error fetching time:', error);
+      this.accurateTime = 'Could not fetch time';
+    });
   }
 }

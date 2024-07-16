@@ -30,10 +30,10 @@ export class AdminDashboardComponent implements OnInit {
   @ViewChild('pieChart', { static: true }) private chartContainer!: ElementRef;
 
   private data: PieData[] = [
-    { label: 'Section 1', value: 10, color: '#ff0000' }, // Red
-    { label: 'Section 2', value: 20, color: '#00ff00' }, // Green
-    { label: 'Section 3', value: 30, color: '#0000ff' }, // Blue
-    { label: 'Section 4', value: 40, color: '#ffff00' }  // Yellow
+    { label: 'Section 1', value: 10, color: '#c3b7c5' }, // Red
+    { label: 'Section 2', value: 20, color: '#06c0e0' }, // Green
+    { label: 'Section 3', value: 30, color: '#955f9e' }, // Blue
+    { label: 'Section 4', value: 40, color: '#28a745' }  // Yellow
   ];
 
   

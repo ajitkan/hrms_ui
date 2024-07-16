@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class HeaderComponent {
   @Output() isLogin = new EventEmitter();
+  // @Output() isCollapse =new EventEmitter();
  user:any;
  isCollapsed:boolean=false;
 
@@ -18,10 +19,11 @@ export class HeaderComponent {
   }
   ngOnInit(){
     this.user = JSON.parse(localStorage.getItem("user")as string);
-    debugger;
+
   }
   toggleCollapse() {
-    this.isCollapsed =!this.isCollapsed
+     this.isCollapsed =!this.isCollapsed
+    // this.isCollapse.emit(true);
   }
   logout(){
     this.appService.logout();

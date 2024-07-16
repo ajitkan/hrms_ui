@@ -1,15 +1,10 @@
-<!-- <app-header (toggleSidebar)="onToggleSidebar()"></app-header> -->
 <div class="wrapper">
- 
   <app-login *ngIf="!IsLogin " (isLogin)="IsLoggedin($event)"></app-login>
     <!-- Add the header component here -->
-   
- 
   <!-- ====================================
     ——— LEFT SIDEBAR WITH OUT FOOTER
   ===================================== -->
   <aside *ngIf="IsLogin" class="left-sidebar sidebar-dark" id="left-sidebar">
-   
     <div id="sidebar" class="sidebar sidebar-with-footer">
       <!-- Aplication Brand -->
       <div class="app-brand">
@@ -18,22 +13,19 @@
           <!-- <span class="brand-name">MONO</span> -->
         </a>
       </div>
-     
       <!-- begin sidebar scrollbar -->
       <!-- <app-header (toggleSidebar)="onToggleSidebar()" ></app-header> -->
       <div class="sidebar-left" data-simplebar style="height: 100%;">
         <!-- sidebar menu -->
-     
         <ul class="nav sidebar-inner" id="sidebar-menu">
           <li>
-            <a class="sidenav-item-link" routerLink="/home">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/home')">
               <i class="mdi mdi-briefcase-account-outline"></i>
               <span class="nav-text">Business Dashboard</span>
             </a>
           </li>
- 
           <li>
-            <a class="sidenav-item-link" href="/Admin">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/Admin')">
               <i class="mdi mdi-chart-line"></i>
               <span class="nav-text">Analytics Dashboard</span>
             </a>
@@ -57,7 +49,19 @@
               <li>
                 <a class="sidenav-item-link" routerLink="/employeeList">
                   <i class="mdi mdi-wechat"></i>
-                  <span class="nav-text">List of Employees</span>
+                  <span class="nav-text">List of Onboard Employees</span>
+                </a>
+              </li>
+              <li>
+                <a class="sidenav-item-link" routerLink="/exitoffboard">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Employee Off Boarding</span>
+                </a>
+              </li>
+              <li>
+                <a class="sidenav-item-link" routerLink="/adminexitoffboard">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Admin Employee Off Boarding</span>
                 </a>
               </li>
  
@@ -102,18 +106,51 @@
                   <span class="nav-text">Nomination Details</span>
                 </a>
               </li>
- 
               <li>
-                <a class="sidenav-item-link" routerLink="emp-education-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Education Details</span>
+                <a class="sidenav-item-link" routerLink="/create-employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Employee Creation</span>
+                </a>
+              </li>
+             <li>
+                <a class="sidenav-item-link" routerLink="/import-employee">
+                  <i class="mdi mdi-wechat"></i>
+                  <span class="nav-text">Import Employee</span>
+                </a>
+              </li>
+           </div>
+          </ul>
+
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/employeeData')">
+              <span class="nav-text">MyProfile</span>
+            </a>
+          </li>
+
+          <!-- Recruitement Section -->
+        <!-- masters start -->
+          <li class="section-title sidenav-item-link">
+            <a class="sidenav-item-link" (click)="toggleCollapse('Master')" href="javascript:void(0)"
+              data-toggle="collapse" data-target="#Master">
+              <!-- <i class="mdi mdi-email"></i> -->
+              <span class="nav-text">Masters</span>
+              <!-- <b class="caret"></b> -->
+              <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['Master'], 'rotate-right': collapsedStates['Master']}"></b>
+            </a>
+          </li>
+          <ul id="Master" class="collapse" [ngClass]="{'collapse': collapsedStates['Master']}"
+            data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <a class="sidenav-item-link" routerLink="company-master">
+                  <span class="nav-text">Company</span>
                 </a>
               </li>
  
               <li>
-                <a class="sidenav-item-link" routerLink="emp-bank-details">
-                  <i class="mdi mdi-calendar-check"></i>
-                  <span class="nav-text">Bank Details</span>
+                <a class="sidenav-item-link" routerLink="badge.html">
+                  <span class="nav-text">Company Type</span>
                 </a>
               </li>
             </div>
@@ -146,10 +183,10 @@
               </li>
             </div>
           </ul>  
-    <!-- </div>
-  </ul> -->
+        </ul>
  
-          <!-- Employee Data Management -->
+  <!-- Recruitement Section -->
+      <!-- Employee Data Management -->
           <!-- App Section -->
           <li class="section-title sidenav-item-link">
             <a class="sidenav-item-link" (click)="toggleCollapse('appSection')" href="javascript:void(0)"
@@ -224,16 +261,16 @@
           </ul>
           <!-- App Section -->
           <!-- Recruitement Section -->
-          <!-- <li class="section-title sidenav-item-link">
+         <!-- <li class="section-title sidenav-item-link">
             <a class="sidenav-item-link" (click)="toggleCollapse('RMSection')" href="javascript:void(0)"
               data-toggle="collapse" data-target="#RMSection">
               <span class="nav-text">Recruiter Management</span>
-              <b class="caret"></b>
+              <b class="caret"
+                [ngClass]="{'rotate-down': !collapsedStates['RMSection'], 'rotate-right': collapsedStates['RMSection']}"></b>
             </a>
           </li>
           <ul id="RMSection" class="collapse" [ngClass]="{'collapse': collapsedStates['RMSection']}" id="RMSection"
             data-parent="#sidebar-menu">
-         
             <div class="sub-menu">
               <li>
                 <a class="sidenav-item-link" routerLink="jobpost">
@@ -252,8 +289,7 @@
                   <span class="nav-text">Job Interview</span>
                 </a>
               </li>
- 
-              <li>
+               <li>
                 <a class="sidenav-item-link" routerLink="breadcrumb.html">
                   <span class="nav-text">CMS</span>
                 </a>
@@ -295,8 +331,7 @@
               </li>
             </div>
           </ul>
- 
- 
+
           <!-- Recruitement Section -->
 <!-- payroll start-->
 <li class="section-title sidenav-item-link">
@@ -317,12 +352,9 @@
         <span class="nav-text">Salary Calculator</span>
       </a>
     </li>
- 
- 
   </div>
 </ul>
 <!-- payroll end -->
- 
           <!-- <li class="has-sub">
             <a class="sidenav-item-link" (click)="toggleCollapse('charts')" href="javascript:void(0)" data-toggle="collapse" data-target="#charts"
                aria-controls="charts">
@@ -401,11 +433,7 @@
               </li>
             </div>
           </ul>
- 
-          <li class="section-title" style="display: none;">
-            <i class="mdi mdi-book"></i> Pages
-          </li>
- 
+
           <li class="has-sub">
             <a class="sidenav-item-link" (click)="toggleCollapse('users')" href="javascript:void(0)"
               data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="users">
@@ -532,13 +560,9 @@
               </div>
             </ul>
           </li> -->
- 
-          <li class="section-title" style="display: none;">
-            <i class="mdi mdi-file-document"></i> Documentation
-          </li>
- 
+
           <li>
-            <a class="sidenav-item-link" href="getting-started.html">
+            <a class="sidenav-item-link" (click)="setAllCollapsedStatesToFalseAndRedirectedRoute('/')">
               <i class="mdi mdi-airplane"></i>
               <span class="nav-text">Getting Started</span>
             </a>
@@ -598,13 +622,15 @@
       </div>
     </div>
   </aside>
- 
+
   <!-- ====================================
 ——— PAGE WRAPPER
 ===================================== -->
   <div *ngIf="IsLogin " class="page-wrapper">
     <!-- Header -->
+    <!-- <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="collapseSideMenu()"></app-header> -->
     <app-header (isLogin)="IsLoggedin($event)"></app-header>
+
     <!-- Content Area -->
     <router-outlet></router-outlet>
     <!-- Footer -->
