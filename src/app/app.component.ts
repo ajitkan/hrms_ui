@@ -38,7 +38,7 @@ export class AppComponent {
     otherpage:true,
     customization:true,
     email:true,
-    Payroll:true
+    Payroll:true,
     TimeSection:true
   };
 

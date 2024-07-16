@@ -1,4 +1,4 @@
-<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
+<!-- <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
   <div class="d-flex flex-column justify-content-between">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-10">
@@ -14,8 +14,7 @@
           </div>
           <div class="card-body px-5 pb-5 pt-0">
 
-            <!-- <h4 class="text-dark mb-6 text-center">Sign in for free</h4> -->
-
+         
             <form [formGroup]="loginForm">
               <div class="row">
                 <div class="form-group col-md-12 mb-4"
@@ -55,7 +54,7 @@
                     <button type="submit" (click)="login()" class="btn btn-primary btn-pill mb-4">Sign In</button>
                   </div>
 
-                  <!-- <button type="submit" (click)="login()" class="btn btn-primary btn-pill mb-4">Sign In</button> -->
+                 
 
                   <p>Don't have an account yet ?
                     <a class="text-blue" href="sign-up.html">Sign Up</a>
@@ -68,4 +67,544 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<!-- 
+<div class="container text-center">
+  <div class="pull-right login-container whitebg bs-reset" id="login-box">
+      <div class="login-content">
+          <div class="loginPanelHeader">
+              <div class="form-container">
+                  <div class="text-center">
+                      <span class="zingHRLogo"></span>
+                  </div>
+                  
+                  <div class="login-section text-center clearfix CredentialsDiv">
+                      <h2>Login</h2>
+                      <div class="form-group">
+                          <input class="form-control" id="txtCompanyCode" tabindex="1" maxlength="30" placeholder="Company Code" required />
+                      </div>
+                      <div class="form-group">
+                          <input class="form-control" id="txtEmpCode" tabindex="2" maxlength="15" placeholder="Employee Code" required />
+                      </div>
+                      <div class="form-group">
+                          <div class="input-group">
+                              <input class="form-control" type="password" id="txtPassword" tabindex="3" maxlength="24" placeholder="Password" required />
+                              <div class="input-group-append">
+                                  <span class="input-group-text showpass"><i class="fa fa-eye-slash"></i></span>
+                              </div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-block">Login</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+<!-- <div class="container text-center">
+  <div class="login-container whitebg bs-reset float-right" id="login-box">
+    <div class="login-content">
+      <div class="loginPanelHeader">
+        <div class="form-container">
+          <div class="text-center">
+           
+            <span class="Logo">Your Logo Here</span>
+          </div>
+
+          <div class="login-section text-center clearfix CredentialsDiv">
+            <h2>Login</h2>
+            <div class="form-group">
+              <input class="form-control" id="txtCompanyCode" tabindex="1" maxlength="30" placeholder="Company Code" required />
+            </div>
+            <div class="form-group">
+              <input class="form-control" id="txtEmpCode" tabindex="2" maxlength="15" placeholder="Employee Code" required />
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" type="password" id="txtPassword" tabindex="3" maxlength="24" placeholder="Password" required />
+                <div class="input-group-append">
+                  <span class="input-group-text showpass">
+                    Placeholder for eye icon toggle logic
+                    <i class="fa" [ngClass]="{'fa-eye': passwordVisible, 'fa-eye-slash': !passwordVisible}"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Remember Me</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+            <div class="form-group text-center">
+              <button type="button" class="btn btn-outline-secondary">Check In</button>
+              <span class="ml-2 mr-2"></span>
+              <button type="button" class="btn btn-outline-secondary">Check Out</button>
+            </div>
+            <div class="form-group text-center">
+              <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(content)">Forgot Password?</button>
+              <span class="ml-2 mr-2"></span>
+              <a href="#" class="btn btn-sm btn-link">Unlock Account</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeForgotPasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitForgotPasswordForm()">
+      <div class="form-group">
+        <label for="txtForgotEmail">Enter your email</label>
+        <input type="email" class="form-control" id="txtForgotEmail" [(ngModel)]="email" name="email" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</ng-template> -->
+
+
+<!-- <div class="container text-center">
+  <div class="login-container whitebg bs-reset float-right" id="login-box">
+    <div class="login-content">
+      <div class="loginPanelHeader">
+        <div class="form-container">
+          <div class="text-center">
+            <span class="Logo">Your Logo Here</span>
+          </div>
+
+          <div class="login-section text-center clearfix CredentialsDiv">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
+                  required />
+                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger">
+                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                  <div *ngIf="f['companyCode'].errors?.['maxlength']">Company Code cannot exceed 30 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input formControlName="empCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
+                  required />
+                <div *ngIf="f['empCode'].touched && f['empCode'].invalid" class="text-danger">
+                  <div *ngIf="f['empCode'].errors?.['required']">Employee Code is required.</div>
+                  <div *ngIf="f['empCode'].errors?.['maxlength']">Employee Code cannot exceed 15 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
+                    id="txtPassword" placeholder="Password" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                  <div *ngIf="f['password'].errors?.['maxlength']">Password cannot exceed 24 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <input formControlName="rememberMe" type="checkbox" class="form-check-input" id="rememberMe" />
+                  <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" >Login</button>
+              
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-secondary">Check In</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-outline-secondary">Check Out</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(content)">Forgot
+                  Password?</button>
+                <span class="ml-2 mr-2"></span>
+                <a href="#" class="btn btn-sm btn-link">Unlock Account</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeForgotPasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitForgotPasswordForm()">
+      <div class="form-group">
+        <label for="txtForgotEmail">Enter your email</label>
+        <input type="email" class="form-control" id="txtForgotEmail" [(ngModel)]="email" name="email" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</ng-template> -->
+
+
+<!-- <div class="container text-center">
+  <div class="login-container whitebg bs-reset float-right" id="login-box">
+    <div class="login-content">
+      <div class="loginPanelHeader">
+        <div class="form-container">
+          <div class="text-center">
+            <span class="Logo">Your Logo Here</span>
+          </div>
+
+          <div class="login-section text-center clearfix CredentialsDiv">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code" required />
+                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                  <div *ngIf="f['companyCode'].errors?.['maxlength']">Company Code cannot exceed 30 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input formControlName="empCode" class="form-control" id="txtEmpCode" placeholder="Employee Code" required />
+                <div *ngIf="f['empCode'].touched && f['empCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['empCode'].errors?.['required']">Employee Code is required.</div>
+                  <div *ngIf="f['empCode'].errors?.['maxlength']">Employee Code cannot exceed 15 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'" id="txtPassword" placeholder="Password" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                  <div *ngIf="f['password'].errors?.['maxlength']">Password cannot exceed 24 characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <input formControlName="rememberMe" type="checkbox" class="form-check-input" id="rememberMe" />
+                  <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-secondary">Check In</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-outline-secondary">Check Out</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(content)">Forgot Password?</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(unlockContent)">Unlock Account</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container text-center">
+  <div class="login-container whitebg bs-reset float-right" id="login-box">
+    <div class="login-content">
+      <div class="loginPanelHeader">
+        <div class="form-container">
+          <div class="text-center">
+            <span class="Logo">Your Logo Here</span>
+          </div>
+
+          <div class="login-section text-center clearfix CredentialsDiv">
+            <h2>Login</h2>
+          
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code" required />
+                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                  <div *ngIf="f['companyCode'].errors?.['pattern']">Company Code cannot contain special characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input formControlName="empCode" class="form-control" id="txtEmpCode" placeholder="Employee Code" required />
+                <div *ngIf="f['empCode'].touched && f['empCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['empCode'].errors?.['required']">Employee Code is required.</div>
+                  <div *ngIf="f['empCode'].errors?.['pattern']">Employee Code cannot contain special characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'" id="txtPassword" placeholder="Password" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                </div>
+              </div>
+            
+        
+               {{ captchaText }}
+               <div>
+                <label for="userInput">Enter CAPTCHA Code:</label>
+                <input type="text" id="userInput" name="userInput" [(ngModel)]="userInput">
+                <button (click)="verifyCaptcha()">Verify CAPTCHA</button>
+                <p *ngIf="isVerificationAttempted && !isCaptchaValid && userInput !== ''" style="color: red;">Incorrect CAPTCHA code. Please try again.</p>
+              </div>
+              
+              
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-secondary">Check In</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-outline-secondary">Check Out</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(content)">Forgot Password?</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(unlockContent)">Unlock Account</button>
+               
+              </div>
+              <span class="ml-2 mr-2"></span>
+              <button type="button" class="btn btn-sm btn-link" (click)="openChangePasswordModal(changePasswordContent)">Change Password</button>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container text-center">
+  <div class="login-container whitebg bs-reset float-right" id="login-box">
+    <div class="login-content">
+      <div class="loginPanelHeader">
+        <div class="form-container">
+          <div class="text-center">
+            <span class="Logo">Your Logo Here</span>
+          </div>
+
+          <div class="login-section text-center clearfix CredentialsDiv">
+            <h2>Login</h2>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
+                  required />
+                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                  <div *ngIf="f['companyCode'].errors?.['pattern']">Company Code cannot contain special characters.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input formControlName="empCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
+                  required />
+                <div *ngIf="f['empCode'].touched && f['empCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['empCode'].errors?.['required']">Employee Code is required.</div>
+                  <div *ngIf="f['empCode'].errors?.['pattern']">Employee Code cannot contain special characters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
+                    id="txtPassword" placeholder="Password" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                </div>
+              </div>
+
+              <!-- CAPTCHA Section -->
+              <div class="form-group text-center">
+                <div class="d-flex justify-content-between align-items-center">
+                  <canvas #captchaCanvas id="captchaCanvas" width="200" height="50"></canvas>
+                  <button type="button" class="btn btn-secondary ml-2" (click)="generateCaptcha()">
+                    <i class="fa fa-refresh"></i>
+                  </button>
+                </div>
+
+
+                <div class="input-group">
+                  <input type="text" placeholder="Enter CAPTCHA Code" id="userInput" name="userInput"
+                    class="form-control" [(ngModel)]="userInput">
+                  <button type="button" class="btn btn-primary ml-2" (click)="verifyCaptcha()">
+                    <i class="fa fa-check"></i>
+                  </button>
+                </div>
+
+                <p *ngIf="isVerificationAttempted && isCaptchaValid && userInput !== ''" style="color: green;">
+                  <i class="fa fa-check-circle"></i> CAPTCHA verified successfully!
+                </p>
+                <p *ngIf="isVerificationAttempted && !isCaptchaValid && userInput !== ''" style="color: red;">
+                  <i class="fa fa-times-circle"></i> Incorrect CAPTCHA code. Please try again.
+                </p>
+              </div>
+
+
+
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="loginForm.invalid || !isCaptchaValid">Login</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-secondary">Check In</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-outline-secondary">Check Out</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(content)">Forgot
+                  Password?</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(unlockContent)">Unlock
+                  Account</button>
+              </div>
+              <span class="ml-2 mr-2"></span>
+              <button type="button" class="btn btn-sm btn-link"
+                (click)="openChangePasswordModal(changePasswordContent)">Change Password</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Forgot Password Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeForgotPasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="submitForgotPasswordForm()">
+      <div class="form-group">
+        <label for="txtForgotEmail">Enter your email</label>
+        <input type="email" class="form-control" id="txtForgotEmail" formControlName="email" required>
+        <div *ngIf="fp['email'].touched && fp['email'].invalid" class="text-danger">
+          <div *ngIf="fp['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="fp['email'].errors?.['email']">Invalid email format.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Unlock Account Modal -->
+<ng-template #unlockContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Unlock Account</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeUnlockAccountModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="unlockAccountForm" (ngSubmit)="submitUnlockAccountForm()">
+      <div class="form-group">
+        <label for="txtJoiningDate">Joining Date</label>
+        <input type="date" class="form-control" id="txtJoiningDate" formControlName="joiningDate" required>
+        <div *ngIf="ua['joiningDate'].touched && ua['joiningDate'].invalid" class="text-danger">
+          <div *ngIf="ua['joiningDate'].errors?.['required']">Joining Date is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="txtDateOfBirth">Date of Birth</label>
+        <input type="date" class="form-control" id="txtDateOfBirth" formControlName="dateOfBirth" required>
+        <div *ngIf="ua['dateOfBirth'].touched && ua['dateOfBirth'].invalid" class="text-danger">
+          <div *ngIf="ua['dateOfBirth'].errors?.['required']">Date of Birth is required.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Change Password Modal -->
+<ng-template #changePasswordContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeChangePasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePasswordForm()">
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control" required>
+        <div *ngIf="cp['currentPassword'].touched && cp['currentPassword'].invalid" class="text-danger">
+          Current Password is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" formControlName="newPassword" class="form-control" required>
+        <div *ngIf="cp['newPassword'].touched && cp['newPassword'].invalid" class="text-danger">
+          New Password is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmNewPassword">Confirm New Password</label>
+        <input type="password" id="confirmNewPassword" formControlName="confirmNewPassword" class="form-control"
+          required>
+        <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].invalid" class="text-danger">
+          Confirm New Password is required.
+        </div>
+        <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].value !== cp['newPassword'].value"
+          class="text-danger">
+          Passwords do not match.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
+  </div>
+</ng-template>

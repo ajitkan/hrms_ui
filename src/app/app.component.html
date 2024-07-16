@@ -1,6 +1,6 @@
 
 <!-- <app-header (toggleSidebar)="onToggleSidebar()"></app-header> -->
-<div class="wrapper">
+<div class="container">
  
   <app-login *ngIf="!IsLogin " (isLogin)="IsLoggedin($event)"></app-login>
     <!-- Add the header component here -->
@@ -147,8 +147,8 @@
               </li>
             </div>
           </ul>  
-    </div>
-  </ul>
+    <!-- </div>
+  </ul> -->
  
           <!-- Employee Data Management -->
           <!-- App Section -->
@@ -318,7 +318,11 @@
         <span class="nav-text">Salary Calculator</span>
       </a>
     </li>
-
+    <li>
+      <a class="sidenav-item-link" routerLink="salary-details">
+        <span class="nav-text">Salary Details</span>
+      </a>
+    </li>
 
   </div>
 </ul>

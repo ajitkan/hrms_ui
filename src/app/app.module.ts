@@ -38,6 +38,9 @@ import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent
+    PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
     AddAttendanceComponent,
@@ -66,6 +69,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     MyApplicationComponent,
     SalaryCalculatorComponent,
     MyTimesheetComponent,
+    SalaryDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    
     BsDatepickerModule.forRoot(),
     // ToastrModule.forRoot(),
     ToastrModule.forRoot({
@@ -83,14 +88,18 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     }),
     NgbModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule    
+    Ng2SearchPipeModule,
+    RecaptchaModule
+  
+       
   ],
   providers: [
               DatePipe,
-              CUSTOM_ELEMENTS_SCHEMA,
+              
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],
+  schemas :[CUSTOM_ELEMENTS_SCHEMA],          
   bootstrap: [AppComponent]
 })
 export class AppModule { }

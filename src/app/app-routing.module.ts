@@ -21,20 +21,23 @@ import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-det
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
-import { AppComponent, DashboardComponent } from './app.component';
-import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
+import { AppComponent} from './app.component';
+// import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
+import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path:'login',component:LoginComponent
   },
   {
     path:'home',component:DashboardComponent
   },
-  {path:'Admin',component:AdminDashboardComponent}
+  {path:'Admin',component:AdminDashboardComponent},
   {
     path:'login',component:LoginComponent,
     canActivate: [AuthGuard]
@@ -89,6 +92,10 @@ const routes: Routes = [
   },
   { 
     path: 'salary-calculator', component: SalaryCalculatorComponent
+  },
+  {
+    path: 'salary-details', component: SalaryDetailsComponent
+  },
   {
     path: 'my-timesheet', component: MyTimesheetComponent
   }

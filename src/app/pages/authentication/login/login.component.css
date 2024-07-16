@@ -1,4 +1,4 @@
-.show-password{
+/* .show-password{
     font-size:larger;
     position:absolute; 
     right: 20px; 
@@ -9,13 +9,109 @@
 
   .validation-message {
     position: absolute;
-    top: 100%; /* Position below the input field */
+    top: 100%; 
     right: 20px;
     color: red;
     font-size: 0.8rem;
-    display: none; /* Initially hide the message */
+    display: none; 
   }
   
   .input-error .validation-message {
-    display: block; /* Show the message when input has an error */
+    display: block; 
+  } */
+
+
+/* 
+  .login-container {
+    margin-top: 50px;
   }
+  
+  .login-content {
+    padding: 20px;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .float-right {
+    float: right;
+  }
+   */
+
+
+   /* .wrapper {
+    align-items: stretch;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: flex-end; 
+  }
+   */
+  .wrapper .login-container {
+    margin-top: 50px;
+    float: right; /* Ensure it floats to the right */
+  }
+  
+  .login-content {
+    padding: 20px;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .error-message {
+    text-align: left;
+  }
+  
+
+
+
+  /* Example styles */
