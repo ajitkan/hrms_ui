@@ -1,0 +1,35 @@
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Discription</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+       <ng-container  *ngIf="items.roles | async; let temps">
+        <tr *ngFor="let item of temps">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.active}}</td>
+            <td>{{item.createdAt|date:"dd/MM/yyyy HH:mm:ss "}}</td>
+          </tr>
+       </ng-container>
+     
+      
+      
+    </tbody>
+  </table>
+  <!-- <pagination [currentPage]="1" [itemsPerPage]="2" [totalItems]="6" (pageChanged)="pageChanged($event)"></pagination>
+    -->
+
+    <pagination [boundaryLinks]="false" 
+    [directionLinks]="true" 
+    [totalItems]="totalItems"
+    [itemsPerPage]="pageSize"
+    (pageChanged)="pageChanged($event)"></pagination>
+  <!-- {{items|async|json}} -->

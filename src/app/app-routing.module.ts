@@ -21,7 +21,7 @@ import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-det
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
-
+import { RoleMasterComponent } from './pages/master/role-master/role-master.component';
 import { AppComponent} from './app.component';
 import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
 import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
@@ -32,7 +32,6 @@ import { user } from './constant/constant';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
-
 
 const routes: Routes = [
   {
@@ -107,8 +106,10 @@ const routes: Routes = [
   { 
     path: 'my-application', component: MyApplicationComponent
   },
+  {
+    path:'roles',component:RoleMasterComponent
+  },
   { 
-
     path: 'exitoffboard', component: ExitoffboardComponent
   },
   {
@@ -122,7 +123,6 @@ const routes: Routes = [
   },
   {
     path: 'my-timesheet', component: MyTimesheetComponent
-
   }
 ];
 

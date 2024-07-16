@@ -36,7 +36,9 @@ import { CompanyMasterComponent } from './pages/master/company-master/company-ma
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
 import { JwtInterceptor } from './service/jwt.interceptor';
-
+import { RoleMasterComponent } from './pages/master/role-master/role-master.component';
+import { PaginationComponent } from './pages/common/pagination/pagination.component';
+import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
 import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
 import { AdminexitoffboardComponent } from './pages/adminexitoffboard/adminexitoffboard.component';
@@ -76,7 +78,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
-
+    RoleMasterComponent
     AdmincalenderComponent,
     ExitoffboardComponent,
     AdminexitoffboardComponent,
@@ -89,7 +91,6 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     // EmployeeDataManagementComponent,
     SalaryCalculatorComponent,
     MyTimesheetComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -107,13 +108,16 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     }),
     NgbModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule    
+    Ng2SearchPipeModule ,
+    PaginationModule
   ],
   providers: [
               DatePipe,
-              
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+            ],
+            schemas: [
+              CUSTOM_ELEMENTS_SCHEMA
             ],
   bootstrap: [AppComponent]
 })

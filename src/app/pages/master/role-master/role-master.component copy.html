@@ -1,0 +1,29 @@
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Discription</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+       <ng-container  *ngIf="items | async; let temps">
+        <tr *ngFor="let item of temps | paginate: { itemsPerPage: 3, currentPage: currentPage }">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.active}}</td>
+            <td>{{item.createdAt|date:"dd/MM/yyyy HH:mm:ss "}}</td>
+          </tr>
+       </ng-container>
+     
+      
+      
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+  <!-- {{items|async|json}} -->
