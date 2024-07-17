@@ -26,9 +26,10 @@ label {
         width: 102px;
         height: 43px;
         margin-left: 15px;
+        border-radius: 20px; 
 
   }
-
+  
   .leftmargin{
     margin-left: 15px;
   }

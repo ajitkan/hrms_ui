@@ -46,26 +46,29 @@ export class LoginComponent {
         "email":this.loginForm.controls['Email'].value,
         "password":this.loginForm.controls['Password'].value
       } 
-      // this.isLogin.emit(true);
-      this.appService.login(userPayload).pipe(first())
-      .subscribe({
-        next:  (res:any) => {
-          this.loading=false;
-          if (res != null && res != undefined) {         
-            this.toastr.success('Logged In Successfully');  
-            user.id = res.obj.id;          
-            this.isLogin.emit(true);
-          }
-          else{
-            this.toastr.error('Incorrect Username or Password!');
-          }
-        },
-        error: (error:any) =>{
-          this.toastr.error(error);
-        }})
+       this.isLogin.emit(true);
+       this.loading=false;
+      // this.appService.login(userPayload).pipe(first())
+      // .subscribe({
+      //   next:  (res:any) => {
+      //     this.loading=false;
+      //     if (res != null && res != undefined) {         
+      //       this.toastr.success('Logged In Successfully');  
+      //       user.id = res.obj.id;          
+      //       this.isLogin.emit(true);
+      //     }
+      //     else{
+      //       this.toastr.error('Incorrect Username or Password!');
+      //     }
+      //   },
+      //   error: (error:any) =>{
+      //     this.toastr.error(error);
+      //   }})
     }
     else{
       this.loginForm.markAllAsTouched();
+      this.isLogin.emit(true);
+      this.loading=false;
     }
   }
 }

@@ -4,11 +4,12 @@
 }
 .submitpermission
 {
-    width: 78px;
+    width: 100px;
     height: 40px;
     color: white;
     background-color: rgb(23, 155, 231);
     border-color: rgb(23, 155, 231) ;
+    border-radius: 20px;
 } 
 .table {
     border-collapse: separate;

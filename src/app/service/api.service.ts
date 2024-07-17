@@ -78,26 +78,19 @@ export class ApiService {
     const apiUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
     return this.http.get<any>(apiUrl);
   }
-
+  // Get Department Details
   GetDepartmentDetails(): Observable<any[]>{
-    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);
-}
+    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);    
+  }
 
-  // GetDepartmentDetails() {
+  GetSeparationEmployeeDetails(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetSeprationEmployeeDetails`);
+  }
+  // Get  Separation Employee Details 
+  // GetSeparationEmployeeDetails(): Observable<any[]>{
   //   debugger
-  //   return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetDepartmentDetails`)
-    
-  // }
-
-
-  //Login
-  // login(data: any): Observable<any> {
-
-  //   return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
-  //     localStorage.setItem('user', JSON.stringify(user));
-  //     return user;
-  //   }));
-  // }
+  //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
+  // } 
 
   login(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
