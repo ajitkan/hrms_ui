@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
@@ -13,98 +14,6 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
-  // @Output isLogin
-  // @Output() isLogin = new EventEmitter();
-
-  // loginForm !: FormGroup
-  // fieldTextType: boolean | undefined;
-
-  // rememberMe: boolean = false;
-  // passwordVisible: boolean = false; 
-  // passwordFieldType: string = 'password'; 
-
-  // ForgotPassword :boolean =false;
-  // showForgotPasswordForm: boolean = false;
-  // modalRef!: NgbModalRef ;
-  // email: string | undefined;
-
-  // toggleForgotPasswordForm() {
-  //   this.showForgotPasswordForm = !this.showForgotPasswordForm;
-  // }
-  //  togglePasswordVisibility() {
-  //   this.passwordVisible = !this.passwordVisible;
-  //   this.passwordFieldType = this.passwordVisible ? 'text' : 'password';
-  // }
-  // constructor(private formBuilder: FormBuilder,
-  //              private appService: ApiService,
-  //              private toastr : ToastrService,
-  //              private modalService :NgbModal
-  // ) { }
-
-  // ngOnInit(): void {
-  //   this.loginForm = this.formBuilder.group({
-  //     CompanyCode: ['', [Validators.required]],
-  //     Password: ['', [Validators.required]]
-  //   })
-
-  // }
-
-  // openForgotPasswordModal(content: any): void {
-  //   this.modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-  // }
-  // closeForgotPasswordModal(): void {
-  //   this.modalRef.close();
-  // }
-  // checkIn(){}
-  // checkOut(){}
-  // unlockAccount(){}
-  // forgotPassword(){}
-  // showForgotPasswordPopup(){}
-  // submitForgotPasswordForm(): void {
-  //   console.log('Email:', this.email);
-  //   this.closeForgotPasswordModal();
-  // }
-
-
-
-  // get f() {
-  //   return this.loginForm.controls;
-  // }
-
-  // toggleFieldTextType() {
-  //   this.fieldTextType = !this.fieldTextType;
-  // }
-
-  // login() {
-
-  //   if (this.loginForm.valid) {
-
-  //     const userPayload ={
-  //       "email":this.loginForm.controls['Email'].value,
-  //       "password":this.loginForm.controls['Password'].value
-  //     } 
-  //     // this.isLogin.emit(true);
-  //     this.appService.login(userPayload).pipe(first())
-  //     .subscribe({
-  //       next:  (res:any) => {
-  //         if (res != null && res != undefined) {         
-  //           this.toastr.success('Logged In Successfully');
-  //           this.isLogin.emit(true);
-  //         }
-  //         else{
-  //           this.toastr.error('Incorrect Username or Password!');
-  //         }
-  //       },
-  //       error: (error:any) =>{
-  //         this.toastr.error(error);
-  //       }})
-  //   }
-  //   else{
-  //     this.loginForm.markAllAsTouched();
-  //   }
-  // }
-
 
   loginForm!: FormGroup;
   modalRef!: NgbModalRef;
@@ -130,37 +39,44 @@ export class LoginComponent {
   @ViewChild('captchaCanvas', { static: false })
   captchaCanvas!: ElementRef<HTMLCanvasElement>;
 
+  @ViewChild('changePasswordContent')
+  changePasswordContent!: TemplateRef<any>;
+  modalPayload: any;
+
+  alertMessage: string | null = null;
+  alertType: 'success' | 'error' | 'info' | null = null;
+  alertTimeout:any;
+
+  // @Output() isLogin = new EventEmitter();
+  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[]}>();
   constructor(
     private fb: FormBuilder, 
     private modalService: NgbModal,
     private authService: AuthService,
-    private elRef: ElementRef,private renderer: Renderer2
+    private elRef: ElementRef,
+    private router: Router,
+    private toastr: ToastrService
   ) { 
     this.generateCaptcha(); 
   }
 
   ngOnInit(): void {
-    // this.loginForm = this.fb.group({
-    //   companyCode: ['', [Validators.required, Validators.maxLength(30)]],
-    //   empCode: ['', [Validators.required, Validators.maxLength(15)]],
-    //   password: ['', [Validators.required, Validators.maxLength(24)]],
-    //   rememberMe: [false]
-    // });
-
+  
     this.loginForm = this.fb.group({
-      companyCode: ['', [Validators.required, this.noSpecialCharsValidator()]],
-      empCode: ['', [Validators.required, this.noSpecialCharsValidator()]],
+      companyCode: ['', [Validators.required]],
+      employeeCode: ['', [Validators.required]],
       password: ['', [Validators.required]],
       rememberMe: [false]
     });
 
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      EmailID: ['', [Validators.required, Validators.email]],
+      MobileNo:['', [Validators.required]]
     });
 
     this.unlockAccountForm = this.fb.group({
-      joiningDate: ['', Validators.required],
-      dateOfBirth: ['', Validators.required]
+      dob: ['', Validators.required],
+      doj: ['', Validators.required]
     });
 
     this.changePasswordForm = this.fb.group({
@@ -207,7 +123,6 @@ export class LoginComponent {
     this.renderCaptcha();
 }
 
-
   renderCaptcha(): void {
     if (this.captchaCanvas && this.captchaCanvas.nativeElement) {
       const canvas = this.captchaCanvas.nativeElement;
@@ -224,7 +139,6 @@ export class LoginComponent {
       console.error('Canvas element not found or initialized');
     }
   }
-
   verifyCaptcha(): void {
     const userInputLower = this.userInput.trim().toLowerCase();
     const captchaTextLower = this.captchaText.toLowerCase();
@@ -239,34 +153,198 @@ export class LoginComponent {
     }
   }
   
-
   resolved(captchaResponse: any): void {
     this.captchaResponse = captchaResponse;
     this.captchaInvalid = !captchaResponse;
   }
+  // onSubmit() {
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
   
+  //   const payload = {
+  //     companyCode: this.loginForm.get('companyCode')?.value,
+  //     employeeCode: this.loginForm.get('employeeCode')?.value,
+  //     password: this.loginForm.get('password')?.value
+  //   };
+  
+  //   this.authService.login(payload.companyCode, payload.employeeCode, payload.password).pipe(first())
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         console.log('Login successful', res);
+  //         this.showAlertMessage('Login successful' , 'success')
+  //         localStorage.setItem('token', res.token);
+  //         this.isLogin.emit(true);
+          
+  //         if (res.user.firstLoggedIn === true) {
+         
+  //           const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });
+  //         } else {
+  //           this.router.navigate(['/home']);
+  //         }
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Login failed', error);
+  //       }
+  //     });
+  // }
+  
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
   onSubmit() {
     if (this.loginForm.invalid) {
+      this.showAlertMessage('Please fill in all required fields', 'error');
       return;
     }
 
-    const { companyCode, empCode, password } = this.loginForm.value;
-    this.authService.login(companyCode, empCode, password).subscribe(
-      response => {
-        console.log('Login successful', response);
-      },
-      error => {
-        console.error('Login failed', error);
-      }
-    );
-  }
+    const payload = {
+      companyCode: this.loginForm.get('companyCode')?.value,
+      employeeCode: this.loginForm.get('employeeCode')?.value,
+      password: this.loginForm.get('password')?.value
+    };
 
-    openForgotPasswordModal(content: any) {
-      this.modalService.open(content);
+    this.authService.login(payload.companyCode, payload.employeeCode, payload.password).pipe(first())
+      .subscribe({
+        next: (res: any) => {
+          console.log('Login successful', res);
+          this.showAlertMessage('Login successful', 'success');
+          localStorage.setItem('token', res.token);
+          // this.isLogin.emit(true);
+          this.isLogin.emit({isLoggedIn: true, screens: res.user.screens});
+
+          if (res.user.firstLoggedIn === true) {
+            const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });
+          } else {
+            this.router.navigate(['/home']);
+          }
+        },
+        error: (error: any) => {
+          console.error('Login failed', error);
+          this.showAlertMessage('Invalid company code, employee code, or password', 'error');
+        }
+      });
+  }
+    openForgotPasswordModal(loginForm:FormGroup , content: any) {
+      var payload = {
+        userName: this.loginForm.get('employeeCode')?.value, 
+        companyCode: this.loginForm.get('companyCode')?.value
+      };
+    
+      this.authService.forgotPassword(payload).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            if (res.code === 1) {
+              this.modalService.open(content);
+              console.log(res.message);
+
+            } else {
+              console.log(res.message);
+              this.showAlertMessage(res.message)
+            }
+          },
+          error: (error: any) => {
+            console.log(error.message);
+            this.showAlertMessage(error.message,'error')
+          }
+        });
     }
   
-    openUnlockAccountModal(content: any) {
-      this.modalService.open(content);
+    openUnlockAccountModal(loginForm: FormGroup, content: any) {
+      var payload = {
+        userName: this.loginForm.get('employeeCode')?.value, 
+        companyCode: this.loginForm.get('companyCode')?.value
+      };
+    
+      this.authService.unlockedUser(payload).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            if (res.code === 1) {
+              this.modalService.open(content);
+              console.log(res.message);
+              this.showAlertMessage(res.message,'success')
+            } else {
+              console.log(res.message);
+              this.showAlertMessage(res.message)
+            }
+          },
+          error: (error: any) => {
+            console.log(error.message);
+            this.showAlertMessage(error.message,'error')
+          }
+        });
+    }
+
+    submitUnlockAccountForm(){
+      var payload = {
+        userName: this.loginForm.get('employeeCode')?.value, 
+        companyCode: this.loginForm.get('companyCode')?.value,
+        dob:this.unlockAccountForm.get('dob')?.value,
+        doj:this.unlockAccountForm.get('doj')?.value
+      };
+    
+      this.authService.unlockedUser(payload).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            if (res.code === 1) {
+              // this.modalService.open(content);
+              console.log(res.message);
+              this.showAlertMessage('Account unlocked successfully', 'success'); 
+              this.modalService.dismissAll();
+            } else {
+              console.log(res.message);
+            this.showAlertMessage(res.message,"error")
+              this.modalService.dismissAll();
+            }
+          },
+          error: (error: any) => {
+            console.log(error.message);
+            this.showAlertMessage('Failed to unlock account', 'error')
+            this.modalService.dismissAll();
+          }
+        });
+    }
+    
+    submitForgotPasswordForm(content: TemplateRef<any>): void {
+
+      this.markFormGroupTouched(this.forgotPasswordForm);
+      if (this.forgotPasswordForm.invalid) {
+        this.showAlertMessage('please fill required field','error')
+        return;
+      }
+      var payload = {
+        userName: this.loginForm.get('employeeCode')?.value, 
+        companyCode: this.loginForm.get('companyCode')?.value,
+        EmailID:this.forgotPasswordForm.get('EmailID')?.value,
+        MobileNo:this.forgotPasswordForm.get('MobileNo')?.value
+      };
+    
+      this.authService.forgotPassword(payload).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            if (res.code === 1) {
+              console.log(res.message);
+              // this.toastr.success(' successfully', 'Success'); 
+              this.showAlertMessage(res.message, 'success');
+              this.modalService.dismissAll();
+            } else {
+              console.log(res.message);
+              this.modalService.dismissAll();
+              this.showAlertMessage(res.message, 'error');
+            }
+          },
+          error: (error: any) => {
+            console.log(error);
+            this.showAlertMessage('Failed to forgot password', 'error');
+            // this.toastr.error('Failed to forgot password', 'Error')
+            this.modalService.dismissAll();
+          }
+        });
     }
     openChangePasswordModal(content: TemplateRef<any>) {
       this.modalService.open(content, { centered: true });
@@ -279,14 +357,72 @@ export class LoginComponent {
       this.modalService.dismissAll();
     }
 
-  submitForgotPasswordForm(): void {
-    console.log('Email:', this.email);
-    this.closeForgotPasswordModal();
-  }
-  submitUnlockAccountForm(){}
   closeChangePasswordModal(){
     this.modalService.dismissAll();
   }
-  submitChangePasswordForm(){}
- 
+  submitChangePasswordForm() {
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
+  
+    const { currentPassword, newPassword, confirmNewPassword } = this.changePasswordForm.value;
+    const token = localStorage.getItem('token');
+    const companyCode = this.loginForm.get('companyCode')?.value;
+    const userName = this.loginForm.get('employeeCode')?.value;
+  
+    if (!token) {
+      console.error('No token found');
+      this.showAlertMessage('No token found' ,'error');
+      return;
+    }
+  
+    if (newPassword !== confirmNewPassword) {
+      console.log('New password and confirm new password must match.');
+      this.showAlertMessage('New password and confirm new password must match.' ,'error');
+      return;
+    }
+  
+    const payload = {
+      companyCode: companyCode,
+      userName: userName,
+      currentPassword: currentPassword,
+      newPassword: newPassword
+    };
+  
+    this.authService.changePassword(token, payload).pipe(first())
+      .subscribe({
+        next: (res: any) => {
+          console.log('Password change successful', res);
+          this.showAlertMessage('Password changed successfully', 'success');
+          this.modalService.dismissAll();
+          this.router.navigate(['/home']);
+        },
+        error: (error: any) => {
+          console.error('Password change failed', error);
+          this.showAlertMessage('Failed to change password', 'error');
+          this.modalService.dismissAll();
+        }
+      });
+  }
+  showAlertMessage(message: string, type?: 'success' | 'error'): void {
+    this.alertMessage = message;
+    this.alertType = type || 'info'; 
+
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+    //    this.alertTimeout = setTimeout(() => {
+    //   this.alertMessage = null;
+    //   this.alertType = null;
+    // }, 3000); 
+  }
+
+  dismissAlert(): void {
+    this.alertMessage = null;
+    this.alertType = null;
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+      this.alertTimeout = null;
+    }
+  }
 }

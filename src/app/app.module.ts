@@ -40,6 +40,7 @@ import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/sal
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     SalaryCalculatorComponent,
     MyTimesheetComponent,
     SalaryDetailsComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

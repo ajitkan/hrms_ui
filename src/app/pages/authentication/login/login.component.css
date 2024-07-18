@@ -87,6 +87,7 @@
   
   .form-group {
     margin-bottom: 15px;
+    margin-top: 16px;
   }
   
   .form-control {
@@ -115,3 +116,61 @@
 
 
   /* Example styles */
+
+  .ForgotPasswordAlert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+
+.alert {
+    font-size: 16px;
+    margin-top: 7px;
+    /* padding: 20px; */
+    /* margin: 20px; */
+    text-align: center;
+    width: 65%;
+    margin-left: 387px;
+}
+
+  /* .alert[_ngcontent-pen-c25] {
+    margin: 20px;
+    text-align: right;
+    padding: 20px; 
+    width: 45%;
+    float: right;
+    position: relative;
+} */
+
+  
+  /* .modal-body .alert {
+    width: auto;
+    max-width: 300px; 
+    margin: 0 auto; 
+    text-align: center; 
+  } */
+  /* .modal-body .alert {
+    width: 30%; 
+  }
+   */
+
+   .logo{
+    height: 60px;
+   }
+
+
+
+   .background-image {
+    background-image: url('src\assets\images\hrms--500x500.webp'); /* Adjust path accordingly */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 100%; /* Adjust height as per your design */
+    width: 50%; /* Adjust width as per your design */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
