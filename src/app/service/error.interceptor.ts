@@ -42,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 else if([500].includes(err.status)){
                     const error = err.error?.message || err.statusText;
                     console.error(err);
-                    this.accountService.logout();
+                    this.authService.logout();
                     return throwError(() => error);
                 }
                 else{
