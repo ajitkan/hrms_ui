@@ -1,27 +1,4 @@
-<!-- src/app/salary-calculator/salary-calculator.component.html -->
-<!-- <div class="form-container">
-    <h2>Salary Calculator</h2>
-    <form (ngSubmit)="calculateSalary()" class="salary-form">
-      <div class="form-group">
-        <label for="annualCTC">Enter Annual CTC:</label>
-        <input type="number" id="annualCTC" [(ngModel)]="request.annualCTC" name="annualCTC" required placeholder="e.g., 600000">
-      </div>
-      <button type="submit" class="btn">Calculate Salary</button>
-    </form>
-  </div> -->
 
-<!-- 
-  <div class="form-container">
-    <h2>Salary Calculator</h2>
-    <form (ngSubmit)="calculateSalary()" class="salary-form" #salaryForm="ngForm">
-      <div class="form-group">
-        <label for="annualCTC">Enter Annual CTC:</label>
-        <input type="number" id="annualCTC" [(ngModel)]="request.annualCTC" name="annualCTC"
-               required pattern="[0-9]+" placeholder="e.g., 600000">
-      </div>
-      <button type="submit" class="btn">Calculate Salary</button>
-    </form>
-  </div> -->
   <div class="form-container">
   <h2>Salary Calculator</h2>
   <p class="form-description" [style.text-align]="'center'" [style.color]="'gray'">  Enter your Annual CTC to calculate your salary breakdown.</p>
@@ -43,16 +20,51 @@
     </div>
     <button type="submit" class="btn">Calculate Salary</button>
   </form>
+</div>  
+
+ <div *ngIf="!result" class="result-container">
+  <h3 >Salary Structure</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:40%">Components</th>
+        <th>Monthly</th>
+        <th>Annually</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Basic Salary (50%)</td><td></td><td></td></tr>
+      <tr><td>HRA (25%)</td><td></td><td></td></tr>
+      <tr><td>Education Allowance</td><td></td><td></td></tr>
+      <tr><td>Leave Travelling Allowance (4.167%)</td><td></td><td></td></tr>
+      <tr><td>Telephone Allowance</td><td></td><td></td></tr>
+      <tr><td>Special Allowances</td><td></td><td></td></tr>
+      <tr class="gross-salary"><td>Gross Salary</td><td></td><td></td></tr>
+  
+      <tr class="deductions"><td colspan="3">Deductions</td></tr>
+      <tr><td>PF (12% of Basic)</td><td></td><td></td></tr>
+      <tr><td>ESI (0%)</td><td></td><td></td></tr>
+      <tr><td>Professional Tax</td><td></td><td></td></tr>
+      <tr class="total-deductions"><td>Total Deductions (PF+ESI+PT)</td><td></td><td></td></tr>
+  
+      <tr class="net-salary"><td>Net Salary (Gross - Total Deduction)</td><td></td><td></td></tr>
+        
+      <tr class="ctc-calculation"><td colspan="3">CTC Calculation</td></tr>
+      <tr><td>Employer PF (12% of Basic)</td><td></td><td></td></tr>
+      <tr><td>Medical Insurance</td><td></td><td></td></tr>
+      <tr><td>Term Plan</td><td></td><td></td></tr>
+    </tbody>
+  </table>
 </div>
 
-  
-  
-  <div *ngIf="result" class="result-container">
+
+
+  <div *ngIf="result"  class="result-container"> 
     <h3>Calculated Salary Structure</h3>
     <table>
       <thead>
         <tr>
-          <th>Components</th>
+          <th style="width:40%">Components</th>
           <th>Monthly</th>
           <th>Annually</th>
         </tr>
@@ -78,67 +90,24 @@
         <tr><td>Employer PF (12% of Basic)</td><td>{{ result.employerPFMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.employerPFYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
         <tr><td>Medical Insurance</td><td>{{ result.medInsMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.medInsYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
         <tr><td>Term Plan</td><td>{{ result.termPlanMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.termPlanYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-        <tr><td>Performance Bonus</td><td>{{ result.performanceBonusMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.performanceBonusYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-        <!-- <tr class="final-ctc"><td>Without Gratuity: CTC</td><td>{{ result.finalCTCMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.finalCTCYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr> -->
+
       </tbody>
     </table>
-  </div>
+
   
   <div *ngIf="error" class="error-container">
     <p>Error: {{ error }}</p>
   </div>
   
 
-<!-- src/app/salary-calculator/salary-calculator.component.html -->
-<!-- <div class="container">
-    <h2>Salary Calculator</h2>
-    <form (ngSubmit)="calculateSalary()">
-      <div class="form-group">
-        <label for="annualCTC">Annual CTC:</label>
-        <input type="number" id="annualCTC" [(ngModel)]="request.annualCTC" name="annualCTC" required>
-      </div>
-      <button type="submit" class="btn">Calculate Salary</button>
-    </form>
-  
-    <div *ngIf="result" class="salary-structure">
-      <h3>Calculated Salary Structure</h3>
-  
-      <table>
-        <thead>
-          <tr>
-            <th>Components</th>
-            <th>Monthly</th>
-            <th>Annually</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Basic Salary (50%)</td><td>{{ result.basicMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.basicYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>HRA (25%)</td><td>{{ result.hraMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.hraYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Education Allowance</td><td>{{ result.eduAllowanceMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.eduAllowanceYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Leave Travelling Allowance (4.167%)</td><td>{{ result.ltaMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.ltaYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Telephone Allowance</td><td>{{ result.telAllowanceMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.telAllowanceYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Special Allowances</td><td>{{ result.specialMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.specialYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr class="gross-salary"><td>Gross Salary</td><td>{{ result.grossCTCMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.grossCTC | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-  
-          <tr class="deductions"><td colspan="3">Deductions</td></tr>
-          <tr><td>PF (12% of Basic)</td><td>{{ result.pfMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.pfYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>ESI (0%)</td><td>-</td><td>-</td></tr>
-          <tr><td>Professional Tax</td><td>{{ result.ptMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.ptYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr class="total-deductions"><td>Total Deductions (PF+ESI+PT)</td><td>{{ (result.pfMonthly + result.ptMonthly) | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ (result.pfYearly + result.ptYearly) | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr class="net-salary"><td>Net Salary: (gross - total deduction)</td><td>{{ (result.grossCTCMonthly - (result.pfMonthly + result.ptMonthly)) | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ (result.grossCTC - (result.pfYearly + result.ptYearly)) | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-  
-          <tr class="ctc-calculation"><td colspan="3">CTC Calculation</td></tr>
-          <tr><td>Employer PF(12% of basic)</td><td>{{ result.employerPFMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.employerPFYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Medical Insurance</td><td>{{ result.medInsMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.medInsYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Term Plan</td><td>{{ result.termPlanMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.termPlanYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
-          <tr><td>Performance Bonus</td><td>{{ result.performanceBonusMonthly | currency:'INR':'symbol':'1.2-2' }}</td><td>{{ result.performanceBonusYearly | currency:'INR':'symbol':'1.2-2' }}</td></tr>
 
-        </tbody>
-      </table>
-    </div>
+
   
-    <div *ngIf="error">
-      <p class="error">Error: {{ error }}</p>
-    </div>
-  </div> -->
   
+
+
+
+
+
+
+ 
