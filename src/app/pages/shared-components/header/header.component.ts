@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,8 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; }>();
+  @Input() notificationCount:any;
+  @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[];notificationCount:any; }>();
  
  user:any;
  isCollapsed:boolean=false;
@@ -49,7 +50,7 @@ export class HeaderComponent {
           this.authService.clearSession();
           console.log('Navigating to login page...');
           // this.isLogin.emit(false); 
-          this.isLogin.emit({ isLoggedIn: false, screens: [] });
+          this.isLogin.emit({ isLoggedIn: false, screens: [],notificationCount:this.notificationCount  });
           this.router.navigate(['']).then(() => {
             console.log('Navigation successful!');
           }).catch((error) => {

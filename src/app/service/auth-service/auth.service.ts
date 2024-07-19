@@ -44,7 +44,7 @@ public get userValue() {
 
 
   logout(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('token')!);
     if (!token) {
       throw new Error('No token found');
     }

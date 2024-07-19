@@ -48,7 +48,7 @@ export class LoginComponent {
   alertTimeout:any;
 
   // @Output() isLogin = new EventEmitter();
-  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[]}>();
+  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[],notificationCount:any;}>();
   constructor(
     private fb: FormBuilder, 
     private modalService: NgbModal,
@@ -214,9 +214,9 @@ export class LoginComponent {
         next: (res: any) => {
           console.log('Login successful', res);
           this.showAlertMessage('Login successful', 'success');
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('token', JSON.stringify(res.token) as string);
           // this.isLogin.emit(true);
-          this.isLogin.emit({isLoggedIn: true, screens: res.user.screens});
+          this.isLogin.emit({isLoggedIn: true, screens: res.user.screens, notificationCount:res.user.notification});
 
           if (res.user.firstLoggedIn === true) {
             const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });

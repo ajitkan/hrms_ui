@@ -29,7 +29,7 @@
     </div>
   </aside>
   <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)"></app-header>
+    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   </div>
