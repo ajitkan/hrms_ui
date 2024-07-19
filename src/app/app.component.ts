@@ -104,6 +104,7 @@ export class AppComponent {
   screens: any[] = [];
 
   collapsedStates: { [key: string]: boolean } = {
+
     Master: true,
     RMSection: true,
     EDMSection: true,
@@ -145,9 +146,37 @@ export class AppComponent {
   get isSuperAdmin() {
     return this.userLogIn.role === Role.SuperAdmin;
   }
+/* sagarDev
+  IsLoggedin(status:any){
+    if(status){
+      this.IsLogin = true;
+      this.IsLogout = false;
+      localStorage.setItem('LoggedIn',this.IsLogin.toString());
+      this.router.navigate(['/']);
+    }
+    else{ 
+      this.IsLogin = false;
+      this.IsLogout = true;
+      localStorage.removeItem('LoggedIn');
+    }
+  }
+  toggleCollapse(menuItem: string) {
+    this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
+  }
+  collapseSideMenu(){
+    
+  }
+  setAllCollapsedStatesToFalseAndRedirectedRoute(redirectUrl:string) {
+    for (let key in this.collapsedStates) {
+      if (this.collapsedStates.hasOwnProperty(key)) {
+        this.collapsedStates[key] = true;
+      }
+    }
+    this.router.navigate([redirectUrl]);
+  }
+  
+ }*/
 }
-
-
 @Component({
   selector: 'app-dashboard',
   template: `<h1>Dashboard Component</h1>`

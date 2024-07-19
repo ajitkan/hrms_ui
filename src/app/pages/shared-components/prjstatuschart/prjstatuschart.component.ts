@@ -22,10 +22,10 @@ export class PrjstatuschartComponent implements OnInit {
   @ViewChild('pieChart', { static: true }) private chartContainer!: ElementRef;
 
   private data: PieData[] = [
-    { label: 'Section 1', value: 10, color: '#ff0000' }, // Red
-    { label: 'Section 2', value: 20, color: '#00ff00' }, // Green
-    { label: 'Section 3', value: 30, color: '#0000ff' }, // Blue
-    { label: 'Section 4', value: 40, color: '#ffff00' }  // Yellow
+    { label: 'Section 1', value: 10, color: '#923535' }, // Red
+    // { label: 'Section 2', value: 20, color: '#00ff00' },
+    { label: 'Section 3', value: 30, color: '#c2bdbd' }, // Blue
+    { label: 'Section 4', value: 40, color: '#38d4a5' }  // Yellow
    
   ];
 

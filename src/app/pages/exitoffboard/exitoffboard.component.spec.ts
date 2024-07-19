@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmployeeDataComponent } from './employee-list-data.component';
+import { ExitoffboardComponent } from './exitoffboard.component';
 
-describe('EmployeeDataComponent', () => {
-  let component: EmployeeDataComponent;
-  let fixture: ComponentFixture<EmployeeDataComponent>;
+describe('ExitoffboardComponent', () => {
+  let component: ExitoffboardComponent;
+  let fixture: ComponentFixture<ExitoffboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmployeeDataComponent ]
+      declarations: [ ExitoffboardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EmployeeDataComponent);
+    fixture = TestBed.createComponent(ExitoffboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

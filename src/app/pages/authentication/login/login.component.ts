@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
+import { user } from 'src/app/constant/constant';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth-service/auth.service';
 
@@ -14,7 +15,6 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   loginForm!: FormGroup;
   modalRef!: NgbModalRef;
   email!: string;

@@ -12,8 +12,6 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  // @Output() isLogin = new EventEmitter();
-  // @Output() isLogin = new EventEmitter<boolean>();
   @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; }>();
  
  user:any;
@@ -36,7 +34,8 @@ export class HeaderComponent {
     this.modalService.open(this.changePasswordModal, { centered: true }); // Open modal with centered option
   }
   toggleCollapse() {
-    this.isCollapsed =!this.isCollapsed
+     this.isCollapsed =!this.isCollapsed
+    // this.isCollapse.emit(true);
   }
   logoutRes: any;
 

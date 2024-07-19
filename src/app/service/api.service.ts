@@ -14,6 +14,8 @@ export class ApiService {
   private userSubject: BehaviorSubject<User>;  
   public user: Observable<User>;
   
+
+  apiUrlsepration!: 'https://localhost:44315/api'; 
   constructor(private http: HttpClient,
     private router: Router,
     private toastr : ToastrService) { 
@@ -23,6 +25,7 @@ export class ApiService {
     }
 
   public get userValue() {
+      this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
       return this.userSubject.value;
   }
 
@@ -76,17 +79,19 @@ export class ApiService {
     const apiUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
     return this.http.get<any>(apiUrl);
   }
+  // Get Department Details
+  GetDepartmentDetails(): Observable<any[]>{
+    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);    
+  }
 
-
-
-  //Login
-  // login(data: any): Observable<any> {
-
-  //   return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
-  //     localStorage.setItem('user', JSON.stringify(user));
-  //     return user;
-  //   }));
-  // }
+  GetSeparationEmployeeDetails(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetSeprationEmployeeDetails`);
+  }
+  // Get  Separation Employee Details 
+  // GetSeparationEmployeeDetails(): Observable<any[]>{
+  //   debugger
+  //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
+  // } 
 
 //   login(data: any): Observable<any> {
 //     return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
@@ -109,6 +114,8 @@ export class ApiService {
     return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
   }
 
+  // Get Department Clearance 
+ 
 
   updateAttendance(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)
