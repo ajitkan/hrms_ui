@@ -7,11 +7,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   
-  /* h2, h3 {
-    text-align: center;
-    color: #4A4A4A;
-    padding:10px;
-  } */
+ 
   h2, h3 {
     color: #333;
     padding: 10px;
@@ -80,11 +76,6 @@
     transform: scale(1.05);
   } 
   
- 
-  
-  
-  
-  
   .salary-structure {
     margin-top: 20px;
   }
@@ -123,149 +114,22 @@
   .error-container {
     color: red;
     text-align: center;
-    /* background-color: #FFD2D2;
-    border: 1px solid red; */
     border-radius: 6px;
     padding: 10px;
     margin-top: 20px;
   }
-
+.error-message{
+  color:red;
+} 
  
-  
-  
+
+/* 27/06/2024 umesh 
+
+--------------------------------------------------- */
+
+
+
+
 
   
 
-/* src/app/salary-calculator/salary-calculator.component.css */
-
-/* src/app/salary-calculator/salary-calculator.component.css */
-
-/* Base Styles */
-/* .container {
-    max-width: 600px;
-    margin: 20px auto;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .bold {
-    font-weight: bold;
-  }
-  
-  
-  .form-container, .result-container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-  }
-  
- 
-  h2, h3 {
-    color: #333;
-    padding: 10px;
-    margin: 0;
-    font-weight: bold;
-    text-align: center;
-  }
-  
- 
-  .salary-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: calc(100% - 24px);
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-  
-  .form-group input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-  }
-  
- 
-  .btn {
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    border-radius: 6px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
- 
-  .salary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .salary-table th, .salary-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .salary-table th {
-    background-color: #f0f0f0;
-    font-weight: bold;
-  }
-  
-  .salary-table td {
-    background-color: #fff;
-  }
-  
-  
-  .gross-salary, .net-salary, .final-ctc {
-    background-color: #f0f0f0;
-  }
-  
-  .deductions, .ctc-calculation {
-    background-color: #e9ecef;
-  }
-  
-  .error-container {
-    color: red;
-    text-align: center;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 6px;
-    padding: 12px;
-    margin-top: 20px;
-  }
-   */
-  

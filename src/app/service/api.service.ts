@@ -20,6 +20,7 @@ export class ApiService {
     private router: Router,
     private toastr : ToastrService) { 
       this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
+      
         this.user = this.userSubject.asObservable();
     }
 
@@ -92,22 +93,22 @@ export class ApiService {
   //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
   // } 
 
-  login(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
-      localStorage.setItem('user', JSON.stringify(user.obj));
-      return user;
-    }));
-  }
+//   login(data: any): Observable<any> {
+//     return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
+//       localStorage.setItem('user', JSON.stringify(user.obj));
+//       return user;
+//     }));
+//   }
 
-  logout() {
-    // remove user from local storage and set current user to null
-    // sessionStorage.removeItem('user');
-    sessionStorage.clear();
-    localStorage.clear();
-    this.toastr.success("LogOut Successfully...")
-    // isLogin.status = false;
-    this.router.navigate(['/login']);
-}
+//   logout() {
+//     // remove user from local storage and set current user to null
+//     // sessionStorage.removeItem('user');
+//     sessionStorage.clear();
+//     localStorage.clear();
+//     this.toastr.success("LogOut Successfully...")
+//     // isLogin.status = false;
+//     this.router.navigate(['/login']);
+// }
 
   getAttendance() {
     return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)

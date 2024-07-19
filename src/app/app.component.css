@@ -32,6 +32,7 @@ app-login{
   transform: rotate(90deg);
 }
 
+ /*  sagarDev  */
 /* CSS for the collapse/expand behavior */
 ul.collapse {
   max-height: 0;
@@ -47,4 +48,51 @@ ul.collapse.show {
 
 .section-title{
  margin-left: 30px;
+app-login{
+  width: 100%;
+}
+
+
+
+/* Ensure you add this CSS in your global styles.css or component-specific CSS */
+
+.left-sidebar {
+  background-color: #343a40;
+}
+
+.left-sidebar .nav-item {
+  margin: 0.5rem 0;
+}
+
+.left-sidebar .nav-link {
+  color: #adb5bd;
+  padding: 0.75rem 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.left-sidebar .nav-link:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.left-sidebar .nav-link .fas {
+  font-size: 1.25rem;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  background-color: #212529;
+}
+
+.sidebar-footer-content .d-flex li {
+  list-style: none;
+}
+
+.sidebar-footer-content .d-flex li a {
+  color: #adb5bd;
+  transition: color 0.3s;
+}
+
+.sidebar-footer-content .d-flex li a:hover {
+  color: #fff;
 }

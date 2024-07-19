@@ -3,11 +3,12 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { AuthService } from './auth-service/auth.service';
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private accountService: ApiService) { }
+    constructor(private accountService: ApiService,private authService:AuthService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError((err:any) => {
@@ -22,14 +23,14 @@ export class ErrorInterceptor implements HttpInterceptor {
             else if ([401].includes(err.status) && this.accountService.userValue) {
                 const error = "Session Expired Kindly LogIn again.....";
                 console.error(err);
-                this.accountService.logout();
+                this.authService.logout();
                 return throwError(() => error);
             }
             else {
                 if(err.message === "Http failure response for https://localhost:7181/api/login: 0 Unknown Error"){
                     const error = "Server Down Kindly try again later.....";
                     console.error(err);
-                    this.accountService.logout();
+                    this.authService.logout();
                     return throwError(() => error);
                 }
                 else if([404].includes(err.status)){

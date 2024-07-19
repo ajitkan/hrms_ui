@@ -49,6 +49,10 @@ import { NoDataFound } from './pages/shared-components/no-data-found.component';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
+import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
+
 
 
 @NgModule({
@@ -90,6 +94,8 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     SalaryCalculatorComponent,
     MyTimesheetComponent,
 
+    SalaryDetailsComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +106,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     FormsModule,
     CommonModule,
     HttpClientModule,
+    
     BsDatepickerModule.forRoot(),
     // ToastrModule.forRoot(),
     ToastrModule.forRoot({
@@ -108,7 +115,10 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
     }),
     NgbModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule    
+    Ng2SearchPipeModule,
+    RecaptchaModule
+  
+       
   ],
   providers: [
               DatePipe,
@@ -116,6 +126,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
             ],
+  schemas :[CUSTOM_ELEMENTS_SCHEMA],          
   bootstrap: [AppComponent]
 })
 export class AppModule { }
