@@ -16,8 +16,6 @@ export class SalaryCalculatorComponent {
 
   }
 
-
-
   calculateSalary(): void {
     if (!this.request.annualCTC) {
       this.error = 'Please enter Annual CTC.';
@@ -42,17 +40,6 @@ export class SalaryCalculatorComponent {
       }
     });
   }
-  // calculateSalary():void{
-  //   this.service.calculateSalary(this.request).subscribe({
-  //     next: (data) =>{
-  //       this.result = data;
-  //       this.error = undefined;
-  //     },
-  //     error:(err:any) => {
-  //       this.error=err.message;
-  //       this.result = undefined
-  //     }
-  //   })
-  // }
+
 
 }

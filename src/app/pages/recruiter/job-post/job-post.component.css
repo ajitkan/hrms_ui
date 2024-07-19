@@ -395,3 +395,8 @@ textarea.form-control {
     right: 10px; 
     z-index: 10000; 
 }
+
+
+.jobsPagination{
+    background-color: red;
+}

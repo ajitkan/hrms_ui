@@ -1,12 +1,68 @@
-.AdminExit{
+ .AdminExit{
     text-align: center;
     font-size: 30px;    
 }
 .submitpermission
 {
-    width: 78px;
+    width: 100px;
     height: 40px;
     color: white;
     background-color: rgb(23, 155, 231);
     border-color: rgb(23, 155, 231) ;
+    border-radius: 20px;
+    
+} 
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .table th {
+    background-color: rgb(198, 235, 250);
+    padding: 10px;
+    text-align: left;
+    color: rgb(10, 10, 10);
+    font-size: 14px;
+  }
+  .table th:first-child {
+    border-top-left-radius: 8px;
+  }
+  .table th:last-child {
+    border-top-right-radius: 8px;
+  }
+  .table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+   label {
+    display: block;
+    margin-bottom: 2px;
+    line-height: 20px;
+    margin: 10px;
+
+} 
+.form-control {
+  width: 100%; /* Full width */
+  max-width: 400px; /* Maximum width */
+  padding: 10px; /* Inner padding */
+  margin:  5px; /* Outer margin */
+  border: 1px solid #ddd; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  font-size: 14px; /* Font size */
+  font-family: Arial, sans-serif; /* Font family */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  margin-bottom: 0rem;
+}
+
+/* Add focus styles */
+.form-control:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a blue shadow on focus */
 }

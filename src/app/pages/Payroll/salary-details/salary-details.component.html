@@ -1,0 +1,97 @@
+
+
+
+<div class="container">
+    <h2>Statutory Detail</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Statutory Component</th>
+          <th>Membership</th>
+          <th>Id Number</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of statutoryDetails">
+          <td>{{ detail.component }}</td>
+          <td>{{ detail.membership }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>Financial Detail</h2>
+  
+    <div class="row" >
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="effectiveDate">Effective From:</label>
+          <input type="date" id="effectiveDate" class="form-control " [(ngModel)]="financialDetails.effectiveDate">
+        </div>
+        <div class="form-group">
+          <label for="revisedMonth">Revised Month:</label>
+          <select id="revisedMonth" class="form-control" [(ngModel)]="financialDetails.revisedMonth">
+            <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
+                    [value]="month">
+              {{ month }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="profession">Profession:</label>
+          <select id="profession" class="form-control" [(ngModel)]="financialDetails.profession">
+            <option value="Salaried">Salaried</option>
+            <option value="Contractual">Contractual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="currentAnnualCTC">Current Annual CTC:</label>
+          <input type="number" id="currentAnnualCTC" class="form-control" [(ngModel)]="financialDetails.currentAnnualCTC">
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="onCompanyPayroll">On Company Payroll:</label>
+          <input type="checkbox" id="onCompanyPayroll" class="form-check" [(ngModel)]="financialDetails.onCompanyPayroll">
+        </div>
+        <div class="form-group">
+          <label for="proposedAnnualCTC">Proposed Annual CTC:</label>
+          <input type="number" id="proposedAnnualCTC" class="form-control" [(ngModel)]="financialDetails.proposedAnnualCTC">
+        </div>
+        <div class="form-group">
+          <label for="currentAnnualGross">Current Annual Gross:</label>
+          <input type="number" id="currentAnnualGross" class="form-control" [(ngModel)]="financialDetails.currentAnnualGross">
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Revision Type:</label>
+          <div class="form-check">
+            <input type="radio" id="revisionTypePromotion" class="form-check-input" value="Promotion" [(ngModel)]="financialDetails.revisionType">
+            <label for="revisionTypePromotion" class="form-check-label">Promotion</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="revisionTypeTransfer" class="form-check-input" value="Transfer" [(ngModel)]="financialDetails.revisionType">
+            <label for="revisionTypeTransfer" class="form-check-label">Transfer</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="revisionTypeIncrement" class="form-check-input" value="Increment" [(ngModel)]="financialDetails.revisionType">
+            <label for="revisionTypeIncrement" class="form-check-label">Increment</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="proposedAnnualGross">Proposed Annual Gross:</label>
+          <input type="number" id="proposedAnnualGross" class="form-control" [(ngModel)]="financialDetails.proposedAnnualGross">
+        </div>
+      </div>
+    </div>
+  
+    <button class="btn btn-primary" (click)="calculate()">Calculate</button>
+  </div>
+  

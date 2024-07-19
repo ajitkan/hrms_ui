@@ -14,10 +14,13 @@ export class ApiService {
   private userSubject: BehaviorSubject<User>;  
   public user: Observable<User>;
   
+
+  apiUrlsepration!: 'https://localhost:44315/api'; 
   constructor(private http: HttpClient,
     private router: Router,
     private toastr : ToastrService) { 
       this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token')!));
+      
         this.user = this.userSubject.asObservable();
     }
 
@@ -76,43 +79,43 @@ export class ApiService {
     const apiUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
     return this.http.get<any>(apiUrl);
   }
-
-
-
-  //Login
-  // login(data: any): Observable<any> {
-
-  //   return this.http.post<any>(`${environment.apiUrl}/Authenticate/login`, data).pipe(map(user => {
-  //     localStorage.setItem('user', JSON.stringify(user));
-  //     return user;
-  //   }));
-  // }
-
-  login(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
-      localStorage.setItem('user', JSON.stringify(user.obj));
-      return user;
-    }));
+  // Get Department Details
+  GetDepartmentDetails(): Observable<any[]>{
+    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);    
   }
 
-  logout() {
-    // remove user from local storage and set current user to null
-    // sessionStorage.removeItem('user');
-    sessionStorage.clear();
-    localStorage.clear();
-    this.toastr.success("LogOut Successfully...")
-    // isLogin.status = false;
-    this.router.navigate(['/login']);
-}
+  GetSeparationEmployeeDetails(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrlsepration}/Separation/GetSeprationEmployeeDetails`);
+  }
+  // Get  Separation Employee Details 
+  // GetSeparationEmployeeDetails(): Observable<any[]>{
+  //   debugger
+  //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
+  // } 
+
+//   login(data: any): Observable<any> {
+//     return this.http.post<any>(`${environment.apiUrl1}/Login`, data).pipe(map(user => {
+//       localStorage.setItem('user', JSON.stringify(user.obj));
+//       return user;
+//     }));
+//   }
+
+//   logout() {
+//     // remove user from local storage and set current user to null
+//     // sessionStorage.removeItem('user');
+//     sessionStorage.clear();
+//     localStorage.clear();
+//     this.toastr.success("LogOut Successfully...")
+//     // isLogin.status = false;
+//     this.router.navigate(['/login']);
+// }
 
   getAttendance() {
     return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
   }
 
   // Get Department Clearance 
-  GetDepartmentDetails() {
-    return this.http.get<any>(`${environment.apiUrl}/Separation/GetDepartmentDetails`)
-  }
+ 
 
   updateAttendance(data: any) {
     return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)

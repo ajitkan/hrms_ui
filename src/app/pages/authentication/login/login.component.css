@@ -1,4 +1,4 @@
-.show-password{
+/* .show-password{
     font-size:larger;
     position:absolute; 
     right: 20px; 
@@ -9,13 +9,168 @@
 
   .validation-message {
     position: absolute;
-    top: 100%; /* Position below the input field */
+    top: 100%; 
     right: 20px;
     color: red;
     font-size: 0.8rem;
-    display: none; /* Initially hide the message */
+    display: none; 
   }
   
   .input-error .validation-message {
-    display: block; /* Show the message when input has an error */
+    display: block; 
+  } */
+
+
+/* 
+  .login-container {
+    margin-top: 50px;
   }
+  
+  .login-content {
+    padding: 20px;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .float-right {
+    float: right;
+  }
+   */
+
+
+   /* .wrapper {
+    align-items: stretch;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: flex-end; 
+  }
+   */
+  .wrapper .login-container {
+    margin-top: 50px;
+    float: right; /* Ensure it floats to the right */
+  }
+  
+  .login-content {
+    padding: 20px;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    margin-top: 16px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .error-message {
+    text-align: left;
+  }
+  
+
+
+
+  /* Example styles */
+
+  .ForgotPasswordAlert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+
+.alert {
+    font-size: 16px;
+    margin-top: 7px;
+    /* padding: 20px; */
+    /* margin: 20px; */
+    text-align: center;
+    width: 65%;
+    margin-left: 387px;
+}
+
+  /* .alert[_ngcontent-pen-c25] {
+    margin: 20px;
+    text-align: right;
+    padding: 20px; 
+    width: 45%;
+    float: right;
+    position: relative;
+} */
+
+  
+  /* .modal-body .alert {
+    width: auto;
+    max-width: 300px; 
+    margin: 0 auto; 
+    text-align: center; 
+  } */
+  /* .modal-body .alert {
+    width: 30%; 
+  }
+   */
+
+   .logo{
+    height: 60px;
+   }
+
+
+
+   .background-image {
+    background-image: url('src\assets\images\hrms--500x500.webp'); /* Adjust path accordingly */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 100%; /* Adjust height as per your design */
+    width: 50%; /* Adjust width as per your design */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
