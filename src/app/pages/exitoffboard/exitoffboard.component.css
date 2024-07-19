@@ -9,7 +9,7 @@
 }
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     line-height: 0px;
 }
 
@@ -25,8 +25,10 @@ label {
         cursor: pointer;
         width: 102px;
         height: 43px;
-        margin-left: 15px;
+        float: right;
         border-radius: 20px; 
+        margin-right: 10px;
+
 
   }
   
@@ -38,3 +40,73 @@ label {
     width: 62%;
     height: 72px;
   } 
+
+  .Separationheader{
+    text-align: center;
+  }
+  .Separationheader h3{
+    margin-top: 25px;
+    color: rgb(9, 9, 99);
+  }
+
+  .subpoint{
+    font-size: 20px;
+    color: rgb(9, 9, 99);
+  }
+
+  .form-control {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Maximum width */
+    padding: 10px; /* Inner padding */
+    margin:  5px; /* Outer margin */
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    font-size: 14px; /* Font size */
+    font-family: Arial, sans-serif; /* Font family */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+    margin-bottom: 0rem;
+  }
+  
+  /* Add focus styles */
+  .form-control:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a blue shadow on focus */
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    height: calc(1.5em + .75rem + 2px); /* Match the height of the form-control class */
+  }
+  
+  #reason{
+    width: 250px; 
+    height: 40px;
+  }
+  .custom-select-arrow {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 24px;
+    padding-right: 35px;
+    position: relative;
+}
+
+.custom-select-arrow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    transform: translateY(-50%);
+}
+
+  
