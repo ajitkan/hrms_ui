@@ -1,15 +1,23 @@
-<div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
   {{ alertMessage }}
   <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
     <span aria-hidden="true">&times;</span>
   </button>
-</div>
+</div>  -->
 
 
-<div class="container text-center">
+<div *ngIf="loginForm.invalid || loginForm.valid" class="container text-center">
+  <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+    {{ alertMessage }}
+    <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
   <div class="login-container whitebg bs-reset float-right" id="login-box">
 
     <div class="background-image"> </div>
+
+    
 
     <div class="login-content">
       <div class="loginPanelHeader">
@@ -118,26 +126,28 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="alertMessage" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-      {{ alertMessage }}
-      <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div *ngIf="forgotPassAlertMessage!=null" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+      {{ forgotPassAlertMessage }}
+      <!-- <button type="button" class="close" aria-label="Close" (click)="dismissAlert()"> -->
+        <!-- <span aria-hidden="true">&times;</span>
+      </button> -->
     </div>
     <form [formGroup]="forgotPasswordForm" (ngSubmit)="submitForgotPasswordForm(changePasswordContent)">
       <div class="form-group">
         <label for="txtForgotEmail">Enter your email</label>
         <input type="email" class="form-control" id="txtForgotEmail" formControlName="EmailID" required>
         <div *ngIf="fp['EmailID'].touched && fp['EmailID'].invalid" class="text-danger">
-          <div *ngIf="fp['EmailID'].errors?.['required']">EmailID is required.</div>
+          <div *ngIf="fp['EmailID'].errors?.['required']">Email ID is required.</div>
           <div *ngIf="fp['EmailID'].errors?.['email']">Invalid email format.</div>
         </div>
         <div class="form-group">
           <label for="txtForgotEmail">Enter your Mobile No</label>
-          <input type="number" class="form-control" id="txtForgotMobileNo" formControlName="MobileNo" required>
+          <input type="text" class="form-control" id="txtForgotMobileNo" formControlName="MobileNo" maxlength="10"  pattern="^\d{10}$" required>
           <div *ngIf="fp['MobileNo'].touched && fp['MobileNo'].invalid" class="text-danger">
-            <div *ngIf="fp['MobileNo'].errors?.['required']">MobileNo is required.</div>
-            <div *ngIf="fp['MobileNo'].errors?.['MobileNo']">Invalid MobileNo format.</div>
+            <div *ngIf="fp['MobileNo'].errors?.['required']">Mobile No is required.</div>
+            <div *ngIf="fp['MobileNo'].errors?.['MobileNo']">Invalid Mobile No format.</div>
+            <div *ngIf="fp['MobileNo'].errors?.['pattern']">Invalid Mobile No format.</div>
+
           </div>
         </div>
       </div>
@@ -155,6 +165,12 @@
     </button>
   </div>
   <div class="modal-body">
+    <div *ngIf="forgotPassAlertMessage !=null" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+      {{ forgotPassAlertMessage }}
+      <!-- <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
     <form [formGroup]="unlockAccountForm" (ngSubmit)="submitUnlockAccountForm()">
       <div class="form-group">
         <label for="doj">Joining Date</label>
@@ -221,7 +237,7 @@
         </div>
         <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].value !== cp['newPassword'].value"
           class="text-danger">
-          New password and confirm new password must match.
+          Entered new password and confirm new password are not match.
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Change Password</button>

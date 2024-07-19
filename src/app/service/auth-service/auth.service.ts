@@ -17,7 +17,7 @@ export class AuthService {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
     this.user = this.userSubject.asObservable();
     
-}
+  }
 
 public get userValue() {
   return this.userSubject.value;
