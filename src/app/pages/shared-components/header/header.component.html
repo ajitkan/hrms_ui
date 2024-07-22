@@ -51,12 +51,11 @@
             </a>
           </li>
           <li class="custom-dropdown">
-            <button class="notify-toggler custom-dropdown-toggler">
+            <button class="notify-toggler custom-dropdown-toggler" (click)="toggleCollapse(true)"href="javascript:void(0)" data-target="#notificationDropdownMenu" data-toggle="Active">
               <i class="mdi mdi-bell-outline icon"></i>
               <span class="badge badge-xs rounded-circle">{{notificationCount}}</span>
             </button>
-            <div class="dropdown-notify">
-
+            <div class="dropdown-notify"  id="notificationDropdownMenu" [ngClass]="{'Active': isNotification}">
               <header>
                 <div class="nav nav-underline" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link active" id="all-tabs" data-toggle="tab" href="#all" role="tab"
@@ -311,7 +310,7 @@
           <!-- User Account -->
           <li class="dropdown user-menu">
             <button class="dropdown-toggle nav-link" (click)="toggleCollapse()" href="javascript:void(0)" data-target="#loginDropdownMenu" data-toggle="show">
-              
+             
               <img src="../assets/images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
               <span class="d-none d-lg-inline-block">{{user!=null && user.first_name!=null?user.first_name+" "+user.last_name:'' | uppercase}}</span>
             </button>

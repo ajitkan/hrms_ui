@@ -17,6 +17,8 @@ export class HeaderComponent {
  
  user:any;
  isCollapsed:boolean=false;
+ isNotification:boolean=false;
+
  @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
  userName:any;
  token:any;
@@ -34,8 +36,11 @@ export class HeaderComponent {
   openChangePasswordModal() {
     this.modalService.open(this.changePasswordModal, { centered: true }); // Open modal with centered option
   }
-  toggleCollapse() {
+  toggleCollapse(isNotification?:boolean) {
+    if(!isNotification)
      this.isCollapsed =!this.isCollapsed
+    else
+     this.isNotification =!this.isNotification
     // this.isCollapse.emit(true);
   }
   logoutRes: any;
