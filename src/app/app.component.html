@@ -7,7 +7,8 @@
         <ul class="nav flex-column">
           <li *ngFor="let screen of screens" class="nav-item">
             <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
-              <i class="fas fa-icon mr-2"></i> <!-- Replace 'fa-icon' with the actual icon class -->
+              <i class="fas fa-icon mr-2"></i> 
+              <!-- {{(screen.icon!=undefined)?.(screen.icon)}} -->
               <span class="nav-text">{{ screen.screenDisplayName }}</span>
             </a>
           </li>

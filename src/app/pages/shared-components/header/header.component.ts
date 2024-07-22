@@ -34,7 +34,7 @@ export class HeaderComponent {
     this.user = JSON.parse(localStorage.getItem("user")as string);
   }
   openChangePasswordModal() {
-    this.modalService.open(this.changePasswordModal, { centered: true }); // Open modal with centered option
+    this.modalService.open(this.changePasswordModal, { centered: true }); 
   }
   toggleCollapse(isNotification?:boolean) {
     if(!isNotification)

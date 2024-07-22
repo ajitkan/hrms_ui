@@ -47,6 +47,7 @@ export class ChangePasswordComponent {
 
   submitChangePasswordForm() {
     if (this.changePasswordForm.invalid) {
+      this.showAlertMessage('Please fill all required field','error')
       return;
     }
 
@@ -68,7 +69,7 @@ export class ChangePasswordComponent {
 
     if (this.changePasswordForm.value.newPassword !== this.changePasswordForm.value.confirmNewPassword) {
       console.log('New password and confirm new password must match.');
-      this.showAlertMessage('New password and confirm new password must match.', 'error');
+      this.showAlertMessage('Entered new password and confirm new password are not match.', 'error');
       return;
     }
 
@@ -84,16 +85,16 @@ export class ChangePasswordComponent {
         next: (res: any) => {
           console.log('Password change successful', res);
           this.showAlertMessage('Password changed successfully', 'success');
-          setTimeout(() => {
-            this.modalService.dismissAll(); 
-            this.closeChangePassword.emit(); 
-            this.router.navigate(['/home']);
-          }, 1000); 
+          // setTimeout(() => {
+          //   this.modalService.dismissAll(); 
+          //   this.closeChangePassword.emit(); 
+          //   this.router.navigate(['/home']);
+          // }, 1000); 
         },
         error: (error: any) => {
           console.error('Password change failed', error);
           this.showAlertMessage('Failed to change password', 'error');
-          this.modalService.dismissAll(); // Close modal on error
+          // this.modalService.dismissAll(); 
         }
       });
   }
@@ -105,10 +106,10 @@ export class ChangePasswordComponent {
     if (this.alertTimeout) {
       clearTimeout(this.alertTimeout);
     }
-       this.alertTimeout = setTimeout(() => {
-      this.alertMessage = null;
-      this.alertType = null;
-    }, 3000); 
+    //    this.alertTimeout = setTimeout(() => {
+    //   this.alertMessage = null;
+    //   this.alertType = null;
+    // }, 3000); 
   }
 
   dismissAlert(): void {
@@ -121,6 +122,7 @@ export class ChangePasswordComponent {
   }
 
   closeChangePasswordModal() {
+    this.dismissAlert();
     this.closeChangePassword.emit();
   }
 }

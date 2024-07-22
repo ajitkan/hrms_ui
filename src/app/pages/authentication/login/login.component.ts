@@ -44,6 +44,7 @@ export class LoginComponent {
   modalPayload: any;
 
   alertMessage: string | null = null;
+  forgotPassAlertMessage: string | null = null;
   alertType: 'success' | 'error' | 'info' | null = null;
   alertTimeout:any;
 
@@ -71,7 +72,7 @@ export class LoginComponent {
 
     this.forgotPasswordForm = this.fb.group({
       EmailID: ['', [Validators.required, Validators.email]],
-      MobileNo:['', [Validators.required]]
+      MobileNo:['', [Validators.required ,Validators.pattern(/^\d{10}$/),Validators.minLength(10)]]
     });
 
     this.unlockAccountForm = this.fb.group({
@@ -217,7 +218,7 @@ export class LoginComponent {
           localStorage.setItem('token', JSON.stringify(res.token) as string);
           // this.isLogin.emit(true);
           this.isLogin.emit({isLoggedIn: true, screens: res.user.screens, notificationCount:res.user.notification});
-
+          
           if (res.user.firstLoggedIn === true) {
             const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });
           } else {
@@ -226,7 +227,7 @@ export class LoginComponent {
         },
         error: (error: any) => {
           console.error('Login failed', error);
-          this.showAlertMessage('Invalid company code, employee code, or password', 'error');
+          this.showAlertMessage('Invalid credentials. Please try again.', 'error');
         }
       });
   }
@@ -267,7 +268,7 @@ export class LoginComponent {
             if (res.code === 1) {
               this.modalService.open(content);
               console.log(res.message);
-              this.showAlertMessage(res.message,'success')
+              // this.showAlertMessage(res.message,'success')
             } else {
               console.log(res.message);
               this.showAlertMessage(res.message)
@@ -281,6 +282,10 @@ export class LoginComponent {
     }
 
     submitUnlockAccountForm(){
+      if (this.unlockAccountForm.invalid) {
+        this.showAlertMessage('Please fill all required fields.', 'error',true);
+        return;
+      }
       var payload = {
         userName: this.loginForm.get('employeeCode')?.value, 
         companyCode: this.loginForm.get('companyCode')?.value,
@@ -294,18 +299,18 @@ export class LoginComponent {
             if (res.code === 1) {
               // this.modalService.open(content);
               console.log(res.message);
-              this.showAlertMessage('Account unlocked successfully', 'success'); 
-              this.modalService.dismissAll();
+              this.showAlertMessage('Account unlocked successfully. Please try login now with your credential.', 'success',true); 
+              // this.modalService.dismissAll();
             } else {
               console.log(res.message);
-            this.showAlertMessage(res.message,"error")
-              this.modalService.dismissAll();
+            this.showAlertMessage(res.message,"error",true)
+              // this.modalService.dismissAll();
             }
           },
           error: (error: any) => {
             console.log(error.message);
-            this.showAlertMessage('Failed to unlock account', 'error')
-            this.modalService.dismissAll();
+            this.showAlertMessage('Failed to unlock account', 'error',true)
+            // this.modalService.dismissAll();
           }
         });
     }
@@ -314,7 +319,7 @@ export class LoginComponent {
 
       this.markFormGroupTouched(this.forgotPasswordForm);
       if (this.forgotPasswordForm.invalid) {
-        this.showAlertMessage('please fill required field','error')
+        this.showAlertMessage('Please fill required field','error',true)
         return;
       }
       var payload = {
@@ -330,19 +335,19 @@ export class LoginComponent {
             if (res.code === 1) {
               console.log(res.message);
               // this.toastr.success(' successfully', 'Success'); 
-              this.showAlertMessage(res.message, 'success');
-              this.modalService.dismissAll();
+              this.showAlertMessage(res.message, 'success',true);
+              // this.modalService.dismissAll();
             } else {
               console.log(res.message);
-              this.modalService.dismissAll();
-              this.showAlertMessage(res.message, 'error');
+              this.showAlertMessage(res.message, 'error',true);
+              // this.modalService.dismissAll();
             }
           },
           error: (error: any) => {
             console.log(error);
-            this.showAlertMessage('Failed to forgot password', 'error');
-            // this.toastr.error('Failed to forgot password', 'Error')
-            this.modalService.dismissAll();
+            this.showAlertMessage('Failed to forgot password', 'error',true);
+           
+            // this.modalService.dismissAll();
           }
         });
     }
@@ -350,18 +355,22 @@ export class LoginComponent {
       this.modalService.open(content, { centered: true });
     }
     closeForgotPasswordModal() {
+      this.dismissAlert();
       this.modalService.dismissAll();
     }
   
     closeUnlockAccountModal() {
+      this.dismissAlert();
       this.modalService.dismissAll();
     }
 
   closeChangePasswordModal(){
+    this.dismissAlert();
     this.modalService.dismissAll();
   }
   submitChangePasswordForm() {
     if (this.changePasswordForm.invalid) {
+      this.showAlertMessage('Please fill required field','error',true)
       return;
     }
   
@@ -372,13 +381,13 @@ export class LoginComponent {
   
     if (!token) {
       console.error('No token found');
-      this.showAlertMessage('No token found' ,'error');
+      this.showAlertMessage('No token found' ,'error',true);
       return;
     }
   
     if (newPassword !== confirmNewPassword) {
       console.log('New password and confirm new password must match.');
-      this.showAlertMessage('New password and confirm new password must match.' ,'error');
+      this.showAlertMessage('Entered new password and confirm new password are not matched.' ,'error',true);
       return;
     }
   
@@ -393,19 +402,22 @@ export class LoginComponent {
       .subscribe({
         next: (res: any) => {
           console.log('Password change successful', res);
-          this.showAlertMessage('Password changed successfully', 'success');
-          this.modalService.dismissAll();
+          this.showAlertMessage('Password changed successfully', 'success',true);
+          // this.modalService.dismissAll();
           this.router.navigate(['/home']);
         },
         error: (error: any) => {
           console.error('Password change failed', error);
-          this.showAlertMessage('Failed to change password', 'error');
-          this.modalService.dismissAll();
+          this.showAlertMessage('Failed to change password', 'error',true);
+          // this.modalService.dismissAll();
         }
       });
   }
-  showAlertMessage(message: string, type?: 'success' | 'error'): void {
+  showAlertMessage(message: string, type?: 'success' | 'error', ismodal?:boolean): void {
+    if(!ismodal) 
     this.alertMessage = message;
+  else
+    this.forgotPassAlertMessage =message;
     this.alertType = type || 'info'; 
 
     if (this.alertTimeout) {
@@ -419,6 +431,7 @@ export class LoginComponent {
 
   dismissAlert(): void {
     this.alertMessage = null;
+    this.forgotPassAlertMessage = null;
     this.alertType = null;
     if (this.alertTimeout) {
       clearTimeout(this.alertTimeout);
