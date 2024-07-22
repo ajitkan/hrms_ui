@@ -1,0 +1,49 @@
+
+<div class="AdminExit">
+    <label>Admin Employee Off Boarding</label>
+</div>
+<div>
+    <p class="emplisthead">Employee List</p>
+</div>
+ <!-- {{EmpData|json}}  -->
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sepration Id</th> 
+        <th scope="col">Employee Name</th>
+        <th scope="col">Employee Id </th>
+        <th scope="col">Work Location</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Joining Date</th>
+        <th scope="col">Resign Date</th>
+        <th scope="col">Last Day of Employee</th>
+        <th scope="col">Resignation Type</th>       
+        <th scope="col">Status</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    
+   <tr *ngFor="let empdata of EmpData">
+    <td>{{ empdata.sepration_Id}}</td>
+    <td>{{ empdata.employeeName }}</td>
+    <td>{{ empdata.employee_Id }}</td>
+    <!-- <td>{{ empdata.employeeCode }}</td> -->
+    <!-- <td>{{ empdata.baseLocation }}</td> -->
+    <td>{{ empdata.workLocation }}</td>
+    <td>{{ empdata.designation }}</td>
+    <td>{{ empdata.joiningDate }}</td>
+    <td>{{ empdata.resignDate }}</td>
+    <!-- <td>{{ empdata.contractEndDate | date }}</td> -->
+    <!-- <td>{{ empdata.joiningDate | date }}</td>
+    <td>{{ empdata.releaseDate | date }}</td> -->
+    <td>{{ empdata.confirmDate | date }}</td>
+    <!-- <td>{{ empdata.resignDate | date }}</td> -->
+    <td>{{ empdata.resignType }}</td>
+    <td>{{ empdata.status }}</td>
+    <!-- <td>{{ empdata.details }}</td> -->
+    <td><a href="/adminexitDetail">Link</a></td>
+  </tr>
+    </tbody>
+  </table>

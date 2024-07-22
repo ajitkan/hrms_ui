@@ -1,1 +1,79 @@
-<p>contact-details works!</p>
+<app-navbar></app-navbar>
+<div class="row mb-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="card mb-4">
+            <div class="card-header cheader text-center">
+                <!-- <img height="20px" src="static/images/icons/kyc.png">  -->
+                Contact Details
+            </div>
+            <div class="card-body cbody10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.aadhar}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on Aadhaar</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.first_name + " " + personalDetails.middle_name + " " + personalDetails.last_name |uppercase}}</p>
+                    </div>
+                </div>  
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.pan}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on PAN</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0"> {{personalDetails.first_name + " " + personalDetails.middle_name + " " + personalDetails.last_name |uppercase}}</p>
+                    </div>
+                </div> 
+
+                <hr class="hr1">                                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK A/C Number</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.account_No}} </p>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">Name as on BANK</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.account_holderName}} </p>
+                    </div>
+                </div> 
+                <hr class="hr1">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">BANK IFSC</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{personalDetails.ifsc}}</p>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

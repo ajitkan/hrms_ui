@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
+import { user } from 'src/app/constant/constant';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth-service/auth.service';
 
@@ -14,7 +15,6 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   loginForm!: FormGroup;
   modalRef!: NgbModalRef;
   email!: string;
@@ -49,7 +49,7 @@ export class LoginComponent {
   alertTimeout:any;
 
   // @Output() isLogin = new EventEmitter();
-  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[]}>();
+  @Output() isLogin = new EventEmitter<{isLoggedIn: boolean, screens: any[],notificationCount:any;}>();
   constructor(
     private fb: FormBuilder, 
     private modalService: NgbModal,
@@ -215,9 +215,10 @@ export class LoginComponent {
         next: (res: any) => {
           console.log('Login successful', res);
           this.showAlertMessage('Login successful', 'success');
-          localStorage.setItem('token', res.token);
-          this.isLogin.emit({isLoggedIn: true, screens: res.user.screens});
-
+          localStorage.setItem('token', JSON.stringify(res.token) as string);
+          // this.isLogin.emit(true);
+          this.isLogin.emit({isLoggedIn: true, screens: res.user.screens, notificationCount:res.user.notification});
+          
           if (res.user.firstLoggedIn === true) {
             const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });
           } else {

@@ -41,16 +41,23 @@ public get userValue() {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
-
-
-  logout(): Observable<any> {
-    const token = localStorage.getItem('token');
+getUserName(){
+  const token = JSON.parse(localStorage.getItem('token')!);
     if (!token) {
       throw new Error('No token found');
     }
-debugger
     const decodedToken: any = jwtDecode(token);
-    const username = decodedToken?.unique_name; 
+    return decodedToken?.unique_name; 
+}
+
+  logout(): Observable<any> {
+    const token = JSON.parse(localStorage.getItem('token')!);
+//     if (!token) {
+//       throw new Error('No token found');
+//     }
+// debugger
+//     const decodedToken: any = jwtDecode(token);
+    const username = this.getUserName();//decodedToken?.unique_name; 
 
     // Call the logout API
     return this.http.post(`${this.apiUrl}/LogOut`, { username }, {

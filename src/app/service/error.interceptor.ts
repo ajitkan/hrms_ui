@@ -39,12 +39,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                     //this.accountService.logout();
                     return throwError(() => error);
                 }
-                // else if([500].includes(err.status)){
-                //     const error = err.error?.message || err.statusText;
-                //     console.error(err);
-                //     //this.accountService.logout();
-                //     return throwError(() => error);
-                // }
+                else if([500].includes(err.status)){
+                    const error = err.error?.message || err.statusText;
+                    console.error(err);
+                    this.authService.logout();
+                    return throwError(() => error);
+                }
                 else{
                     const error = err.error?.message || err.statusText;
                     console.error(err);

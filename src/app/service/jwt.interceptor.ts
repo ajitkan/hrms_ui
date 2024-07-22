@@ -74,7 +74,6 @@ export class JwtInterceptor implements HttpInterceptor {
         } else {
             console.warn('User token is not available or request is not to API URL. Proceeding without token.');
         }
-
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {

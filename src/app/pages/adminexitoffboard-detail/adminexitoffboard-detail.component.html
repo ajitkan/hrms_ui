@@ -1,0 +1,78 @@
+<div style="text-align: center; font-size: 149%; margin-left: -119px;">
+    <label>Employee Detail</label>
+</div>
+<br/>
+<section>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-2">
+            <label>Employee Name </label><br/>
+            <label>Employee Id </label><br/>
+            <label>Department</label><br/>
+            <label>Contact No.</label><br/>
+            <label>Resign Type</label><br/>
+           
+        </div>                   
+        <div class="col-3">
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>
+           
+            
+        </div>
+        <div class="col-2">
+            <label>Joining Date</label><br>
+            <label>Confirmed Date</label><br>
+            <label>Last Working Date</label><br>
+            <label>Notice Period</label>
+        </div>
+      
+        <div class="col-3">
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>
+            <input type="text" class="form-control"><br/>          
+            <label style="font-weight: bold;">90 Days</label>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</section>
+
+<section>
+    <div class="row" style="margin-left: 15px;">
+        <div class="col">
+            <input type="button" class="submitpermission" value="Approved">
+        </div>
+        <div class="col">
+            <input type="button" value="Reject" class="submitpermission" style="margin-left: -424px;">
+        </div>
+    </div>
+</section>
+<br/>
+<hr/>
+<br/>
+<div class="AdminExit">
+    <label>Separation Clearance</label>
+</div>
+<br/><br/>
+<div style="margin-left: 15px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Clearance Required</th>
+                <th scope="col">Submission of Clearance</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dept of deptNames">
+                <td>{{ dept.deptId }}</td>
+                <td>{{ dept.deptName }}</td>
+                <td><input type="checkbox" value="{{ dept.deptName }}"></td>
+                <td><input type="submit" class="submitpermission" value="Submit"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

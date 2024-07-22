@@ -1,0 +1,325 @@
+<div class="container">
+    <span class="m-auto" style="
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 25px;">
+        Create Employee
+    </span>
+    <!-- <hr> -->
+    <div class="row">
+        <form _ngcontent-mws-c48="" novalidate="" method="post" id="sample_form" enctype="multipart/form-data"
+            class="form-horizontal m-auto ng-untouched ng-pristine ng-valid" style="
+                width: 95%;
+                top: 25px;
+                position: relative;
+                border: 1px solid;"><input _ngcontent-mws-c48="" type="hidden" name="_token" value="G8PQfsjamTA9Gcc8eqcwBvGQZy9Dfw8RDdho13bQ">
+            <div _ngcontent-mws-c48="" class="row" style="
+    padding: 25px;
+">
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">First Name <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text"
+                        name="first_name" id="first_name" placeholder="First Name" required="" class="form-control">
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Last Name <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text"
+                        name="last_name" id="last_name" placeholder="Last Name" required="" class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Staff Id <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text" name="staff_id"
+                        id="staff_id" placeholder="Staff Id" required="" class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Email</label><input _ngcontent-mws-c48="" type="email" name="email" id="email"
+                        placeholder="example@example.com" class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Phone <span _ngcontent-mws-c48="" class="text-danger">*</span></label><input
+                        _ngcontent-mws-c48="" type="text" name="contact_no" id="contact_no" placeholder="Phone"
+                        required="" value="" class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Date Of Birth <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text"
+                        name="date_of_birth" id="date_of_birth" required="" autocomplete="off" value=""
+                        class="form-control date"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Gender</label>
+                    <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control"><button
+                            _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button" data-id="gender"
+                            title="Select Gender..."
+                            class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span _ngcontent-mws-c48=""
+                                class="filter-option pull-left">Select Gender...</span>&nbsp;<span _ngcontent-mws-c48=""
+                                class="bs-caret"><span _ngcontent-mws-c48="" class="caret"></span></span></button>
+                        <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                            <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                    autocomplete="off" role="textbox" aria-label="Search" class="form-control"></div>
+                            <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false" class="dropdown-menu inner">
+                                <a _ngcontent-mws-c48="" tabindex="0" data-original-index="1"
+                                    class="dropdown-item"><span _ngcontent-mws-c48="" data-tokens="null" role="option"
+                                        tabindex="0" aria-disabled="false" aria-selected="false"
+                                        class="dropdown-item-inner"><span _ngcontent-mws-c48=""
+                                            class="text">Male</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="2" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">Female</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="3" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">Other</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a></div>
+                        </div><select _ngcontent-mws-c48="" name="gender" id="gender" data-live-search="true"
+                            data-live-search-style="contains" title="Select Gender..." tabindex="-98"
+                            class="selectpicker form-control">
+                            <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">Select
+                                Gender...</option>
+                            <option _ngcontent-mws-c48="" value="Male" ng-reflect-value="Male">Male</option>
+                            <option _ngcontent-mws-c48="" value="Female" ng-reflect-value="Female">Female</option>
+                            <option _ngcontent-mws-c48="" value="Other" ng-reflect-value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6">
+                    <div _ngcontent-mws-c48="" class="form-group"><label _ngcontent-mws-c48="" class="text-bold">Company
+                            <span _ngcontent-mws-c48="" class="text-danger">*</span></label>
+                        <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control dynamic"><button
+                                _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                                data-id="company_id" title="Select Company..."
+                                class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span
+                                    _ngcontent-mws-c48="" class="filter-option pull-left">Select
+                                    Company...</span>&nbsp;<span _ngcontent-mws-c48="" class="bs-caret"><span
+                                        _ngcontent-mws-c48="" class="caret"></span></span></button>
+                            <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                                <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                        autocomplete="off" role="textbox" aria-label="Search" class="form-control">
+                                </div>
+                                <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false"
+                                    class="dropdown-menu inner"><a _ngcontent-mws-c48="" tabindex="0"
+                                        data-original-index="1" class="dropdown-item"><span _ngcontent-mws-c48=""
+                                            data-tokens="null" role="option" tabindex="0" aria-disabled="false"
+                                            aria-selected="false" class="dropdown-item-inner"><span
+                                                _ngcontent-mws-c48="" class="text">HR1</span><span _ngcontent-mws-c48=""
+                                                class="fa fa-check check-mark"></span></span></a><a
+                                        _ngcontent-mws-c48="" tabindex="0" data-original-index="2"
+                                        class="dropdown-item"><span _ngcontent-mws-c48="" data-tokens="null"
+                                            role="option" tabindex="0" aria-disabled="false" aria-selected="false"
+                                            class="dropdown-item-inner"><span _ngcontent-mws-c48=""
+                                                class="text">HR2</span><span _ngcontent-mws-c48=""
+                                                class="fa fa-check check-mark"></span></span></a></div>
+                            </div><select _ngcontent-mws-c48="" name="company_id" id="company_id" required=""
+                                data-live-search="true" data-live-search-style="contains" data-shift_name="shift_name"
+                                data-dependent="department_name" title="Select Company..." tabindex="-98"
+                                class="form-control selectpicker dynamic">
+                                <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">
+                                    Select Company...</option>
+                                <option _ngcontent-mws-c48="" value="1" ng-reflect-value="1">HR1</option>
+                                <option _ngcontent-mws-c48="" value="2" ng-reflect-value="2">HR2</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6">
+                    <div _ngcontent-mws-c48="" class="form-group"><label _ngcontent-mws-c48=""
+                            class="text-bold">Department <span _ngcontent-mws-c48=""
+                                class="text-danger">*</span></label>
+                        <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control designation"><button
+                                _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                                data-id="department_id" title="Select Department..."
+                                class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span
+                                    _ngcontent-mws-c48="" class="filter-option pull-left">Select
+                                    Department...</span>&nbsp;<span _ngcontent-mws-c48="" class="bs-caret"><span
+                                        _ngcontent-mws-c48="" class="caret"></span></span></button>
+                            <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                                <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                        autocomplete="off" role="textbox" aria-label="Search" class="form-control">
+                                </div>
+                                <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false"
+                                    class="dropdown-menu inner"></div>
+                            </div><select _ngcontent-mws-c48="" name="department_id" id="department_id" required=""
+                                data-live-search="true" data-live-search-style="contains"
+                                data-designation_name="designation_name" title="Select Department..." tabindex="-98"
+                                class="selectpicker form-control designation">
+                                <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">
+                                    Select Department...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Designation <span _ngcontent-mws-c48="" class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control"><button
+                            _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                            data-id="designation_id" title="Select Designation..."
+                            class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span _ngcontent-mws-c48=""
+                                class="filter-option pull-left">Select Designation...</span>&nbsp;<span
+                                _ngcontent-mws-c48="" class="bs-caret"><span _ngcontent-mws-c48=""
+                                    class="caret"></span></span></button>
+                        <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                            <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                    autocomplete="off" role="textbox" aria-label="Search" class="form-control"></div>
+                            <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false" class="dropdown-menu inner">
+                            </div>
+                        </div><select _ngcontent-mws-c48="" name="designation_id" id="designation_id" required=""
+                            data-live-search="true" data-live-search-style="contains" title="Select Designation..."
+                            tabindex="-98" class="selectpicker form-control">
+                            <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">Select
+                                Designation...</option>
+                        </select>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Office Shift <span _ngcontent-mws-c48="" class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control"><button
+                            _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                            data-id="office_shift_id" title="Select Office Shift..."
+                            class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span _ngcontent-mws-c48=""
+                                class="filter-option pull-left">Select Office Shift...</span>&nbsp;<span
+                                _ngcontent-mws-c48="" class="bs-caret"><span _ngcontent-mws-c48=""
+                                    class="caret"></span></span></button>
+                        <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                            <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                    autocomplete="off" role="textbox" aria-label="Search" class="form-control"></div>
+                            <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false" class="dropdown-menu inner">
+                            </div>
+                        </div><select _ngcontent-mws-c48="" name="office_shift_id" id="office_shift_id" required=""
+                            data-live-search="true" data-live-search-style="contains" title="Select Office Shift..."
+                            tabindex="-98" class="selectpicker form-control">
+                            <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">Select
+                                Office Shift...</option>
+                        </select>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Username <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text" name="username"
+                        id="username" placeholder="Unique Value" required="" class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Role <span _ngcontent-mws-c48="" class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control"><button
+                            _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                            data-id="role_users_id" title="Select Role..."
+                            class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span _ngcontent-mws-c48=""
+                                class="filter-option pull-left">Select Role...</span>&nbsp;<span _ngcontent-mws-c48=""
+                                class="bs-caret"><span _ngcontent-mws-c48="" class="caret"></span></span></button>
+                        <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                            <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                    autocomplete="off" role="textbox" aria-label="Search" class="form-control"></div>
+                            <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false" class="dropdown-menu inner">
+                                <a _ngcontent-mws-c48="" tabindex="0" data-original-index="1"
+                                    class="dropdown-item"><span _ngcontent-mws-c48="" data-tokens="null" role="option"
+                                        tabindex="0" aria-disabled="false" aria-selected="false"
+                                        class="dropdown-item-inner"><span _ngcontent-mws-c48=""
+                                            class="text">admin</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="2" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">employee</span><span
+                                            _ngcontent-mws-c48="" class="fa fa-check check-mark"></span></span></a><a
+                                    _ngcontent-mws-c48="" tabindex="0" data-original-index="3"
+                                    class="dropdown-item"><span _ngcontent-mws-c48="" data-tokens="null" role="option"
+                                        tabindex="0" aria-disabled="false" aria-selected="false"
+                                        class="dropdown-item-inner"><span _ngcontent-mws-c48=""
+                                            class="text">Manager</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="4" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">Editor</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="5" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">HR</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="6" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">abc</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a></div>
+                        </div><select _ngcontent-mws-c48="" name="role_users_id" id="role_users_id" required=""
+                            data-live-search="true" data-live-search-style="contains" title="Select Role..."
+                            tabindex="-98" class="selectpicker form-control">
+                            <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">Select
+                                Role...</option>
+                            <option _ngcontent-mws-c48="" value="1" ng-reflect-value="1">admin</option>
+                            <option _ngcontent-mws-c48="" value="2" ng-reflect-value="2">employee</option>
+                            <option _ngcontent-mws-c48="" value="4" ng-reflect-value="4">Manager</option>
+                            <option _ngcontent-mws-c48="" value="5" ng-reflect-value="5">Editor</option>
+                            <option _ngcontent-mws-c48="" value="6" ng-reflect-value="6">HR</option>
+                            <option _ngcontent-mws-c48="" value="8" ng-reflect-value="8">abc</option>
+                        </select>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Password <span _ngcontent-mws-c48="" class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="input-group"><input _ngcontent-mws-c48="" type="password"
+                            name="password" id="password" placeholder="Password" required="" class="form-control"></div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Confirm Password <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="input-group"><input _ngcontent-mws-c48="" id="confirm_pass"
+                            type="password" name="password_confirmation" placeholder="Re-type Password" required=""
+                            autocomplete="new-password" class="form-control"></div>
+                    <div _ngcontent-mws-c48="" class="form-group">
+                        <div _ngcontent-mws-c48="" id="divCheckPasswordMatch" class="registrationFormAlert"></div>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Attendance Type <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label>
+                    <div _ngcontent-mws-c48="" class="btn-group bootstrap-select form-control"><button
+                            _ngcontent-mws-c48="" type="button" data-toggle="dropdown" role="button"
+                            data-id="attendance_type" title="Select Attendance Type..."
+                            class="btn dropdown-toggle bs-placeholder btn-default btn-light"><span _ngcontent-mws-c48=""
+                                class="filter-option pull-left">Select Attendance Type...</span>&nbsp;<span
+                                _ngcontent-mws-c48="" class="bs-caret"><span _ngcontent-mws-c48=""
+                                    class="caret"></span></span></button>
+                        <div _ngcontent-mws-c48="" role="combobox" class="dropdown-menu open">
+                            <div _ngcontent-mws-c48="" class="bs-searchbox"><input _ngcontent-mws-c48="" type="text"
+                                    autocomplete="off" role="textbox" aria-label="Search" class="form-control"></div>
+                            <div _ngcontent-mws-c48="" role="listbox" aria-expanded="false" class="dropdown-menu inner">
+                                <a _ngcontent-mws-c48="" tabindex="0" data-original-index="1"
+                                    class="dropdown-item"><span _ngcontent-mws-c48="" data-tokens="null" role="option"
+                                        tabindex="0" aria-disabled="false" aria-selected="false"
+                                        class="dropdown-item-inner"><span _ngcontent-mws-c48=""
+                                            class="text">General</span><span _ngcontent-mws-c48=""
+                                            class="fa fa-check check-mark"></span></span></a><a _ngcontent-mws-c48=""
+                                    tabindex="0" data-original-index="2" class="dropdown-item"><span
+                                        _ngcontent-mws-c48="" data-tokens="null" role="option" tabindex="0"
+                                        aria-disabled="false" aria-selected="false" class="dropdown-item-inner"><span
+                                            _ngcontent-mws-c48="" class="text">IP Based</span><span
+                                            _ngcontent-mws-c48="" class="fa fa-check check-mark"></span></span></a>
+                            </div>
+                        </div><select _ngcontent-mws-c48="" name="attendance_type" id="attendance_type" required=""
+                            data-live-search="true" data-live-search-style="contains" title="Select Attendance Type..."
+                            tabindex="-98" class="selectpicker form-control">
+                            <option _ngcontent-mws-c48="" value="" class="bs-title-option" ng-reflect-value="">Select
+                                Attendance Type...</option>
+                            <option _ngcontent-mws-c48="" value="general" ng-reflect-value="general">General</option>
+                            <option _ngcontent-mws-c48="" value="ip_based" ng-reflect-value="ip_based">IP Based</option>
+                        </select>
+                    </div>
+                </div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        class="text-bold">Date Of Joining <span _ngcontent-mws-c48=""
+                            class="text-danger">*</span></label><input _ngcontent-mws-c48="" type="text"
+                        name="joining_date" id="joining_date" class="form-control date"></div>
+                <div _ngcontent-mws-c48="" class="col-md-6 form-group"><label _ngcontent-mws-c48=""
+                        for="profile_photo"><strong _ngcontent-mws-c48="">Image</strong></label><input
+                        _ngcontent-mws-c48="" type="file" id="profile_photo" name="profile_photo" placeholder="Upload"
+                        class="form-control"></div>
+                <div _ngcontent-mws-c48="" class="container">
+                    <div _ngcontent-mws-c48="" align="center" class="form-group"><input _ngcontent-mws-c48=""
+                            type="hidden" name="action" id="action" value="Add"><input _ngcontent-mws-c48=""
+                            type="hidden" name="hidden_id" id="hidden_id"><input _ngcontent-mws-c48="" type="submit"
+                            name="action_button" id="action_button" value="Add" class="btn btn-warning w-100"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
