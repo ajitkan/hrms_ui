@@ -298,7 +298,7 @@ export class LoginComponent {
             if (res.code === 1) {
               // this.modalService.open(content);
               console.log(res.message);
-              this.showAlertMessage('Account unlocked successfully', 'success',true); 
+              this.showAlertMessage('Account unlocked successfully. Please try login now with your credential.', 'success',true); 
               // this.modalService.dismissAll();
             } else {
               console.log(res.message);
@@ -386,7 +386,7 @@ export class LoginComponent {
   
     if (newPassword !== confirmNewPassword) {
       console.log('New password and confirm new password must match.');
-      this.showAlertMessage('Entered new password and confirm new password are not match.' ,'error',true);
+      this.showAlertMessage('Entered new password and confirm new password are not matched.' ,'error',true);
       return;
     }
   
