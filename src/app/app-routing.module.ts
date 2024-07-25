@@ -35,10 +35,11 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
 // import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
+import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path:'',component:LoginComponent
   },
@@ -50,11 +51,14 @@ const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
-  {
-    path:'change-password', component: ChangePasswordComponent
-  },
+  { path: 'reset-password', component: ChangePasswordComponent,
+    canActivate: [AuthGuard]    
+   },
+   {
+    path: 'notification' , component:NotificationComponent
+   },
   {
     path:'jobpost', component:JobPostComponent
   },

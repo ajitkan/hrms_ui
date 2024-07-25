@@ -1,0 +1,34 @@
+
+  
+
+ <div class="notifications-container">
+    <h2>Notifications</h2>
+  
+    <div *ngIf="notifications.length > 0; else noNotifications">
+      <div 
+        class="notification-item" 
+        *ngFor="let notification of notifications"
+      >
+       
+        <div class="notification-details" *ngIf="selectedNotification === notification">
+          <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
+          <p><strong>Module:</strong> {{ notification.module }}</p>
+          <button 
+            class="btn btn-sm btn-secondary close-details-button" 
+            (click)="clearSelectedNotification($event)"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noNotifications>
+      <div class="alert alert-info">
+        <p>No notifications found.</p>
+      </div>
+    </ng-template>
+  </div>
+   
+
+
+ 
