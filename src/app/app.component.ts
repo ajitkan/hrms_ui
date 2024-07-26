@@ -14,6 +14,7 @@ export class AppComponent {
   userLogIn:any;
   screens: any[] = [];
   notificationCount=0;
+  token='';
   
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
@@ -45,7 +46,7 @@ export class AppComponent {
   };
 
   constructor(private router:Router){
-
+    this.token = JSON.parse(localStorage.getItem('token') as string);
   }
   ngOnInit(){
     console.log('Notification count',this.notificationCount);
