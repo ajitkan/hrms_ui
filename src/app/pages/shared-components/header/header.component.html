@@ -43,81 +43,31 @@
       </div>
 
       <ul class="nav navbar-nav">
-        
+
         <!-- <li class="custom-dropdown">
           <a class="offcanvas-toggler active custom-dropdown-toggler" data-offcanvas="contact-off" href="javascript:">
             <i class="mdi mdi-contacts icon"></i>
           </a>
         </li> -->
 
-        <!-- <li class="dropdown user-menu">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" 
-            data-target="#notificationDropdownMenu" data-toggle="show">
-            <i class="mdi mdi-bell-outline icon"></i>
-            <span class="notification-count">{{notificationCount}}</span>
-          </button>
-          <ul id="notificationDropdownMenu" class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isNotification}">
-            <div *ngIf="notifications.length > 0">
-              <div class="notification-item" *ngFor="let notification of notifications" (click)="showNotificationDetails(notification)">
-                <div class="notification-header">
-                  <span>{{ notification.message }}</span>
-                  <span class="notification-timestamp">
-                    {{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}
-                  </span>
-                </div>
-                <div class="notification-details" *ngIf="selectedNotification === notification">
-                  <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
-                  <p><strong>Module:</strong> {{ notification.module }}</p>
-                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </ul>
-        </li> -->
+
         
-        <!-- <li class="dropdown user-menu">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" 
-            data-target="#notificationDropdownMenu" data-toggle="show">
-            <i class="mdi mdi-bell-outline icon"></i>
+        <!-- <li class="dropdown notification">
+          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)"
+                  data-target="#notificationDropdownMenu" data-toggle="show">
+            <i class="mdi mdi-bell-outline icon"></i> 
             <span class="notification-count">{{notificationCount}}</span>
-          </button>
-          <ul id="notificationDropdownMenu" class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isNotification}">
-            <div *ngIf="notifications.length > 0">
-              <div class="notification-item" *ngFor="let notification of notifications" (click)="showNotificationDetails(notification)">
-                <div class="notification-header">
-                  <span>{{ notification.message }}</span>
-                  <span class="notification-timestamp">
-                    {{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}
-                  </span>
-                </div>
-                <div class="notification-details" *ngIf="selectedNotification === notification">
-                  <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
-                  <p><strong>Module:</strong> {{ notification.module }}</p>
-                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </ul>
-        </li> -->
-        
-        <li class="dropdown user-menu">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" 
-            data-target="#notificationDropdownMenu" data-toggle="show">
-            <i class="mdi mdi-bell-outline icon"></i>
-            <span class="notification-count">{{notificationCount}}</span>
+             
           </button>
           <ul id="notificationDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isNotification}">
             <div *ngIf="notifications.length > 0">
-              <div class="notification-item" 
-                   *ngFor="let notification of notifications" 
+              <div class="notification-item"
+                   *ngFor="let notification of notifications"
                    (click)="showNotificationDetails(notification)"
                    [ngClass]="{'active': selectedNotification === notification}">
                 <div class="notification-header">
                   <span>{{ notification.message }}</span>
+                  <br>
                   <span class="notification-timestamp">
                     {{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}
                   </span>
@@ -130,6 +80,59 @@
                   </button>
                 </div>
               </div>
+            
+              <div class="load-more">
+                <button class="btn btn-sm btn-primary" (click)="loadMore()">
+                  View More
+                </button>
+              </div>
+            </div>
+            <div *ngIf="notifications.length === 0">
+              <p class="no-notifications">No notifications available.</p>
+            </div>
+          </ul>
+        </li> -->
+        
+
+
+        <li class="dropdown notification">
+          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" data-target="#notificationDropdownMenu" data-toggle="show">
+            <i class="mdi mdi-bell-outline icon"></i>
+            <span class="notification-count">
+              <!-- {{ unreadCount }} -->
+              {{ unreadCount > 0 ? unreadCount : notificationCount }}
+            </span>
+          </button>
+          <ul id="notificationDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isNotification}">
+            <div *ngIf="notifications.length > 0">
+              <div class="notification-item"
+                   *ngFor="let notification of notifications"
+                   (click)="showNotificationDetails(notification)"
+                   [ngClass]="{'active': selectedNotification === notification}">
+                <div class="notification-header">
+                  <span>{{ notification.message }}</span>
+                  <br>
+                  <span class="notification-timestamp">
+                    {{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}
+                  </span>
+                </div>
+                <div class="notification-details" *ngIf="selectedNotification === notification">
+                  <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
+                  <p><strong>Module:</strong> {{ notification.module }}</p>
+                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
+                    Close
+                  </button>
+                </div>
+              </div>
+              <!-- Load More Button -->
+              <div class="load-more">
+                <button class="btn btn-sm btn-primary" (click)="loadMore()">
+                  View More
+                </button>
+              </div>
+            </div>
+            <div *ngIf="notifications.length === 0">
+              <p class="no-notifications">No notifications available.</p>
             </div>
           </ul>
         </li>
@@ -149,7 +152,7 @@
 
         <!-- <div class="header-right">
           <button class="notification-icon" (click)="openNotificationModal()">
-            <i class="fa fa-bell"></i> 
+            <i class="fa fa-bell"></i>
             <span class="badge badge-xs rounded-circle">{{ notificationCount }}</span>
           </button>
         </div> -->

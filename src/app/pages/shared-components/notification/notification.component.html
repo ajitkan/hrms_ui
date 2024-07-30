@@ -1,34 +1,40 @@
 
-  
 
- <div class="notifications-container">
+
+<div class="notifications-container">
+  <div class="header-controls">
     <h2>Notifications</h2>
-  
-    <div *ngIf="notifications.length > 0; else noNotifications">
-      <div 
-        class="notification-item" 
-        *ngFor="let notification of notifications"
-      >
-       
-        <div class="notification-details" *ngIf="selectedNotification === notification">
-          <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
-          <p><strong>Module:</strong> {{ notification.module }}</p>
-          <button 
-            class="btn btn-sm btn-secondary close-details-button" 
-            (click)="clearSelectedNotification($event)"
-          >
-            Close
-          </button>
-        </div>
+    <div class="records-per-page">
+      <label for="recordsPerPage">Records per page:</label>
+      <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="onPageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="notifications.length > 0" class="notifications-list">
+    <div class="notification-item" *ngFor="let notification of notifications" (click)="selectNotification(notification)">
+      <div class="notification-content">
+        <div class="notification-message">{{ notification.message }}</div>
+        <div class="notification-timestamp">{{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}</div>
       </div>
     </div>
-    <ng-template #noNotifications>
-      <div class="alert alert-info">
-        <p>No notifications found.</p>
-      </div>
-    </ng-template>
   </div>
-   
-
+  <div *ngIf="notifications.length === 0" class="no-notifications">
+    No notifications available.
+  </div>
 
  
+
+  <div class="pagination">
+    <button [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">Previous</button>
+    <button *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="goToPage(page)">{{ page }}</button>
+    <button [class.disabled]="currentPage === getTotalPages()" (click)="goToPage(currentPage + 1)">Next</button>
+  </div>
+</div> 
+ 
+
+
+
+
+

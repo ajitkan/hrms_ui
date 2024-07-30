@@ -36,6 +36,7 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
+import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,9 @@ const routes: Routes = [
    {
     path: 'notification' , component:NotificationComponent
    },
+   { 
+    path: 'notification/:id', component: NotificationDetailsComponent
+    },
   {
     path:'jobpost', component:JobPostComponent
   },
