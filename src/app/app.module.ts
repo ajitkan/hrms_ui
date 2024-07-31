@@ -56,6 +56,8 @@ import { ChangePasswordComponent } from './pages/authentication/change-password/
 import { CommanSearchEmployeeService } from './service/CommanService/comman-search-employee.service';
 import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
 import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
+import { NotificationComponent } from './pages/shared-components/notification/notification.component';
+import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 
 
 @NgModule({
@@ -101,6 +103,8 @@ import { EmployeeSearchResultComponent } from './pages/employee-search-result/em
     ChangePasswordComponent,
     EmploymentDetailsComponent,
     EmployeeSearchResultComponent,
+    NotificationComponent,
+    NotificationDetailsComponent,
   ],
   imports: [
     BrowserModule,

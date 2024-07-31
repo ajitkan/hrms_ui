@@ -1,0 +1,10 @@
+<div class="notification-details-page">
+    <a routerLink="/notification" class="back-button">← Back to Notifications</a>
+    
+    <div class="notification-details-container">
+      <h2>Notification Details</h2>
+      <p>{{ notification.message }}</p>
+      <p>{{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}</p>
+    </div>
+  </div>
+  

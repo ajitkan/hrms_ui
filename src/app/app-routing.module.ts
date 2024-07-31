@@ -30,6 +30,7 @@ import { User } from './models/user';
 import { user } from './constant/constant';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
+
 import { AppComponent} from './app.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
@@ -39,9 +40,12 @@ import { ChangePasswordComponent } from './pages/authentication/change-password/
 import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
 import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
 
+import { NotificationComponent } from './pages/shared-components/notification/notification.component';
+import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
+
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path:'',component:LoginComponent
   },
@@ -53,11 +57,17 @@ const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
-  {
-    path:'change-password', component: ChangePasswordComponent
-  },
+  { path: 'reset-password', component: ChangePasswordComponent,
+    canActivate: [AuthGuard]    
+   },
+   {
+    path: 'notification' , component:NotificationComponent
+   },
+   { 
+    path: 'notification/:id', component: NotificationDetailsComponent
+    },
   {
     path:'jobpost', component:JobPostComponent
   },
@@ -120,7 +130,7 @@ const routes: Routes = [
   {
     path: 'adminexitDetail', component: AdminexitoffboardDetailComponent
   },
-  {
+ {
     path: 'EmployementDetail', component: EmploymentDetailsComponent
   },
   {

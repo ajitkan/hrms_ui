@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, catchError, Observable } from 'rxjs';
@@ -17,7 +18,7 @@ export class AuthService {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token') as string));
     this.user = this.userSubject.asObservable();
     
-}
+  }
 
 public get userValue() {
   return this.userSubject.value;
@@ -46,12 +47,19 @@ public get userValue() {
   logout(): Observable<any> {
     //const token = localStorage.getItem('token');
     const token = JSON.parse(localStorage.getItem('token') as string);
+  } 
+getUserName(){
+  const token = JSON.parse(localStorage.getItem('token')!);
     if (!token) {
       throw new Error('No token found');
     }
-debugger
     const decodedToken: any = jwtDecode(token);
-    const username = decodedToken?.unique_name; 
+    return decodedToken?.unique_name; 
+}
+
+  logout(): Observable<any> {
+    const token = JSON.parse(localStorage.getItem('token')!);
+    const username = this.getUserName();//decodedToken?.unique_name; 
 
     // Call the logout API
     return this.http.post(`${this.apiUrl}/LogOut`, { username }, {
@@ -66,6 +74,29 @@ debugger
   clearSession() {
     localStorage.removeItem('token');
    
-  }
- 
+  }// auth.service.ts
+resetPassword(payload: {currentPassword:string; newPassword: string; userName: string; companyCode: string }, token: string): Observable<any> {
+  debugger
+  return this.http.post<any>(`${this.apiUrl}/ChangePassword`, payload, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+}
+
+  
+getNotifications(payload:{userName:string,pageNumber: number, pageSize: number},token:string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/FetchNotification`, payload ,{
+    headers: { Authorization: `Bearer ${token}`}
+  }); 
+}
+  
+// getNotifications(payload: any, token: string): Observable<any> {
+//   const url = `${this.apiUrl}/FetchNotification`;
+  
+//   const headers = new HttpHeaders({
+//     'Content-Type': 'application/json',
+//     'Authorization': `Bearer ${token}`
+//   });
+
+//   return this.http.post(url, payload, { headers });
+// }
 }
