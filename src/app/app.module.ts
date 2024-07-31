@@ -52,9 +52,12 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
 import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
+// import { CommonModule } from '@angular/common';
+import { CommanSearchEmployeeService } from './service/CommanService/comman-search-employee.service';
+import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
+import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
-
 
 
 @NgModule({
@@ -82,7 +85,7 @@ import { NotificationDetailsComponent } from './pages/shared-components/notifica
     BankDetailsComponent,
     CompanyMasterComponent,
     MyApplicationComponent,
-
+    EmployeeDetailsComponent,
     AdmincalenderComponent,
     ExitoffboardComponent,
     AdminexitoffboardComponent,
@@ -98,6 +101,8 @@ import { NotificationDetailsComponent } from './pages/shared-components/notifica
 
     SalaryDetailsComponent,
     ChangePasswordComponent,
+    EmploymentDetailsComponent,
+    EmployeeSearchResultComponent,
     NotificationComponent,
     NotificationDetailsComponent,
   ],

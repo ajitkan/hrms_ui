@@ -206,6 +206,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth-service/auth.service';
+import { CommanSearchEmployeeService,Employee } from 'src/app/service/CommanService/comman-search-employee.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { jwtDecode } from 'jwt-decode';
 
@@ -215,9 +216,18 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
   @Input() notificationCount: any;
   @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; notificationCount: any; }>();
- 
+  [x: string]: any;
+ //variable  for Search Employee
+  TextFrees: string = '';
+  searchResults: Employee[] = [];
+  visibleResults: any[] = [];
+  showDropdown: boolean = true;
+  showAll: boolean = false;
+
+  encodedJsonString:any;
   user: any;
   isCollapsed: boolean = false;
   isNotification: boolean = false;
@@ -239,7 +249,8 @@ export class HeaderComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private CommanSearchEmployeeService:CommanSearchEmployeeService
   ) {}
 
   ngOnInit() {
@@ -305,7 +316,6 @@ export class HeaderComponent {
 
   // showNotificationDetails(notification: any) { 
   //   if (notification && notification.notificationID) {
-    
   //     notification.isRead = true;
   
   //     this.updateUnreadCount();
@@ -377,12 +387,53 @@ export class HeaderComponent {
       }
     });
   }
+
+  //______________________________For Search Employee______________________________________________
+  onSearch(): void {
+    if (this.TextFrees) {
+      this.searchResults = this.CommanSearchEmployeeService.searchEmployees(this.TextFrees);
+      if (this.searchResults.length > 0 && !this.showAll) {
+        this.visibleResults = this.searchResults.slice(0, 3);
+      } else {
+        debugger;
+        this.visibleResults = this.searchResults;
+      }
+      this.showDropdown = false;
+    } 
+    else {
+      debugger;
+      this.searchResults = [];
+      this.visibleResults = [];
+    }
+
+    // const jsonString = JSON.stringify(this.searchResults);    
+  }
+  showAllRecords(): void {
+    this.showAll = true;
+    this.visibleResults = this.searchResults;
+    this.showDropdown = false; // Hide the dropdown
+    //this.router.navigate(['/EmployeeList'], { queryParams: { data: this.encodedJsonArray } });
+  }
+
+  // get encodedJsonArray(): any {
+  //   return this.encodedJsonString = encodeURIComponent(JSON.stringify(this.searchResults));//encodeURIComponent(JSON.stringify(this.jsonArray));
+  // }
+  encodedJsonArray(emp?: any): string {
+    if(emp){
+      const dataToEncode = emp ? emp : this.searchResults;
+      this.encodedJsonString = encodeURIComponent(JSON.stringify(dataToEncode));
+      console.log('Fetched Employee',JSON.stringify(this.encodedJsonString));
+      return this.encodedJsonString;
+    }
+    else{
+      return this.encodedJsonString = encodeURIComponent(JSON.stringify(this.searchResults));//encodeURIComponent(JSON.stringify(this.jsonArray));
+    }
+}   
   fetchNotifications(page: number) {
     if (!this.token) {
       console.error('Token not found. Cannot fetch notifications.');
       return;
     }
-
     const payload = {
       userName: this.userName,
       pageNumber: page,
@@ -406,8 +457,6 @@ export class HeaderComponent {
         this.loading = false; // Reset loading state
       }
     });
-  }
-  
-  
-  
+  }  
+  //-------------------Search Enmployee-------------------------------
 }
