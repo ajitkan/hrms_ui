@@ -1,3 +1,45 @@
 .dropdown-footer{
     cursor: pointer;
 }
+
+/* --------------*/
+.search-container {
+  position: relative;
+  display: block;
+  width: 390px;
+  }
+  
+  .search-container .bi-search {
+    position: absolute;
+    left: 10px;
+    pointer-events: none; /* Prevents the icon from blocking input clicks */
+    color: #aaa; /* Optional: adjust icon color */
+  }
+  
+  .search-container input {
+    width: 490px;
+    text-align: center;
+  }
+/*--------------*/
+.list-group-item {
+  border-bottom: 1px solid #ddd; /* Light gray line */
+  padding: 10px 15px;
+}
+
+.list-group-item:last-child {
+  border-bottom: none; /* Remove the line from the last item */
+}
+
+.see-all {
+  cursor: pointer;
+  color: blue;
+  text-align: center;
+}
+
+/* Hide search Content*/
+
+.d-none {
+  display: none;
+}
+
+/*-----------------------------------------------*/

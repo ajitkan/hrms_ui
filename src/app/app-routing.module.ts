@@ -21,7 +21,7 @@ import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-det
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
-import { AppComponent} from './app.component';
+// import { AppComponent} from './app.component';
 import { AdmincalenderComponent } from './pages/shared-components/admincalender/admincalender.component';
 import { ExitoffboardComponent } from './pages/exitoffboard/exitoffboard.component';
 import { AdminexitoffboardComponent } from './pages/adminexitoffboard/adminexitoffboard.component';
@@ -29,13 +29,15 @@ import { AdminexitoffboardDetailComponent } from './pages/adminexitoffboard-deta
 import { User } from './models/user';
 import { user } from './constant/constant';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
-import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
+// import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { AppComponent} from './app.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
-import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
+// import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
+import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
+import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
 
 
 const routes: Routes = [
@@ -79,9 +81,9 @@ const routes: Routes = [
   {
     path:'emp-personal-details',component:PersonalDetailsComponent
   },
-  {
-    path:'emp-employement-history',component:EmploymentDetailsComponent
-  },
+  // {
+  //   path:'emp-employement-history',component:EmploymentDetailsComponent
+  // },
   { 
     path: 'emp-documents', component: DocumentsComponent 
   },
@@ -119,13 +121,22 @@ const routes: Routes = [
     path: 'adminexitDetail', component: AdminexitoffboardDetailComponent
   },
   {
-    path: 'salary-calculator', component: SalaryCalculatorComponent
+    path: 'EmployementDetail', component: EmploymentDetailsComponent
   },
   {
-    path: 'salary-details', component: SalaryDetailsComponent
+    path: 'EmployeeDetail', component: EmployeeDetailsComponent
   },
+  // {
+  //   path: 'salary-calculator', component: SalaryCalculatorComponent
+  // },
+  // {
+  //   path: 'salary-details', component: SalaryDetailsComponent
+  // },
   {
     path: 'my-timesheet', component: MyTimesheetComponent
+  },
+  {
+    path: 'EmployeeList', component: EmployeeSearchResultComponent
   }
 ];
 

@@ -14,7 +14,7 @@ export class AuthService {
    public user: Observable<User>;
   
   constructor(private http: HttpClient) {  
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
+    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token') as string));
     this.user = this.userSubject.asObservable();
     
 }
@@ -44,7 +44,8 @@ public get userValue() {
 
 
   logout(): Observable<any> {
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('token') as string);
     if (!token) {
       throw new Error('No token found');
     }
