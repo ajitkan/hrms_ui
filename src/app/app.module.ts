@@ -52,6 +52,8 @@ import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/m
 import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
+import { NotificationComponent } from './pages/shared-components/notification/notification.component';
+import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 
 
 
@@ -96,6 +98,8 @@ import { ChangePasswordComponent } from './pages/authentication/change-password/
 
     SalaryDetailsComponent,
     ChangePasswordComponent,
+    NotificationComponent,
+    NotificationDetailsComponent,
   ],
   imports: [
     BrowserModule,
