@@ -19,6 +19,7 @@ export class AppComponent {
   isResetPasswordRoute=false;
   
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
+  token='';
   
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
@@ -49,10 +50,11 @@ export class AppComponent {
     TimeSection:true
   };
 
+
   constructor(private router:Router,private route:ActivatedRoute,
     private modalService: NgbModal,
   ){
-
+    this.token = JSON.parse(localStorage.getItem('token') as string);
   }
   ngOnInit(){
     if (this.router.url.includes('reset-password')) {

@@ -7,11 +7,24 @@
       <div class="sidebar-left" data-simplebar style="height: 100%;">
         <ul class="nav flex-column">
           <li *ngFor="let screen of screens" class="nav-item">
-            <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
+            <ng-container *ngIf="screen.screenURL !== 'https://kaninfos.com/kan-on-boarding/login'; else externalLink">
+              <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
+                <i class="fas fa-icon mr-2"></i>
+                <span class="nav-text">{{ screen.screenDisplayName }}</span>
+              </a>
+            </ng-container>
+            <ng-template #externalLink>
+              <a class="nav-link d-flex align-items-center" [href]="'http://localhost:52003/login?'+'token='+token" target="_blank">
+                <i class="fas fa-icon mr-2"></i>
+                <span class="nav-text">{{ screen.screenDisplayName }}</span>
+              </a>
+            </ng-template>
+            <!-- <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL !="https://kaninfos.com/kan-on-boarding/login" [routerLink]="screen.screenURL">
+            <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL = "https://kaninfos.com/kan-on-boarding/login" href=screen.screenURL target="_blank">
               <i class="fas fa-icon mr-2"></i> 
-              <!-- {{(screen.icon!=undefined)?.(screen.icon)}} -->
+              
               <span class="nav-text">{{ screen.screenDisplayName }}</span>
-            </a>
+            </a> -->
           </li>
         </ul>
       </div>
