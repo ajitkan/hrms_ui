@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 1;
   pageSize: number = 5; 
-  // totalNotifications : number = 30;
+  //  totalNotifications : number = 0;
   totalNotifications : number= this.notifications.length;
   pageSizes: number[] = [5, 10, 20, 50, 100]; 
   notificationUnreadCount :number = 0; 
