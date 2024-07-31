@@ -13,11 +13,12 @@
               </a>
             </ng-container>
             <ng-template #externalLink>
-              <a class="nav-link d-flex align-items-center" [href]="'http://localhost:52003/login?'+'token='+token" target="_blank">
+              <a class="nav-link d-flex align-items-center" (click)="openLink()">
                 <i class="fas fa-icon mr-2"></i>
                 <span class="nav-text">{{ screen.screenDisplayName }}</span>
               </a>
             </ng-template>
+            <!-- [href]="'http://localhost:54485/login?'+'token='+token" target="_blank" -->
             <!-- <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL !="https://kaninfos.com/kan-on-boarding/login" [routerLink]="screen.screenURL">
             <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL = "https://kaninfos.com/kan-on-boarding/login" href=screen.screenURL target="_blank">
               <i class="fas fa-icon mr-2"></i> 

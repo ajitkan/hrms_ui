@@ -23,14 +23,14 @@ export class ErrorInterceptor implements HttpInterceptor {
             else if ([401].includes(err.status) && this.accountService.userValue) {
                 const error = "Session Expired Kindly LogIn again.....";
                 console.error(err);
-                this.authService.logout();
+                // this.authService.logout();
                 return throwError(() => error);
             }
             else {
                 if(err.message === "Http failure response for https://localhost:7181/api/login: 0 Unknown Error"){
                     const error = "Server Down Kindly try again later.....";
                     console.error(err);
-                    this.authService.logout();
+                    // this.authService.logout();
                     return throwError(() => error);
                 }
                 else if([404].includes(err.status)){
@@ -42,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 else if([500].includes(err.status)){
                     const error = err.error?.message || err.statusText;
                     console.error(err);
-                    this.authService.logout();
+                    // this.authService.logout();
                     return throwError(() => error);
                 }
                 else{

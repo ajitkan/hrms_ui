@@ -136,4 +136,13 @@ export class ApiService {
     }
     return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`,{params}) 
   }
+
+  postData(token: string): Observable<any> {
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json'
+    // });
+    // const body = { token };
+
+    return this.http.post("http://localhost:54485/login",token);
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role } from './models/roles';
+import { ApiService } from './service/api.service';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +46,7 @@ export class AppComponent {
     TimeSection:true
   };
 
-  constructor(private router:Router){
+  constructor(private router:Router, private httpService:ApiService){
     this.token = JSON.parse(localStorage.getItem('token') as string);
   }
   ngOnInit(){
@@ -98,8 +99,31 @@ export class AppComponent {
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }
-}
 
+  openLink() {
+    // this.httpService.postData(this.token).subscribe(
+    //   response => {
+    //     // Handle the response from the server
+    //     console.log(response);
+    //     // Open the link in a new tab if needed
+    //     window.open(`http://localhost:54485/login?token=${this.token}`, '_blank');
+    //   },
+    //   error => {
+    //     // Handle error
+    //     console.error(error);
+    //   }
+    // );
+    // this.login();
+    
+  }
+//   login(username: string, password: string) {
+//     this.http.post('http://localhost:5000/api/login', { username, password })
+//       .subscribe((response: any) => {
+//         localStorage.setItem('token', response.token);
+//         this.openPostInNewTab('http://localhost:54485/login', { token: response.token });
+//       });
+// }
+}
 @Component({
   selector: 'app-dashboard',
   template: `<h1>Dashboard Component</h1>`

@@ -78,6 +78,9 @@
   
   .login-content {
     padding: 20px;
+    margin-right: 20%;
+    top: 70px;
+    position: relative;
   }
   
   .login-section {
@@ -101,6 +104,10 @@
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
+  }
+  .btn-primary,.btn-outline-secondary{
+     background-color: #0032A4;
+     color: white;
   }
   
   .btn-primary:hover {
@@ -169,7 +176,8 @@
 
 
    .background-image {
-    background-image: url('src\assets\images\hrms--500x500.webp'); 
+    /* background-image: url('src\assets\images\hrms--500x500.webp');  */
+    background-image: url('src\assets\images\HRMS.png'); 
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
@@ -178,5 +186,37 @@
     position: absolute;
     top: 0;
     left: 0;
+    top: 70px;
+    width: 545px;
+    height: 471px;
+    /* margin: auto; */
+    margin-left: 10%;
+
   }
-  
+  .loginPanelHeader{
+    margin: auto;
+    align-items: center;
+    position: relative;
+    display: flex;
+    margin-left: 25%;
+  }
+  #login-box{
+    height: 100%;
+  }
+  .col-6-bg-image{
+    width: 50% !important;
+    height: 100% !important;
+  }
+  .bg-4C6FBF{
+    background-color: #4C6FBF;
+  }
+  .container{
+    max-width: 100%;
+    height: 100%;
+  }
+  .btn-link{
+    color: white;
+  }
+  label,.label{
+    color: white;
+  }
