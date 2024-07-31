@@ -71,7 +71,10 @@
     justify-content: flex-end; 
   }
    */
-  .wrapper .login-container {
+
+/* 
+   ----------------------------------------------- 
+   .wrapper .login-container {
     margin-top: 50px;
     float: right; 
   }
@@ -119,11 +122,6 @@
     text-align: left;
   }
   
-
-
-
-  
-
   .ForgotPasswordAlert{
     padding: 15px;
     margin-bottom: 20px;
@@ -135,21 +133,13 @@
 .alert {
     font-size: 16px;
     margin-top: 7px;
-    /* padding: 20px; */
-    /* margin: 20px; */
+   
     text-align: center;
     width: 65%;
     margin-left: 415px;
 }
 
-/* .alert-danger {
-  color: #721c24;
-  background-color: #eb404e;
-  border-color: #f5c6cb;
-  padding: 10px;
-  border: 1px solid rgb(221, 35, 107);
-  border-radius: 5px 5px 5px 5px;
-} */
+
 
 .alert-danger {
   color: #721c24;

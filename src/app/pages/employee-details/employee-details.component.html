@@ -1,0 +1,72 @@
+<section><br/><br/>
+<div class="col-md-8 order-md-2">
+    <h4 class="mb-3 text-center ">Employee Details</h4><hr>
+    <form class="needs-validation">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="companyName">First Name</label>
+          <input type="text" class="form-control" id="companyName" placeholder="" value="" required="" formControlName="companyName">
+        
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="designation">Last Name</label>
+          <input type="text" class="form-control" id="designation" placeholder="" value="" formControlName="designation" required="">         
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="rmName">RM Name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="rmName" placeholder="rmName" required="" formControlName="rmName">
+        
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-6 mb-3">
+              <label for="mrMail">RM Email </label>
+              <input type="email" class="form-control" id="mrMail" placeholder="you@example.com" formControlName="rmMail">
+              <!-- <div class="invalid-feedback">
+                  Please enter a valid email address of Reporting Manager.
+              </div> -->
+          </div>
+
+          <div class="col-md-6 mb-3">
+              <label for="rmMob">Contact No of RM</label>
+              <input type="number" class="form-control" id="rmMob" placeholder="8787877887" required="" formControlName="rmMob">
+              <!-- <div class="invalid-feedback">
+                  Please enter contact no of Reporting Manager.
+              </div> -->
+          </div>
+      </div>
+      <div class="mb-3">
+          <label for="hrName">HR Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="hrName" placeholder="hrName" required="" formControlName="hrName">
+            <!-- <div class="invalid-feedback" style="width: 100%;">
+              Name of HR is required.
+            </div> -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+              <label for="hrMail">HR Email </label>
+              <input type="email" class="form-control" id="hrMail" placeholder="you@example.com" formControlName="hrMail">
+              <!-- <div class="invalid-feedback">
+                   Please enter a valid email address HR.
+              </div> -->
+          </div>
+
+          <div class="col-md-6 mb-3">
+              <label for="hrmob">Contact No of HR</label>
+              <input type="number" class="form-control" id="hrmob" placeholder="8787877887" required="" formControlName="hrMob">
+              <div class="invalid-feedback">
+                   Please enter contact no of HR.
+              </div>
+          </div>
+      </div>
+      <!-- <button class="btn btn-primary float-right" (click)="createEmployee()" type="submit">Create</button> -->
+    </form>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 <div class="wrapper">
-  <app-login *ngIf="!IsLogin" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
+ <app-change-password *ngIf="isSnapshot" ></app-change-password>
   
   <aside *ngIf="IsLogin" class="left-sidebar sidebar-dark" id="left-sidebar">
     <div id="sidebar" class="sidebar sidebar-with-footer">

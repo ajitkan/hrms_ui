@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { Role } from './models/roles';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from './service/api.service';
 
 @Component({
@@ -15,6 +16,10 @@ export class AppComponent {
   userLogIn:any;
   screens: any[] = [];
   notificationCount=0;
+  isSnapshot = false;
+  isResetPasswordRoute=false;
+  
+  // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token='';
   
   // isJobPostCollapsed: boolean = true;
@@ -46,10 +51,18 @@ export class AppComponent {
     TimeSection:true
   };
 
-  constructor(private router:Router, private httpService:ApiService){
+  constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
+    private modalService: NgbModal,
+  ){
     this.token = JSON.parse(localStorage.getItem('token') as string);
   }
   ngOnInit(){
+    if (this.router.url.includes('reset-password')) {
+      this.isSnapshot = true;
+      // this.isResetPasswordRoute = true;
+      // this.openChangePasswordModal();
+   
+  }
     console.log('Notification count',this.notificationCount);
     // alert("login Success");
     // this.IsLogin = true;
@@ -59,6 +72,20 @@ export class AppComponent {
     }
 
   }
+
+  ngDoCheck(){
+    if (this.router.url.includes('reset-password')) {
+      this.isSnapshot = true;
+      // this.isResetPasswordRoute = true;
+      // this.openChangePasswordModal();
+    }
+  }
+  // openChangePasswordModal() {
+  //   this.modalService.open(this.changePasswordModal, { centered: true }); 
+  // }
+  // closeChangePasswordModal() {
+  //   this.isResetPasswordRoute = false;
+  // }
 
   get isAdmin() {
     // this.userLogIn = JSON.parse(sessionStorage.getItem('user')!);
