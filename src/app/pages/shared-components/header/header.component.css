@@ -106,8 +106,8 @@
   .notification .dropdown-menu.show {
     display: block;
     width: 400px;
-    left: -225px;
-    margin-top: 10px;
+    left: -220px;
+    /* margin-top: 10px; */
   }
   
   .notification .notification-item {
