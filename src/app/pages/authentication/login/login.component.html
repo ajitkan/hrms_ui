@@ -7,12 +7,7 @@
 
 
 <div *ngIf="loginForm.invalid || loginForm.valid" class="container text-center">
-  <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-    {{ alertMessage }}
-    <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div> 
+  
   <div class="loginPanelHeader">
     
   </div>
@@ -25,17 +20,23 @@
     </div>
     
     <div class="col-6 float-right bg-4C6FBF">
+      <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
       <div class="login-content">
         <div class="loginPanelHeader">
           <div class="form-container">
           
 
             <div class="login-section text-center clearfix CredentialsDiv ">
-              <h3 class="text-center label">Login in to your Account</h3>
+              <h3 class="text-center loginlabel">Login in to your Account</h3>
 
               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                  <label for="companyCode" class="float-left">Company Code</label>
+                  <label for="companyCode" class="float-left loginlabel">Company Code</label>
                   <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
                     required />
                   <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
@@ -45,7 +46,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="employeeCode"class="float-left">Employee Code</label>
+                  <label for="employeeCode"class="float-left loginlabel">Employee Code</label>
                   <input formControlName="employeeCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
                     required />
                   <div *ngIf="f['employeeCode'].touched && f['employeeCode'].invalid" class="text-danger error-message">
@@ -54,7 +55,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="password" class="float-left">Password</label>
+                  <label for="password" class="float-left loginlabel">Password</label>
                   <div class="input-group">
                     <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
                       id="txtPassword" placeholder="Password" required />

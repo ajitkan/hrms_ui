@@ -1,94 +1,35 @@
-<!-- Header -->
 <header class="main-header" id="header">
   <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-    <!-- Sidebar toggle button -->
     <button id="sidebar-toggler" class="sidebar-toggle">
-      <!-- <button id="sidebar-toggler" (click)="toggleCollapse()" class="sidebar-toggle"> -->
-
       <span class="sr-only">Toggle navigation</span>
     </button>
 
-    <!-- <span class="page-title">navbar customization</span> -->
-
-       <!---------Implement Search Functionality---------> 
-      <div class="search-container m-auto">
-        <div class="row" style="width: 129%;">
-          <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees"
-                 name="query" id="search-input" class="form-control"/>
-        </div>
-        <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;">
-          <ul class="dropdown-menu show" [ngClass]="{'d-none': !['showDropdown']}" style="width: 490px; margin-left: -12px;">
-            <!-- <a routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray}"> -->
-              <!-- <a (click)="navigateToEmployeeDetail(EmployeeList)"> -->
-              <li *ngFor="let employee of visibleResults" class="list-group-item">
-                <a routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}" style="text-decoration: none;">
-
-                {{ employee.FirstName }} {{ employee.LastName }} {{ employee.Email }} {{employee.PhoneNumber}} </a>
-              </li>
-            <!-- </a> -->
-            <li *ngIf="searchResults.length > 0 && !showAll" routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray()}" class="list-group-item see-all">
-              See all records
-            </li>
-          </ul>
-        </div>
-      </div> 
+    <!---------Implement Search Functionality--------->
+    <div class="search-container m-auto">
+      <div class="row" style="width: 129%;">
+        <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees" name="query"
+          id="search-input" class="form-control" />
       </div>
-
+      <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;">
+        <ul class="dropdown-menu show" [ngClass]="{'d-none': !['showDropdown']}"
+          style="width: 490px; margin-left: -12px;">
+          <li *ngFor="let employee of visibleResults" class="list-group-item">
+            <a routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}"
+              style="text-decoration: none;">
+              {{ employee.FirstName }} {{ employee.LastName }} {{ employee.Email }} {{employee.PhoneNumber}} </a>
+          </li>
+          <li *ngIf="searchResults.length > 0 && !showAll" routerLink="/EmployeeList"
+            [queryParams]="{data:encodedJsonArray()}" class="list-group-item see-all">
+            See all records
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-right ">
       <ul class="nav navbar-nav">
-
-        <!-- <li class="custom-dropdown">
-          <a class="offcanvas-toggler active custom-dropdown-toggler" data-offcanvas="contact-off" href="javascript:">
-            <i class="mdi mdi-contacts icon"></i>
-          </a>
-        </li> -->
-
-
-        
-        <!-- <li class="dropdown notification">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)"
-                  data-target="#notificationDropdownMenu" data-toggle="show">
-            <i class="mdi mdi-bell-outline icon"></i> 
-            <span class="notification-count">{{notificationCount}}</span>
-             
-          </button>
-          <ul id="notificationDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isNotification}">
-            <div *ngIf="notifications.length > 0">
-              <div class="notification-item"
-                   *ngFor="let notification of notifications"
-                   (click)="showNotificationDetails(notification)"
-                   [ngClass]="{'active': selectedNotification === notification}">
-                <div class="notification-header">
-                  <span>{{ notification.message }}</span>
-                  <br>
-                  <span class="notification-timestamp">
-                    {{ notification.createdDate | date: 'dd/MM/yyyy, h:mm a' }}
-                  </span>
-                </div>
-                <div class="notification-details" *ngIf="selectedNotification === notification">
-                  <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
-                  <p><strong>Module:</strong> {{ notification.module }}</p>
-                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
-                    Close
-                  </button>
-                </div>
-              </div>
-            
-              <div class="load-more">
-                <button class="btn btn-sm btn-primary" (click)="loadMore()">
-                  View More
-                </button>
-              </div>
-            </div>
-            <div *ngIf="notifications.length === 0">
-              <p class="no-notifications">No notifications available.</p>
-            </div>
-          </ul>
-        </li> -->
-        
-
-
         <li class="dropdown notification">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" data-target="#notificationDropdownMenu" data-toggle="show">
+          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)"
+            data-target="#notificationDropdownMenu" data-toggle="show">
             <i class="mdi mdi-bell-outline icon"></i>
             <span class="notification-count">
               <!-- {{ unreadCount }} -->
@@ -97,10 +38,9 @@
           </button>
           <ul id="notificationDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isNotification}">
             <div *ngIf="notifications.length > 0">
-              <div class="notification-item"
-                   *ngFor="let notification of notifications"
-                   (click)="showNotificationDetails(notification)"
-                   [ngClass]="{'active': selectedNotification === notification}">
+              <div class="notification-item" *ngFor="let notification of notifications"
+                (click)="showNotificationDetails(notification)"
+                [ngClass]="{'active': selectedNotification === notification}">
                 <div class="notification-header">
                   <span>{{ notification.message }}</span>
                   <br>
@@ -111,7 +51,8 @@
                 <div class="notification-details" *ngIf="selectedNotification === notification">
                   <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
                   <p><strong>Module:</strong> {{ notification.module }}</p>
-                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
+                  <button class="btn btn-sm btn-secondary close-details-button"
+                    (click)="clearSelectedNotification($event)">
                     Close
                   </button>
                 </div>
@@ -128,32 +69,8 @@
             </div>
           </ul>
         </li>
-        
-        
-        <!-- notification -->
-
-
-
-
-        <!-- <li class="custom-dropdown">
-            <button class="notify-toggler custom-dropdown-toggler" (click)="openNotificationModal()" href="javascript:void(0)">
-              <i class="mdi mdi-bell-outline icon"></i>
-              <span class="badge badge-xs rounded-circle">{{ notificationCount }}</span>
-            </button>
-          </li> -->
-
-        <!-- <div class="header-right">
-          <button class="notification-icon" (click)="openNotificationModal()">
-            <i class="fa fa-bell"></i>
-            <span class="badge badge-xs rounded-circle">{{ notificationCount }}</span>
-          </button>
-        </div> -->
 
         <!-- Other header HTML code -->
-
-
-
-
         <!-- User Account -->
         <li class="dropdown user-menu">
           <button class="dropdown-toggle nav-link" (click)="toggleCollapse()" href="javascript:void(0)"
@@ -178,46 +95,15 @@
               </a>
             </li>
 
-             <footer class="border-top dropdown-notify-footer">
-                <div class="d-flex justify-content-between align-items-center py-2 px-4">
-                  <span>Last updated 3 min ago</span>
-                  <a id="refress-button" href="javascript:" class="btn mdi mdi-cached btn-refress"></a>
-                </div>
-              </footer>
-            </div>
+            <li class="dropdown-footer">
+              <a class="dropdown-link-item" style="justify-content: normal;" (click)="logout()"> <i
+                  class="mdi mdi-logout"></i> Log Out </a>
+            </li>
           </ul>
-        
-          <!-- User Account -->
-          <li class="dropdown user-menu">
-            <button class="dropdown-toggle nav-link" (click)="toggleCollapse()" href="javascript:void(0)" data-target="#loginDropdownMenu" data-toggle="show">
-              
-              <img src="../assets/images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
-              <span class="d-none d-lg-inline-block">{{user!=null && user.first_name!=null?user.first_name+" "+user.last_name:'' | uppercase}}</span>
-            </button>
-
-            <ul id="loginDropdownMenu" class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isCollapsed}">
-              <li>
-                <a class="dropdown-link-item" routerLink="/employeeData">
-                  <i class="mdi mdi-account-outline"></i>
-                  <span class="nav-text">My Profile</span>
-                </a>
-              </li>
-
-              <li>
-                <a class="link-item" style="justify-content: normal;" (click)="openChangePasswordModal()" [ngStyle]="{'cursor': 'pointer'}">
-                  <i class="fas fa-lock icon"></i>
-                  <span class="nav-text">Change Password</span>
-                </a>
-              </li>
-              
-              <li class="dropdown-footer">
-                <a class="dropdown-link-item" style="justify-content: normal;" (click)="logout()"> <i class="mdi mdi-logout"></i> Log Out </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>
 <app-notifications *ngIf="notificationsOpen"></app-notifications>
 

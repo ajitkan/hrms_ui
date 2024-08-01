@@ -148,7 +148,7 @@
     display: block;
     width: 400px;
     left: -355px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
   
   .notification .notification-item {

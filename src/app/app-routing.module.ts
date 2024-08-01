@@ -46,8 +46,12 @@ import { NotificationDetailsComponent } from './pages/shared-components/notifica
 
 const routes: Routes = [
   //  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // {
+  //   path:'login',component:LoginComponent
+  // },
   {
-    path:'',component:LoginComponent
+    path:'',component:DashboardComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'home',component:DashboardComponent
@@ -57,7 +61,8 @@ const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data:{ isLogin:localStorage.getItem('token')?true:false} 
   },
   { path: 'reset-password', component: ChangePasswordComponent,
     canActivate: [AuthGuard]    

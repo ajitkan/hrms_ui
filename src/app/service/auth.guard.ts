@@ -35,7 +35,14 @@ export class AuthGuard implements CanActivate {
             return false;
         }
         return true;
-    } else {
+    } else
+    if (localStorage.getItem("token") != null && Object.keys(route.data).length == 0) {
+        return true;
+    }
+    if(route.data['isLogin']){
+        return false;
+    }
+    else {
         // Redirect to login or other page if not logged in
         this.router.navigate(['/login']);
         return false;

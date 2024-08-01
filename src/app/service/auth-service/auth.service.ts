@@ -10,12 +10,13 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class AuthService {
-   private apiUrl = environment.apiUrl1;
+   private apiUrl = environment.apiUrl;
    private userSubject: BehaviorSubject<User>;  
    public user: Observable<User>;
   
   constructor(private http: HttpClient) {  
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token') as string));
+    debugger;
+    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
     this.user = this.userSubject.asObservable();
     
   }
@@ -44,12 +45,13 @@ public get userValue() {
   }
 
 
-  logout(): Observable<any> {
-    //const token = localStorage.getItem('token');
-    const token = JSON.parse(localStorage.getItem('token') as string);
-  } 
+  // logout(): Observable<any> {
+  //   //const token = localStorage.getItem('token');
+  //   const token = JSON.parse(localStorage.getItem('token') as string);
+  // } 
 getUserName(){
   const token = JSON.parse(localStorage.getItem('token')!);
+  
     if (!token) {
       throw new Error('No token found');
     }
@@ -59,12 +61,13 @@ getUserName(){
 
   logout(): Observable<any> {
     const token = JSON.parse(localStorage.getItem('token')!);
+    // const token =localStorage.getItem('token');
+
     const username = this.getUserName();//decodedToken?.unique_name; 
 
     // Call the logout API
-    return this.http.post(`${this.apiUrl}/LogOut`, { username }, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).pipe(
+    return this.http.post(`${this.apiUrl}/LogOut`, { username },{
+      headers: { Authorization: `Bearer ${token}` }}).pipe(
       catchError(error => {
         throw error;
       })
@@ -73,6 +76,7 @@ getUserName(){
 
   clearSession() {
     localStorage.removeItem('token');
+    localStorage.clear();
    
   }// auth.service.ts
 resetPassword(payload: {currentPassword:string; newPassword: string; userName: string; companyCode: string }, token: string): Observable<any> {

@@ -166,6 +166,124 @@
 
 
    .background-image {
+    background-image: url('src\assets\images\HRMS.png'); 
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 100%; 
+    width: 50%; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 70px;
+    width: 545px;
+    height: 471px;
+    
+    margin-left: 10%;
+
+  }*/
+  .wrapper .login-container {
+    margin-top: 50px;
+    float: right; 
+  }
+  
+  .login-content {
+    padding: 20px;
+    margin-right: 20%;
+    top: 70px;
+    position: relative;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    margin-top: 16px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary,.btn-outline-secondary{
+     background-color: #0032A4;
+     color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .error-message {
+    text-align: left;
+  }
+  
+
+
+
+  
+
+  .ForgotPasswordAlert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+
+.alert {
+    font-size: 16px;
+    margin-top: 7px;
+    /* padding: 20px; */
+    /* margin: 20px; */
+    text-align: center;
+    /* width: 65%;
+    margin-left: 415px; */
+}
+
+/* .alert-danger {
+  color: #721c24;
+  background-color: #eb404e;
+  border-color: #f5c6cb;
+  padding: 10px;
+  border: 1px solid rgb(221, 35, 107);
+  border-radius: 5px 5px 5px 5px;
+} */
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f1c3c7;
+  border-color:#eb949d ;
+  padding: 10px;
+  border: 1px solid #eb949d;
+  border-radius: 5px 5px 5px 5px;
+}
+
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #a7dbb3;
+  padding: 10px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+   .logo{
+    height: 60px;
+   }
+.background-image {
     /* background-image: url('src\assets\images\hrms--500x500.webp');  */
     background-image: url('src\assets\images\HRMS.png'); 
     background-size: cover;
@@ -207,6 +325,7 @@
   .btn-link{
     color: white;
   }
-  label,.label{
+  .loginlabel{
     color: white;
   }
+  

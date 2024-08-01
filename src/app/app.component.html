@@ -2,7 +2,7 @@
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
  <app-change-password *ngIf="isSnapshot" ></app-change-password>
   
-  <aside *ngIf="IsLogin" class="left-sidebar sidebar-dark" id="left-sidebar">
+  <aside *ngIf="IsLogin && !isSnapshot" class="left-sidebar sidebar-dark" id="left-sidebar">
     <div id="sidebar" class="sidebar sidebar-with-footer">
       <div class="sidebar-left" data-simplebar style="height: 100%;">
         <ul class="nav flex-column">
@@ -44,7 +44,7 @@
       </div>
     </div>
   </aside>
-  <div *ngIf="IsLogin" class="page-wrapper">
+  <div *ngIf="IsLogin && !isSnapshot" class="page-wrapper">
     <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
     <router-outlet></router-outlet>
     <app-footer></app-footer>

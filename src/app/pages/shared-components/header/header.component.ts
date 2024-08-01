@@ -255,6 +255,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user") as string);
+    console.log("this.notificationCount",this.notificationCount)
     this.initializeUserData();
   }
 
@@ -366,6 +367,7 @@ export class HeaderComponent {
   logout() {
     this.authService.logout().subscribe({
       next: (res: any) => {
+        debugger;
         console.log('Logout response:', res); 
         this.logoutRes = res;
         
@@ -383,6 +385,7 @@ export class HeaderComponent {
         }
       },
       error: (error) => {
+        debugger;
         console.error('Logout failed', error);
       }
     });
@@ -447,6 +450,7 @@ export class HeaderComponent {
           this.notifications = page === 1 ? res.notificationList : [...this.notifications, ...res.notificationList];
           this.totalPages = res.totalCount ? Math.ceil(res.totalCount / this.pageSize) : 1; // Update totalPages
           this.loading = false; // Reset loading state
+          this.notificationCount = res.totalCount;
         } else {
           this.totalPages = 1; // If no notifications, default to 1 page
           this.loading = false; // Reset loading state

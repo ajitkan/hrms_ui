@@ -20,7 +20,7 @@ export class AppComponent {
   isResetPasswordRoute=false;
   
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
-  token='';
+  token:string ='';
   
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
@@ -54,22 +54,29 @@ export class AppComponent {
   constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
     private modalService: NgbModal,
   ){
-    this.token = JSON.parse(localStorage.getItem('token') as string);
+    this.token = JSON.parse(localStorage.getItem('token')as string);
   }
   ngOnInit(){
     if (this.router.url.includes('reset-password')) {
       this.isSnapshot = true;
       // this.isResetPasswordRoute = true;
       // this.openChangePasswordModal();
-   
-  }
+      
+    }
+    
+    console.log("IsLogin",this.IsLogin);
     console.log('Notification count',this.notificationCount);
     // alert("login Success");
     // this.IsLogin = true;
     this.userLogIn = JSON.parse(sessionStorage.getItem('user')! as string);
-    if(localStorage.getItem('LoggedIn') !== null){
-      this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
+    if(this.token!=null){
+      this.IsLogin = true;
+      this.screens = JSON.parse(localStorage.getItem('screens') as string);
+      this.isSnapshot = false;
     }
+    // if(localStorage.getItem('LoggedIn') !== null){
+    //   this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
+    // }
 
   }
 
@@ -116,7 +123,8 @@ export class AppComponent {
     if (!event.isLoggedIn) {
       this.screens = [];
       this.notificationCount = 0;
-      localStorage.removeItem('LoggedIn');
+      debugger;
+      //localStorage.removeItem('LoggedIn');
     } else {
       debugger;
       this.screens = event.screens;
