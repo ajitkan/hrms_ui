@@ -2,6 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { Role } from './models/roles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from './service/api.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
   isResetPasswordRoute=false;
   
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
-  token='';
+  token:string ='';
   
   // isJobPostCollapsed: boolean = true;
   // isCollapsed:boolean=false;
@@ -50,36 +51,42 @@ export class AppComponent {
     TimeSection:true
   };
 
-
-  constructor(private router:Router,private route:ActivatedRoute,
+  constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
     private modalService: NgbModal,
   ){
-    this.token = JSON.parse(localStorage.getItem('token') as string);
   }
   ngOnInit(){
+    this.token = JSON.parse(localStorage.getItem('token')as string);
     if (this.router.url.includes('reset-password')) {
       this.isSnapshot = true;
       // this.isResetPasswordRoute = true;
       // this.openChangePasswordModal();
-   
-  }
+      
+    }
+    
+    console.log("IsLogin",this.IsLogin);
     console.log('Notification count',this.notificationCount);
     // alert("login Success");
     // this.IsLogin = true;
     this.userLogIn = JSON.parse(sessionStorage.getItem('user')! as string);
-    if(localStorage.getItem('LoggedIn') !== null){
-      this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
+    if(this.token!=null){
+      this.IsLogin = true;
+      this.screens = JSON.parse(localStorage.getItem('screens') as string);
+      this.isSnapshot = false;
     }
+    // if(localStorage.getItem('LoggedIn') !== null){
+    //   this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
+    // }
 
   }
 
-  ngDoCheck(){
-    if (this.router.url.includes('reset-password')) {
-      this.isSnapshot = true;
-      // this.isResetPasswordRoute = true;
-      // this.openChangePasswordModal();
-    }
-  }
+  // ngDoCheck(){
+  //   if (this.router.url.includes('reset-password')) {
+  //     this.isSnapshot = true;
+  //     // this.isResetPasswordRoute = true;
+  //     // this.openChangePasswordModal();
+  //   }
+  // }
   // openChangePasswordModal() {
   //   this.modalService.open(this.changePasswordModal, { centered: true }); 
   // }
@@ -116,7 +123,8 @@ export class AppComponent {
     if (!event.isLoggedIn) {
       this.screens = [];
       this.notificationCount = 0;
-      localStorage.removeItem('LoggedIn');
+      debugger;
+      //localStorage.removeItem('LoggedIn');
     } else {
       debugger;
       this.screens = event.screens;
@@ -126,8 +134,31 @@ export class AppComponent {
   toggleCollapse(menuItem: string) {
     this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
   }
-}
 
+  openLink() {
+    // this.httpService.postData(this.token).subscribe(
+    //   response => {
+    //     // Handle the response from the server
+    //     console.log(response);
+    //     // Open the link in a new tab if needed
+    //     window.open(`http://localhost:54485/login?token=${this.token}`, '_blank');
+    //   },
+    //   error => {
+    //     // Handle error
+    //     console.error(error);
+    //   }
+    // );
+    // this.login();
+    
+  }
+//   login(username: string, password: string) {
+//     this.http.post('http://localhost:5000/api/login', { username, password })
+//       .subscribe((response: any) => {
+//         localStorage.setItem('token', response.token);
+//         this.openPostInNewTab('http://localhost:54485/login', { token: response.token });
+//       });
+// }
+}
 @Component({
   selector: 'app-dashboard',
   template: `<h1>Dashboard Component</h1>`

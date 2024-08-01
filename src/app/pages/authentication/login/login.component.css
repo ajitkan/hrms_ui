@@ -81,6 +81,9 @@
   
   .login-content {
     padding: 20px;
+    margin-right: 20%;
+    top: 70px;
+    position: relative;
   }
   
   .login-section {
@@ -104,6 +107,10 @@
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
+  }
+  .btn-primary,.btn-outline-secondary{
+     background-color: #0032A4;
+     color: white;
   }
   
   .btn-primary:hover {
@@ -159,7 +166,7 @@
 
 
    .background-image {
-    background-image: url('src\assets\images\hrms--500x500.webp'); 
+    background-image: url('src\assets\images\HRMS.png'); 
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
@@ -168,307 +175,157 @@
     position: absolute;
     top: 0;
     left: 0;
+    top: 70px;
+    width: 545px;
+    height: 471px;
+    
+    margin-left: 10%;
+
+  }*/
+  .wrapper .login-container {
+    margin-top: 50px;
+    float: right; 
   }
-  ----------------------------- */
+  
+  .login-content {
+    padding: 20px;
+    margin-right: 20%;
+    top: 70px;
+    position: relative;
+  }
+  
+  .login-section {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    margin-top: 16px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary,.btn-outline-secondary{
+     background-color: #0032A4;
+     color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .error-message {
+    text-align: left;
+  }
+  
 
-  /* Base styles */
-/* .wrapper .login-container {
-  margin-top: 50px;
-  float: right; 
-}
 
-.login-content {
-  padding: 20px;
-}
 
-.login-section {
-  max-width: 100%;
-  margin: 0 auto;
-}
+  
 
-.form-group {
-  margin-bottom: 15px;
-  margin-top: 16px;
-}
+  .ForgotPasswordAlert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
 
-.form-control {
-  border-radius: 4px;
-}
-
-.input-group-text {
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
-.error-message {
-  text-align: left;
-}
-
-.ForgotPasswordAlert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
 
 .alert {
-  font-size: 16px;
-  margin-top: 7px;
-  text-align: center;
-  width: 65%;
-  margin-left: auto;
-  margin-right: auto;
+    font-size: 16px;
+    margin-top: 7px;
+    /* padding: 20px; */
+    /* margin: 20px; */
+    text-align: center;
+    /* width: 65%;
+    margin-left: 415px; */
 }
+
+/* .alert-danger {
+  color: #721c24;
+  background-color: #eb404e;
+  border-color: #f5c6cb;
+  padding: 10px;
+  border: 1px solid rgb(221, 35, 107);
+  border-radius: 5px 5px 5px 5px;
+} */
 
 .alert-danger {
   color: #721c24;
   background-color: #f1c3c7;
-  border-color: #eb949d;
+  border-color:#eb949d ;
   padding: 10px;
   border: 1px solid #eb949d;
-  border-radius: 5px;
+  border-radius: 5px 5px 5px 5px;
 }
+
 
 .alert-success {
   color: #155724;
   background-color: #d4edda;
   border-color: #a7dbb3;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
-.logo {
-  height: 60px;
-}
-
+   .logo{
+    height: 60px;
+   }
 .background-image {
-  background-image: url('src/assets/images/hrms--500x500.webp'); 
-  background-size: cover;
-  background-position: left;
-  background-repeat: no-repeat;
-  height: 100%; 
-  width: 50%; 
-  position: absolute;
-  top: 0;
-  left: 0;
-} */
+    /* background-image: url('src\assets\images\hrms--500x500.webp');  */
+    background-image: url('src\assets\images\HRMS.png'); 
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 100%; 
+    width: 50%; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 70px;
+    width: 545px;
+    height: 471px;
+    /* margin: auto; */
+    margin-left: 10%;
 
-/* Responsive styles */
-/* @media (max-width: 768px) {
-  .wrapper .login-container {
-      margin-top: 20px;
-      float: none;
-      width: 100%;
-      padding: 0 10px;
   }
-
-  .login-content {
-      padding: 10px;
+  .loginPanelHeader{
+    margin: auto;
+    align-items: center;
+    position: relative;
+    display: flex;
+    margin-left: 25%;
   }
-
-  .alert {
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
+  #login-box{
+    height: 100%;
   }
-
-  .background-image {
-      width: 100%;
-      height: 50%;
-      position: relative;
-      background-position: center;
+  .col-6-bg-image{
+    width: 50% !important;
+    height: 100% !important;
   }
-}
-
-@media (max-width: 576px) {
-  .wrapper .login-container {
-      margin-top: 10px;
+  .bg-4C6FBF{
+    background-color: #4C6FBF;
   }
-
-  .login-content {
-      padding: 5px;
+  .container{
+    max-width: 100%;
+    height: 100%;
   }
-
-  .form-group {
-      margin-bottom: 10px;
-      margin-top: 10px;
+  .btn-link{
+    color: white;
   }
-
-  .alert {
-      font-size: 14px;
-      width: 100%;
-      padding: 10px;
+  .loginlabel{
+    color: white;
   }
-
-  .background-image {
-      display: none; 
-  }
-
-  .logo {
-      height: 40px;
-  }
-} */
-
-
-/* Base styles */
-.wrapper .login-container {
-  margin-top: 50px;
-  float: right; 
-}
-
-.login-content {
-  padding: 20px;
-}
-
-.login-section {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  margin-top: 16px;
-}
-
-.form-control {
-  border-radius: 4px;
-}
-
-.input-group-text {
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
-.error-message {
-  text-align: left;
-}
-
-.ForgotPasswordAlert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
-.alert {
-  font-size: 16px;
-  margin-top: 7px;
-  text-align: center;
-  width: 65%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.alert-danger {
-  color: #721c24;
-  background-color: #f1c3c7;
-  border-color: #eb949d;
-  padding: 10px;
-  border: 1px solid #eb949d;
-  border-radius: 5px;
-  margin-left: 450px;
-}
-
-.alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #a7dbb3;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.logo {
-  height: 60px;
-}
-
-.background-image {
-  background-image: url('src/assets/images/hrms--500x500.webp'); 
-  background-size: cover;
-  background-position: left;
-  background-repeat: no-repeat;
-  height: 100%; 
-  width: 50%; 
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .wrapper .login-container {
-      margin-top: 20px;
-      float: none;
-      width: 100%;
-      padding: 0 10px;
-  }
-
-  .login-content {
-      padding: 10px;
-  }
-
-  .alert {
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-  }
-
-  .background-image {
-      width: 100%;
-      height: 50%;
-      position: relative;
-      background-position: center;
-      background-size: contain;
-      opacity: 0.5; /* Make it less prominent */
-  }
-}
-
-@media (max-width: 576px) {
-  .wrapper .login-container {
-      margin-top: 10px;
-  }
-
-  .login-content {
-      padding: 5px;
-  }
-
-  .form-group {
-      margin-bottom: 10px;
-      margin-top: 10px;
-  }
-
-  .alert {
-      font-size: 14px;
-      width: 100%;
-      padding: 10px;
-  }
-
-  .background-image {
-      width: 100%;
-      height: 30%;
-      background-position: center;
-      background-size: cover;
-      opacity: 0.3; /* Make it even less prominent on very small screens */
-  }
-
-  .logo {
-      height: 40px;
-  }
-}
+  

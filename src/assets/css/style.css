@@ -14994,6 +14994,7 @@ table.dataTable thead .sorting {
   top: auto !important;
   bottom: 69px;
   left: 20px;
+  margin-top: 10%;
 }
 
 /*===== ICONS =====*/

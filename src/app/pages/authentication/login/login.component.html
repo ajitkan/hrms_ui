@@ -7,108 +7,117 @@
 
 
 <div *ngIf="loginForm.invalid || loginForm.valid" class="container text-center">
-  <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-    {{ alertMessage }}
-    <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div> 
-  <div class="login-container whitebg bs-reset float-right" id="login-box">
-
-    <div class="background-image"> </div>
-
+  
+  <div class="loginPanelHeader">
     
+  </div>
+  <div class="bs-reset row" id="login-box">
+    <div class="col-6 col-6-bg-image">
+      <div class="text-center mt-2 mb-2">
+        <img src="assets\images\kanlogo2.png" alt="Your Logo" class="logo">
+      </div>
+      <div class="background-image"> </div>
+    </div>
+    
+    <div class="col-6 float-right bg-4C6FBF">
+      <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+      <div class="login-content">
+        <div class="loginPanelHeader">
+          <div class="form-container">
+          
 
-    <div class="login-content">
-      <div class="loginPanelHeader">
-        <div class="form-container">
-          <div class="text-center mt-2 mb-2 mr-3">
-            <img src="assets\images\kanlogo2.png" alt="Your Logo" class="logo">
-          </div>
+            <div class="login-section text-center clearfix CredentialsDiv ">
+              <h3 class="text-center loginlabel">Login in to your Account</h3>
 
-          <div class="login-section text-center clearfix CredentialsDiv ">
-            <h3 class="text-center">Login</h3>
-
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
-                  required />
-                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
-                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
-                  <!-- <div *ngIf="f['companyCode'].errors?.['pattern']">Company Code cannot contain special characters.
-                  </div> -->
-                </div>
-              </div>
-              <div class="form-group">
-                <input formControlName="employeeCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
-                  required />
-                <div *ngIf="f['employeeCode'].touched && f['employeeCode'].invalid" class="text-danger error-message">
-                  <div *ngIf="f['employeeCode'].errors?.['required']">Employee Code is required.</div>
-                  <!-- <div *ngIf="f['empCode'].errors?.['pattern']">Employee Code cannot contain special characters.</div> -->
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
-                    id="txtPassword" placeholder="Password" required />
-                  <div class="input-group-append">
-                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
-                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
-                    </span>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label for="companyCode" class="float-left loginlabel">Company Code</label>
+                  <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
+                    required />
+                  <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
+                    <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                    <!-- <div *ngIf="f['companyCode'].errors?.['pattern']">Company Code cannot contain special characters.
+                    </div> -->
                   </div>
                 </div>
-                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
-                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                <div class="form-group">
+                  <label for="employeeCode"class="float-left loginlabel">Employee Code</label>
+                  <input formControlName="employeeCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
+                    required />
+                  <div *ngIf="f['employeeCode'].touched && f['employeeCode'].invalid" class="text-danger error-message">
+                    <div *ngIf="f['employeeCode'].errors?.['required']">Employee Code is required.</div>
+                    <!-- <div *ngIf="f['empCode'].errors?.['pattern']">Employee Code cannot contain special characters.</div> -->
+                  </div>
                 </div>
-              </div>
-
-              <!-- CAPTCHA Section -->
-              <!-- <div class="form-group text-center">
-                <div class="d-flex justify-content-between align-items-center">
-                  <canvas #captchaCanvas id="captchaCanvas" width="200" height="50"></canvas>
-                  <button type="button" class="btn btn-secondary ml-2" (click)="generateCaptcha()">
-                    <i class="fa fa-refresh"></i>
-                  </button>
+                <div class="form-group">
+                  <label for="password" class="float-left loginlabel">Password</label>
+                  <div class="input-group">
+                    <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
+                      id="txtPassword" placeholder="Password" required />
+                    <div class="input-group-append">
+                      <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                        <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
+                    <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                  </div>
                 </div>
 
+                <!-- CAPTCHA Section -->
+                <!-- <div class="form-group text-center">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <canvas #captchaCanvas id="captchaCanvas" width="200" height="50"></canvas>
+                    <button type="button" class="btn btn-secondary ml-2" (click)="generateCaptcha()">
+                      <i class="fa fa-refresh"></i>
+                    </button>
+                  </div>
 
-                <div class="input-group">
-                  <input type="text" placeholder="Enter CAPTCHA Code" id="userInput" name="userInput"
-                    class="form-control" [(ngModel)]="userInput">
-                  <button type="button" class="btn btn-primary ml-2" (click)="verifyCaptcha()">
-                    <i class="fa fa-check"></i>
-                  </button>
+
+                  <div class="input-group">
+                    <input type="text" placeholder="Enter CAPTCHA Code" id="userInput" name="userInput"
+                      class="form-control" [(ngModel)]="userInput">
+                    <button type="button" class="btn btn-primary ml-2" (click)="verifyCaptcha()">
+                      <i class="fa fa-check"></i>
+                    </button>
+                  </div>
+
+                  <p *ngIf="isVerificationAttempted && isCaptchaValid && userInput !== ''" style="color: green;">
+                    <i class="fa fa-check-circle"></i> CAPTCHA verified successfully!
+                  </p>
+                  <p *ngIf="isVerificationAttempted && !isCaptchaValid && userInput !== ''" style="color: red;">
+                    <i class="fa fa-times-circle"></i> Incorrect CAPTCHA code. Please try again.
+                  </p>
+                </div> -->
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"
+                  >Login</button> 
+                  <!-- // [disabled]="loginForm.invalid" -->
                 </div>
-
-                <p *ngIf="isVerificationAttempted && isCaptchaValid && userInput !== ''" style="color: green;">
-                  <i class="fa fa-check-circle"></i> CAPTCHA verified successfully!
-                </p>
-                <p *ngIf="isVerificationAttempted && !isCaptchaValid && userInput !== ''" style="color: red;">
-                  <i class="fa fa-times-circle"></i> Incorrect CAPTCHA code. Please try again.
-                </p>
-              </div> -->
-
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"
-                 >Login</button> 
-                 <!-- // [disabled]="loginForm.invalid" -->
-              </div>
-              <div class="form-group text-center">
-                <button type="button" class="btn btn-outline-secondary">Check In</button>
+                <div class="form-group text-center">
+                  <button type="button" class="btn btn-outline-secondary">Check In</button>
+                  <span class="ml-2 mr-2"></span>
+                  <button type="button" class="btn btn-outline-secondary">Check Out</button>
+                </div>
+                <div class="form-group text-center">
+                  <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(loginForm,content)">Forgot
+                    Password?</button>
+                  <span class="ml-2 mr-2"></span>
+                  <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(loginForm,unlockContent)">Unlock
+                    Account</button>
+                </div>
                 <span class="ml-2 mr-2"></span>
-                <button type="button" class="btn btn-outline-secondary">Check Out</button>
-              </div>
-              <div class="form-group text-center">
-                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(loginForm,content)">Forgot
-                  Password?</button>
-                <span class="ml-2 mr-2"></span>
-                <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(loginForm,unlockContent)">Unlock
-                  Account</button>
-              </div>
-              <span class="ml-2 mr-2"></span>
-              <button type="button" class="btn btn-sm btn-link"
-                (click)="openChangePasswordModal(changePasswordContent)" style="display: none;" >Change Password</button>
-            </form>
+                <button type="button" class="btn btn-sm btn-link"
+                  (click)="openChangePasswordModal(changePasswordContent)" style="display: none;" >Change Password</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { AuthService } from "./auth-service/auth.service";
 import { map, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environments";
+import { json } from "d3";
 
 // import { environment } from '../../environments/environments';
 // import { ApiService } from './api.service';
@@ -71,7 +72,18 @@ export class JwtInterceptor implements HttpInterceptor {
             request = request.clone({
                 setHeaders: { Authorization: `Bearer ${user.token}` }
             });
-        } else {
+        }else
+        if (user && isApiUrl) {
+            request = request.clone({
+                setHeaders: { Authorization: `Bearer ${user}` }
+            });
+        }
+        else
+        if (localStorage.getItem('token') && isApiUrl) {
+            request = request.clone({
+                setHeaders: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('token')as string)}` }
+            });
+        }else {
             console.warn('User token is not available or request is not to API URL. Proceeding without token.');
         }
         return next.handle(request).pipe(

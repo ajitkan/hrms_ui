@@ -206,6 +206,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth-service/auth.service';
+import { CommanSearchEmployeeService,Employee } from 'src/app/service/CommanService/comman-search-employee.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { jwtDecode } from 'jwt-decode';
 
@@ -215,9 +216,18 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
   @Input() notificationCount: any;
   @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; notificationCount: any; }>();
- 
+  [x: string]: any;
+ //variable  for Search Employee
+  TextFrees: string = '';
+  searchResults: Employee[] = [];
+  visibleResults: any[] = [];
+  showDropdown: boolean = true;
+  showAll: boolean = false;
+
+  encodedJsonString:any;
   user: any;
   isCollapsed: boolean = false;
   isNotification: boolean = false;
@@ -239,11 +249,13 @@ export class HeaderComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private CommanSearchEmployeeService:CommanSearchEmployeeService
   ) {}
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user") as string);
+    console.log("this.notificationCount",this.notificationCount)
     this.initializeUserData();
   }
 
@@ -305,7 +317,6 @@ export class HeaderComponent {
 
   // showNotificationDetails(notification: any) { 
   //   if (notification && notification.notificationID) {
-    
   //     notification.isRead = true;
   
   //     this.updateUnreadCount();
@@ -356,6 +367,7 @@ export class HeaderComponent {
   logout() {
     this.authService.logout().subscribe({
       next: (res: any) => {
+        debugger;
         console.log('Logout response:', res); 
         this.logoutRes = res;
         
@@ -373,16 +385,58 @@ export class HeaderComponent {
         }
       },
       error: (error) => {
+        debugger;
         console.error('Logout failed', error);
       }
     });
   }
+
+  //______________________________For Search Employee______________________________________________
+  onSearch(): void {
+    if (this.TextFrees) {
+      this.searchResults = this.CommanSearchEmployeeService.searchEmployees(this.TextFrees);
+      if (this.searchResults.length > 0 && !this.showAll) {
+        this.visibleResults = this.searchResults.slice(0, 3);
+      } else {
+        debugger;
+        this.visibleResults = this.searchResults;
+      }
+      this.showDropdown = false;
+    } 
+    else {
+      debugger;
+      this.searchResults = [];
+      this.visibleResults = [];
+    }
+
+    // const jsonString = JSON.stringify(this.searchResults);    
+  }
+  showAllRecords(): void {
+    this.showAll = true;
+    this.visibleResults = this.searchResults;
+    this.showDropdown = false; // Hide the dropdown
+    //this.router.navigate(['/EmployeeList'], { queryParams: { data: this.encodedJsonArray } });
+  }
+
+  // get encodedJsonArray(): any {
+  //   return this.encodedJsonString = encodeURIComponent(JSON.stringify(this.searchResults));//encodeURIComponent(JSON.stringify(this.jsonArray));
+  // }
+  encodedJsonArray(emp?: any): string {
+    if(emp){
+      const dataToEncode = emp ? emp : this.searchResults;
+      this.encodedJsonString = encodeURIComponent(JSON.stringify(dataToEncode));
+      console.log('Fetched Employee',JSON.stringify(this.encodedJsonString));
+      return this.encodedJsonString;
+    }
+    else{
+      return this.encodedJsonString = encodeURIComponent(JSON.stringify(this.searchResults));//encodeURIComponent(JSON.stringify(this.jsonArray));
+    }
+}   
   fetchNotifications(page: number) {
     if (!this.token) {
       console.error('Token not found. Cannot fetch notifications.');
       return;
     }
-
     const payload = {
       userName: this.userName,
       pageNumber: page,
@@ -396,6 +450,7 @@ export class HeaderComponent {
           this.notifications = page === 1 ? res.notificationList : [...this.notifications, ...res.notificationList];
           this.totalPages = res.totalCount ? Math.ceil(res.totalCount / this.pageSize) : 1; // Update totalPages
           this.loading = false; // Reset loading state
+          this.notificationCount = res.totalCount;
         } else {
           this.totalPages = 1; // If no notifications, default to 1 page
           this.loading = false; // Reset loading state
@@ -406,8 +461,6 @@ export class HeaderComponent {
         this.loading = false; // Reset loading state
       }
     });
-  }
-  
-  
-  
+  }  
+  //-------------------Search Enmployee-------------------------------
 }

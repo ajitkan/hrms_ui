@@ -111,22 +111,22 @@ export class ApiService {
 // }
 
   getAttendance() {
-    return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
+    return this.http.get<any>(`${environment.apiUrl}/api/Attendance/getAttendance`)
   }
 
   // Get Department Clearance 
  
 
   updateAttendance(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/UpdateAttendance`, data)
   }
 
   punchTimeApplication(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/Attendance/PunchTimeApplication`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/PunchTimeApplication`, data)
   }
 
   getAttendanceByUserId(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/Attendance/GetAttendanceByUserId`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/GetAttendanceByUserId`, data)
   }
 
   getApplicationByUserId(data:any){
@@ -134,6 +134,15 @@ export class ApiService {
       Emp_Id : data.Emp_Id,
       Shift_Date : data.Shift_Date
     }
-    return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`,{params}) 
+    return this.http.get<any>(`${environment.apiUrl}/api/Attendance/GetApplicationByUserId`,{params}) 
+  }
+
+  postData(token: string): Observable<any> {
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json'
+    // });
+    // const body = { token };
+
+    return this.http.post("http://localhost:54485/login",token);
   }
 }

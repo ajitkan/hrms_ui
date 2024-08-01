@@ -215,7 +215,9 @@ export class LoginComponent {
         next: (res: any) => {
           console.log('Login successful', res);
           this.showAlertMessage('Login successful', 'success');
-          localStorage.setItem('token', JSON.stringify(res.token) as string);
+          // localStorage.setItem('token', JSON.stringify(res.token) as string);
+          localStorage.setItem('token', JSON.stringify(res.token)as string);
+          localStorage.setItem('screens',JSON.stringify(res.user.screens));
           // this.isLogin.emit(true);
           this.isLogin.emit({isLoggedIn: true, screens: res.user.screens, notificationCount:res.user.notification});
           
@@ -223,6 +225,7 @@ export class LoginComponent {
             const modalRef = this.modalService.open(this.changePasswordContent, { centered: true });
           } else {
             this.router.navigate(['/home']);
+            // this.openPostInNewTab('https://localhost:7181/api/PersonalDetails/login', { token: res.token });
           }
         },
         error: (error: any) => {
@@ -231,6 +234,26 @@ export class LoginComponent {
         }
       });
   }
+
+  private openPostInNewTab(url: string, params: { [key: string]: any }) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    form.target = '_blank';
+
+    Object.keys(params).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = params[key];
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  }
+
     openForgotPasswordModal(loginForm:FormGroup , content: any) {
       var payload = {
         userName: this.loginForm.get('employeeCode')?.value, 
@@ -375,7 +398,7 @@ export class LoginComponent {
     }
   
     const { currentPassword, newPassword, confirmNewPassword } = this.changePasswordForm.value;
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('token')!);
     const companyCode = this.loginForm.get('companyCode')?.value;
     const userName = this.loginForm.get('employeeCode')?.value;
   
@@ -438,4 +461,6 @@ export class LoginComponent {
       this.alertTimeout = null;
     }
   }
+
+  
 }

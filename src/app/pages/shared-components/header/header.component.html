@@ -1,57 +1,46 @@
-<!-- 
 <header class="main-header" id="header">
   <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-   
     <button id="sidebar-toggler" class="sidebar-toggle">
       <span class="sr-only">Toggle navigation</span>
     </button>
-    <div class="navbar-right ">
 
-      
-      <div class="search-form">
-        <form action="index.html" method="get">
-          <div class="input-group input-group-sm" id="input-group-search">
-            <input type="text" autocomplete="off" name="query" id="search-input" class="form-control"
-              placeholder="Search Employee" />
-            <div class="input-group-append">
-              <button class="btn" type="button">/</button>
-            </div>
-          </div>
-        </form>
-        <ul class="dropdown-menu dropdown-menu-search">
-
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Morbi leo risus</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Dapibus ac facilisis in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Porta ac consectetur ac</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Vestibulum at eros</a>
-          </li>
-
-        </ul>
-
+    <!---------Implement Search Functionality--------->
+    <div class="search-container m-auto">
+      <div class="row" style="width: 129%;">
+        <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees" name="query"
+          id="search-input" class="form-control" />
       </div>
-
+      <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;">
+        <ul class="dropdown-menu show" [ngClass]="{'d-none': !['showDropdown']}"
+          style="width: 490px; margin-left: -12px;">
+          <li *ngFor="let employee of visibleResults" class="list-group-item">
+            <a routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}"
+              style="text-decoration: none;">
+              {{ employee.FirstName }} {{ employee.LastName }} {{ employee.Email }} {{employee.PhoneNumber}} </a>
+          </li>
+          <li *ngIf="searchResults.length > 0 && !showAll" routerLink="/EmployeeList"
+            [queryParams]="{data:encodedJsonArray()}" class="list-group-item see-all">
+            See all records
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-right ">
       <ul class="nav navbar-nav">
-
         <li class="dropdown notification">
-          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)" data-target="#notificationDropdownMenu" data-toggle="show">
+          <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)"
+            data-target="#notificationDropdownMenu" data-toggle="show">
             <i class="mdi mdi-bell-outline icon"></i>
             <span class="notification-count">
+              <!-- {{ unreadCount }} -->
               {{ unreadCount > 0 ? unreadCount : notificationCount }}
             </span>
           </button>
           <ul id="notificationDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isNotification}">
             <div *ngIf="notifications.length > 0">
-              <div class="notification-item"
-                   *ngFor="let notification of notifications"
-                   (click)="showNotificationDetails(notification)"
-                   [ngClass]="{'active': selectedNotification === notification}">
+              <div class="notification-item" *ngFor="let notification of notifications"
+                (click)="showNotificationDetails(notification)"
+                [ngClass]="{'active': selectedNotification === notification}">
                 <div class="notification-header">
                   <span>{{ notification.message }}</span>
                   <br>
@@ -62,12 +51,13 @@
                 <div class="notification-details" *ngIf="selectedNotification === notification">
                   <p><strong>UserID:</strong> {{ notification.notificationUserID }}</p>
                   <p><strong>Module:</strong> {{ notification.module }}</p>
-                  <button class="btn btn-sm btn-secondary close-details-button" (click)="clearSelectedNotification($event)">
+                  <button class="btn btn-sm btn-secondary close-details-button"
+                    (click)="clearSelectedNotification($event)">
                     Close
                   </button>
                 </div>
               </div>
-             
+              <!-- Load More Button -->
               <div class="load-more">
                 <button class="btn btn-sm btn-primary" (click)="loadMore()">
                   View More
@@ -79,9 +69,9 @@
             </div>
           </ul>
         </li>
-        
-        
-        
+
+        <!-- Other header HTML code -->
+        <!-- User Account -->
         <li class="dropdown user-menu">
           <button class="dropdown-toggle nav-link" (click)="toggleCollapse()" href="javascript:void(0)"
             data-target="#loginDropdownMenu" data-toggle="show">
@@ -114,8 +104,6 @@
       </ul>
     </div>
   </nav>
-
-
 </header>
 <app-notifications *ngIf="notificationsOpen"></app-notifications>
 
