@@ -31,7 +31,7 @@
 
 
 
- <div class="wrapper">
+ <!-- <div class="wrapper">
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
   <app-change-password *ngIf="isSnapshot"></app-change-password>
 
@@ -59,4 +59,144 @@
     </div>
     <app-footer></app-footer>
   </div>
+</div> -->
+
+
+<!-- <div class="wrapper">
+  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-change-password *ngIf="isSnapshot"></app-change-password>
+
+  <div *ngIf="IsLogin" class="page-wrapper">
+    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+
+    <div class="main-content">
+     
+      <aside class="left-sidebar sidebar-dark" id="left-sidebar">
+        <div id="sidebar" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li *ngFor="let screen of screens" class="nav-item">
+                <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
+                  <i class="fas fa-icon mr-2"></i>
+                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      
+     
+      <aside class="left1-sidebar sidebar-light" id="right-sidebar">
+        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li class="nav-item" (click)="selectTab('profile')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">My Profile</span>
+                </a>
+              </li>
+              <li class="nav-item" (click)="selectTab('contact')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">Contact Details</span>
+                </a>
+              </li>
+              <li class="nav-item" (click)="selectTab('education')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">Education Details</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+     
+      <div class="page-content">
+        <div *ngIf="selectedTab === 'profile'">
+         
+        </div>
+        <div *ngIf="selectedTab === 'contact'">
+        
+        </div>
+        <div *ngIf="selectedTab === 'education'">
+         
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div> -->
+
+
+<div class="wrapper">
+  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-change-password *ngIf="isSnapshot"></app-change-password>
+
+  <div *ngIf="IsLogin" class="page-wrapper">
+    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+
+    <div class="main-content">
+      <!-- Existing Sidebar -->
+      <aside class="left-sidebar sidebar-dark" id="left-sidebar">
+        <div id="sidebar" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li *ngFor="let screen of screens" class="nav-item">
+                <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
+                  <i class="fas fa-icon mr-2"></i>
+                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Additional Sidebar for Tabs -->
+      <aside class="left1-sidebar sidebar-light" id="right-sidebar">
+        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li class="nav-item" (click)="selectTab('profile')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">My Profile</span>
+                </a>
+              </li>
+              <li class="nav-item" (click)="selectTab('contact')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">Contact Details</span>
+                </a>
+              </li>
+              <li class="nav-item" (click)="selectTab('education')">
+                <a class="nav-link d-flex align-items-center">
+                  <span class="nav-text">Education Details</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <div *ngIf="selectedTab === 'profile'">
+          <!-- My Profile content goes here -->
+          <app-profile></app-profile>
+        </div>
+        <div *ngIf="selectedTab === 'contact'">
+          <!-- Contact Details content goes here -->
+          <app-contact-details></app-contact-details>
+        </div>
+        <div *ngIf="selectedTab === 'education'">
+          <!-- Education Details content goes here -->
+          <app-education-details></app-education-details>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
 </div>
+
