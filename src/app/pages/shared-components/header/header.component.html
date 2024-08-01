@@ -10,16 +10,15 @@
         <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees" name="query"
           id="search-input" class="form-control" />
       </div>
-      <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;">
-        <ul class="dropdown-menu show" [ngClass]="{'d-none': !['showDropdown']}"
+      <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;" [ngClass]="!showDropdown?'d-none':'d-flex'">
+        <ul class="dropdown-menu show" 
           style="width: 490px; margin-left: -12px;">
           <li *ngFor="let employee of visibleResults" class="list-group-item">
-            <a routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}"
+            <a (click)="displaySearchResult(employee)" 
               style="text-decoration: none;">
               {{ employee.FirstName }} {{ employee.LastName }} {{ employee.Email }} {{employee.PhoneNumber}} </a>
           </li>
-          <li *ngIf="searchResults.length > 0 && !showAll" routerLink="/EmployeeList"
-            [queryParams]="{data:encodedJsonArray()}" class="list-group-item see-all">
+          <li *ngIf="searchResults.length > 0 && !showAll" (click)="displaySearchResult()" class="list-group-item see-all">
             See all records
           </li>
         </ul>

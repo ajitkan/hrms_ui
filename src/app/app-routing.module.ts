@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent,
-     canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     // data:{ isLogin:localStorage.getItem('token')?true:false} 
   },
   { path: 'reset-password', component: ChangePasswordComponent,

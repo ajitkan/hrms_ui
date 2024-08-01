@@ -9,6 +9,7 @@ import { CommanSearchEmployeeService, Employee } from 'src/app/service/CommanSer
 })
 
 export class EmployeeSearchResultComponent {
+[x: string]: any;
   searchResults:any[] = [];
   searchResults1:Employee | undefined;
 
@@ -16,29 +17,46 @@ export class EmployeeSearchResultComponent {
   constructor(private service:CommanSearchEmployeeService,private route:ActivatedRoute){}
 
   ngOnInit(){
-    this.route.queryParams.subscribe((params:any) => {
-        const encodedJsonString = params['data'];
-        const decodedString = decodeURIComponent(params['data']);
+    // this.searchResults1=undefined;
+    // this.searchResults = [];
+    // this.route.queryParams.subscribe((params:any) => {
+    //     const encodedJsonString = params['data'];
+    //     const decodedString = decodeURIComponent(params['data']);
     
-    // Check if the decoded string starts with '[' (indicating an array) or '{' (indicating an object)
-    if (decodedString.startsWith('[')) {
-      // Parse the JSON array
-       this.searchResults = JSON.parse(decodedString);
-    } else if (decodedString.startsWith('{')) {
-      // Parse the JSON object
-      this.searchResults1 = JSON.parse(decodedString);
-    }
-        // if (encodedJsonString) {
-        //   this.searchResults = JSON.parse(decodeURIComponent(encodedJsonString));
-        // }
-      if(this.searchResults.length>0){
-        return this.searchResults;
-      }else{
-        this.isIndivisualEmployee = true;
-        return false;
-      }
-      //}
-    });
-    console.log(this.searchResults,this.searchResults1);
+    // // Check if the decoded string starts with '[' (indicating an array) or '{' (indicating an object)
+    // if (decodedString.startsWith('[')) {
+    //   // Parse the JSON array
+    //   this.searchResults1=undefined;
+    //   return this.searchResults = JSON.parse(decodedString);
+    // } else if (decodedString.startsWith('{')) {
+    //   // Parse the JSON object
+    //   this.isIndivisualEmployee = true;
+    //   this.searchResults = []
+    //   return this.searchResults1 = JSON.parse(decodedString);
+    // }
+    // });
+    // console.log(this.searchResults,this.searchResults1);
+  }
+  ngDoCheck(){
+    this.searchResults1=undefined;
+    this.searchResults = [];
+    this.route.queryParams.subscribe((params:any) => {
+      const encodedJsonString = params['data'];
+      const decodedString = decodeURIComponent(params['data']);
+  
+  // Check if the decoded string starts with '[' (indicating an array) or '{' (indicating an object)
+  if (decodedString.startsWith('[')) {
+    // Parse the JSON array
+    this.searchResults1=undefined;
+    return this.searchResults = JSON.parse(decodedString);
+  } else if (decodedString.startsWith('{')) {
+    // Parse the JSON object
+    this.isIndivisualEmployee = true;
+    this.searchResults = []
+
+    return this.searchResults1 = JSON.parse(decodedString);
+  }
+  });
+  console.log(this.searchResults,this.searchResults1);
   }
 }
