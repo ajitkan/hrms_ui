@@ -1,52 +1,62 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
- <app-change-password *ngIf="isSnapshot" ></app-change-password>
-  
-  <aside *ngIf="IsLogin && !isSnapshot" class="left-sidebar sidebar-dark" id="left-sidebar">
-    <div id="sidebar" class="sidebar sidebar-with-footer">
-      <div class="sidebar-left" data-simplebar style="height: 100%;">
-        <ul class="nav flex-column">
-          <li *ngFor="let screen of screens" class="nav-item">
-            <ng-container *ngIf="screen.screenURL !== 'https://kaninfos.com/kan-on-boarding/login'; else externalLink">
+  <app-change-password *ngIf="isSnapshot"></app-change-password>
+
+
+  <div *ngIf="IsLogin" class="page-wrapper">
+    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+
+    <aside *ngIf="IsLogin" class="left-sidebar sidebar-dark" id="left-sidebar">
+      <div id="sidebar" class="sidebar sidebar-with-footer">
+        <div class="sidebar-left" data-simplebar style="height: 100%;">
+          <ul class="nav flex-column">
+            <li *ngFor="let screen of screens" class="nav-item">
               <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
                 <i class="fas fa-icon mr-2"></i>
+    
                 <span class="nav-text">{{ screen.screenDisplayName }}</span>
               </a>
-            </ng-container>
-            <ng-template #externalLink>
-              <a class="nav-link d-flex align-items-center" (click)="openLink()">
-                <i class="fas fa-icon mr-2"></i>
-                <span class="nav-text">{{ screen.screenDisplayName }}</span>
-              </a>
-            </ng-template>
-            <!-- [href]="'http://localhost:54485/login?'+'token='+token" target="_blank" -->
-            <!-- <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL !="https://kaninfos.com/kan-on-boarding/login" [routerLink]="screen.screenURL">
-            <a class="nav-link d-flex align-items-center" *ngIf=screen.screenURL = "https://kaninfos.com/kan-on-boarding/login" href=screen.screenURL target="_blank">
-              <i class="fas fa-icon mr-2"></i> 
-              
-              <span class="nav-text">{{ screen.screenDisplayName }}</span>
-            </a> -->
-          </li>
-        </ul>
-      </div>
-      <div class="sidebar-footer">
-        <div class="sidebar-footer-content">
-          <ul class="d-flex justify-content-around">
-            <li>
-              <a href="user-account-settings.html" data-toggle="tooltip" title="Profile settings"><i
-                  class="fas fa-cog"></i></a>
-            </li>
-            <li>
-              <a href="#" data-toggle="tooltip" title="No chat messages"><i class="fas fa-comments"></i></a>
             </li>
           </ul>
         </div>
+     
+      </div>
+    </aside>
+
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+</div>
+ -->
+
+
+
+ <div class="wrapper">
+  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-change-password *ngIf="isSnapshot"></app-change-password>
+
+  <div *ngIf="IsLogin" class="page-wrapper">
+    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+
+    <div class="main-content">
+      <aside class="left-sidebar sidebar-dark" id="left-sidebar">
+        <div id="sidebar" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li *ngFor="let screen of screens" class="nav-item">
+                <a class="nav-link d-flex align-items-center" [routerLink]="screen.screenURL">
+                  <i class="fas fa-icon mr-2"></i>
+                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <div class="page-content">
+        <router-outlet></router-outlet>
       </div>
     </div>
-  </aside>
-  <div *ngIf="IsLogin && !isSnapshot" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
-    <router-outlet></router-outlet>
     <app-footer></app-footer>
   </div>
 </div>
