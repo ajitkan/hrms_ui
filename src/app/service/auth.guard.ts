@@ -36,16 +36,17 @@ export class AuthGuard implements CanActivate {
         }
         return true;
     } else
-    if (localStorage.getItem("token") != null && Object.keys(route.data).length == 0) {
+    if (localStorage.getItem("token") != null && Object.keys(route.data).length == 0 && !state.url.includes('/login')) {
         return true;
     }
-    if(route.data['isLogin']){
-        return false;
-    }
+    // if(route.data['isLogin']){
+    //     this.router.navigate(['/']);
+    //     return true;
+    // }
     else {
         // Redirect to login or other page if not logged in
         this.router.navigate(['/login']);
-        return false;
+        return true;
     }
 }
 

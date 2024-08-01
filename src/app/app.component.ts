@@ -54,9 +54,9 @@ export class AppComponent {
   constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
     private modalService: NgbModal,
   ){
-    this.token = JSON.parse(localStorage.getItem('token')as string);
   }
   ngOnInit(){
+    this.token = JSON.parse(localStorage.getItem('token')as string);
     if (this.router.url.includes('reset-password')) {
       this.isSnapshot = true;
       // this.isResetPasswordRoute = true;
@@ -80,13 +80,13 @@ export class AppComponent {
 
   }
 
-  ngDoCheck(){
-    if (this.router.url.includes('reset-password')) {
-      this.isSnapshot = true;
-      // this.isResetPasswordRoute = true;
-      // this.openChangePasswordModal();
-    }
-  }
+  // ngDoCheck(){
+  //   if (this.router.url.includes('reset-password')) {
+  //     this.isSnapshot = true;
+  //     // this.isResetPasswordRoute = true;
+  //     // this.openChangePasswordModal();
+  //   }
+  // }
   // openChangePasswordModal() {
   //   this.modalService.open(this.changePasswordModal, { centered: true }); 
   // }

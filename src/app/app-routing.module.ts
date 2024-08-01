@@ -54,15 +54,16 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path:'home',component:DashboardComponent
+    path:'home',component:DashboardComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'Admin',component:AdminDashboardComponent
   },
   {
     path:'login',component:LoginComponent,
-    canActivate: [AuthGuard],
-    data:{ isLogin:localStorage.getItem('token')?true:false} 
+     canActivate: [AuthGuard],
+    // data:{ isLogin:localStorage.getItem('token')?true:false} 
   },
   { path: 'reset-password', component: ChangePasswordComponent,
     canActivate: [AuthGuard]    
