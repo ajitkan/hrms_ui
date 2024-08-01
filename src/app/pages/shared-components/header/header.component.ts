@@ -224,7 +224,7 @@ export class HeaderComponent {
   TextFrees: string = '';
   searchResults: Employee[] = [];
   visibleResults: any[] = [];
-  showDropdown: boolean = true;
+  showDropdown: boolean = false;
   showAll: boolean = false;
 
   encodedJsonString:any;
@@ -398,13 +398,14 @@ export class HeaderComponent {
       if (this.searchResults.length > 0 && !this.showAll) {
         this.visibleResults = this.searchResults.slice(0, 3);
       } else {
-        debugger;
+        // debugger;
         this.visibleResults = this.searchResults;
       }
-      this.showDropdown = false;
+      this.showDropdown = true;
     } 
     else {
-      debugger;
+      // debugger;
+      this.showDropdown = false;
       this.searchResults = [];
       this.visibleResults = [];
     }
@@ -462,5 +463,19 @@ export class HeaderComponent {
       }
     });
   }  
+  displaySearchResult(employee?:any){
+    let url = '';
+    if(employee){
+      url = `/EmployeeList?data=${this.encodedJsonArray(employee)}`;//this.encodedJsonArray();
+    }
+    else{
+      // const encodedJsonArray = encodeURIComponent(JSON.stringify(employee));
+      url = `/EmployeeList?data=${this.encodedJsonArray()}`;
+    }
+    this.showDropdown=false;
+
+    this.router.navigateByUrl(url);
+    // routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}"
+  }
   //-------------------Search Enmployee-------------------------------
 }
