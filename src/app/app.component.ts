@@ -22,7 +22,7 @@ export class AppComponent {
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token:string ='';
   
-  selectedTab: string = 'profile';
+  selectedTab: string = '';
 
   selectTab(tab: string) {
     this.selectedTab = tab;
