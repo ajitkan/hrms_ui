@@ -1,8 +1,18 @@
-.dropdown-footer{
+ .dropdown-footer{
     cursor: pointer;
 }
 
-/* ------sagarDev--------*/
+
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+  } */
+
+
+  /* ------sagarDev--------*/
 .search-container {
   position: relative;
   display: block;
@@ -41,17 +51,6 @@
 .d-none {
   display: none;
 }
-
-/*--------------------sagarDev---------------------------*/
-/* ------------------- */
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-  }
   
   .notification-icon {
     background: none;
@@ -61,8 +60,8 @@
   }
   
   .notification-icon .fa-bell {
-    font-size: 24px;
-    color: #007bff;
+    /* font-size: 24px; */
+    color: red;
   }
   
   .notification-icon .badge {
@@ -78,8 +77,8 @@
   
   .dropdown-menu {
     position: absolute;
-    top: 40px; /* Adjust based on header height */
-    right: 20px; /* Adjust based on header padding */
+    top: 40px; 
+    right: 20px; 
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -108,13 +107,14 @@
   }
   
   .notification .nav-link .icon {
-    font-size: 24px;
-    color: #333;
+    /* font-size: 24px; */
+    color:#ffffff;
     transition: color 0.3s ease;
+    margin-left: 130px;
   }
   
   .notification .nav-link .notification-count {
-    background-color: #007bff;
+    background-color: rgb(255, 0, 0);
     color: #fff !important;
     font-size: 12px;
     padding: 2px 6px;
@@ -130,7 +130,7 @@
   }
   
   .notification .dropdown-menu {
-    background-color: #fff;
+    background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -147,7 +147,7 @@
   .notification .dropdown-menu.show {
     display: block;
     width: 400px;
-    left: -355px;
+    left: -220px;
     /* margin-top: 10px; */
   }
   
@@ -236,7 +236,7 @@
     padding: 20px;
   }
   
-  /* Responsive Design */
+  
   @media (max-width: 768px) {
     .notification .dropdown-menu {
       width: 100%;
@@ -259,4 +259,130 @@
       font-size: 14px;
     }
   }
+  
 
+
+
+
+  
+
+
+/* 
+body {
+  font-family: Arial, sans-serif;
+}
+
+.main-header {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  margin-right: 20px;
+}
+
+.search-form .input-group {
+  display: flex;
+  align-items: center;
+}
+
+.search-form .form-control {
+  width: 200px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .notification .icon {
+  font-size: 1.5em;
+}
+
+.navbar-nav .user-menu {
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.dropdown-menu {
+  background: white;
+  color: black;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+.dropdown-menu .notification-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu .notification-item.active {
+  background: #f4f4f4;
+}
+
+.dropdown-menu .notification-header {
+  font-weight: bold;
+}
+
+.dropdown-menu .notification-timestamp {
+  font-size: 0.85em;
+  color: #666;
+}
+
+.load-more {
+  text-align: center;
+  padding: 10px;
+}
+
+.load-more .btn {
+  background: #007bff;
+  color: white;
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+.dropdown-footer {
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #f4f4f4;
+}
+
+.dropdown-footer a {
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-footer a:hover {
+  text-decoration: underline;
+} */
