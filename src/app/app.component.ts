@@ -18,7 +18,7 @@ export class AppComponent {
   notificationCount=0;
   isSnapshot = false;
   isResetPasswordRoute=false;
-  
+  isCollapsedSideBar =false;
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token:string ='';
   
@@ -117,7 +117,11 @@ export class AppComponent {
   //   }
   // }
 
-  IsLoggedin(event: { isLoggedIn: boolean, screens: any[],notificationCount:any }) {
+  isCollapse(event:{isCollapsible:boolean }){
+    this.isCollapsedSideBar = event.isCollapsible;
+  }
+
+  IsLoggedin(event: { isLoggedIn: boolean, screens: any[],notificationCount:any}) {
     debugger;
     this.IsLogin = event.isLoggedIn;
     if (!event.isLoggedIn) {
@@ -129,6 +133,7 @@ export class AppComponent {
       debugger;
       this.screens = event.screens;
       this.notificationCount = event.notificationCount.notification;
+      // this.isCollapsed = event.isCollapsed;
     }
   }
   toggleCollapse(menuItem: string) {

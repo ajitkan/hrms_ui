@@ -36,10 +36,10 @@
   <app-change-password *ngIf="isSnapshot"></app-change-password>
 
   <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+    <app-header (isLogin)="IsLoggedin($event)" (isCollapse) = "isCollapse($event)" [notificationCount]="notificationCount"></app-header>
 
     <div class="main-content">
-      <aside class="left-sidebar sidebar-dark" id="left-sidebar">
+      <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
         <div id="sidebar" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
             <ul class="nav flex-column">
