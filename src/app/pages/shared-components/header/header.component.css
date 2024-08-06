@@ -392,6 +392,6 @@ body {
 
 @media (min-width: 992px) {
   .navbar .navbar-right .navbar-nav .user-menu {
-      min-width: 100%;
+      min-width: 0;
   }
 }
