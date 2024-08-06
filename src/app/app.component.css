@@ -253,7 +253,7 @@ body {
 .sidebar ul {
   list-style-type: none;
   padding: 0;
-
+}
 .page-content {
   /* margin-left: 250px; */
    /* Adjust margin to account for the fixed sidebar */
@@ -261,14 +261,11 @@ body {
   margin: auto;
   width: calc(100% - 250px); /* Adjust width to account for the fixed sidebar */
 }
-
 .sidebar ul li {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
-
 .sidebar {
   width: 250px;
   height: 100vh;

@@ -145,4 +145,8 @@ export class ApiService {
 
     return this.http.post("http://localhost:54485/login",token);
   }
+  
+  fetchTabs(roleID:any){
+    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchTabs`,{roleID : roleID}) 
+  }
 }

@@ -60,7 +60,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const user = this.accountService.userValue;
-        if (!user) {
+        if (!user && !localStorage.getItem('token')) {
             // Handle case where user is not defined (possibly not logged in)
             console.warn('User is not defined. Proceeding without token.');
             return next.handle(request);
@@ -68,7 +68,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const isApiUrl = request.url.startsWith(environment.apiUrl);
 
-        if (user.token && isApiUrl) {
+        if (user && user.token && isApiUrl) {
             request = request.clone({
                 setHeaders: { Authorization: `Bearer ${user.token}` }
             });

@@ -386,3 +386,12 @@ body {
 .dropdown-footer a:hover {
   text-decoration: underline;
 } */
+.navbar.navbar-light{
+  background-color: #4c6fbf;
+}
+
+@media (min-width: 992px) {
+  .navbar .navbar-right .navbar-nav .user-menu {
+      min-width: 100%;
+  }
+}

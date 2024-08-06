@@ -19,12 +19,13 @@ export class AppComponent {
   isSnapshot = false;
   isResetPasswordRoute=false;
   isCollapsedSideBar =false;
+  tabs:any;
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token:string ='';
   
   selectedTab: string = '';
 
-  selectTab(tab: string) {
+  selectTab(tab: any) {
     this.selectedTab = tab;
   }
   collapsedStates: { [key: string]: boolean } = {
@@ -119,15 +120,15 @@ export class AppComponent {
   }
 
   IsLoggedin(event: { isLoggedIn: boolean, screens: any[],notificationCount:any}) {
-    debugger;
+    // debugger;
     this.IsLogin = event.isLoggedIn;
     if (!event.isLoggedIn) {
       this.screens = [];
       this.notificationCount = 0;
-      debugger;
+      // debugger;
       //localStorage.removeItem('LoggedIn');
     } else {
-      debugger;
+      // debugger;
       this.screens = event.screens;
       this.notificationCount = event.notificationCount.notification;
       // this.isCollapsed = event.isCollapsed;
@@ -152,6 +153,33 @@ export class AppComponent {
     // );
     // this.login();
     
+  }
+
+  fetchTabs(screenID:any){
+    var screens = JSON.parse(localStorage.getItem('screens')as string);
+    if(screens!=null){
+      screens.forEach((screen:any)=>{
+        if(screen.screenID == screenID){
+          this.httpService.fetchTabs(screen.roleID).subscribe({
+            next: (res: any) => {
+              if(res.code == 1){
+                console.log('Tabs for given screens is :',res.tabResponces);
+                this.tabs = res.tabResponces;
+              }
+              else
+                console.log(res.message);
+            },
+            error:(err:any) =>{
+              console.log(err.message);
+            }
+        })
+      }
+      else{
+        return;
+      }
+    })
+    }
+    return;
   }
 //   login(username: string, password: string) {
 //     this.http.post('http://localhost:5000/api/login', { username, password })
