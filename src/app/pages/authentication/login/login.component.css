@@ -329,4 +329,14 @@
   .loginlabel{
     color: white;
   }
-  
+  .app-brand a img{
+    max-width: 30%;
+  }
+  .l-center{
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+  }
+  .p10{
+    padding: 0 20%;
+  }

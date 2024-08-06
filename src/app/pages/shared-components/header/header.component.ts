@@ -218,7 +218,8 @@ import { jwtDecode } from 'jwt-decode';
 export class HeaderComponent {
 
   @Input() notificationCount: any;
-  @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; notificationCount: any; }>();
+  @Output() isLogin = new EventEmitter<{ isLoggedIn: boolean; screens: any[]; notificationCount: any;}>();
+  @Output() isCollapse = new EventEmitter<{isCollapsible:boolean}>();
   [x: string]: any;
  //variable  for Search Employee
   TextFrees: string = '';
@@ -244,6 +245,7 @@ export class HeaderComponent {
   loading = false;
   unreadCount :number = 0; 
   moduleURL: any;
+  isCollapsible = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -374,7 +376,7 @@ export class HeaderComponent {
         if (res.status === 'Success') {
           this.authService.clearSession();
           console.log('Navigating to login page...');
-          this.isLogin.emit({ isLoggedIn: false, screens: [], notificationCount: this.notificationCount });
+          this.isLogin.emit({ isLoggedIn: false, screens: [], notificationCount: this.notificationCount});
           this.router.navigate(['']).then(() => {
             console.log('Navigation successful!');
           }).catch((error) => {
@@ -478,4 +480,10 @@ export class HeaderComponent {
     // routerLink="/EmployeeList" [queryParams]="{data:encodedJsonArray(employee)}"
   }
   //-------------------Search Enmployee-------------------------------
+  
+
+  toggleSidebar() {
+    this.isCollapsible = !this.isCollapsible;
+    this.isCollapse.emit({isCollapsible:this.isCollapsible});
+  }
 }

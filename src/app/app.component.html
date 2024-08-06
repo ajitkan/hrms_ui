@@ -1,3 +1,4 @@
+<!-- Updated by Umesh --->======= --
 <!-- <div class="wrapper">
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
   <app-change-password *ngIf="isSnapshot"></app-change-password>
@@ -30,16 +31,17 @@
  -->
 
 
-
+<!-- Updated by Umesh <<<<=======-->
  <!-- <div class="wrapper">
+
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
   <app-change-password *ngIf="isSnapshot"></app-change-password>
 
   <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" [notificationCount]="notificationCount"></app-header>
+    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
 
-    <div class="main-content">
-      <aside class="left-sidebar sidebar-dark" id="left-sidebar">
+    <div class="main-content d-flex">
+      <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
         <div id="sidebar" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
             <ul class="nav flex-column">
@@ -53,7 +55,7 @@
           </div>
         </div>
       </aside>
-      <div class="page-content">
+      <div class="page-content flex-grow-1 p-3">
         <router-outlet></router-outlet>
       </div>
     </div>
