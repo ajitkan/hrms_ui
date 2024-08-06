@@ -255,6 +255,11 @@ export class LoginComponent {
   }
 
     openForgotPasswordModal(loginForm:FormGroup , content: any) {
+      if(loginForm.invalid){
+        // var message = 'Please fill'+loginForm.get('employeeCode')?.valid ?'EmployeeCode':'CompanyCode'+'fields';
+        this.showAlertMessage('Please fill ' + (this.loginForm.get('employeeCode')?.invalid ? 'EmployeeCode' : 'CompanyCode') + ' fields', 'error');
+        return;
+      }
       var payload = {
         userName: this.loginForm.get('employeeCode')?.value, 
         companyCode: this.loginForm.get('companyCode')?.value
@@ -280,6 +285,10 @@ export class LoginComponent {
     }
   
     openUnlockAccountModal(loginForm: FormGroup, content: any) {
+      if(loginForm.invalid){
+         this.showAlertMessage('Please fill ' + (this.loginForm.get('employeeCode')?.invalid ? 'EmployeeCode' : 'CompanyCode') + ' fields', 'error');
+        return;
+      }
       var payload = {
         userName: this.loginForm.get('employeeCode')?.value, 
         companyCode: this.loginForm.get('companyCode')?.value
@@ -403,7 +412,7 @@ export class LoginComponent {
     const userName = this.loginForm.get('employeeCode')?.value;
   
     if (!token) {
-      console.error('No token found');
+      console.error('No token found');  
       this.showAlertMessage('No token found' ,'error',true);
       return;
     }

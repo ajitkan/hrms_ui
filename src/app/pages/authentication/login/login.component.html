@@ -1,130 +1,86 @@
-<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-  {{ alertMessage }}
-  <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>  -->
-
-
-<div *ngIf="loginForm.invalid || loginForm.valid" class="container text-center">
-  
-  <div class="loginPanelHeader">
-    
-  </div>
-  <div class="bs-reset row" id="login-box">
-    <div class="col-6 col-6-bg-image">
-      <div class="text-center mt-2 mb-2">
-        <img src="assets\images\kanlogo2.png" alt="Your Logo" class="logo">
+<div *ngIf="loginForm.invalid || loginForm.valid" class="d-flex" style="min-height: 100vh;">
+  <div class="col-6">
+    <div class="card card-default mb-0" style="border: none;height: 100%;">
+      <div class="app-brand w-100 d-flex justify-content-center border-bottom-0 row">
+        <a class="l-center pl-0" href="https://kaninfos.com">
+          <img alt="https://kaninfos.com" src="../assets/images/kanlogo2.png">
+        </a>
       </div>
-      <div class="background-image"> </div>
+      <div style="margin: auto;
+                  background-image: url(https://kaninfos.com/hrmsui/HRMS.b69151d03b169957.png);
+                  height: 70%;
+                  width: 75%;
+                  background-size: cover;
+                  background-repeat: no-repeat;">
+      </div>
     </div>
-    
-    <div class="col-6 float-right bg-4C6FBF">
-      <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-        {{ alertMessage }}
-        <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-      <div class="login-content">
-        <div class="loginPanelHeader">
-          <div class="form-container">
-          
-
-            <div class="login-section text-center clearfix CredentialsDiv ">
-              <h3 class="text-center loginlabel">Login in to your Account</h3>
-
-              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                  <label for="companyCode" class="float-left loginlabel">Company Code</label>
-                  <input formControlName="companyCode" class="form-control" id="txtCompanyCode" placeholder="Company Code"
-                    required />
-                  <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
-                    <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
-                    <!-- <div *ngIf="f['companyCode'].errors?.['pattern']">Company Code cannot contain special characters.
-                    </div> -->
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="employeeCode"class="float-left loginlabel">Employee Code</label>
-                  <input formControlName="employeeCode" class="form-control" id="txtEmpCode" placeholder="Employee Code"
-                    required />
-                  <div *ngIf="f['employeeCode'].touched && f['employeeCode'].invalid" class="text-danger error-message">
-                    <div *ngIf="f['employeeCode'].errors?.['required']">Employee Code is required.</div>
-                    <!-- <div *ngIf="f['empCode'].errors?.['pattern']">Employee Code cannot contain special characters.</div> -->
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="password" class="float-left loginlabel">Password</label>
-                  <div class="input-group">
-                    <input formControlName="password" class="form-control" [type]="passwordVisible ? 'text' : 'password'"
-                      id="txtPassword" placeholder="Password" required />
-                    <div class="input-group-append">
-                      <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
-                        <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
-                    <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
-                  </div>
-                </div>
-
-                <!-- CAPTCHA Section -->
-                <!-- <div class="form-group text-center">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <canvas #captchaCanvas id="captchaCanvas" width="200" height="50"></canvas>
-                    <button type="button" class="btn btn-secondary ml-2" (click)="generateCaptcha()">
-                      <i class="fa fa-refresh"></i>
-                    </button>
-                  </div>
-
-
-                  <div class="input-group">
-                    <input type="text" placeholder="Enter CAPTCHA Code" id="userInput" name="userInput"
-                      class="form-control" [(ngModel)]="userInput">
-                    <button type="button" class="btn btn-primary ml-2" (click)="verifyCaptcha()">
-                      <i class="fa fa-check"></i>
-                    </button>
-                  </div>
-
-                  <p *ngIf="isVerificationAttempted && isCaptchaValid && userInput !== ''" style="color: green;">
-                    <i class="fa fa-check-circle"></i> CAPTCHA verified successfully!
-                  </p>
-                  <p *ngIf="isVerificationAttempted && !isCaptchaValid && userInput !== ''" style="color: red;">
-                    <i class="fa fa-times-circle"></i> Incorrect CAPTCHA code. Please try again.
-                  </p>
-                </div> -->
-
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"
-                  >Login</button> 
-                  <!-- // [disabled]="loginForm.invalid" -->
-                </div>
-                <div class="form-group text-center">
-                  <button type="button" class="btn btn-outline-secondary">Check In</button>
-                  <span class="ml-2 mr-2"></span>
-                  <button type="button" class="btn btn-outline-secondary">Check Out</button>
-                </div>
-                <div class="form-group text-center">
-                  <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(loginForm,content)">Forgot
-                    Password?</button>
-                  <span class="ml-2 mr-2"></span>
-                  <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(loginForm,unlockContent)">Unlock
-                    Account</button>
-                </div>
-                <span class="ml-2 mr-2"></span>
-                <button type="button" class="btn btn-sm btn-link"
-                  (click)="openChangePasswordModal(changePasswordContent)" style="display: none;" >Change Password</button>
-              </form>
-            </div>
+  </div>
+  <div class="col-6" style="background-color: #4c6fbf;">
+    <div class="card card-default mb-0" style="border: none;background-color: #4c6fbf;">
+      <div class="card-header pb-0">
+        <div class="app-brand w-100 d-flex justify-content-center border-bottom-0 row">
+          <div *ngIf="alertMessage" class="alert alert-dismissible" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+            {{ alertMessage }}
+            <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         </div>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-container">
+            <div class="login-section text-center clearfix CredentialsDiv p10">
+              <h3 class="text-center loginlabel">Login to your Account</h3>
+              <div class="form-group">
+                <label for="companyCode" class="float-left loginlabel">Company Code</label>
+                <input formControlName="companyCode" id="txtCompanyCode" placeholder="Company Code" class="form-control" [ngClass]="{'is-invalid': f['companyCode'].touched && f['companyCode'].invalid}">
+                <div *ngIf="f['companyCode'].touched && f['companyCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['companyCode'].errors?.['required']">Company Code is required.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="employeeCode" class="float-left loginlabel">Employee Code</label>
+                <input formControlName="employeeCode" id="txtEmpCode" placeholder="Employee Code" class="form-control" [ngClass]="{'is-invalid': f['employeeCode'].touched && f['employeeCode'].invalid}">
+                <div *ngIf="f['employeeCode'].touched && f['employeeCode'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['employeeCode'].errors?.['required']">Employee Code is required.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="float-left loginlabel">Password</label>
+                <div class="input-group">
+                  <input formControlName="password" [type]="passwordVisible ? 'text' : 'password'" id="txtPassword" placeholder="Password" class="form-control" [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}">
+                  <div class="input-group-append">
+                    <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger error-message">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block border-white" style="background-color: #0032A4;">Login</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-secondary border-white">Check In</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-outline-secondary border-white">Check Out</button>
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-link" (click)="openForgotPasswordModal(loginForm,content)">Forgot Password?</button>
+                <span class="ml-2 mr-2"></span>
+                <button type="button" class="btn btn-sm btn-link" (click)="openUnlockAccountModal(loginForm,unlockContent)">Unlock Account</button>
+              </div>
+              <button type="button" class="btn btn-sm btn-link" style="display: none;">Change Password</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- Forgot Password Modal -->
 <ng-template #content let-modal>
@@ -135,11 +91,8 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="forgotPassAlertMessage!=null" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+    <div *ngIf="forgotPassAlertMessage" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
       {{ forgotPassAlertMessage }}
-      <!-- <button type="button" class="close" aria-label="Close" (click)="dismissAlert()"> -->
-        <!-- <span aria-hidden="true">&times;</span>
-      </button> -->
     </div>
     <form [formGroup]="forgotPasswordForm" (ngSubmit)="submitForgotPasswordForm(changePasswordContent)">
       <div class="form-group">
@@ -149,15 +102,13 @@
           <div *ngIf="fp['EmailID'].errors?.['required']">Email ID is required.</div>
           <div *ngIf="fp['EmailID'].errors?.['email']">Invalid email format.</div>
         </div>
-        <div class="form-group">
-          <label for="txtForgotEmail">Enter your Mobile No</label>
-          <input type="text" class="form-control" id="txtForgotMobileNo" formControlName="MobileNo" maxlength="10"  pattern="^\d{10}$" required>
-          <div *ngIf="fp['MobileNo'].touched && fp['MobileNo'].invalid" class="text-danger">
-            <div *ngIf="fp['MobileNo'].errors?.['required']">Mobile No is required.</div>
-            <div *ngIf="fp['MobileNo'].errors?.['MobileNo']">Invalid Mobile No format.</div>
-            <div *ngIf="fp['MobileNo'].errors?.['pattern']">Invalid Mobile No format.</div>
-
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="txtForgotMobileNo">Enter your Mobile No</label>
+        <input type="text" class="form-control" id="txtForgotMobileNo" formControlName="MobileNo" maxlength="10" pattern="^\d{10}$" required>
+        <div *ngIf="fp['MobileNo'].touched && fp['MobileNo'].invalid" class="text-danger">
+          <div *ngIf="fp['MobileNo'].errors?.['required']">Mobile No is required.</div>
+          <div *ngIf="fp['MobileNo'].errors?.['pattern']">Invalid Mobile No format.</div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -174,23 +125,23 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="forgotPassAlertMessage !=null" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+    <div *ngIf="forgotPassAlertMessage" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
       {{ forgotPassAlertMessage }}
-      <!-- <button type="button" class="close" aria-label="Close" (click)="dismissAlert()">
-        <span aria-hidden="true">&times;</span>
-      </button> -->
     </div>
     <form [formGroup]="unlockAccountForm" (ngSubmit)="submitUnlockAccountForm()">
       <div class="form-group">
         <label for="doj">Joining Date</label>
-        <input type="date" class="form-control" id="doj" formControlName="doj" required>
-        <div *ngIf="ua['doj'].touched && ua['doj'].invalid" class="text-danger">
-          <div *ngIf="ua['doj'].errors?.['required']">Joining Date is required.</div>
+        <input type="date" class="form-control" id="doj" formControlName="DOJ" required>
+        <div *ngIf="ua['DOJ'].touched && ua['DOJ'].invalid" class="text-danger">
+          <div *ngIf="ua['DOJ'].errors?.['required']">Date of Joining is required.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="dob">Date of Birth</label>
+        <label for="dob">Enter your Employee Code</label>
         <input type="date" class="form-control" id="txtDateOfBirth" formControlName="dob" required>
+        <!-- <div *ngIf="ua['EmpCode'].touched && ua['EmpCode'].invalid" class="text-danger">
+          <div *ngIf="ua['EmpCode'].errors?.['required']">Employee Code is required.</div>
+        </div> -->
         <div *ngIf="ua['dob'].touched && ua['dob'].invalid" class="text-danger">
           <div *ngIf="ua['dob'].errors?.['dob']">Date of Birth is required.</div>
         </div>
@@ -200,21 +151,8 @@
   </div>
 </ng-template>
 
-
-  <!-- Example of a button that opens the change password modal -->
-<button type="button" (click)="openChangePasswordModal(changePasswordContent)">
-  <!-- Open Change Password Modal -->
-</button>
-
-<!-- ng-template for change password modal content -->
-<!-- <ng-template #changePasswordContent let-modal>
-  <app-change-password (closeChangePassword)="closeChangePasswordModal()"></app-change-password>
-</ng-template> -->
-
-
-
 <!-- Change Password Modal -->
- <ng-template #changePasswordContent let-modal>
+<ng-template #changePasswordContent let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
     <button type="button" class="close" aria-label="Close" (click)="closeChangePasswordModal()">
@@ -222,34 +160,25 @@
     </button>
   </div>
   <div class="modal-body">
+    <div *ngIf="forgotPassAlertMessage" class="alert-dismissible forgotPasswordAlert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+      {{ forgotPassAlertMessage }}
+    </div>
     <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePasswordForm()">
       <div class="form-group">
-        <label for="currentPassword">Current Password</label>
-        <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control" required>
-        <div *ngIf="cp['currentPassword'].touched && cp['currentPassword'].invalid" class="text-danger">
-          Current Password is required.
+        <label for="txtChangeNewPass">Enter your New Password</label>
+        <input type="password" class="form-control" id="txtChangeNewPass" formControlName="NewPassword" required>
+        <div *ngIf="cp['NewPassword'].touched && cp['NewPassword'].invalid" class="text-danger">
+          <div *ngIf="cp['NewPassword'].errors?.['required']">New Password is required.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="newPassword">New Password</label>
-        <input type="password" id="newPassword" formControlName="newPassword" class="form-control" required>
-        <div *ngIf="cp['newPassword'].touched && cp['newPassword'].invalid" class="text-danger">
-          New Password is required.
+        <label for="txtChangeConfirmPass">Enter Confirm Password</label>
+        <input type="password" class="form-control" id="txtChangeConfirmPass" formControlName="ConfirmPassword" required>
+        <div *ngIf="cp['ConfirmPassword'].touched && cp['ConfirmPassword'].invalid" class="text-danger">
+          <div *ngIf="cp['ConfirmPassword'].errors?.['required']">Confirm Password is required.</div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="confirmNewPassword">Confirm New Password</label>
-        <input type="password" id="confirmNewPassword" formControlName="confirmNewPassword" class="form-control"
-          required>
-        <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].invalid" class="text-danger">
-          Confirm New Password is required.
-        </div>
-        <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].value !== cp['newPassword'].value"
-          class="text-danger">
-          Entered new password and confirm new password are not match.
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Change Password</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-</ng-template> 
+</ng-template>
