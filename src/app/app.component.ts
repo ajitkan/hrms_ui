@@ -22,14 +22,11 @@ export class AppComponent {
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token:string ='';
   
-  // isJobPostCollapsed: boolean = true;
-  // isCollapsed:boolean=false;
+  selectedTab: string = '';
 
-  // isSidebarCollapsed = false;
-
-  // onToggleSidebar() {
-  //   this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  // }
+  selectTab(tab: string) {
+    this.selectedTab = tab;
+  }
   collapsedStates: { [key: string]: boolean } = {
     // uiElements: true,
     // buttons: true,

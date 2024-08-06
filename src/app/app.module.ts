@@ -58,6 +58,7 @@ import { EmployeeDetailsComponent } from './pages/employee-details/employee-deta
 import { EmployeeSearchResultComponent } from './pages/employee-search-result/employee-search-result.component';
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { NotificationDetailsComponent } from './pages/shared-components/notifica
     EmployeeSearchResultComponent,
     NotificationComponent,
     NotificationDetailsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

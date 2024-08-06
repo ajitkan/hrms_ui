@@ -189,7 +189,7 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh; 
+  /* height: 100vh;  */
   /* position: fixed;  */
   top: 60px; 
   left: 0;
@@ -214,7 +214,7 @@ body {
 }
 
 .nav-item .nav-link:hover {
-  background: #bebdf5;
+  background: #8199e9;
 }
 
 .sidebar-footer {
@@ -226,6 +226,34 @@ body {
   color: white;
 }
 
+
+/* ------01081024--------- */
+
+/* main-component.css */
+.main-content {
+  display: flex;
+}
+
+/* .left-sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  height: 100vh; 
+} */
+
+.left1-sidebar {
+  width: 200px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  /* height: 100vh; */
+  /* border-left: 1px solid #ddd; */
+  margin: 3px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+
 .page-content {
   /* margin-left: 250px; */
    /* Adjust margin to account for the fixed sidebar */
@@ -234,7 +262,11 @@ body {
   width: calc(100% - 250px); /* Adjust width to account for the fixed sidebar */
 }
 
-
+.sidebar ul li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
 
 .sidebar {
