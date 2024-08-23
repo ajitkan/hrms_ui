@@ -129,7 +129,7 @@ submitResetPassword(): void {
     const modalElement = document.getElementById('changePasswordModel');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
-      debugger;
+     
       modal.show();
     }
 

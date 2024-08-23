@@ -57,7 +57,7 @@ export class JobService {
       return this.http.get<any>(`${this.apiUrl}/GetAllJobs`);
   }
   addJob(job: any): Observable<any> {
-    debugger
+  
     return this.http.post<any>(`${this.apiUrl}/AddJob`, job);
     
   }
@@ -66,7 +66,7 @@ export class JobService {
   }
 
   deleteJob(id: number): Observable<any> {
-    debugger
+  
     return this.http.delete<any>(`${this.apiUrl}/DeleteJob/${id}`);
   }
   

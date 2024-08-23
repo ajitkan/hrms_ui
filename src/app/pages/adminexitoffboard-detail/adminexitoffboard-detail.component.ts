@@ -34,7 +34,7 @@ export class AdminexitoffboardDetailComponent implements OnInit{
   //   });
   // }
   fetchDeptNames() {
-    debugger
+ 
     this.seprationService.GetDepartmentDetails().subscribe(
       (response: any) => {
         this.deptNames = response.data;

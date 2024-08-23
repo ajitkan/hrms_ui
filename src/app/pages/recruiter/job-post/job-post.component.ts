@@ -104,11 +104,11 @@ setItemsPerPage(value: number) {
     // this.updatePaginatedJobs();
   }
   loadJobs() {
-    debugger
+  
     this.jobService.getAllJobs().subscribe(
       (response: any) => {
         this.jobs = response.data;
-        debugger
+    
       },
       (error: any) => {
         console.error('Error fetching jobs:', error);
@@ -194,7 +194,7 @@ public findInvalidControls() {
         }
       );
     } else {
-      debugger
+    
       this.jobService.addJob(jobData).subscribe(
         () => {
           console.log('Job added successfully!');
@@ -235,7 +235,7 @@ public findInvalidControls() {
   editJob(job: any) {
     this.selectedJob = job;
     console.log("_____edit Job ", job);
-    debugger
+  
   
     console.log("ClosingDate: ", job.ClosingDate);
     job.Id = job.id;

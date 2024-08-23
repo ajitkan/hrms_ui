@@ -1,6 +1,7 @@
 
+  
 
-.profile-container {
+.bank-details-container {
   width: 100%;
   max-width: 98%;
   padding: 20px;
@@ -12,7 +13,7 @@
   position: relative;
  
 }
-.profile-container h3 {
+.bank-details-container h3 {
   margin-bottom: 20px;
   font-size: 25px;
   color: #333;
@@ -20,7 +21,7 @@
   padding-bottom: 12px;
 }
 
-.profile-container h3::after {
+.bank-details-container h3::after {
   content: "";
   display: block;
   width: 100%;
@@ -117,7 +118,7 @@ button:hover:not(:disabled) {
   margin: 1%;
 } 
 
-.profileForm {
+.bankdetailsForm {
   margin-left: 10%;
   margin-right: 10%;
 }

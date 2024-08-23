@@ -1,20 +1,15 @@
-<!-- 
-
-
-<div *ngIf="alertMessage" class="alert alert-dismissible" 
+<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
   {{ alertMessage }}
 </div>
 
-<div class="profile-container">
-  <h3>My Profile</h3>
-  <form class="profileForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="education-container">
+  <h3>Education Details</h3>
+  <form class="educationForm" [formGroup]="educationForm" (ngSubmit)="onSubmit()">
     <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
       <div *ngFor="let field of row" 
            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
-        
-       
         <ng-container *ngIf="field.controls !== 'BUTTON'">
           <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
           
@@ -22,8 +17,7 @@
                  [type]="dynamicFormService.getFieldType(field.fieldDataType)"
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
-                 [required]="field.isMandatory"
-                 (input)="dynamicFormService.onTextInput($event)" />
+                 [required]="field.isMandatory" />
           
           <select *ngIf="field.controls === 'DROPDOWNLIST'"
                   [id]="field.fieldName"
@@ -41,7 +35,7 @@
       </div>
     </div>
 
-   
+
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
         <button *ngIf="field.controls === 'BUTTON'" type="submit">
@@ -50,9 +44,6 @@
         </button>
       </ng-container>
     </div>
-
-   
-    
   </form>
 </div> -->
 
@@ -65,9 +56,9 @@
   {{ alertMessage }}
 </div>
 
-<div class="profile-container">
-  <h3>My Profile</h3>
-  <form class="profileForm" [formGroup]="profileForm">
+<div class="education-container">
+  <h3>Contact Details</h3>
+  <form class="educationForm" [formGroup]="educationForm">
     <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
       <div *ngFor="let field of row" 
            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">

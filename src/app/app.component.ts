@@ -25,9 +25,31 @@ export class AppComponent {
   
   selectedTab: string = '';
 
+
+  isFirstSidebarVisible = true;
+  isSecondSidebarVisible = false;
+
   selectTab(tab: any) {
+   
     this.selectedTab = tab;
+    
+    if (tab && tab.route) {
+      
+      this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
+    } else {
+      console.warn('No route provided for the selected tab');
+    }
   }
+  
+
+  // selectTab(tab: any) {
+  //   this.selectedTab = tab;
+  //   if (tab && tab.route) {
+  //     this.router.navigate([tab.route]);
+  //   } else {
+  //     console.warn('No route provided for the selected tab');
+  //   }
+  // }
   collapsedStates: { [key: string]: boolean } = {
     // uiElements: true,
     // buttons: true,
@@ -117,7 +139,10 @@ export class AppComponent {
 
   isCollapse(event:{isCollapsible:boolean }){
     this.isCollapsedSideBar = event.isCollapsible;
+    this.isFirstSidebarVisible = true;
+    
   }
+  
 
   IsLoggedin(event: { isLoggedIn: boolean, screens: any[],notificationCount:any}) {
     // debugger;
@@ -134,9 +159,11 @@ export class AppComponent {
       // this.isCollapsed = event.isCollapsed;
     }
   }
-  toggleCollapse(menuItem: string) {
-    this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
-  }
+  // toggleCollapse(menuItem: string) {
+  //   this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
+  //   // this.isFirstSidebarVisible = false;
+  //   //             this.isSecondSidebarVisible = true;
+  // }
 
   openLink() {
     // this.httpService.postData(this.token).subscribe(
@@ -160,11 +187,14 @@ export class AppComponent {
     if(screens!=null){
       screens.forEach((screen:any)=>{
         if(screen.screenID == screenID){
-          this.httpService.fetchTabs(screen.roleID).subscribe({
+          this.httpService.fetchTabs(screen.roleID,screen.screenID).subscribe({
             next: (res: any) => {
               if(res.code == 1){
                 console.log('Tabs for given screens is :',res.tabResponces);
                 this.tabs = res.tabResponces;
+                this.isFirstSidebarVisible = false;
+                this.isSecondSidebarVisible = true;
+                // this.navigateBasedOnRoute();
               }
               else
                 console.log(res.message);
@@ -181,13 +211,20 @@ export class AppComponent {
     }
     return;
   }
-//   login(username: string, password: string) {
-//     this.http.post('http://localhost:5000/api/login', { username, password })
-//       .subscribe((response: any) => {
-//         localStorage.setItem('token', response.token);
-//         this.openPostInNewTab('http://localhost:54485/login', { token: response.token });
-//       });
-// }
+
+
+  navigateBasedOnRoute() {
+    if (this.tabs.length > 0) {
+      const route = this.tabs[0].route; // Get the route from the first tab
+      if (route) {
+        this.router.navigate([route]);
+      } else {
+        console.warn('No route provided for the first tab');
+      }
+    } else {
+      console.warn('No tabs available to navigate');
+    }
+  }
 }
 @Component({
   selector: 'app-dashboard',
