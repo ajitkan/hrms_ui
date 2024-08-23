@@ -55,7 +55,7 @@ export class AddAttendanceComponent {
 
   ngOnInit(): void {
 
-    debugger
+
     this.attendanceForm = this.f.group({
 
       TimeIn: ['', Validators.required],
@@ -105,7 +105,7 @@ export class AddAttendanceComponent {
       this.onLoad();
     }
     else{
-      debugger
+    
       this.getAttendanceByUser('K-210', new Date())
     }
 
@@ -405,11 +405,11 @@ export class AddAttendanceComponent {
     // })
 
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    debugger
+
     this.apiService.getCurrentTime(timezone).subscribe((response: any) => {
       if (response != null && response != undefined) {
         this.appliedDate = response.datetime;
-        debugger
+       
         console.log(this.appliedDate)
       }
     }, error => {

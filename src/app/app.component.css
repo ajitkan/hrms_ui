@@ -53,50 +53,6 @@ app-login{
 
 
 
-/* Ensure you add this CSS in your global styles.css or component-specific CSS */
-
-/* .left-sidebar {
-  background-color: #343a40;
-}
-
-.left-sidebar .nav-item {
-  margin: 0.5rem 0;
-}
-
-.left-sidebar .nav-link {
-  color: #adb5bd;
-  padding: 0.75rem 1rem;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.left-sidebar .nav-link:hover {
-  background-color: #495057;
-  color: #fff;
-}
-
-.left-sidebar .nav-link .fas {
-  font-size: 1.25rem;
-}
-
-.sidebar-footer {
-  padding: 1rem;
-  background-color: #212529;
-}
-
-.sidebar-footer-content .d-flex li {
-  list-style: none;
-}
-
-.sidebar-footer-content .d-flex li a {
-  color: #adb5bd;
-  transition: color 0.3s;
-}
-
-.sidebar-footer-content .d-flex li a:hover {
-  color: #fff;
-} */
-
-
 
 
 
@@ -196,6 +152,7 @@ body {
   overflow: hidden;
   z-index: 1000; 
   margin: 3px;
+  border:2px solid #0000ff14 ;
   /* box-shadow: 2px 0 5px #e5e9f2; */
 }
 
@@ -215,6 +172,8 @@ body {
 
 .nav-item .nav-link:hover {
   background: #8199e9;
+  border-radius: 5px;
+  color: white;
 }
 
 .sidebar-footer {
@@ -242,12 +201,18 @@ body {
 } */
 
 .left1-sidebar {
-  width: 200px;
-  background-color: #f8f9fa;
-  padding: 20px;
-  /* height: 100vh; */
-  /* border-left: 1px solid #ddd; */
-  margin: 3px;
+  background: #e5e9f2;
+  color: white;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  top: 60px; 
+  left: 0;
+  overflow: hidden;
+  z-index: 1000; 
+   margin: 3px; 
+  border:2px solid #0000ff14 ;
 }
 
 .sidebar ul {
@@ -255,11 +220,9 @@ body {
   padding: 0;
 }
 .page-content {
-  /* margin-left: 250px; */
-   /* Adjust margin to account for the fixed sidebar */
-  padding: 20px;
-  margin: auto;
-  width: calc(100% - 250px); /* Adjust width to account for the fixed sidebar */
+ 
+  /* margin: auto; */
+  width: calc(100% - 250px); 
 }
 .sidebar ul li {
   padding: 10px;
@@ -305,4 +268,11 @@ body {
 
 .isCollapsedSideBar{
   display: none;
+}
+
+
+
+
+.main-content d-flex{
+  background: #f8f9fa;
 }

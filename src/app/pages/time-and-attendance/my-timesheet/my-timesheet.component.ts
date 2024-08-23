@@ -408,7 +408,7 @@ export class MyTimesheetComponent {
     this.apiService.getCurrentTime(timezone).subscribe((response: any) => {
       if (response != null && response != undefined) {
         this.appliedDate = response.datetime;
-        debugger
+     
         console.log(this.appliedDate)
       }
     }, error => {

@@ -369,7 +369,7 @@ export class HeaderComponent {
   logout() {
     this.authService.logout().subscribe({
       next: (res: any) => {
-        debugger;
+       
         console.log('Logout response:', res); 
         this.logoutRes = res;
         
@@ -387,7 +387,7 @@ export class HeaderComponent {
         }
       },
       error: (error) => {
-        debugger;
+      
         console.error('Logout failed', error);
       }
     });

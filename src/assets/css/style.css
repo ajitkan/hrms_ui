@@ -12575,7 +12575,7 @@ code {
 }
 @media (min-width: 992px) {
   .navbar .navbar-right .navbar-nav .dropdown-menu {
-    right: 15px;
+    right: 10px;
   }
 }
 @media (min-width: 992px) {
@@ -12597,8 +12597,9 @@ code {
   margin-right: auto;
 }
 .navbar .navbar-right .navbar-nav .user-menu .dropdown-menu {
-  width: 210px;
+  width: 185px;
   border-radius: 5px;
+  margin-top: 20%;
 }
 .navbar .navbar-right .navbar-nav .user-menu .dropdown-menu li:first-child a {
   padding-top: 1.25rem;

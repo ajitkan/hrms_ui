@@ -1,6 +1,5 @@
 
-
-.profile-container {
+.contact-details-container {
   width: 100%;
   max-width: 98%;
   padding: 20px;
@@ -12,7 +11,7 @@
   position: relative;
  
 }
-.profile-container h3 {
+.contact-details-container h3 {
   margin-bottom: 20px;
   font-size: 25px;
   color: #333;
@@ -20,7 +19,7 @@
   padding-bottom: 12px;
 }
 
-.profile-container h3::after {
+.contact-details-container h3::after {
   content: "";
   display: block;
   width: 100%;
@@ -117,7 +116,7 @@ button:hover:not(:disabled) {
   margin: 1%;
 } 
 
-.profileForm {
+.contactDetailsForm {
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -125,3 +124,4 @@ button:hover:not(:disabled) {
 .alert-error {
   margin: 1%;
 }
+
