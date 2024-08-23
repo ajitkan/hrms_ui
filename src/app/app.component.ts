@@ -24,7 +24,14 @@ export class AppComponent {
   token:string ='';
   
   selectedTab: string = '';
+  selectedScreen: any;
 
+  selectScreen(screen: any): void {
+    this.selectedScreen = screen;
+    if(screen!='' ){
+      this.fetchTabs(screen.screenID);
+    }
+  }
   selectTab(tab: any) {
     this.selectedTab = tab;
   }

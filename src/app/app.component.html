@@ -139,8 +139,8 @@
   <div *ngIf="IsLogin" class="page-wrapper">
     <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
 
-    <div class="main-content d-flex">
-      <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
+    <!-- <div class="main-content d-flex">
+      <!--  <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
         <div id="sidebar" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
             <ul class="nav flex-column">
@@ -148,16 +148,36 @@
                 <a 
                   class="nav-link d-flex align-items-center" 
                   [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">
+                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
                   <i class="fas fa-icon mr-2"></i>
                   <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                  <!-- UserDetails/FetchTabs -->
                 </a>
               </li>
             </ul>
           </div>
         </div>
-      </aside>
+      </aside> -->
+      <div class="main-content d-flex">
+        <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
+          <div id="sidebar" class="sidebar sidebar-with-footer">
+            <div class="sidebar-left" data-simplebar style="height: 100%;">
+              <ul class="nav flex-column">
+                <li *ngFor="let screen of screens" class="nav-item">
+                  <a 
+                    class="nav-link d-flex align-items-center" 
+                    [routerLink]="screen.screenURL ? screen.screenURL : null" 
+                    [class.active]="selectedScreen === screen"
+                    (click)="selectScreen(screen)">
+                    <i class="fas fa-icon mr-2"></i>
+                    <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                    <!-- UserDetails/FetchTabs -->
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      <!-- </div> -->
       
       <!-- Additional Sidebar for Tabs -->
       <aside *ngIf ="tabs!=null" class="left1-sidebar sidebar-light" id="right-sidebar">

@@ -80,3 +80,7 @@ text-align: center;
   margin-left: 21px;
   box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); 
 }
+section{
+  border: 1px solid #CDCCCC;
+  border-radius: 10px;
+}

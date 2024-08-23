@@ -26,7 +26,7 @@
 
  
 
-  <div class="pagination">
+  <div class="pagination" *ngIf="notifications.length>10">
     <button [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">Previous</button>
     <button *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="goToPage(page)">{{ page }}</button>
     <button [class.disabled]="currentPage === getTotalPages()" (click)="goToPage(currentPage + 1)">Next</button>
