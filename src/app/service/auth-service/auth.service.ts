@@ -15,7 +15,7 @@ export class AuthService {
    public user: Observable<User>;
   
   constructor(private http: HttpClient) {  
-    debugger;
+    
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
     this.user = this.userSubject.asObservable();
     
@@ -80,7 +80,7 @@ getUserName(){
    
   }// auth.service.ts
 resetPassword(payload: {currentPassword:string; newPassword: string; userName: string; companyCode: string }, token: string): Observable<any> {
-  debugger
+
   return this.http.post<any>(`${this.apiUrl}/ChangePassword`, payload, {
     headers: { Authorization: `Bearer ${token}` }
   });

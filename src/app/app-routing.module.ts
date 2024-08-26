@@ -14,10 +14,10 @@ import { EmplyeeDetailsSummaryComponent } from './pages/EmployeeData/employee-de
 import { PersonalDetailsComponent } from './pages/EmployeeData/personal-details/personal-details.component';
 import { EmploymentDetailsComponent } from './pages/EmployeeData/employment-details/employment-details.component';
 import { DocumentsComponent } from './pages/EmployeeData/documents/documents.component';
-import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
+// import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
-import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
-import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+// import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
+// import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { AuthGuard } from './service/auth.guard';
@@ -31,7 +31,7 @@ import { user } from './constant/constant';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 
-import { AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 // import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 // import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
@@ -42,92 +42,113 @@ import { EmployeeSearchResultComponent } from './pages/employee-search-result/em
 
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
-
+import { ProfileComponent } from './pages/profile/profile/profile.component';
+import { EducationDetailsComponent } from './pages/education/education-details/education-details.component';
+import { ContactDetailsComponent } from './pages/contact-details/contact-details/contact-details.component'; 
+import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
+import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
 
 const routes: Routes = [
-  //  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   // {
   //   path:'login',component:LoginComponent
   // },
+  // {
+  //   path:'',component:DashboardComponent,
+  //   canActivate:[AuthGuard]
+  // },
   {
-    path:'',component:DashboardComponent,
-    canActivate:[AuthGuard]
+    path: 'home', component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path:'home',component:DashboardComponent,
-    canActivate:[AuthGuard]
+    path: 'Admin', component: AdminDashboardComponent
   },
   {
-    path:'Admin',component:AdminDashboardComponent
-  },
-  {
-    path:'login',component:LoginComponent,
+    path: 'login', component: LoginComponent,
     // canActivate: [AuthGuard],
     // data:{ isLogin:localStorage.getItem('token')?true:false} 
   },
-  { path: 'reset-password', component: ChangePasswordComponent,
-    canActivate: [AuthGuard]    
-   },
-   {
-    path: 'notification' , component:NotificationComponent
-   },
-   { 
+  {
+    path: 'reset-password', component: ChangePasswordComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'notification', component: NotificationComponent
+  },
+  {
     path: 'notification/:id', component: NotificationDetailsComponent
-    },
-  {
-    path:'jobpost', component:JobPostComponent
   },
   {
-    path:'add-attendance',component:AddAttendanceComponent
+    path: 'profile', component: ProfileComponent
   },
   {
-    path:'import-attendance',component:ImportAttendancesComponent
+    path: 'contact-details', component: ContactDetailsComponent
   },
-  { 
-    path: 'employeeList', component: EmployeeListDataComponent 
+
+  {
+    path: 'bank-details', component: BankDetailsComponent
   },
-  { 
-    path: 'employeeData', component: EmplyeeDetailsSummaryComponent 
+  {
+    path: 'education-details', component: EducationDetailsComponent
   },
-  { 
+  {
+    path: 'experience-details', component: ExperienceDetailsComponent
+  },
+  {
+    path: 'jobpost', component: JobPostComponent
+  },
+  {
+    path: 'add-attendance', component: AddAttendanceComponent
+  },
+  {
+    path: 'import-attendance', component: ImportAttendancesComponent
+  },
+  {
+    path: 'employeeList', component: EmployeeListDataComponent
+  },
+  {
+    path: 'employeeData', component: EmplyeeDetailsSummaryComponent
+  },
+  {
     path: 'employeeData/:id', component: EmplyeeDetailsSummaryComponent,
     canActivate: [AuthGuard],
-    data:{ id:user.id} 
+    data: { id: user.id }
   },
   {
-    path:'emp-personal-details',component:PersonalDetailsComponent
+    path: 'emp-personal-details', component: PersonalDetailsComponent
   },
   // {
   //   path:'emp-employement-history',component:EmploymentDetailsComponent
   // },
-  { 
-    path: 'emp-documents', component: DocumentsComponent 
+  {
+    path: 'emp-documents', component: DocumentsComponent
   },
-  { 
-    path: 'emp-contact-details', component: ContactDetailsComponent 
+  // {
+  //   path: 'emp-contact-details', component: ContactDetailsComponent
+  // },
+  {
+    path: 'emp-nominee-details', component: NominationDetailsComponent
+  },
+  // {
+  //   path: 'emp-education-details', component: EducationDetailsComponent
+  // },
+  {
+    path: 'emp-bank-details', component: BankDetailsComponent
   },
   {
-    path:'emp-nominee-details',component:NominationDetailsComponent
+    path: 'company-master', component: CompanyMasterComponent
   },
   {
-    path:'emp-education-details',component:EducationDetailsComponent
+    path: 'Admincalender', component: AdmincalenderComponent
   },
-  { 
-    path: 'emp-bank-details', component:  BankDetailsComponent
+  {
+    path: 'create-employee', component: CreateEmployeeComponent
   },
- {
-  path: 'company-master', component: CompanyMasterComponent
- },
-   { 
-     path: 'Admincalender', component: AdmincalenderComponent
-   },
-  { 
-    path: 'create-employee', component: CreateEmployeeComponent 
-  },
-  { 
+  {
     path: 'my-application', component: MyApplicationComponent
   },
-  { 
+  {
     path: 'exitoffboard', component: ExitoffboardComponent
   },
   {
@@ -136,7 +157,7 @@ const routes: Routes = [
   {
     path: 'adminexitDetail', component: AdminexitoffboardDetailComponent
   },
- {
+  {
     path: 'EmployementDetail', component: EmploymentDetailsComponent
   },
   {

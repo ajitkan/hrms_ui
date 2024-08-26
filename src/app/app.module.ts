@@ -28,10 +28,10 @@ import { EmplyeeDetailsSummaryComponent } from './pages/EmployeeData/employee-de
 import { PersonalDetailsComponent } from './pages/EmployeeData/personal-details/personal-details.component';
 import { EmploymentDetailsComponent } from './pages/EmployeeData/employment-details/employment-details.component';
 import { DocumentsComponent } from './pages/EmployeeData/documents/documents.component';
-import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
+// import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
-import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
-import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+// import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
+// import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
@@ -59,6 +59,11 @@ import { EmployeeSearchResultComponent } from './pages/employee-search-result/em
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
+import { EducationDetailsComponent } from './pages/education/education-details/education-details.component';
+import { ContactDetailsComponent } from './pages/contact-details/contact-details/contact-details.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
+import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
+
 
 
 @NgModule({
@@ -107,6 +112,8 @@ import { ProfileComponent } from './pages/profile/profile/profile.component';
     NotificationComponent,
     NotificationDetailsComponent,
     ProfileComponent,
+    ExperienceDetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
