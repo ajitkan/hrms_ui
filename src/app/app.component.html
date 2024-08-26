@@ -87,9 +87,9 @@
             </ul>
           </div>
         </div>
-      </aside> -->
-      <div class="main-content d-flex">
-        <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
+      </aside>
+      <!-- <div class="main-content d-flex"> -->
+        <!-- <aside class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
           <div id="sidebar" class="sidebar sidebar-with-footer">
             <div class="sidebar-left" data-simplebar style="height: 100%;">
               <ul class="nav flex-column">
@@ -101,13 +101,12 @@
                     (click)="selectScreen(screen)">
                     <i class="fas fa-icon mr-2"></i>
                     <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                    <!-- UserDetails/FetchTabs -->
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-        </aside>
+        </aside> -->
       <!-- </div> -->
       
       <!-- Additional Sidebar for Tabs -->
@@ -125,19 +124,12 @@
           </div>
         </div>
       </aside>
-
-      <!-- Page Content -->
-      <div class="page-content">
-        <div *ngIf="selectedTab!=''">
-        
-         
-        </div>
-       
-        <router-outlet></router-outlet>
-      </div>
+      
+      <router-outlet></router-outlet>
     </div>
-    <app-footer></app-footer>
+    <!-- </div> -->
   </div>
+  <app-footer></app-footer>
 </div>
 
 

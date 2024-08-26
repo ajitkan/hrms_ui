@@ -41,5 +41,6 @@ p{
 .copyright p {
     font-weight: 500;
 }
- 
- 
+app-profile,app-dashboard,app-contact-details,app-bank-details,app-education-details,app-experience-details{
+    width: 100%;
+}

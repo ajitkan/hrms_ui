@@ -344,7 +344,8 @@
   }
   .bg-image{
     margin: auto;
-    background-image: url(https://kaninfos.com/hrmsui/HRMS.b69151d03b169957.png);
+    background-image:url(src\assets\images\HRMS.png); 
+    /* url(https://kaninfos.com/hrmsui/HRMS.b69151d03b169957.png); */
     height: 60%;
     width: 55%;
     background-size: cover;

@@ -1,4 +1,4 @@
-  
+<!--   
 <section>
     <div class="row">
         <img class="rounded-circle mt-5 profileimg" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
@@ -37,9 +37,7 @@
                     <label class="labelallign hr-lines">My Approval</label>
                     <p class="pcontent"> 3</p>
                 </div>
-                <div class="borderMyApp" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);"> 
-                    <!-- background: url('assets/images/dashboard/appli.png'); -->
-                  
+                <div class="borderMyApp" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);">        
                     <label class="labelallign hr-lines">My Application</label>
                     
                     <p class="pcontent">1</p>
@@ -119,8 +117,6 @@
             <label class="labelallign" style="font-size: 20px;">Team Attendance</label>
         </div>
 
-        <!-- <div style="width: 22%; background-color: white;"> -->
-            <!-- <label class="labelallign"> Upcomming Holidays</label> -->
             <div class="card text-center" style="width: 265px;">
                 <div class="card-header" style="width: 245px;">
                     Upcomming Holidays
@@ -128,14 +124,213 @@
                 <div class="card-body">
                   <h5 class="card-title">15th August</h5>
                   <p class="card-text" style="font-size: 21px;">Independance Day</p>
-                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                </div>
+                    </div>
                 <div class="card-footer text-muted">
                   2 days ago
                 </div>
               </div>
         </div>
-    <!-- </div> -->
 
 </section>
-<br/>
+<br/> -->
+
+
+<main role="main" class="col m-auto col-lg-10 px-4 main-content">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+      <h1 class="h2">Dashboard</h1>
+    </div>
+
+    <!-- Calendar & Attendance Summary Card -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            October 2023
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Calendar -->
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header bg-primary text-white">
+                    Calendar
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Sun</th>
+                          <th>Mon</th>
+                          <th>Tue</th>
+                          <th>Wed</th>
+                          <th>Thu</th>
+                          <th>Fri</th>
+                          <th>Sat</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="working">1</td>
+                          <td class="absent">2</td>
+                          <td class="leave">3</td>
+                        </tr>
+                        <tr>
+                          <td class="holiday">4</td>
+                          <td class="half-day">5</td>
+                          <td>6</td>
+                          <td>7</td>
+                          <td>8</td>
+                          <td>9</td>
+                          <td>10</td>
+                        </tr>
+<tr>
+                          <td>11</td>
+                          <td>12</td>
+                          <td>13</td>
+                          <td>14</td>
+                          <td>15</td>
+                          <td>16</td>
+                          <td>17</td>
+                        </tr>
+<tr>
+                          <td>18</td>
+                          <td>19</td>
+                          <td>20</td>
+                          <td>21</td>
+                          <td>22</td>
+                          <td>23</td>
+                          <td>24</td>
+                        </tr>
+<tr>
+                          <td>25</td>
+                          <td>26</td>
+                          <td>27</td>
+                          <td>28</td>
+                          <td>29</td>
+                          <td>30</td>
+                          <td>31</td>
+                        </tr>
+
+                        <!-- Add more rows as necessary -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Attendance & Summary -->
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    Attendance &amp; Summary
+                  </div>
+                  <div class="card-body">
+                    <p>Present days: 26</p>
+                    <p>Absent days: 3</p>
+                    <p>Leave Apply: 2</p>
+                    <button class="btn btn-success">Check In</button>
+                    <button class="btn btn-outline-secondary">Check Out</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Cards -->
+    <div class="row mt-4">
+      <!-- My Payslip -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            My Payslip
+          </div>
+          <div class="card-body">
+            <select class="form-control">
+              <option>September 2023</option>
+            </select>
+            <button class="btn btn-outline-secondary mt-2">Download</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rewards & Recognition -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Rewards &amp; Recognition
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">Santosh Yadav <span class="badge badge-warning">★★★★☆</span></li>
+              <li class="list-group-item">Priya Sharma <span class="badge badge-warning">★★★★★</span></li>
+              <li class="list-group-item">Manas Shinde <span class="badge badge-warning">★★★★☆</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- IT Help Desk -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            IT Help Desk
+          </div>
+          <div class="card-body">
+            <button class="btn btn-primary">New ticket</button>
+            <button class="btn btn-outline-secondary">Pending tickets</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <!-- HRMS Documents -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            HRMS Documents
+          </div>
+          <div class="card-body">
+            <input type="text" class="form-control" placeholder="Add Document">
+            <button class="btn btn-primary mt-2">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events & Celebrations -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Events &amp; Celebrations
+          </div>
+          <div class="card-body">
+            <p>4 Birthdays</p>
+            <p>2 Event Invites</p>
+            <p>6 Work Anniversary</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <!-- Upcoming Holiday -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Upcoming Holiday
+          </div>
+          <div class="card-body">
+            <p>Vijayadashami - Oct, 24 Tuesday</p>
+            <p>Diwali - Nov, 14 Tuesday</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
