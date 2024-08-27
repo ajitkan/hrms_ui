@@ -125,3 +125,6 @@ button:hover:not(:disabled) {
   margin: 1%;
 }
 
+.alert-danger {
+  margin: 1%;
+}

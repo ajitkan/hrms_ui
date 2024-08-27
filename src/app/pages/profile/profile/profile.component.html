@@ -59,7 +59,7 @@
 
 
 
-<div *ngIf="alertMessage" class="alert alert-dismissible" 
+<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
   {{ alertMessage }}
@@ -72,27 +72,29 @@
       <div *ngFor="let field of row" 
            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
         
-        <!-- Render fields based on control type -->
-        <ng-container *ngIf="field.controls !== 'BUTTON'">
+     
+        <ng-container *ngIf=" field.isView && field.controls !== 'BUTTON'">
           <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
           
-          <!-- Text Input -->
+          
           <input *ngIf="field.controls === 'TEXTFIELD'"
                  [type]="dynamicFormService.getFieldType(field.fieldDataType)"
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
                  [required]="field.isMandatory"
-                 (input)="dynamicFormService.onTextInput($event)" />
+                 (input)="dynamicFormService.onTextInput($event)" 
+                />
           
-          <!-- Dropdown -->
+          
           <select *ngIf="field.controls === 'DROPDOWNLIST'"
                   [id]="field.fieldName"
                   [formControlName]="field.fieldName"
-                  [required]="field.isMandatory">
+                  [required]="field.isMandatory"
+                  [disabled]="field.IsEdit">
             <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
           </select>
           
-          <!-- Datepicker -->
+         
           <input *ngIf="field.controls === 'DATEPICKER'"
                  type="date"
                  [id]="field.fieldName"
@@ -102,12 +104,75 @@
       </div>
     </div>
 
-    <!-- Button Row - Buttons based on field configuration -->
+   
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
         <button 
-          *ngIf="field.controls === 'BUTTON'" 
+          *ngIf="field.isView && field.controls === 'BUTTON'" 
           type="button" 
+          [disabled]="field.isEdit === false"
+          (click)="onButtonClick(field.fieldTitle)">
+          <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
+          {{ field.fieldTitle }}
+        </button>
+      </ng-container>
+    </div>
+  </form>
+</div> -->
+
+
+
+<div *ngIf="alertMessage" class="alert alert-dismissible" 
+     [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
+     role="alert">
+  {{ alertMessage }}
+</div>
+
+<div class="profile-container">
+  <h3>My Profile</h3>
+  <form class="profileForm" [formGroup]="profileForm">
+    <div class="form-row">
+      <ng-container *ngFor="let field of fields">
+        <div *ngIf="field.isView" class="form-group">
+          <ng-container *ngIf="field.controls !== 'BUTTON'">
+            <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
+            
+            <!-- Text Input -->
+            <input *ngIf="field.controls === 'TEXTFIELD'"
+                   [type]="dynamicFormService.getFieldType(field.fieldDataType)"
+                   [id]="field.fieldName"
+                   [formControlName]="field.fieldName"
+                   [required]="field.isMandatory"
+                   [disabled]="field.isEdit === false"/>
+            
+            <!-- Dropdown -->
+            <select *ngIf="field.controls === 'DROPDOWNLIST'"
+                    [id]="field.fieldName"
+                    [formControlName]="field.fieldName"
+                    [required]="field.isMandatory"
+                    [disabled]="field.isEdit === false">
+              <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
+            </select>
+            
+            <!-- Datepicker -->
+            <input *ngIf="field.controls === 'DATEPICKER'"
+                   type="date"
+                   [id]="field.fieldName"
+                   [formControlName]="field.fieldName"
+                   [required]="field.isMandatory" 
+                   [disabled]="field.isEdit === false"/>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Button Row -->
+    <div class="button-container">
+      <ng-container *ngFor="let field of fields">
+        <button 
+          *ngIf="field.isView && field.controls === 'BUTTON'" 
+          type="button" 
+          [disabled]="field.isEdit === false"
           (click)="onButtonClick(field.fieldTitle)">
           <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
           {{ field.fieldTitle }}

@@ -313,16 +313,64 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  // createForm(fields: any[]): void {
+  //   const formGroup: any = {};
+  //   fields.forEach(field => {
+  //     if (field.controls !== 'BUTTON') {
+  //       const validators = [];
+  //       if (field.isMandatory) {
+  //         validators.push(Validators.required);
+  //       }
+  //       // formGroup[field.fieldName] = [field.defaultValue || '', validators];
+  //       formGroup[field.fieldName] = this.fb.control({
+  //         value: field.defaultValue || '',
+  //         disabled: field.IsEdit === false
+  //       }, validators);
+  
+      
+  //       // formGroup[field.fieldName] = control;
+
+  //       if (field.controls === 'DROPDOWNLIST') {
+  //         this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               field.options = res.masterList.map((item: any) => ({
+  //                 value: item.Code,
+  //                 text: item.Text
+  //               }));
+  //             } else {
+  //               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  //   this.profileForm = this.fb.group(formGroup);
+  // }
+
   createForm(fields: any[]): void {
     const formGroup: any = {};
+  
+    // Create form controls with initial values, validators, and disabled state
     fields.forEach(field => {
-      if (field.controls !== 'BUTTON') {
+      if (field.isView) { // Only create form controls for fields that should be visible
         const validators = [];
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        formGroup[field.fieldName] = [field.defaultValue || '', validators];
-
+  
+        // Initialize the control with its value and disabled state
+        const isDisabled = field.isEdit === false;
+        formGroup[field.fieldName] = this.fb.control(
+          { value: field.defaultValue || '', disabled: isDisabled }, 
+          validators
+        );
+  
+        // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
             next: (res: any) => {
@@ -342,8 +390,12 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
+  
+    // Create the form group
     this.profileForm = this.fb.group(formGroup);
   }
+  
+  
 
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);

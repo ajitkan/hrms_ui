@@ -13,7 +13,7 @@
            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
         
         <!-- Render fields based on control type -->
-        <ng-container *ngIf="field.controls !== 'BUTTON'">
+        <ng-container *ngIf="field.isView && field.controls !== 'BUTTON'">
           <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
           
           <!-- Text Input -->
@@ -46,7 +46,7 @@
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
         <button 
-          *ngIf="field.controls === 'BUTTON'" 
+          *ngIf="field.isView && field.controls === 'BUTTON'" 
           type="button" 
           (click)="onButtonClick(field.fieldTitle)">
           <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
