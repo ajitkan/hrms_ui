@@ -119,8 +119,8 @@ export class EducationDetailsComponent {
       const formValues = this.educationForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
-        employeeCode: formValues.EmployeeCode,
-        createdBy: formValues.EmployeeCode
+        employeeCode: this.employeeCode,
+        createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
 

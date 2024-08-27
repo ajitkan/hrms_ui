@@ -241,16 +241,57 @@ export class ContactDetailsComponent implements OnInit {
     });
   }
 
+  // createForm(fields: any[]): void {
+  //   const formGroup: any = {};
+  //   fields.forEach(field => {
+  //     if (field.controls !== 'BUTTON') {
+  //       const validators = [];
+  //       if (field.isMandatory) {
+  //         validators.push(Validators.required);
+  //       }
+  //       formGroup[field.fieldName] = [field.defaultValue || '', validators];
+
+  //       if (field.controls === 'DROPDOWNLIST') {
+  //         this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               field.options = res.masterList.map((item: any) => ({
+  //                 value: item.Code,
+  //                 text: item.Text
+  //               }));
+  //             } else {
+  //               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  //   this.contactForm = this.fb.group(formGroup);
+  // }
+
   createForm(fields: any[]): void {
     const formGroup: any = {};
+  
+    // Create form controls with initial values, validators, and disabled state
     fields.forEach(field => {
-      if (field.controls !== 'BUTTON') {
+      if (field.isView) { // Only create form controls for fields that should be visible
         const validators = [];
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        formGroup[field.fieldName] = [field.defaultValue || '', validators];
-
+  
+        // Initialize the control with its value and disabled state
+        const isDisabled = field.isEdit === false;
+        formGroup[field.fieldName] = this.fb.control(
+          { value: field.defaultValue || '', disabled: isDisabled }, 
+          validators
+        );
+  
+        // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
             next: (res: any) => {
@@ -270,6 +311,8 @@ export class ContactDetailsComponent implements OnInit {
         }
       }
     });
+  
+    // Create the form group
     this.contactForm = this.fb.group(formGroup);
   }
 
@@ -290,12 +333,13 @@ export class ContactDetailsComponent implements OnInit {
 
   onSubmit(fieldTitle: string): void {
     if (this.contactForm.valid || fieldTitle === 'Save As Draft') {
-      const formValues = this.contactForm.getRawValue();
+       const formValues = this.contactForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
-        employeeCode: formValues.EmployeeCode,
-        createdBy: formValues.EmployeeCode
+        employeeCode: this.employeeCode,
+        createdBy: this.employeeCode
       };
+      // const formValues = this.employeeCode
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
 
       this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
@@ -303,10 +347,10 @@ export class ContactDetailsComponent implements OnInit {
           if (fieldTitle === 'Save & Next') {
             this.alertMessage = response.message || 'Saved successfully';
             this.alertType = 'success';
-            // this.contactForm.disable();
-            // this.contactForm.reset();
+            this.contactForm.disable();
+            this.contactForm.reset();
             const nextTabID = this.getNextTabID(this.tabID);
-            this.router.navigate(['/contact-details'], { queryParams: { tabID: nextTabID } });
+            this.router.navigate(['/bank-details'], { queryParams: { tabID: nextTabID } });
           } else if (fieldTitle === 'Save As Draft') {
             this.alertMessage = 'Draft saved successfully.';
             this.alertType = 'success';

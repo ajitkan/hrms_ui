@@ -123,8 +123,13 @@ export class DynamicFormService {
   //   return row.length === 1 || (row.length === 2 && row.some(field => field.controls === 'BUTTON'));
   // }
 
+  // isSingleFieldOrButtonRow(row: any[]): boolean {
+  //   return row.length === 1 && row[0].controls !== 'BUTTON'; // Ensure buttons don't trigger the single field layout
+  // }
+  
   isSingleFieldOrButtonRow(row: any[]): boolean {
-    return row.length === 1 && row[0].controls !== 'BUTTON'; // Ensure buttons don't trigger the single field layout
+    // Check if the row contains only one item and it's not a button
+    return row.length === 1 && row[0].controls !== 'BUTTON' && row[0].isView;
   }
   
 }

@@ -116,8 +116,8 @@ export class BankDetailsComponent {
       const formValues = this.bankdetailsForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
-        employeeCode: formValues.EmployeeCode,
-        createdBy: formValues.EmployeeCode
+        employeeCode: this.employeeCode,
+        createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
 
@@ -129,7 +129,7 @@ export class BankDetailsComponent {
             // this.contactForm.disable();
             // this.contactForm.reset();
             const nextTabID = this.getNextTabID(this.tabID);
-            this.router.navigate(['/contact-details'], { queryParams: { tabID: nextTabID } });
+            this.router.navigate(['/education-details'], { queryParams: { tabID: nextTabID } });
           } else if (fieldTitle === 'Save As Draft') {
             this.alertMessage = 'Draft saved successfully.';
             this.alertType = 'success';
