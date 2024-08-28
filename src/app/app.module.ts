@@ -29,9 +29,12 @@ import { PersonalDetailsComponent } from './pages/EmployeeData/personal-details/
 import { EmploymentDetailsComponent } from './pages/EmployeeData/employment-details/employment-details.component';
 import { DocumentsComponent } from './pages/EmployeeData/documents/documents.component';
 // import { ContactDetailsComponent } from './pages/EmployeeData/contact-details/contact-details.component';
+import { ContactDetailsComponent } from './pages/contact-details/contact-details/contact-details.component';
 import { NominationDetailsComponent } from './pages/EmployeeData/nomination-details/nomination-details.component';
 // import { EducationDetailsComponent } from './pages/EmployeeData/education-details/education-details.component';
+import { EducationDetailsComponent } from './pages/education/education-details/education-details.component';
 // import { BankDetailsComponent } from './pages/EmployeeData/bank-details/bank-details.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
 import { CompanyMasterComponent } from './pages/master/company-master/company-master.component';
 import { MyApplicationComponent } from './pages/time-and-attendance/my-application/my-application.component';
 import { ErrorInterceptor } from './service/error.interceptor';
@@ -49,7 +52,7 @@ import { NoDataFound } from './pages/shared-components/no-data-found.component';
 import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-employee/create-employee.component';
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
-import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
+// import { SalaryDetailsComponent } from './pages/payroll/salary-details/salary-details.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './pages/authentication/change-password/change-password.component';
 // import { CommonModule } from '@angular/common';
@@ -59,11 +62,7 @@ import { EmployeeSearchResultComponent } from './pages/employee-search-result/em
 import { NotificationComponent } from './pages/shared-components/notification/notification.component';
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
-import { EducationDetailsComponent } from './pages/education/education-details/education-details.component';
-import { ContactDetailsComponent } from './pages/contact-details/contact-details/contact-details.component';
-import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
-
 
 
 @NgModule({
@@ -105,15 +104,14 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
     SalaryCalculatorComponent,
     MyTimesheetComponent,
 
-    SalaryDetailsComponent,
+    // SalaryDetailsComponent,
     ChangePasswordComponent,
     EmploymentDetailsComponent,
     EmployeeSearchResultComponent,
     NotificationComponent,
     NotificationDetailsComponent,
     ProfileComponent,
-    ExperienceDetailsComponent,
-    
+    ExperienceDetailsComponent
   ],
   imports: [
     BrowserModule,

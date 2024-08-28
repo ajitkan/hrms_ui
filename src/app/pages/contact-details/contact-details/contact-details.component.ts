@@ -283,7 +283,21 @@ export class ContactDetailsComponent implements OnInit {
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-  
+        
+        if (field.fieldDataType =='TEXT') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(this.dynamicFormService.textOnlyValidator());
+         }
+
+        if(field.fieldDataType =='EMAIL'){
+          //if (field.fieldDataType =='TEXT') {
+            validators.push(Validators.email);
+        }
+
+        if (field.fieldDataType === 'NUMBER') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(this.dynamicFormService.numberOnlyValidator()); // Apply the number-only validator here
+        }
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
         formGroup[field.fieldName] = this.fb.control(

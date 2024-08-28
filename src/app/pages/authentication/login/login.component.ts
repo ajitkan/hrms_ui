@@ -218,6 +218,8 @@ export class LoginComponent {
           // localStorage.setItem('token', JSON.stringify(res.token) as string);
           localStorage.setItem('token', JSON.stringify(res.token)as string);
           localStorage.setItem('screens',JSON.stringify(res.user.screens));
+          localStorage.setItem('roles',JSON.stringify(res.user.roleInfoResultSet));
+
           // this.isLogin.emit(true);
           this.isLogin.emit({isLoggedIn: true, screens: res.user.screens, notificationCount:res.user.notification});
           

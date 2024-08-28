@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -131,5 +132,35 @@ export class DynamicFormService {
     // Check if the row contains only one item and it's not a button
     return row.length === 1 && row[0].controls !== 'BUTTON' && row[0].isView;
   }
-  
+
+  onDropDownChange(form: FormGroup, field:any){
+   if(field.fieldName =='title'){
+    // alert(field.fieldName);
+      const title = form.get('title')?.value;
+
+      if (title === "1") {
+        form.get('Gender')?.setValue('1');
+        //form.controls(disabled);
+      } else if(title === "3" || title === "2" ) {
+        form.get('Gender')?.setValue('2');
+      }
+      else{
+        form.get('Gender')?.setValue('');
+      }
+   }
+    
+  //}
+  }
+  textOnlyValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const forbidden = /[0-9]/.test(control.value);
+      return forbidden ? { 'textOnly': { value: control.value } } : null;
+    };
+  }
+  numberOnlyValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const isValid = /^[0-9]+$/.test(control.value);
+      return !isValid ? { 'numberOnly': { value: control.value } } : null;
+    };
+  }
 }

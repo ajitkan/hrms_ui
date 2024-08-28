@@ -38,6 +38,27 @@
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
                  [required]="field.isMandatory" />
+
+                 <div *ngIf="field.controls === 'TEXTFIELD'"> 
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.errors?.['required']">
+                    {{ field.fieldTitle }} is required.
+                  </small>
+                  <!-- <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.errors?.['minLength']"> -->
+                  <small class="text-danger" *ngIf="(contactForm.get(field.fieldName))?.hasError('minlength')">
+                    {{ field.fieldTitle }} must be at least {{ contactForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('textOnly')">
+                    {{ field.fieldTitle }} should not contain numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('numberOnly')">
+                    {{ field.fieldTitle }} should contain only numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('email')">
+                    {{ field.fieldTitle }} Not in correct format.
+                  </small>
+                  <!-- Add more validation messages as needed -->
+                </div>
+          
         </ng-container>
       </div>
     </div>
