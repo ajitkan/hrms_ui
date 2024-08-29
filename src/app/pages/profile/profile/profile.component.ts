@@ -1,7 +1,3 @@
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +18,7 @@ export class ProfileComponent implements OnInit {
   private tabID!: number;
   private roleID!: number;
   private token: any;
+  private Roles:any;
   private recordType: string | null = null;
   private employeeCode: string = '';// New property for employeeCode
 
@@ -39,9 +36,11 @@ export class ProfileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.tabID = params['tabID'];
       this.token = JSON.parse(localStorage.getItem('token') as string);
+      this.Roles = JSON.parse(localStorage.getItem('roles') as string);
+      this.roleID = this.Roles.roleID;
       const decodedToken: any = jwtDecode(this.token);
-      debugger
-      this.roleID = decodedToken.nameid;
+      // debugger
+      // this.roleID = decodedToken.nameid;
       this.employeeCode = decodedToken.unique_name;
 
       this.fetchFields();
@@ -63,6 +62,11 @@ export class ProfileComponent implements OnInit {
         console.error('Error:', err.message);
       }
     });
+  }
+
+  onTitleChange(field:any) {
+    console.log("field",field)
+    this.dynamicFormService.onDropDownChange(this.profileForm,field);
   }
 
   // createForm(fields: any[]): void {
@@ -114,14 +118,26 @@ export class ProfileComponent implements OnInit {
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-  
+        if (field.fieldDataType =='TEXT') {
+          // validators.push(Validators.required);
+          // debugger;
+          // validators.push(Validators.email);//Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$")])
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(this.dynamicFormService.textOnlyValidator());
+          console.log("length of field",field.minLength);
+          // alert(field.maxLength);
+        }
+
+        
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
         formGroup[field.fieldName] = this.fb.control(
-          { value: field.defaultValue || '', disabled: isDisabled }, 
+          { value: field.defaultValue || ''},//, disabled: isDisabled }, 
           validators
         );
   
+        
+
         // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
@@ -147,69 +163,6 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group(formGroup);
   }
   
-  
-
-  // onButtonClick(fieldTitle: string): void {
-  //   console.log('Button clicked with fieldTitle:', fieldTitle);
-  
-  //   // Set recordType based on button clicked
-  //   this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-  
-  //   if (fieldTitle === 'Save & Next') {
-  //     this.onSubmit('Save & Next');
-  //   } else if (fieldTitle === 'Save As Draft') {
-  //     this.onSubmit('Save As Draft');
-  //   } else if (fieldTitle === 'Back') {
-  //     this.onSubmit('Back');
-  //   } else {
-  //     console.log('Unknown action:', fieldTitle);
-  //   }
-  // }
-  
-  // onSubmit(fieldTitle: string): void {
-  //   debugger
-  //   if (this.profileForm.valid || fieldTitle === 'Save As Draft') {
-  //     const formValues = this.profileForm.getRawValue();
-  //     const extraData = {
-  //       employeeID: formValues.employeeID,
-  //       employeeCode: this.employeeCode,
-  //       createdBy: this.employeeCode
-  //     };
-  //     const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-  
-  //     this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
-  //       next: (response: { message: string | null }) => {
-  //         if (fieldTitle === 'Save & Next') {
-  //           this.alertMessage = response.message || 'Saved successfully';
-  //           this.alertType = 'success';
-  //           this.profileForm.disable();
-  //           this.profileForm.reset();
-  //           const nextTabID = this.getNextTabID(this.tabID);
-  //           this.router.navigate(['/bank-details'], { queryParams: { tabID: nextTabID } });
-  //         } else if (fieldTitle === 'Save As Draft') {
-  //           this.alertMessage = 'Draft saved successfully.';
-  //           this.alertType = 'success';
-  //         } else if (fieldTitle === 'Back') {
-  //           this.alertMessage = 'Navigating to dashboard.';
-  //           this.alertType = 'success';
-  //           this.router.navigate(['/home']);
-  //         }
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Error:', error);
-  //         this.alertMessage = fieldTitle === 'Save & Next'
-  //           ? 'Something went wrong; please try again later.'
-  //           : 'Failed to save draft; please try again later.';
-  //         this.alertType = 'error';
-  //       }
-  //     });
-  //   } else {
-  //     this.alertMessage = 'Please correct the errors in the form.';
-  //     this.alertType = 'error';
-  //   }
-  // }
-
-
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
   
@@ -222,9 +175,6 @@ export class ProfileComponent implements OnInit {
       console.log('Unknown action:', fieldTitle);
     }
   }
-  
-
- 
   
   onSubmit(fieldTitle: string): void {
     console.log('Form Valid:', this.profileForm.valid);
@@ -272,13 +222,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   
-
   fetchEmployeeDetails(): void {
-    // debugger
-    // this.employeeCode = this.profileForm.get('EmployeeCode')?.value || '';
-    // console.log('employeeCode'),this.employeeCode;
-    // const recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-
     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
         .subscribe({
             next: (res: any) => {
@@ -303,14 +247,18 @@ export class ProfileComponent implements OnInit {
         });
 }
 
-
 private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
     // Assuming profileForm is a FormGroup
     employeeDetails.forEach(detail => {
         if (detail.isApplicable) {
+          debugger;
             const control = this.profileForm.get(detail.fieldName);
             if (control) {
+              if(detail.fieldName === 'title'){
                 control.setValue(detail.fieldValue);
+                this.dynamicFormService.onDropDownChange(this.profileForm,detail);
+              }
+              control.setValue(detail.fieldValue);
             } else {
                 console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
             }
@@ -318,35 +266,7 @@ private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
     });
 }
 
-  // fetchEmployeeDetails(): void {
-  //   // Dynamically get employeeCode from the form or another source 
-  //   this.employeeCode = this.profileForm.get('EmployeeCode')?.value || ''; 
-
-  //   this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType).subscribe({
-  //     next: (res: any) => {
-  //       if (res.code === 1) {
-  //         const employeeDetails = res.featchEmployeeDetailResponse;
-  //         this.populateFormWithEmployeeDetails(employeeDetails);
-  //         console.log('employeeDetails ---->', employeeDetails);
-  //       } else {
-  //         console.error('Error fetching employee details:', res.message);
-  //       }
-  //     },
-  //     error: (err: any) => {
-  //       console.error('Error:', err.message);
-  //     }
-  //   });
-  // }
-
-  // populateFormWithEmployeeDetails(details: any[]): void {
-  //   details.forEach(detail => {
-  //     if (this.profileForm.controls[detail.fieldName]) {
-  //       this.profileForm.controls[detail.fieldName].setValue(detail.fieldValue);
-  //     }
-  //   });
-  // }
-
-  private getNextTabID(currentTabID: number): number {
+private getNextTabID(currentTabID: number): number {
     const totalTabs = 11;
     const nextTabID = (currentTabID % totalTabs) + 1;
     console.log(`Current Tab ID: ${currentTabID}, Calculated Next Tab ID: ${nextTabID}`);

@@ -39,8 +39,41 @@
             <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
           </select>
 
+
           <input *ngIf="field.controls === 'DATEPICKER'" type="date" [id]="field.fieldName"
             [formControlName]="field.fieldName" [required]="field.isMandatory" [disabled]="field.isEdit === false" />
+
+          
+          <!-- Datepicker -->
+         <!-- <input *ngIf="field.controls === 'DATEPICKER'"
+                 type="date"
+                 [id]="field.fieldName"
+                 [formControlName]="field.fieldName"
+                 [required]="field.isMandatory" /> -->
+
+                 <div *ngIf="field.controls === 'TEXTFIELD'"> 
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.errors?.['required']">
+                    {{ field.fieldTitle }} is required.
+                  </small>
+                  <!-- <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.errors?.['minLength']"> -->
+                  <small class="text-danger" *ngIf="(contactForm.get(field.fieldName))?.hasError('minlength')">
+                    {{ field.fieldTitle }} must be at least {{ contactForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="(contactForm.get(field.fieldName))?.hasError('maxlength')">
+                    {{ field.fieldTitle }} must not be greater than {{ contactForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('textOnly')">
+                    {{ field.fieldTitle }} should not contain numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('numberOnly')">
+                    {{ field.fieldTitle }} should contain only numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('email')">
+                    {{ field.fieldTitle }} Not in correct format.
+                  </small>
+                  <!-- Add more validation messages as needed -->
+                </div>
+          
         </ng-container>
       </div>
     </div>

@@ -72,6 +72,21 @@ export class BankDetailsComponent {
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
+        if (field.fieldDataType =='TEXT') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(this.dynamicFormService.textOnlyValidator());
+         }
+
+        if(field.fieldDataType =='EMAIL'){
+          //if (field.fieldDataType =='TEXT') {
+            validators.push(Validators.email);
+        }
+
+        if (field.fieldDataType === 'NUMBER') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(Validators.maxLength(field.maxLength))
+          validators.push(this.dynamicFormService.numberOnlyValidator()); // Apply the number-only validator here
+        }
         formGroup[field.fieldName] = [field.defaultValue || '', validators];
 
         if (field.controls === 'DROPDOWNLIST') {
