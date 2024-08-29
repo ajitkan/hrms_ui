@@ -1,57 +1,3 @@
-<!-- 
-
- <div *ngIf="alertMessage" class="alert alert-dismissible" 
-     [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
-     role="alert">
-  {{ alertMessage }}
-</div>
-
-<div class="bank-details-container">
-  <h3>Bank Details</h3>
-  <form class="bankdetailsForm" [formGroup]="bankdetailsForm" (ngSubmit)="onSubmit()">
-    <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
-      <div *ngFor="let field of row" 
-           [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
-           <ng-container *ngIf="field.controls !== 'BUTTON'">
-        <label *ngIf="field.controls !== 'BUTTON'" [for]="field.fieldName">{{ field.fieldTitle }}</label>
-        
-        <input *ngIf="field.controls === 'TEXTFIELD'"
-               [type]="dynamicFormService.getFieldType(field.fieldDataType)"
-               [id]="field.fieldName"
-               [formControlName]="field.fieldName"
-               [required]="field.isMandatory"
-               (input)="dynamicFormService.onTextInput($event)" />
-        
-        <select *ngIf="field.controls === 'DROPDOWNLIST'"
-                [id]="field.fieldName"
-                [formControlName]="field.fieldName"
-                [required]="field.isMandatory">
-          <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
-        </select>
-        
-        <input *ngIf="field.controls === 'DATEPICKER'"
-               type="date"
-               [id]="field.fieldName"
-               [formControlName]="field.fieldName"
-               [required]="field.isMandatory" />
-           </ng-container>
-      </div>
-    </div>
-        
-    
-      
-    <div class="button-container">
-      <ng-container *ngFor="let field of fields">
-        <button *ngIf="field.controls === 'BUTTON'" type="submit">
-          <fa-icon [icon]="['fas', field.iconName]"></fa-icon> 
-          {{ field.fieldTitle }}
-        </button>
-      </ng-container>
-    </div>
-  </form>
-</div>  -->
-
-
 
 <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
@@ -92,6 +38,29 @@
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
                  [required]="field.isMandatory" />
+
+                 <div *ngIf="field.controls === 'TEXTFIELD'"> 
+                  <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.errors?.['required']">
+                    {{ field.fieldTitle }} is required.
+                  </small>
+                  <!-- <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.errors?.['minLength']"> -->
+                  <small class="text-danger" *ngIf="(bankdetailsForm.get(field.fieldName))?.hasError('minlength')">
+                    {{ field.fieldTitle }} must be at least {{ bankdetailsForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="(bankdetailsForm.get(field.fieldName))?.hasError('maxlength')">
+                    {{ field.fieldTitle }} must not be greater than {{ bankdetailsForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.hasError('textOnly')">
+                    {{ field.fieldTitle }} should not contain numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.hasError('numberOnly')">
+                    {{ field.fieldTitle }} should contain only numeric value.
+                  </small>
+                  <!-- <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.hasError('email')">
+                    {{ field.fieldTitle }} Not in correct format.
+                  </small> -->
+                  <!-- Add more validation messages as needed -->
+                </div>
         </ng-container>
       </div>
     </div>

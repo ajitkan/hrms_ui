@@ -47,6 +47,9 @@
                   <small class="text-danger" *ngIf="(contactForm.get(field.fieldName))?.hasError('minlength')">
                     {{ field.fieldTitle }} must be at least {{ contactForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
                   </small>
+                  <small class="text-danger" *ngIf="(contactForm.get(field.fieldName))?.hasError('maxlength')">
+                    {{ field.fieldTitle }} must not be greater than {{ contactForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
+                  </small>
                   <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.hasError('textOnly')">
                     {{ field.fieldTitle }} should not contain numeric value.
                   </small>

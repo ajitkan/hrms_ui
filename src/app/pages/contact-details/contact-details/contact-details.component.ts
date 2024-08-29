@@ -296,6 +296,7 @@ export class ContactDetailsComponent implements OnInit {
 
         if (field.fieldDataType === 'NUMBER') {
           validators.push(Validators.minLength(field.minLength));
+          validators.push(Validators.maxLength(field.maxLength))
           validators.push(this.dynamicFormService.numberOnlyValidator()); // Apply the number-only validator here
         }
         // Initialize the control with its value and disabled state
