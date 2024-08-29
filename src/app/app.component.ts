@@ -23,10 +23,15 @@ export class AppComponent {
   // @ViewChild('changePasswordModal') changePasswordModal!: TemplateRef<any>;
   token:string ='';
   
-  selectedTab: string = '';
+  // selectedTab: string = '';
+  selectedTab :any;
   isFirstSidebarVisible = true;
   isSecondSidebarVisible = false;
   selectedScreen: any;
+
+  backTab: any | null = null; 
+previousScreenID: any | null = null; 
+showBackButton = false;
 
   selectScreen(screen: any): void {
     this.selectedScreen = screen;
@@ -34,27 +39,43 @@ export class AppComponent {
       this.fetchTabs(screen.screenID);
     }
   }
-  selectTab(tab: any) {
+  // selectTab(tab: any) {
    
-    this.selectedTab = tab;
-    
-    if (tab && tab.route) {
+  //   this.selectedTab = tab;
+
+  //   if (tab && tab.route) {
       
-      this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
+  //     this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
+  //   } 
+  //   else {
+  //     console.warn('No route provided for the selected tab');
+  //   }
+  // }
+  
+  selectTab(tab: any) {
+    // Check if the selected tab is the "Back" tab
+    if (tab && tab.tabTitle === 'Back') {
+      this.isFirstSidebarVisible = true;
+      this.isSecondSidebarVisible = false;
     } else {
-      console.warn('No route provided for the selected tab');
+      // Handle other tabs as usual
+      this.selectedTab = tab;
+  
+      if (tab && tab.route) {
+        this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
+      } else {
+        console.warn('No route provided for the selected tab');
+      }
     }
   }
   
 
-  // selectTab(tab: any) {
-  //   this.selectedTab = tab;
-  //   if (tab && tab.route) {
-  //     this.router.navigate([tab.route]);
-  //   } else {
-  //     console.warn('No route provided for the selected tab');
-  //   }
-  // }
+  handleBackClick() {
+    this.isFirstSidebarVisible = true;
+    this.isSecondSidebarVisible = false;
+  }
+  
+ 
   collapsedStates: { [key: string]: boolean } = {
     // uiElements: true,
     // buttons: true,
@@ -105,19 +126,7 @@ export class AppComponent {
 
   }
 
-  // ngDoCheck(){
-  //   if (this.router.url.includes('reset-password')) {
-  //     this.isSnapshot = true;
-  //     // this.isResetPasswordRoute = true;
-  //     // this.openChangePasswordModal();
-  //   }
-  // }
-  // openChangePasswordModal() {
-  //   this.modalService.open(this.changePasswordModal, { centered: true }); 
-  // }
-  // closeChangePasswordModal() {
-  //   this.isResetPasswordRoute = false;
-  // }
+ 
 
   get isAdmin() {
     // this.userLogIn = JSON.parse(sessionStorage.getItem('user')!);
@@ -128,19 +137,6 @@ export class AppComponent {
     //  debugger;
     return this.userLogIn.role === Role.SuperAdmin;
   }
-  // IsLoggedin(status:any){
-  //   if(status){
-  //     this.IsLogin = true;
-  //     this.IsLogout = false;
-  //     localStorage.setItem('LoggedIn',this.IsLogin.toString());
-  //     this.router.navigate(['/']);
-  //   }
-  //   else{ // in case of Logout
-  //     this.IsLogin = false;
-  //     this.IsLogout = true;
-  //     localStorage.removeItem('LoggedIn');
-  //   }
-  // }
 
   isCollapse(event:{isCollapsible:boolean }){
     this.isCollapsedSideBar = event.isCollapsible;
@@ -164,26 +160,10 @@ export class AppComponent {
       // this.isCollapsed = event.isCollapsed;
     }
   }
-  // toggleCollapse(menuItem: string) {
-  //   this.collapsedStates[menuItem] = !this.collapsedStates[menuItem];
-  //   // this.isFirstSidebarVisible = false;
-  //   //             this.isSecondSidebarVisible = true;
-  // }
+
 
   openLink() {
-    // this.httpService.postData(this.token).subscribe(
-    //   response => {
-    //     // Handle the response from the server
-    //     console.log(response);
-    //     // Open the link in a new tab if needed
-    //     window.open(`http://localhost:54485/login?token=${this.token}`, '_blank');
-    //   },
-    //   error => {
-    //     // Handle error
-    //     console.error(error);
-    //   }
-    // );
-    // this.login();
+  
     
   }
 
@@ -217,6 +197,53 @@ export class AppComponent {
     return;
   }
 
+
+  // fetchTabs(screenID: any) {
+  //   var screens = JSON.parse(localStorage.getItem('screens') as string);
+    
+  //   if (screens != null) {
+  //     screens.forEach((screen: any) => {
+  //       if (screen.screenID == screenID) {
+  //         this.previousScreenID = screen.screenID; // Store the current screen ID
+  
+  //         this.httpService.fetchTabs(screen.roleID, screen.screenID).subscribe({
+  //           next: (res: any) => {
+  //             if (res.code == 1) {
+  //               console.log('Tabs for given screens is :', res.tabResponces);
+  //               this.tabs = res.tabResponces;
+  
+  //               debugger
+  //               this.backTab = this.tabs.find((tab: any) => tab.tabTitle === 'Back');
+  //               this.showBackButton = !!this.backTab;
+  
+  //               this.isFirstSidebarVisible = false;
+  //               this.isSecondSidebarVisible = true;
+  //             } else {
+  //               console.log(res.message);
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(err.message);
+  //           }
+  //         });
+  //       } else {
+  //         return;
+  //       }
+  //     });
+  //   }
+  //   return;
+  // }
+  
+  
+
+  navigateBack() {
+    if (this.previousScreenID) {
+      this.fetchTabs(this.previousScreenID);
+    } else {
+      console.error('No previous screen ID found.');
+    }
+  }
+  
 
   navigateBasedOnRoute() {
     if (this.tabs.length > 0) {

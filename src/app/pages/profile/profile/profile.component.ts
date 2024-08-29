@@ -1,254 +1,5 @@
 
 
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { jwtDecode } from 'jwt-decode';
-// import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
-
-// @Component({
-//   selector: 'app-profile',
-//   templateUrl: './profile.component.html',
-//   styleUrls: ['./profile.component.css']
-// })
-// export class ProfileComponent implements OnInit {
-//   public profileForm: FormGroup;
-//   public fields: any[] = [];
-//   public alertMessage: string | null = null;
-//   public alertType: 'success' | 'error' | 'info' | null = null;
-
-//   private tabID!: number;
-//   private roleID!: number;
-//   private token: any;
-
-//   constructor(
-//     private fb: FormBuilder,
-//     public dynamicFormService: DynamicFormService,
-//     private route: ActivatedRoute,
-//     private router: Router
-//   ) {
-//     this.profileForm = this.fb.group({});
-//   }
-
-//   ngOnInit(): void {
-//     this.route.queryParams.subscribe(params => {
-//       this.tabID = params['tabID'];
-//       this.token = JSON.parse(localStorage.getItem('token') as string);
-//       const decodedToken: any = jwtDecode(this.token);
-//       this.roleID = decodedToken.nameid;
-
-//       this.fetchFields();
-//     });
-//   }
-
-//   fetchFields(): void {
-//     this.dynamicFormService.fetchFields(this.roleID, this.tabID).subscribe({
-//       next: (res: any) => {
-//         if (res.code === 1) {
-//           this.fields = res.fieldResponces || [];
-//           this.createForm(this.fields);
-//           this.fetchEmployeeDetails();
-//         } else {
-//           console.error('Error fetching fields:', res.message);
-//         }
-//       },
-//       error: (err: any) => {
-//         console.error('Error:', err.message);
-//       }
-//     });
-//   }
-
-//   createForm(fields: any[]): void {
-//     const formGroup: any = {};
-//     fields.forEach(field => {
-//       if (field.controls !== 'BUTTON') {
-//         const validators = [];
-//         if (field.isMandatory) {
-//           validators.push(Validators.required);
-//         }
-//         formGroup[field.fieldName] = [field.defaultValue || '', validators];
-
-//         if (field.controls === 'DROPDOWNLIST') {
-//           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
-//             next: (res: any) => {
-//               if (res.code === 1 && Array.isArray(res.masterList)) {
-//                 field.options = res.masterList.map((item: any) => ({
-//                   value: item.Code,
-//                   text: item.Text
-//                 }));
-//               } else {
-//                 console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
-//               }
-//             },
-//             error: (err: any) => {
-//               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
-//             }
-//           });
-//         }
-//       }
-//     });
-//     this.profileForm = this.fb.group(formGroup);
-//   }
-
-//   // onSubmit(): void {
-//   //   if (this.profileForm.valid) {
-//   //     const formValues = this.profileForm.getRawValue();
-//   //     const extraData = {
-//   //       employeeID: formValues.employeeID,
-//   //       employeeCode: formValues.EmployeeCode,
-//   //       createdBy: formValues.EmployeeCode
-//   //     };
-//   //     const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-
-//   //     this.dynamicFormService.submitForm(details, this.tabID).subscribe({
-//   //       next: (response) => {
-//   //         this.alertMessage = response.message;
-//   //         this.alertType = 'success';
-//   //         this.profileForm.disable();
-//   //         this.profileForm.reset();
-//   //         const nextTabID = this.getNextTabID(this.tabID);
-//   //         console.log("NextTabId is -->", nextTabID);
-
-//   //         this.router.navigate(['/contact-details'], { queryParams: { tabID: nextTabID } });
-//   //       },
-//   //       error: (error) => {
-//   //         console.error('Error:', error);
-//   //         this.alertMessage = 'Something went wrong; please try again later.';
-//   //         this.alertType = 'error';
-//   //       }
-//   //     });
-//   //   } else {
-//   //     this.alertMessage = 'Please correct the errors in the form.';
-//   //     this.alertType = 'error';
-//   //   }
-//   // }
-
-
-
-//   onButtonClick(fieldTitle: string): void {
-//     console.log('Button clicked with fieldTitle:', fieldTitle);
-//     if (fieldTitle === 'Save & Next') {
-//       this.onSubmit('Save & Next');
-//     } else if (fieldTitle === 'Save As Draft') {
-//       this.onSubmit('Save As Draft');
-//     } else {
-//       console.log('Unknown action:', fieldTitle);
-//     }
-//   }
-  
-  
-//   onSubmit(fieldTitle: string): void {
-//     // Check if the form is valid or if the action is 'Save as Draft'
-//     if (this.profileForm.valid || fieldTitle === 'Save As Draft') {
-//       const formValues = this.profileForm.getRawValue();
-//       const extraData = {
-//         employeeID: formValues.employeeID,
-//         employeeCode: formValues.EmployeeCode,
-//         createdBy: formValues.EmployeeCode
-//       };
-//       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-  
-//       // Determine the recordType based on the button clicked
-//       let recordType: string = fieldTitle === 'Save & Next' ? 'null' : 'Staging';
-  
-//       this.dynamicFormService.submitForm(details, this.tabID, recordType).subscribe({
-//         next: (response: { message: string | null }) => {
-//           if (fieldTitle === 'Save & Next') {
-//             this.alertMessage = response.message || 'Saved successfully';
-//             this.alertType = 'success';
-//             this.profileForm.disable();
-//             this.profileForm.reset();
-//             const nextTabID = this.getNextTabID(this.tabID);
-//             this.router.navigate(['/contact-details'], { queryParams: { tabID: nextTabID } });
-//           } else if (fieldTitle === 'Save as Draft') {
-//             this.alertMessage = 'Draft saved successfully.';
-//             this.alertType = 'success';
-//           }
-//         },
-//         error: (error: any) => {
-//           console.error('Error:', error);
-//           this.alertMessage = fieldTitle === 'Save & Next'
-//             ? 'Something went wrong; please try again later.'
-//             : 'Failed to save draft; please try again later.';
-//           this.alertType = 'error';
-//         }
-//       });
-//     } else {
-//       this.alertMessage = 'Please correct the errors in the form.';
-//       this.alertType = 'error';
-//     }
-//   }
-  
-  
-  
-//   private getNextTabID(currentTabID: number): number {
-//     const totalTabs = 11;
-//     const nextTabID = (currentTabID % totalTabs) + 1;
-//     console.log(`Current Tab ID: ${currentTabID}, Calculated Next Tab ID: ${nextTabID}`);
-//     return nextTabID;
-//   }
-
-
-
-
-//   fetchEmployeeDetails(): void {
-//     // Assuming tabID, employeeCode, and recordType are set dynamically
-//     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType).subscribe({
-//       next: (res: any) => {
-//         if (res.code === 1) {
-//           const employeeDetails = res.featchEmployeeDetailResponse;
-//           this.populateFormWithEmployeeDetails(employeeDetails);
-//           console.log('employeeDetails ---->', employeeDetails);
-//         } else {
-//           console.error('Error fetching employee details:', res.message);
-//         }
-//       },
-//       error: (err: any) => {
-//         console.error('Error:', err.message);
-//       }
-//     });
-//   }
-  
-//   // fetchEmployeeDetails(): void {
-//   //   // const url = `https://localhost:7254/api/UserDetails/FeatchEmployeeDetail?TabID=${this.tabID}&EmployeeCode=K-101&RecordType=null`;
-//   //      const tabID = 1;
-//   //      const employeeCode = 'K-101'; 
-//   //       const recordType = 'Staging';
-//   //       this.dynamicFormService.fetchEmployeeDetails(tabID,employeeCode,recordType ).subscribe({
-//   //     next: (res: any) => {
-//   //       if (res.code === 1) {
-//   //         const employeeDetails = res.featchEmployeeDetailResponse;
-//   //         this.populateFormWithEmployeeDetails(employeeDetails);
-//   //         console.log('employeeDetails ---->', employeeDetails);
-          
-//   //       } else {
-//   //         console.error('Error fetching employee details:', res.message);
-//   //       }
-//   //     },
-//   //     error: (err: any) => {
-//   //       console.error('Error:', err.message);
-//   //     }
-//   //   });
-//   // }
-
-
-
-//   populateFormWithEmployeeDetails(details: any[]): void {
-//     details.forEach(detail => {
-//       if (this.profileForm.controls[detail.fieldName]) {
-//         this.profileForm.controls[detail.fieldName].setValue(detail.fieldValue);
-//       }
-//     });
-//   }
-  
-  
-// }
-
-
-
-
-
-
 
 
 import { Component, OnInit } from '@angular/core';
@@ -256,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -278,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     public dynamicFormService: DynamicFormService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.profileForm = this.fb.group({});
   }
@@ -357,7 +109,7 @@ export class ProfileComponent implements OnInit {
   
     // Create form controls with initial values, validators, and disabled state
     fields.forEach(field => {
-      if (field.isView) { // Only create form controls for fields that should be visible
+      if (field.isView && field.controls !== 'BUTTON')  { // Only create form controls for fields that should be visible
         const validators = [];
         if (field.isMandatory) {
           validators.push(Validators.required);
@@ -397,43 +149,113 @@ export class ProfileComponent implements OnInit {
   
   
 
+  // onButtonClick(fieldTitle: string): void {
+  //   console.log('Button clicked with fieldTitle:', fieldTitle);
+  
+  //   // Set recordType based on button clicked
+  //   this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
+  
+  //   if (fieldTitle === 'Save & Next') {
+  //     this.onSubmit('Save & Next');
+  //   } else if (fieldTitle === 'Save As Draft') {
+  //     this.onSubmit('Save As Draft');
+  //   } else if (fieldTitle === 'Back') {
+  //     this.onSubmit('Back');
+  //   } else {
+  //     console.log('Unknown action:', fieldTitle);
+  //   }
+  // }
+  
+  // onSubmit(fieldTitle: string): void {
+  //   debugger
+  //   if (this.profileForm.valid || fieldTitle === 'Save As Draft') {
+  //     const formValues = this.profileForm.getRawValue();
+  //     const extraData = {
+  //       employeeID: formValues.employeeID,
+  //       employeeCode: this.employeeCode,
+  //       createdBy: this.employeeCode
+  //     };
+  //     const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
+  
+  //     this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
+  //       next: (response: { message: string | null }) => {
+  //         if (fieldTitle === 'Save & Next') {
+  //           this.alertMessage = response.message || 'Saved successfully';
+  //           this.alertType = 'success';
+  //           this.profileForm.disable();
+  //           this.profileForm.reset();
+  //           const nextTabID = this.getNextTabID(this.tabID);
+  //           this.router.navigate(['/bank-details'], { queryParams: { tabID: nextTabID } });
+  //         } else if (fieldTitle === 'Save As Draft') {
+  //           this.alertMessage = 'Draft saved successfully.';
+  //           this.alertType = 'success';
+  //         } else if (fieldTitle === 'Back') {
+  //           this.alertMessage = 'Navigating to dashboard.';
+  //           this.alertType = 'success';
+  //           this.router.navigate(['/home']);
+  //         }
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Error:', error);
+  //         this.alertMessage = fieldTitle === 'Save & Next'
+  //           ? 'Something went wrong; please try again later.'
+  //           : 'Failed to save draft; please try again later.';
+  //         this.alertType = 'error';
+  //       }
+  //     });
+  //   } else {
+  //     this.alertMessage = 'Please correct the errors in the form.';
+  //     this.alertType = 'error';
+  //   }
+  // }
+
+
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
-
+  
     // Set recordType based on button clicked
     this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-
-    if (fieldTitle === 'Save & Next') {
-      this.onSubmit('Save & Next');
-    } else if (fieldTitle === 'Save As Draft') {
-      this.onSubmit('Save As Draft');
+  
+    if (fieldTitle === 'Save & Next' || fieldTitle === 'Save As Draft' || fieldTitle === 'Back') {
+      this.onSubmit(fieldTitle);
     } else {
       console.log('Unknown action:', fieldTitle);
     }
   }
+  
 
+ 
+  
   onSubmit(fieldTitle: string): void {
+    console.log('Form Valid:', this.profileForm.valid);
+    console.log('Form Errors:', this.profileForm.errors);
+  
     if (this.profileForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.profileForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
-        employeeCode: formValues.EmployeeCode,
-        createdBy: formValues.EmployeeCode
+        employeeCode: this.employeeCode,
+        createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-
+  
       this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
         next: (response: { message: string | null }) => {
           if (fieldTitle === 'Save & Next') {
             this.alertMessage = response.message || 'Saved successfully';
             this.alertType = 'success';
             this.profileForm.disable();
-            this.profileForm.reset();
+            this.profileForm.reset(); // This could potentially affect the form validity
             const nextTabID = this.getNextTabID(this.tabID);
-            this.router.navigate(['/contact-details'], { queryParams: { tabID: nextTabID } });
+            this.router.navigate(['/bank-details'], { queryParams: { tabID: nextTabID } });
           } else if (fieldTitle === 'Save As Draft') {
             this.alertMessage = 'Draft saved successfully.';
             this.alertType = 'success';
+          } else if (fieldTitle === 'Back') {
+            this.alertMessage = 'Navigating to dashboard.';
+            this.alertType = 'success';
+            // this.router.navigate(['/home']);
+            this.location.back();
           }
         },
         error: (error: any) => {
@@ -449,7 +271,7 @@ export class ProfileComponent implements OnInit {
       this.alertType = 'error';
     }
   }
-
+  
 
   fetchEmployeeDetails(): void {
     // debugger
