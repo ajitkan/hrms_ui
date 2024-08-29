@@ -87,6 +87,19 @@ export class DynamicFormService {
   }
   
   // Utility function to determine the input type
+  // getFieldType(dataType: string): string {
+  //   switch (dataType) {
+  //     case 'VARCHAR(50)':
+  //     case 'VARCHAR(10)':
+  //       return 'text';
+  //     case 'DATE':
+  //       return 'date';
+  //     default:
+  //       return 'text';
+  //   }
+  // }
+
+
   getFieldType(dataType: string): string {
     switch (dataType) {
       case 'VARCHAR(50)':
@@ -94,11 +107,17 @@ export class DynamicFormService {
         return 'text';
       case 'DATE':
         return 'date';
+      case 'INT': // Add cases for numeric types
+      case 'BIGINT':
+      case 'DECIMAL':
+      case 'NUMERIC':
+      case 'NUMBER':
+        return 'number';
       default:
         return 'text';
     }
   }
-
+  
   // Utility function to divide fields into rows
   getRows(fields: any[]): any[][] {
     const rows = [];
