@@ -118,11 +118,12 @@ export class ProfileComponent implements OnInit {
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        if (field.fieldDataType =='TEXT') {
+        if (field.fieldDataType =='TEXT' ) {
           // validators.push(Validators.required);
           // debugger;
           // validators.push(Validators.email);//Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$")])
           validators.push(Validators.minLength(field.minLength));
+          validators.push(Validators.maxLength(field.maxLength));
           validators.push(this.dynamicFormService.textOnlyValidator());
           console.log("length of field",field.minLength);
           // alert(field.maxLength);
@@ -132,7 +133,7 @@ export class ProfileComponent implements OnInit {
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
         formGroup[field.fieldName] = this.fb.control(
-          { value: field.defaultValue || ''},//, disabled: isDisabled }, 
+          { value: field.defaultValue || ''}, //disabled: isDisabled },
           validators
         );
   

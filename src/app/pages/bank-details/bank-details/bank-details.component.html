@@ -59,6 +59,10 @@
                   <!-- <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.hasError('email')">
                     {{ field.fieldTitle }} Not in correct format.
                   </small> -->
+                  <small class="text-danger" *ngIf="bankdetailsForm.get(field.fieldName)?.hasError('pattern') && field.fieldDataType === 'PAN'">
+                    {{ field.fieldTitle }} is not valid. Please enter a valid PAN number.
+                  </small>
+                  
                   <!-- Add more validation messages as needed -->
                 </div>
         </ng-container>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contact-details',
@@ -25,7 +26,8 @@ export class ContactDetailsComponent implements OnInit {
     private fb: FormBuilder,
     public dynamicFormService: DynamicFormService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location:Location
   ) {
     this.contactForm = this.fb.group({});
   }
@@ -85,6 +87,7 @@ export class ContactDetailsComponent implements OnInit {
             validators.push(Validators.email);
         }
 
+        
         if (field.fieldDataType === 'NUMBER') {
           validators.push(Validators.minLength(field.minLength));
           validators.push(Validators.maxLength(field.maxLength))
@@ -200,7 +203,7 @@ export class ContactDetailsComponent implements OnInit {
   }
   
   onSubmit(fieldTitle: string): void {
-    if (this.contactForm.valid || fieldTitle === 'Save As Draft') {
+    if (!this.contactForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.contactForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
@@ -224,7 +227,7 @@ export class ContactDetailsComponent implements OnInit {
           } else if (fieldTitle === 'Back') {
             this.alertMessage = 'Navigating to dashboard.';
             this.alertType = 'success';
-            this.router.navigate(['/home']);
+            this.location.back();
           }
         },
         error: (error: any) => {
