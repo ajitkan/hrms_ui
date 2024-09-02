@@ -129,8 +129,8 @@ body {
 
 .left-sidebar {
   width: auto;
-  min-width: 20%;
-    max-width: 30%;
+  min-width: 17%;
+    max-width: 17%;
   background: #e5e9f2;
   color: white;
   flex-shrink: 0;
@@ -157,6 +157,7 @@ body {
 .nav-item .nav-link {
   color: black;
   padding: 10px 20px;
+  font-weight: 500;
   display: flex;
   align-items: center;
 }
@@ -196,27 +197,18 @@ body {
 } */
 
 .left1-sidebar {
-/* <<<<<<< HEAD */
-  /* width: auto;
-  background-color: #f8f9fa; */
-  /* padding: 20px; */
-  /* height: 100vh; */
-  /* border-left: 1px solid #ddd; */
-  /* margin: 3px; */
-/* ======= */
+  width: 16%;
   background: #e5e9f2;
   color: white;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-
   top: 60px; 
   left: 0;
   overflow: hidden;
   z-index: 1000; 
    margin: 3px; 
   border:2px solid #0000ff14 ;
-/* >>>>>>> 13da90e7059fb5de262e7ad68c93aebfa1350431 */
 }
 
 .sidebar ul {
@@ -224,16 +216,9 @@ body {
   padding: 0;
 }
 .page-content {
-/* <<<<<<< HEAD */
-  /* margin-left: 250px; */
-   /* Adjust margin to account for the fixed sidebar */
-  /* padding: 1%; */
-  /* 20px; */
-  /* margin: auto;
-  width: calc(100% - 250px); Adjust width to account for the fixed sidebar */
-/* ======= */
+
  
-  /* margin: auto; */
+ 
   width: calc(100% - 250px); 
 /* >>>>>>> 13da90e7059fb5de262e7ad68c93aebfa1350431 */
 }
@@ -282,14 +267,7 @@ body {
 .isCollapsedSideBar{
   display: none;
 }
-/* <<<<<<< HEAD */
-/* .nav-item > .active {
-   background-color: #cdcccc;
-}
-.sidebar-left{
-  background-color: #f5f5f5;
-} */
-/* ======= */
+
 
 
 
@@ -297,7 +275,7 @@ body {
 .main-content d-flex{
   background: #f8f9fa;
 }
-/* >>>>>>> 13da90e7059fb5de262e7ad68c93aebfa1350431 */
+
 
 
 

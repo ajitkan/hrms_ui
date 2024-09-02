@@ -9,7 +9,7 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
   providedIn: 'root'
 })
 export class DynamicFormService {
-  [x: string]: any;
+
   constructor(private fb: FormBuilder,
      private apiService: ApiService,
      private httpClient: HttpClient
@@ -104,6 +104,7 @@ export class DynamicFormService {
     switch (dataType) {
       case 'VARCHAR(50)':
       case 'VARCHAR(10)':
+        case 'TEXT':
         return 'text';
       case 'DATE':
         return 'date';

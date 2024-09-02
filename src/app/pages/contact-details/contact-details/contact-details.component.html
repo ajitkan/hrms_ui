@@ -20,19 +20,6 @@
           <input *ngIf="field.controls === 'TEXTFIELD'" [type]="dynamicFormService.getFieldType(field.fieldDataType)"
             [id]="field.fieldName" [formControlName]="field.fieldName" [required]="field.isMandatory"
             (input)="dynamicFormService.onTextInput($event)" [disabled]="field.isEdit === false" />
-          <div *ngIf="contactForm.get(field.fieldName)?.invalid && contactForm.get(field.fieldName)?.touched"
-            class="invalid-feedback">
-            <div *ngIf="contactForm.get(field.fieldName)?.errors?.['required']">
-              {{ field.fieldTitle }} is required.
-            </div>
-            <div *ngIf="contactForm.get(field.fieldName)?.errors?.['pattern'] && field.fieldName === 'MobileNo'">
-              Invalid mobile number. It must be exactly 10 digits.
-            </div>
-            <div *ngIf="contactForm.get(field.fieldName)?.errors?.['email'] && field.fieldName === 'Email'">
-              Invalid email address.
-            </div>
-          </div>
-
          
           <select *ngIf="field.controls === 'DROPDOWNLIST'" [id]="field.fieldName" [formControlName]="field.fieldName"
             [required]="field.isMandatory" [disabled]="field.isEdit === false">
