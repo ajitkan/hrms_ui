@@ -25,7 +25,7 @@ export class EducationDetailsComponent {
   private token: any;
   private recordType: string | null = null;
   private employeeCode: string = '';// New property for employeeCode
-
+  showform=false;
   constructor(
     private fb: FormBuilder,
     public dynamicFormService: DynamicFormService,
@@ -208,4 +208,7 @@ private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
     return nextTabID;
   }
 
+  showForm(){
+    this.showform = !this.showform;
+  }
 }

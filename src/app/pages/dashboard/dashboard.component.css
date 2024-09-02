@@ -84,3 +84,13 @@ section{
   border: 1px solid #CDCCCC;
   border-radius: 10px;
 }
+.main-content{
+  padding: 20px !important;
+}
+.main-content>h2{
+  margin: 0;
+}
+h1,h2,h3,h4,h5,h6,.card-header{
+  color: #4C6FBF;
+  font-weight: 600;
+}

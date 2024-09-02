@@ -388,6 +388,7 @@ body {
 } */
 .navbar.navbar-light{
   background-color: #4c6fbf;
+  height: 60px;
 }
 
 @media (min-width: 992px) {
