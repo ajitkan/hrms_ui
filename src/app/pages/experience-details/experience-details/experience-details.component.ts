@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-experience-details',
@@ -32,7 +33,8 @@ export class ExperienceDetailsComponent {
     public dynamicFormService: DynamicFormService,
     private route: ActivatedRoute,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private location :Location
   ) {
     this.experienceDetailsForm = this.fb.group({});
   }
@@ -68,16 +70,74 @@ export class ExperienceDetailsComponent {
     });
   }
 
+  // createForm(fields: any[]): void {
+  //   const formGroup: any = {};
+  //   fields.forEach(field => {
+  //     if (field.controls !== 'BUTTON') {
+  //       const validators = [];
+  //       if (field.isMandatory) {
+  //         validators.push(Validators.required);
+  //       }
+  //       formGroup[field.fieldName] = [field.defaultValue || '', validators];
+
+  //       if (field.controls === 'DROPDOWNLIST') {
+  //         this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               field.options = res.masterList.map((item: any) => ({
+  //                 value: item.Code,
+  //                 text: item.Text
+  //               }));
+  //             } else {
+  //               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  //   this.experienceDetailsForm = this.fb.group(formGroup);
+  // }
+
+
   createForm(fields: any[]): void {
     const formGroup: any = {};
+
+    // Create form controls with initial values, validators, and disabled state
     fields.forEach(field => {
-      if (field.controls !== 'BUTTON') {
+      if (field.isView) { // Only create form controls for fields that should be visible
         const validators = [];
+
+        // Add required validator if the field is mandatory
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        formGroup[field.fieldName] = [field.defaultValue || '', validators];
+        if (field.fieldDataType =='TEXT') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(this.dynamicFormService.textOnlyValidator());
+         }
 
+        if(field.fieldDataType =='EMAIL'){
+          //if (field.fieldDataType =='TEXT') {
+            validators.push(Validators.email);
+        }
+
+        if (field.fieldDataType === 'NUMBER') {
+          validators.push(Validators.minLength(field.minLength));
+          validators.push(Validators.maxLength(field.maxLength))
+          validators.push(this.dynamicFormService.numberOnlyValidator()); // Apply the number-only validator here
+        }
+        // Initialize the control with its value and disabled state
+        const isDisabled = field.isEdit === false;
+        formGroup[field.fieldName] = this.fb.control(
+          { value: field.defaultValue || '', disabled: isDisabled },
+          validators
+        );
+
+        // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
             next: (res: any) => {
@@ -97,46 +157,106 @@ export class ExperienceDetailsComponent {
         }
       }
     });
+
+    // Create the form group
     this.experienceDetailsForm = this.fb.group(formGroup);
   }
+  // onButtonClick(fieldTitle: string): void {
+  //   console.log('Button clicked with fieldTitle:', fieldTitle);
+
+  //   // Set recordType based on button clicked
+  //   this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
+
+  //   if (fieldTitle === 'Save & Next') {
+  //     this.onSubmit('Save & Next');
+  //   } else if (fieldTitle === 'Save As Draft') {
+  //     this.onSubmit('Save As Draft');
+  //   } else {
+  //     console.log('Unknown action:', fieldTitle);
+  //   }
+  // }
+
+  // onSubmit(fieldTitle: string): void {
+  //   if (this.experienceDetailsForm.valid || fieldTitle === 'Save As Draft') {
+  //     const formValues = this.experienceDetailsForm.getRawValue();
+  //     const extraData = {
+  //       employeeID: formValues.employeeID,
+  //       employeeCode: formValues.EmployeeCode,
+  //       createdBy: formValues.EmployeeCode
+  //     };
+  //     const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
+
+  //     this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
+  //       next: (response: { message: string | null }) => {
+  //         if (fieldTitle === 'Save & Next') {
+  //           this.alertMessage = response.message || 'Saved successfully';
+  //           this.alertType = 'success';
+  //           // this.contactForm.disable();
+  //           // this.contactForm.reset();
+  //           const nextTabID = this.getNextTabID(this.tabID);
+  //           this.router.navigate(['/home'], { queryParams: { tabID: nextTabID } });
+  //         } else if (fieldTitle === 'Save As Draft') {
+  //           this.alertMessage = 'Draft saved successfully.';
+  //           this.alertType = 'success';
+  //         }
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Error:', error);
+  //         this.alertMessage = fieldTitle === 'Save & Next'
+  //           ? 'Something went wrong; please try again later.'
+  //           : 'Failed to save draft; please try again later.';
+  //         this.alertType = 'error';
+  //       }
+  //     });
+  //   } else {
+  //     this.alertMessage = 'Please correct the errors in the form.';
+  //     this.alertType = 'error';
+  //   }
+  // }
 
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
-
+  
     // Set recordType based on button clicked
     this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-
-    if (fieldTitle === 'Save & Next') {
-      this.onSubmit('Save & Next');
-    } else if (fieldTitle === 'Save As Draft') {
-      this.onSubmit('Save As Draft');
+  
+    if (fieldTitle === 'Save & Next' || fieldTitle === 'Save As Draft' || fieldTitle === 'Back') {
+      this.onSubmit(fieldTitle);
     } else {
       console.log('Unknown action:', fieldTitle);
     }
   }
-
+  
   onSubmit(fieldTitle: string): void {
-    if (this.experienceDetailsForm.valid || fieldTitle === 'Save As Draft') {
+    console.log('Form Valid:', this.experienceDetailsForm.valid);
+    console.log('Form Errors:', this.experienceDetailsForm.errors);
+  
+    if (!this.experienceDetailsForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.experienceDetailsForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
-        employeeCode: formValues.EmployeeCode,
-        createdBy: formValues.EmployeeCode
+        employeeCode: this.employeeCode,
+        createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-
+  
       this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
         next: (response: { message: string | null }) => {
           if (fieldTitle === 'Save & Next') {
             this.alertMessage = response.message || 'Saved successfully';
             this.alertType = 'success';
-            // this.contactForm.disable();
-            // this.contactForm.reset();
+            this.experienceDetailsForm.disable();
+            this.experienceDetailsForm.reset(); // This could potentially affect the form validity
             const nextTabID = this.getNextTabID(this.tabID);
             this.router.navigate(['/home'], { queryParams: { tabID: nextTabID } });
           } else if (fieldTitle === 'Save As Draft') {
             this.alertMessage = 'Draft saved successfully.';
             this.alertType = 'success';
+          } else if (fieldTitle === 'Back') {
+            this.alertMessage = 'Navigating to dashboard.';
+            this.alertType = 'success';
+            // this.router.navigate(['/home']);
+            this.location.back();
           }
         },
         error: (error: any) => {
@@ -152,8 +272,6 @@ export class ExperienceDetailsComponent {
       this.alertType = 'error';
     }
   }
-
-
   fetchEmployeeDetails(): void {
     // debugger
     // this.employeeCode = this.profileForm.get('EmployeeCode')?.value || '';

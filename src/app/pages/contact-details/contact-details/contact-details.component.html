@@ -1,7 +1,5 @@
-
-<div *ngIf="alertMessage" class="alert alert-dismissible" 
-     [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
-     role="alert">
+ <div *ngIf="alertMessage" class="alert alert-dismissible"
+  [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
   {{ alertMessage }}
 </div>
 
@@ -9,35 +7,36 @@
   <h3>Contact Details</h3>
   <form class="contactDetailsForm" [formGroup]="contactForm">
     <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
-      <div *ngFor="let field of row" 
-           [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
-        
-        <!-- Render fields based on control type -->
+      <div *ngFor="let field of row"
+        [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
+
+    
         <ng-container *ngIf="field.isView && field.controls !== 'BUTTON'">
           <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
-          
-          <!-- Text Input -->
-          <input *ngIf="field.controls === 'TEXTFIELD'"
-                 [type]="dynamicFormService.getFieldType(field.fieldDataType)"
-                 [id]="field.fieldName"
-                 [formControlName]="field.fieldName"
-                 [required]="field.isMandatory"
-                 (input)="dynamicFormService.onTextInput($event)" />
-          
-          <!-- Dropdown -->
-          <select *ngIf="field.controls === 'DROPDOWNLIST'"
-                  [id]="field.fieldName"
-                  [formControlName]="field.fieldName"
-                  [required]="field.isMandatory">
+
+       
+
+
+          <input *ngIf="field.controls === 'TEXTFIELD'" [type]="dynamicFormService.getFieldType(field.fieldDataType)"
+            [id]="field.fieldName" [formControlName]="field.fieldName" [required]="field.isMandatory"
+            (input)="dynamicFormService.onTextInput($event)" [disabled]="field.isEdit === false" />
+         
+          <select *ngIf="field.controls === 'DROPDOWNLIST'" [id]="field.fieldName" [formControlName]="field.fieldName"
+            [required]="field.isMandatory" [disabled]="field.isEdit === false">
             <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
           </select>
+
+
+          <input *ngIf="field.controls === 'DATEPICKER'" type="date" [id]="field.fieldName"
+            [formControlName]="field.fieldName" [required]="field.isMandatory" [disabled]="field.isEdit === false" />
+
           
           <!-- Datepicker -->
-          <input *ngIf="field.controls === 'DATEPICKER'"
+         <!-- <input *ngIf="field.controls === 'DATEPICKER'"
                  type="date"
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
-                 [required]="field.isMandatory" />
+                 [required]="field.isMandatory" /> -->
 
                  <div *ngIf="field.controls === 'TEXTFIELD'"> 
                   <small class="text-danger" *ngIf="contactForm.get(field.fieldName)?.errors?.['required']">
@@ -66,12 +65,10 @@
       </div>
     </div>
 
-    <!-- Button Row - Buttons based on field configuration -->
+  
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
-        <button 
-          *ngIf="field.isView && field.controls === 'BUTTON'" 
-          type="button" 
+        <button *ngIf="field.isView && field.controls === 'BUTTON'" type="button" [disabled]="field.isEdit === false"
           (click)="onButtonClick(field.fieldTitle)">
           <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
           {{ field.fieldTitle }}
@@ -79,4 +76,7 @@
       </ng-container>
     </div>
   </form>
-</div>
+</div> 
+
+
+

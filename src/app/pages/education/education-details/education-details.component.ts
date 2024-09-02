@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
@@ -67,16 +67,80 @@ export class EducationDetailsComponent {
     });
   }
 
+  // createForm(fields: any[]): void {
+  //   const formGroup: any = {};
+  //   fields.forEach(field => {
+  //     if (field.controls !== 'BUTTON') {
+  //       const validators = [];
+  //       if (field.isMandatory) {
+  //         validators.push(Validators.required);
+  //       }
+  //       formGroup[field.fieldName] = [field.defaultValue || '', validators];
+
+  //       if (field.controls === 'DROPDOWNLIST') {
+  //         this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               field.options = res.masterList.map((item: any) => ({
+  //                 value: item.Code,
+  //                 text: item.Text
+  //               }));
+  //             } else {
+  //               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  //   this.educationForm = this.fb.group(formGroup);
+  // }
+
+
   createForm(fields: any[]): void {
     const formGroup: any = {};
+  
+    // Create form controls with initial values, validators, and disabled state
     fields.forEach(field => {
-      if (field.controls !== 'BUTTON') {
+      if (field.isView && field.controls !== 'BUTTON')  { // Only create form controls for fields that should be visible
         const validators = [];
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        formGroup[field.fieldName] = [field.defaultValue || '', validators];
+        if (field.fieldDataType === 'DATE') {
+          // Initialize date range validator if both fromDate and toDate exist
+          //this.educationForm.setValidators(this.dateRangeValidator('FromDate', 'ToDate'));
+          validators.push(this.dateRangeValidator());
+        }
+       
+        if (field.fieldDataType =='TEXT' ) {
+          // validators.push(Validators.required);
+          // debugger;
+          // validators.push(Validators.email);//Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$")])
 
+          validators.push(Validators.minLength(field.minLength));
+          if(field.maxLength != null){
+          validators.push(Validators.maxLength(field.maxLength));
+          }
+          validators.push(this.dynamicFormService.textOnlyValidator());
+          console.log("length of field",field.minLength);
+          // alert(field.maxLength);}
+        }
+
+        
+        // Initialize the control with its value and disabled state
+        const isDisabled = field.isEdit === false;
+        formGroup[field.fieldName] = this.fb.control(
+          { value: field.defaultValue || ''},//, disabled: isDisabled }, 
+          validators
+        );
+  
+        
+
+        // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
             next: (res: any) => {
@@ -96,9 +160,25 @@ export class EducationDetailsComponent {
         }
       }
     });
+  
+    // Create the form group
     this.educationForm = this.fb.group(formGroup);
   }
 
+    // Custom Validator Function for Date Range
+    dateRangeValidator(){//(fromDateKey: string, toDateKey: string): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        debugger;
+        const fromDate = this.educationForm.controls['FromDate']?.value;
+        const toDate = this.educationForm.controls['ToDate']?.value;
+  
+        if (fromDate && toDate && fromDate === toDate) {
+          // !isValid ? { 'numberOnly': { value: control.value } } : null;
+          return { 'dateRangeInvalid': { value: control.value } };//{ dateRangeInvalid: true };
+        }
+        return null;
+      };
+    }
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
 
@@ -212,3 +292,5 @@ private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
     this.showform = !this.showform;
   }
 }
+
+

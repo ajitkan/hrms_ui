@@ -1,4 +1,4 @@
-
+<!-- 
 <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
@@ -12,11 +12,11 @@
       <div *ngFor="let field of row" 
            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
         
-        <!-- Render fields based on control type -->
+      
         <ng-container *ngIf="field.controls !== 'BUTTON'">
           <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
           
-          <!-- Text Input -->
+       
           <input *ngIf="field.controls === 'TEXTFIELD'"
                  [type]="dynamicFormService.getFieldType(field.fieldDataType)"
                  [id]="field.fieldName"
@@ -24,7 +24,7 @@
                  [required]="field.isMandatory"
                  (input)="dynamicFormService.onTextInput($event)" />
           
-          <!-- Dropdown -->
+        
           <select *ngIf="field.controls === 'DROPDOWNLIST'"
                   [id]="field.fieldName"
                   [formControlName]="field.fieldName"
@@ -32,22 +32,130 @@
             <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
           </select>
           
-          <!-- Datepicker -->
+        
           <input *ngIf="field.controls === 'DATEPICKER'"
                  type="date"
                  [id]="field.fieldName"
                  [formControlName]="field.fieldName"
                  [required]="field.isMandatory" />
+
+
+
+                 <div *ngIf="field.controls === 'TEXTFIELD'"> 
+                  <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.errors?.['required']">
+                    {{ field.fieldTitle }} is required.
+                  </small>
+
+                  <small class="text-danger" *ngIf="(experienceDetailsForm.get(field.fieldName))?.hasError('minlength')">
+                    {{ field.fieldTitle }} must be at least {{ experienceDetailsForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="(experienceDetailsForm.get(field.fieldName))?.hasError('maxlength')">
+                    {{ field.fieldTitle }} must not be greater than {{ experienceDetailsForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
+                  </small>
+                  <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.hasError('textOnly')">
+                    {{ field.fieldTitle }} should not contain numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.hasError('numberOnly')">
+                    {{ field.fieldTitle }} should contain only numeric value.
+                  </small>
+                  <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.hasError('email')">
+                    {{ field.fieldTitle }} Not in correct format.
+                  </small>
+                 
+                </div>
         </ng-container>
       </div>
     </div>
 
-    <!-- Button Row - Buttons based on field configuration -->
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
         <button 
           *ngIf="field.controls === 'BUTTON'" 
           type="button" 
+          (click)="onButtonClick(field.fieldTitle)">
+          <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
+          {{ field.fieldTitle }}
+        </button>
+      </ng-container>
+    </div>
+  </form>
+</div> -->
+
+
+
+<div *ngIf="alertMessage" class="alert alert-dismissible" 
+     [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
+     role="alert">
+  {{ alertMessage }}
+</div>
+
+<div class="experience-details-container">
+  <h3>Experience Details</h3>
+  <form class="experienceDetailsForm" [formGroup]="experienceDetailsForm">
+    <div class="form-row">
+      <ng-container *ngFor="let field of fields">
+        <div *ngIf="field.isView" class="form-group">
+          <ng-container *ngIf="field.controls !== 'BUTTON'">
+            <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
+            
+            <!-- Text Input -->
+            <input *ngIf="field.controls === 'TEXTFIELD'"
+                   [type]="dynamicFormService.getFieldType(field.fieldDataType)"
+                   [id]="field.fieldName"
+                   [formControlName]="field.fieldName"
+                   [required]="field.isMandatory"
+                   [disabled]="field.isEdit === false"/>
+            
+            <!-- Dropdown -->
+            <select *ngIf="field.controls === 'DROPDOWNLIST'"
+                    [id]="field.fieldName"
+                    [formControlName]="field.fieldName"
+                    [required]="field.isMandatory"
+                    [disabled]="field.isEdit === false" >
+              <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
+            </select>
+            
+            <!-- Datepicker -->
+            <input *ngIf="field.controls === 'DATEPICKER'"
+                   type="date"
+                   [id]="field.fieldName"
+                   [formControlName]="field.fieldName"
+                   [required]="field.isMandatory" 
+                   [disabled]="field.isEdit === false"/>
+                   
+                   <!--  -->
+                   <!-- {{profileForm.get(field.fieldName)?.errors?.['minLength']}} -->
+                   <!-- {{(profileForm.get(field.fieldName))?.hasError('minlength')}}
+                   {{ field.fieldTitle }} -->
+                   <div *ngIf="field.controls === 'TEXTFIELD'"> 
+                    <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.errors?.['required']">
+                      {{ field.fieldTitle }} is required.
+                    </small>
+                    <!-- <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.errors?.['minLength']"> -->
+                    <small class="text-danger" *ngIf="(experienceDetailsForm.get(field.fieldName))?.hasError('minlength')">
+                      {{ field.fieldTitle }} must be at least {{ experienceDetailsForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
+                    </small>
+                    <small class="text-danger" *ngIf="(experienceDetailsForm.get(field.fieldName))?.hasError('maxlength')">
+                      {{ field.fieldTitle }}  not be greater than {{ experienceDetailsForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
+                    </small>
+                    <small class="text-danger" *ngIf="experienceDetailsForm.get(field.fieldName)?.hasError('textOnly')">
+                      {{ field.fieldTitle }} should not contain numeric characters.
+                    </small>
+                    <!-- Add more validation messages as needed -->
+                  </div>
+                   <!--  -->
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Button Row -->
+    <div class="button-container">
+      <ng-container *ngFor="let field of fields">
+        <button 
+          *ngIf="field.isView && field.controls === 'BUTTON'" 
+          type="button" 
+          [disabled]="field.isEdit === false"
           (click)="onButtonClick(field.fieldTitle)">
           <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
           {{ field.fieldTitle }}

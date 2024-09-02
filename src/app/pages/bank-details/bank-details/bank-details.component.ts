@@ -82,8 +82,15 @@ export class BankDetailsComponent {
             validators.push(Validators.email);
         }
 
-        if (field.fieldDataType === 'NUMBER') {
+        if (field.fieldDataType === 'PAN') {
+          // PAN number regex pattern: 5 alphabets + 4 digits + 1 alphabet
+          const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+          validators.push(Validators.pattern(panPattern));
+      }
+
+        if (field.fieldDataType == 'NUMBER') {
           validators.push(Validators.minLength(field.minLength));
+          if(field.maxLength !=null)
           validators.push(Validators.maxLength(field.maxLength))
           validators.push(this.dynamicFormService.numberOnlyValidator()); // Apply the number-only validator here
         }
