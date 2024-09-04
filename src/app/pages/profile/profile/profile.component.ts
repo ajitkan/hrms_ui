@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit {
           // validators.push(Validators.email);//Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$")])
           validators.push(Validators.minLength(field.minLength));
           validators.push(Validators.maxLength(field.maxLength));
-          validators.push(this.dynamicFormService.textOnlyValidator());
+          // validators.push(this.dynamicFormService.textOnlyValidator());
           console.log("length of field",field.minLength);
           // alert(field.maxLength);
         }
@@ -223,49 +223,99 @@ export class ProfileComponent implements OnInit {
     }
   }
   
-  fetchEmployeeDetails(): void {
-    this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
-        .subscribe({
-            next: (res: any) => {
-              console.log('res--->',res);
+//   fetchEmployeeDetails(): void {
+//     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
+//         .subscribe({
+//             next: (res: any) => {
+//               console.log('res--->',res);
               
-                if (res.code === 1) {
+//                 if (res.code === 1) {
                   
-                    const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
-                    if (employeeDetails && Array.isArray(employeeDetails)) {
-                        this.populateFormWithEmployeeDetails(employeeDetails);
-                        console.log('Employee Details:', employeeDetails);
-                    } else {
-                        console.error('No employee details found or invalid format:', employeeDetails);
-                    }
-                } else {
-                    console.error('Error fetching employee details:', res.message);
-                }
-            },
-            error: (err: any) => {
-                console.error('Error:', err.message);
-            }
-        });
+//                     const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
+//                     if (employeeDetails && Array.isArray(employeeDetails)) {
+//                         this.populateFormWithEmployeeDetails(employeeDetails);
+//                         console.log('Employee Details:', employeeDetails);
+//                     } else {
+//                         console.error('No employee details found or invalid format:', employeeDetails);
+//                     }
+//                 } else {
+//                     console.error('Error fetching employee details:', res.message);
+//                 }
+//             },
+//             error: (err: any) => {
+//                 console.error('Error:', err.message);
+//             }
+//         });
+// }
+
+// private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
+//     // Assuming profileForm is a FormGroup
+//     employeeDetails.forEach(detail => {
+//         if (detail.isApplicable) {
+//           debugger;
+//             const control = this.profileForm.get(detail.fieldName);
+//             if (control) {
+//               if(detail.fieldName === 'title'){
+//                 control.setValue(detail.fieldValue);
+//                 this.dynamicFormService.onDropDownChange(this.profileForm,detail);
+//               }
+//               control.setValue(detail.fieldValue);
+//             } else {
+//                 console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
+//             }
+//         }
+//     });
+// }
+
+fetchEmployeeDetails(): void {
+  this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
+      .subscribe({
+          next: (res: any) => {
+              console.log('res--->', res);
+
+              if (res.code === 1) {
+                  const employeeDetailsArray = res.featchEmployeeDetailResponse;
+                  if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
+                      const employeeDetails = employeeDetailsArray[0].dynamicData;
+                      if (employeeDetails) {
+                          this.populateFormWithEmployeeDetails(employeeDetails);
+                          console.log('Employee Details:', employeeDetails);
+                      } else {
+                          console.error('No employee details found or invalid format:', employeeDetails);
+                      }
+                  } else {
+                      console.error('No employee details found or invalid format:', employeeDetailsArray);
+                  }
+              } else {
+                  console.error('Error fetching employee details:', res.message);
+              }
+          },
+          error: (err: any) => {
+              console.error('Error:', err.message);
+          }
+      });
 }
 
-private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
-    // Assuming profileForm is a FormGroup
-    employeeDetails.forEach(detail => {
-        if (detail.isApplicable) {
-          debugger;
-            const control = this.profileForm.get(detail.fieldName);
-            if (control) {
-              if(detail.fieldName === 'title'){
-                control.setValue(detail.fieldValue);
-                this.dynamicFormService.onDropDownChange(this.profileForm,detail);
-              }
-              control.setValue(detail.fieldValue);
-            } else {
-                console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
-            }
-        }
-    });
+
+
+private populateFormWithEmployeeDetails(employeeDetails: any): void {
+  // Assuming employeeDetails is an object with key-value pairs
+  Object.keys(employeeDetails).forEach(fieldName => {
+      const control = this.profileForm.get(fieldName);
+      if (control) {
+          if (fieldName === 'title') {
+              control.setValue(employeeDetails[fieldName]);
+              this.dynamicFormService.onDropDownChange(this.profileForm, { fieldName, fieldValue: employeeDetails[fieldName] });
+          } else {
+              control.setValue(employeeDetails[fieldName]);
+          }
+      } else {
+          console.warn(`Form control for field '${fieldName}' does not exist.`);
+      }
+  });
 }
+
+
 
 private getNextTabID(currentTabID: number): number {
     const totalTabs = 11;
