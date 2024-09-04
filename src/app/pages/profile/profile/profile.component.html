@@ -53,9 +53,9 @@
                     <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.hasError('maxlength')">
                       {{ field.fieldTitle }}  not be greater than {{ profileForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
                     </small>
-                    <small class="text-danger" *ngIf="profileForm.get(field.fieldName)?.hasError('textOnly')">
+                    <!-- <small class="text-danger" *ngIf="profileForm.get(field.fieldName)?.hasError('textOnly')">
                       {{ field.fieldTitle }} should not contain numeric characters.
-                    </small>
+                    </small> -->
                     <!-- Add more validation messages as needed -->
                   </div>
                    <!--  -->

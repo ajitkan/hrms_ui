@@ -234,25 +234,23 @@ export class EducationDetailsComponent {
 
 
   fetchEmployeeDetails(): void {
-    // debugger
-    // this.employeeCode = this.profileForm.get('EmployeeCode')?.value || '';
-    // console.log('employeeCode'),this.employeeCode;
-    // const recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-
     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
         .subscribe({
             next: (res: any) => {
-              console.log('res--->',res);
-              
+                console.log('res--->', res);
+  
                 if (res.code === 1) {
-                  
-                    const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
-                    if (employeeDetails && Array.isArray(employeeDetails)) {
-                        this.populateFormWithEmployeeDetails(employeeDetails);
-                        this.cdr.detectChanges();
-                        console.log('Employee Details:', employeeDetails);
+                    const employeeDetailsArray = res.featchEmployeeDetailResponse;
+                    if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
+                        const employeeDetails = employeeDetailsArray[0].dynamicData;
+                        if (employeeDetails) {
+                            this.populateFormWithEmployeeDetails(employeeDetails);
+                            console.log('Employee Details:', employeeDetails);
+                        } else {
+                            console.error('No employee details found or invalid format:', employeeDetails);
+                        }
                     } else {
-                        console.error('No employee details found or invalid format:', employeeDetails);
+                        console.error('No employee details found or invalid format:', employeeDetailsArray);
                     }
                 } else {
                     console.error('Error fetching employee details:', res.message);
@@ -262,22 +260,26 @@ export class EducationDetailsComponent {
                 console.error('Error:', err.message);
             }
         });
-}
-
-
-private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
-    
-    employeeDetails.forEach(detail => {
-        if (detail.isApplicable) {
-            const control = this.educationForm.get(detail.fieldName);
-            if (control) {
-                control.setValue(detail.fieldValue);
+  }
+  
+  
+  
+  private populateFormWithEmployeeDetails(employeeDetails: any): void {
+    // Assuming employeeDetails is an object with key-value pairs
+    Object.keys(employeeDetails).forEach(fieldName => {
+        const control = this.educationForm.get(fieldName);
+        if (control) {
+            if (fieldName === 'title') {
+                control.setValue(employeeDetails[fieldName]);
+                this.dynamicFormService.onDropDownChange(this.educationForm, { fieldName, fieldValue: employeeDetails[fieldName] });
             } else {
-                console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
+                control.setValue(employeeDetails[fieldName]);
             }
+        } else {
+            console.warn(`Form control for field '${fieldName}' does not exist.`);
         }
     });
-}
+  }
 
 
 
