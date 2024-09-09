@@ -127,19 +127,19 @@
     <form [formGroup]="unlockAccountForm" (ngSubmit)="submitUnlockAccountForm()">
       <div class="form-group">
         <label for="doj">Joining Date</label>
-        <input type="date" class="form-control" id="doj" formControlName="DOJ" required>
-        <div *ngIf="ua['DOJ'].touched && ua['DOJ'].invalid" class="text-danger">
-          <div *ngIf="ua['DOJ'].errors?.['required']">Date of Joining is required.</div>
+        <input type="date" class="form-control" id="doj" formControlName="doj" required>
+        <div *ngIf="ua['doj'].touched && ua['doj'].invalid" class="text-danger">
+        <div *ngIf="ua['doj'].touched && ua['doj'].errors?.['required']">Date of Joining is required.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="dob">Enter your Employee Code</label>
+        <label for="dob">Enter your Date of Birth</label>
         <input type="date" class="form-control" id="txtDateOfBirth" formControlName="dob" required>
         <!-- <div *ngIf="ua['EmpCode'].touched && ua['EmpCode'].invalid" class="text-danger">
           <div *ngIf="ua['EmpCode'].errors?.['required']">Employee Code is required.</div>
         </div> -->
         <div *ngIf="ua['dob'].touched && ua['dob'].invalid" class="text-danger">
-          <div *ngIf="ua['dob'].errors?.['dob']">Date of Birth is required.</div>
+          <div *ngIf="ua['dob'].errors?.['required']">Date of Birth is required.</div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>

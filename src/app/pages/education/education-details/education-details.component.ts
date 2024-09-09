@@ -26,6 +26,30 @@ export class EducationDetailsComponent {
   private recordType: string | null = null;
   private employeeCode: string = '';// New property for employeeCode
   showform=false;
+  employeeDetails:any;
+  educationList: any;
+//   {
+//     "code": 1,
+//     "status": "Success",
+//     "message": "Data fetched successfully",
+//     "featchEmployeeDetailResponse": [
+//         {
+//             "dynamicData": {
+//                 "Code": "1",
+//                 "EmpID": null,
+//                 "EMPCode": "K-101",
+//                 "College": "1",
+//                 "CourseTitle": "2",
+//                 "CourseType": "1",
+//                 "FromDate": "2024-08-30",
+//                 "Percetage": "100",
+//                 "Specialization": "1",
+//                 "ToDate": "2024-08-30",
+//                 "University": "3"
+//             }
+//         }
+//     ]
+// }
   constructor(
     private fb: FormBuilder,
     public dynamicFormService: DynamicFormService,
@@ -35,7 +59,7 @@ export class EducationDetailsComponent {
   ) {
     this.educationForm = this.fb.group({});
   }
-
+  
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.tabID = params['tabID'];
@@ -242,12 +266,15 @@ export class EducationDetailsComponent {
                 if (res.code === 1) {
                     const employeeDetailsArray = res.featchEmployeeDetailResponse;
                     if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
-                        const employeeDetails = employeeDetailsArray[0].dynamicData;
-                        if (employeeDetails) {
-                            this.populateFormWithEmployeeDetails(employeeDetails);
-                            console.log('Employee Details:', employeeDetails);
+                        //  this.employeeDetails = employeeDetailsArray[0].dynamicData;
+                        this.educationList = res.featchEmployeeDetailResponse;
+                        this.employeeDetails = this.dynamicFormService.BindMasterValue(res,this.tabID);
+                        if (this.employeeDetails) {
+                            // this.populateFormWithEmployeeDetails(this.employeeDetails);
+                            this.showform = false;
+                            console.log('Employee Details:', this.employeeDetails);
                         } else {
-                            console.error('No employee details found or invalid format:', employeeDetails);
+                            console.error('No employee details found or invalid format:', this.employeeDetails);
                         }
                     } else {
                         console.error('No employee details found or invalid format:', employeeDetailsArray);
@@ -262,23 +289,32 @@ export class EducationDetailsComponent {
         });
   }
   
+  EditEducation(education:any,index:any){
+    this.showform = true;
+    this.populateFormWithEmployeeDetails(education,this.educationList);
+  }
   
-  
-  private populateFormWithEmployeeDetails(employeeDetails: any): void {
+  private populateFormWithEmployeeDetails(employeeDetails: any, educationList?:any): void {
     // Assuming employeeDetails is an object with key-value pairs
-    Object.keys(employeeDetails).forEach(fieldName => {
+    Object.keys(employeeDetails.dynamicData).forEach(fieldName => {
+      if(fieldName=='Code' || fieldName=='EmpID'|| fieldName=='EMPCode'){
+        console.log(fieldName+" is not a formcontrol");
+      }
+      else{
         const control = this.educationForm.get(fieldName);
         if (control) {
             if (fieldName === 'title') {
-                control.setValue(employeeDetails[fieldName]);
-                this.dynamicFormService.onDropDownChange(this.educationForm, { fieldName, fieldValue: employeeDetails[fieldName] });
+                control.setValue(employeeDetails.dynamicData[fieldName]);
+                this.dynamicFormService.onDropDownChange(this.educationForm, { fieldName, fieldValue: employeeDetails.dynamicData[fieldName] });
             } else {
-                control.setValue(employeeDetails[fieldName]);
+                control.setValue(employeeDetails.dynamicData[fieldName]);
             }
         } else {
             console.warn(`Form control for field '${fieldName}' does not exist.`);
         }
+      }
     });
+    console.log("SetValue of Form is",this.educationForm);
   }
 
 

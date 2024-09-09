@@ -166,7 +166,7 @@ export class ApiService {
   }
 
   fetchUserDetailsField(payload: { roleID: number; tabID: number }): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl1}/UserDetails/FetchField`, payload);
+    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchField`, payload);
   }
   fetchDropdownOptions(fieldID: number, tabID: number): Observable<any> {
     const requestPayload = {

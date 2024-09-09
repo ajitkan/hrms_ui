@@ -76,8 +76,8 @@ export class LoginComponent {
     });
 
     this.unlockAccountForm = this.fb.group({
-      dob: ['', Validators.required],
-      doj: ['', Validators.required]
+      doj: ['', Validators.required],
+      dob: ['', Validators.required]
     });
 
     this.changePasswordForm = this.fb.group({
@@ -232,7 +232,7 @@ export class LoginComponent {
         },
         error: (error: any) => {
           console.error('Login failed', error);
-          this.showAlertMessage('Invalid credentials. Please try again.', 'error');
+          this.showAlertMessage(error,'error');
         }
       });
   }
@@ -257,7 +257,7 @@ export class LoginComponent {
   }
 
     openForgotPasswordModal(loginForm:FormGroup , content: any) {
-      if(loginForm.invalid){
+      if(!loginForm.get('employeeCode')?.valid || !loginForm.get('companyCode')?.valid){//loginForm.invalid){
         // var message = 'Please fill'+loginForm.get('employeeCode')?.valid ?'EmployeeCode':'CompanyCode'+'fields';
         this.showAlertMessage('Please fill ' + (this.loginForm.get('employeeCode')?.invalid ? 'EmployeeCode' : 'CompanyCode') + ' fields', 'error');
         return;
@@ -287,7 +287,8 @@ export class LoginComponent {
     }
   
     openUnlockAccountModal(loginForm: FormGroup, content: any) {
-      if(loginForm.invalid){
+      // if(loginForm.invalid){
+      if(!loginForm.get('employeeCode')?.valid || !loginForm.get('companyCode')?.valid){
          this.showAlertMessage('Please fill ' + (this.loginForm.get('employeeCode')?.invalid ? 'EmployeeCode' : 'CompanyCode') + ' fields', 'error');
         return;
       }
@@ -379,7 +380,9 @@ export class LoginComponent {
           },
           error: (error: any) => {
             console.log(error);
-            this.showAlertMessage('Failed to forgot password', 'error',true);
+            // this.showAlertMessage('Failed to forgot password', 'error',true);
+            this.showAlertMessage('Details do not match', 'error',true);
+
            
             // this.modalService.dismissAll();
           }
