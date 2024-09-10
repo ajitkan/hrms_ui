@@ -53,6 +53,7 @@ import { CreateEmployeeComponent } from './pages/EmployeeDataManagement/create-e
 import { SalaryCalculatorComponent } from './pages/Payroll/salary-calculator/salary-calculator.component';
 import { MyTimesheetComponent } from './pages/time-and-attendance/my-timesheet/my-timesheet.component';
 import { DesignationComponent } from './pages/EmployeeData/master/designation/designation.component';
+import { DesignationComponent } from './pages/EmployeeData/master/designation/designation.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,6 @@ import { DesignationComponent } from './pages/EmployeeData/master/designation/de
     ExpensepiechatComponent,
     PrjstatuschartComponent,
     EmpdeptchartComponent,
-    PaymentbarchartComponent,
     PaymentbarchartComponent,
     EmployeeListDataComponent,
     JobPostComponent,
@@ -94,6 +94,7 @@ import { DesignationComponent } from './pages/EmployeeData/master/designation/de
     SalaryCalculatorComponent,
     MyTimesheetComponent,
     DesignationComponent,
+    DesignationComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +121,7 @@ import { DesignationComponent } from './pages/EmployeeData/master/designation/de
   ],
   providers: [
               DatePipe,
+               //[CUSTOM_ELEMENTS_SCHEMA],
                //[CUSTOM_ELEMENTS_SCHEMA],
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
