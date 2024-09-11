@@ -185,109 +185,157 @@ export class DynamicFormService {
     };
   }
 
-  BindMasterValue(res:any,tabID:any){
-    if(res.code == 0){
-      return;
-    }
-    else if(res.code == 1 ){
-      let result = res;
-     result.featchEmployeeDetailResponse.forEach(async (emp:any)=>{
-        if(tabID==4){
-          // College Mapping
-          await this.fetchDropdownOptions(21,tabID).subscribe({ // for College FieldId is 21
-            next: (res: any) => {
-              if (res.code === 1 && Array.isArray(res.masterList)) {
-                res.masterList.forEach((item: any) => {
-                  if(item.Code==emp.dynamicData.College){
-                    emp.dynamicData.College = item.Text
-                  }
-                });
-                // return res;
-              } else {
-                console.log('No data available');
-              }
-            },
-            error: (err: any) => {
-              console.log(`Error :`, err.message);
-            }
-          });
-          // CourseTitle Status
-          await this.fetchDropdownOptions(18,tabID).subscribe({ // for CourseTitle FieldId is 18
-            next: (res: any) => {
-              if (res.code === 1 && Array.isArray(res.masterList)) {
-                res.masterList.forEach((item: any) => {
-                  if(item.Code==emp.dynamicData.CourseTitle){
-                    emp.dynamicData.CourseTitle = item.Text
-                  }
-                });
-              } else {
-                console.log('No data available');
-              }
-            },
-            error: (err: any) => {
-              console.log(`Error :`, err.message);
-            }
-          });
+  // BindMasterValue(fields:any,res:any,tabID:any){
+  //   debugger
+  //   if(res.code == 0){
+  //     return;
+  //   }
+  //   else if(res.code == 1 ){
+  //     let result = res;
+  //    result.featchEmployeeDetailResponse.forEach(async (emp:any)=>{
+  //       if(tabID==4){
+  //         debugger
+  //         await this.fetchDropdownOptions(fields.fieldID,tabID).subscribe({ // for College FieldId is 21
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               res.masterList.forEach((item: any) => {
+  //                 if(item.Code==emp.dynamicData.College){
+  //                   emp.dynamicData.College = item.Text
+  //                 }
+  //               });
+  //               // return res;
+  //             } else {
+  //               console.log('No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error :`, err.message);
+  //           }
+  //         });
+  //         // CourseTitle Status
+  //         await this.fetchDropdownOptions(18,tabID).subscribe({ // for CourseTitle FieldId is 18
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               res.masterList.forEach((item: any) => {
+  //                 if(item.Code==emp.dynamicData.CourseTitle){
+  //                   emp.dynamicData.CourseTitle = item.Text
+  //                 }
+  //               });
+  //             } else {
+  //               console.log('No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error :`, err.message);
+  //           }
+  //         });
           
-          //CourseType
-           await this.fetchDropdownOptions(24,tabID).subscribe({ // for CourseType FieldId is 24
-            next: (res: any) => {
-              if (res.code === 1 && Array.isArray(res.masterList)) {
-                res.masterList.forEach((item: any) => {
-                  if(item.Code==emp.dynamicData.CourseType){
-                    emp.dynamicData.CourseType = item.Text
-                  }
-                });
-              } else {
-                console.log('No data available');
-              }
-            },
-            error: (err: any) => {
-              console.log(`Error :`, err.message);
+  //         //CourseType
+  //          await this.fetchDropdownOptions(24,tabID).subscribe({ // for CourseType FieldId is 24
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               res.masterList.forEach((item: any) => {
+  //                 if(item.Code==emp.dynamicData.CourseType){
+  //                   emp.dynamicData.CourseType = item.Text
+  //                 }
+  //               });
+  //             } else {
+  //               console.log('No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error :`, err.message);
+  //           }
+  //         });
+  //         //Specialization
+
+  //         await this.fetchDropdownOptions(19,tabID).subscribe({ // for CourseTitle FieldId is 19
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               res.masterList.forEach((item: any) => {
+  //                 if(item.Code==emp.dynamicData.Specialization){
+  //                   emp.dynamicData.Specialization = item.Text
+  //                 }
+  //               });
+  //             } else {
+  //               console.log('No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error :`, err.message);
+  //           }
+  //         });
+
+  //         //University
+  //         await this.fetchDropdownOptions(20,tabID).subscribe({ // for University FieldId is 20
+  //           next: (res: any) => {
+  //             if (res.code === 1 && Array.isArray(res.masterList)) {
+  //               res.masterList.forEach((item: any) => {
+  //                 if(item.Code==emp.dynamicData.University){
+  //                   emp.dynamicData.University = item.Text
+  //                 }
+  //               });
+  //             } else {
+  //               console.log('No data available');
+  //             }
+  //           },
+  //           error: (err: any) => {
+  //             console.log(`Error :`, err.message);
+  //           }
+  //         });
+
+
+  //       }
+  //     });
+
+  //     return result;
+  //   }
+  // }
+
+  BindMasterValue(fields: any, res: any, tabID: any) {
+    debugger;
+    if (res.code == 0) {
+        return;
+    } else if (res.code == 1) {
+        let result = res;
+
+        // Define a mapping of field IDs to dynamicData keys
+        const fieldMappings = {
+            21: 'College',
+            18: 'CourseTitle',
+            24: 'CourseType',
+            19: 'Specialization',
+            20: 'University',
+            16: 'title',
+            4: 'Gender',
+            17: 'skills'
+        };
+
+        result.featchEmployeeDetailResponse.forEach(async (emp: any) => {
+            if (tabID ) {
+                for (const [fieldID, key] of Object.entries(fieldMappings)) {
+                    await this.fetchDropdownOptions(Number(fieldID), tabID).subscribe({
+                        next: (res: any) => {
+                            if (res.code === 1 && Array.isArray(res.masterList)) {
+                                res.masterList.forEach((item: any) => {
+                                    if (item.Code == emp.dynamicData[key]) {
+                                        emp.dynamicData[key] = item.Text;
+                                    }
+                                });
+                            } else {
+                                console.log('No data available');
+                            }
+                        },
+                        error: (err: any) => {
+                            console.log(`Error :`, err.message);
+                        }
+                    });
+                }
             }
-          });
-          //Specialization
+        });
 
-          await this.fetchDropdownOptions(19,tabID).subscribe({ // for CourseTitle FieldId is 19
-            next: (res: any) => {
-              if (res.code === 1 && Array.isArray(res.masterList)) {
-                res.masterList.forEach((item: any) => {
-                  if(item.Code==emp.dynamicData.Specialization){
-                    emp.dynamicData.Specialization = item.Text
-                  }
-                });
-              } else {
-                console.log('No data available');
-              }
-            },
-            error: (err: any) => {
-              console.log(`Error :`, err.message);
-            }
-          });
-
-          //University
-          await this.fetchDropdownOptions(20,tabID).subscribe({ // for University FieldId is 20
-            next: (res: any) => {
-              if (res.code === 1 && Array.isArray(res.masterList)) {
-                res.masterList.forEach((item: any) => {
-                  if(item.Code==emp.dynamicData.University){
-                    emp.dynamicData.University = item.Text
-                  }
-                });
-              } else {
-                console.log('No data available');
-              }
-            },
-            error: (err: any) => {
-              console.log(`Error :`, err.message);
-            }
-          });
-
-
-        }
-      });
-
-      return result;
+        return result;
     }
-  }
+}
+
 }

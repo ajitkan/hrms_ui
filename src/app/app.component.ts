@@ -168,6 +168,7 @@ showBackButton = false;
   }
 
   fetchTabs(screenID:any){
+    debugger
     var screens = JSON.parse(localStorage.getItem('screens')as string);
     if(screens!=null){
       screens.forEach((screen:any)=>{

@@ -68,18 +68,7 @@
       </div>
     </form>
   </div>
-<!-- 
-  style="
-    margin: 10px; -->
-<!-- <div class="row" style="
-    width: 100%;
-">
-   <h3 style="
-    width: 85%;
-">Education </h3><button id="basic" type="button" class="btn btn-primary" style="width: 15%;">
-  <i class="bi bi-plus-circle"></i> Add Education
-</button></div>
-<hr> -->
+
 <div *ngIf="employeeDetails && employeeDetails.featchEmployeeDetailResponse.length>0 && !showform">
 <div class="accordion" id="accordionExample" *ngFor="let education of employeeDetails.featchEmployeeDetailResponse; let i=index;">
     <!-- First Panel -->
@@ -136,63 +125,7 @@
       </div>
     </div>
 
-    <!-- Second Panel -->
-    <!-- <div class="accordion-item" style="
-      margin: 0 9%;
-      /* background-color: gray; */
-  ">
-      <h2 class="accordion-header" id="headingTwo" style="
-      /* background-color: gray; */
-  ">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" >
-          OTHER <span class="ms-auto">Mar 2009 to May 2010</span>
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <div class="card">
-            <div class="card-header">
-              <div class="d-flex align-items-center" style="
-      padding: 1%;
-  ">
-                <div class="avatar me-3"></div>
-                <div class="ms-3">
-                  <h5 class="card-title"><b>College/School Name :</b> SFDSFDS</h5>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <table class="table">
-                <tbody><tr>
-                  <td>Specialization</td>
-                  <td>: </td>
-                </tr>
-                <tr>
-                  <td>Duration</td>
-                  <td>: Mar 2009 to May 2010</td>
-                </tr>
-                <tr>
-                  <td>Course Type</td>
-                  <td>: Regular</td>
-                </tr>
-                <tr>
-                  <td>Percentage</td>
-                  <td>: 80 %</td>
-                </tr>
-              </tbody></table>
-            </div>
-            <div class="card-footer d-flex justify-content-end">
-              <button class="btn btn-outline-primary me-2">
-                <i class="bi bi-pencil-fill"></i> Edit
-              </button>
-              <button class="btn btn-outline-danger">
-                <i class="bi bi-trash-fill"></i> Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
 </div>
 </div>
 </div>

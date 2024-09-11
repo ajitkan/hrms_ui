@@ -47,6 +47,8 @@ import { EducationDetailsComponent } from './pages/education/education-details/e
 import { ContactDetailsComponent } from './pages/contact-details/contact-details/contact-details.component'; 
 import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-details.component';
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
+import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
+import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -94,6 +96,12 @@ const routes: Routes = [
   },
   {
     path: 'experience-details', component: ExperienceDetailsComponent
+  },
+  {
+    path: 'leave-apply', component: LeaveApplyComponent
+  },
+  {
+    path: 'leave-approval', component: LeaveApprovalComponent
   },
   {
     path: 'jobpost', component: JobPostComponent

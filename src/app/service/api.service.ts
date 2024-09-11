@@ -30,7 +30,7 @@ export class ApiService {
   alertType: 'success' | 'error' | 'info' | null = null;
   alertTimeout:any;
 
-  apiUrlsepration!: 'https://localhost:44315/api';
+  apiUrlsepration!: 'https://localhost:44315';
   constructor(private http: HttpClient,
     private router: Router,
     private toastr: ToastrService) {
@@ -45,7 +45,7 @@ export class ApiService {
   }
 
   getIp() {
-    return this.http.get<any>('https://api.ipify.org/?format=json')
+    return this.http.get<any>('https:/.ipify.org/?format=json')
   }
 
   getTimezoneInfo(ip: string) {
@@ -91,12 +91,12 @@ export class ApiService {
   //Cuttent Time Base On TimeZone   
   getCurrentTime(timezone: any): Observable<any> {
 
-    const apiUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
+    const apiUrl = `http://worldtimeapi.org/timezone/${timezone}`;
     return this.http.get<any>(apiUrl);
   }
   // Get Department Details
   GetDepartmentDetails(): Observable<any[]> {
-    return this.http.get<any>(`https://localhost:44315/api/Separation/GetDepartmentDetails`);
+    return this.http.get<any>(`https://localhost:44315/Separation/GetDepartmentDetails`);
   }
 
   GetSeparationEmployeeDetails(): Observable<any> {
@@ -105,7 +105,7 @@ export class ApiService {
   // Get  Separation Employee Details 
   // GetSeparationEmployeeDetails(): Observable<any[]>{
   //   debugger
-  //   return this.http.get<any>(`https://localhost:44315/api/Separation/GetSeprationEmployeeDetails`);    
+  //   return this.http.get<any>(`https://localhost:44315/Separation/GetSeprationEmployeeDetails`);    
   // } 
 
   //   login(data: any): Observable<any> {
@@ -126,22 +126,22 @@ export class ApiService {
   // }
 
   getAttendance() {
-    return this.http.get<any>(`${environment.apiUrl}/api/Attendance/getAttendance`)
+    return this.http.get<any>(`${environment.apiUrl}/Attendance/getAttendance`)
   }
 
   // Get Department Clearance 
 
 
   updateAttendance(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/UpdateAttendance`, data)
+    return this.http.post<any>(`${environment.apiUrl}/Attendance/UpdateAttendance`, data)
   }
 
   punchTimeApplication(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/PunchTimeApplication`, data)
+    return this.http.post<any>(`${environment.apiUrl}/Attendance/PunchTimeApplication`, data)
   }
 
   getAttendanceByUserId(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/Attendance/GetAttendanceByUserId`, data)
+    return this.http.post<any>(`${environment.apiUrl}/Attendance/GetAttendanceByUserId`, data)
   }
 
   getApplicationByUserId(data: any) {
@@ -149,7 +149,7 @@ export class ApiService {
       Emp_Id: data.Emp_Id,
       Shift_Date: data.Shift_Date
     }
-    return this.http.get<any>(`${environment.apiUrl}/api/Attendance/GetApplicationByUserId`, { params })
+    return this.http.get<any>(`${environment.apiUrl}/Attendance/GetApplicationByUserId`, { params })
   }
 
   postData(token: string): Observable<any> {
@@ -162,11 +162,11 @@ export class ApiService {
   }
 
   fetchTabs(roleID: any, screenID: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchTabs`, { roleID: roleID, screenID: screenID })
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/FetchTabs`, { roleID: roleID, screenID: screenID })
   }
 
   fetchUserDetailsField(payload: { roleID: number; tabID: number }): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/UserDetails/FetchField`, payload);
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/FetchField`, payload);
   }
   fetchDropdownOptions(fieldID: number, tabID: number): Observable<any> {
     const requestPayload = {
@@ -176,21 +176,21 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/GetMasterDataByFieldID`, requestPayload);
   }
 
-  // private apiUrl3 = 'https://localhost:7254/api/UserDetails';
+  // private apiUrl3 = 'https://localhost:7254/UserDetails';
   insertEmployeeDetails(employeeDetails: EmployeeDetailDto[], tabID: number, recordType: any): Observable<any> {
-    const url = `https://localhost:7254/api/UserDetails/InsertEmployeeDetails?TabID=${tabID}&recordType=${recordType}`;
+    const url = `https://localhost:7254/UserDetails/InsertEmployeeDetails?TabID=${tabID}&recordType=${recordType}`;
     return this.http.post(url, employeeDetails).pipe(
       catchError(this.handleError)
     );
   }
   
-  saveDraftEmployeeDetails(details: any[], tabID: number, recordType: string): Observable<any> {
-    const params = new HttpParams()
-      .set('tabID', tabID.toString())
-      .set('recordType', recordType);  
+  // saveDraftEmployeeDetails(details: any[], tabID: number, recordType: string): Observable<any> {
+  //   const params = new HttpParams()
+  //     .set('tabID', tabID.toString())
+  //     .set('recordType', recordType);  
   
-    return this.http.post<any>('https://localhost:7254/api/UserDetails/SaveDraftEmployeeDetails', details, { params });
-  }
+  //   return this.http.post<any>('https://localhost:7254/UserDetails/SaveDraftEmployeeDetails', details, { params });
+  // }
   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
