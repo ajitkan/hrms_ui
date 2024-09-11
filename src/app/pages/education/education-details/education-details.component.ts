@@ -91,37 +91,6 @@ export class EducationDetailsComponent {
     });
   }
 
-  // createForm(fields: any[]): void {
-  //   const formGroup: any = {};
-  //   fields.forEach(field => {
-  //     if (field.controls !== 'BUTTON') {
-  //       const validators = [];
-  //       if (field.isMandatory) {
-  //         validators.push(Validators.required);
-  //       }
-  //       formGroup[field.fieldName] = [field.defaultValue || '', validators];
-
-  //       if (field.controls === 'DROPDOWNLIST') {
-  //         this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
-  //           next: (res: any) => {
-  //             if (res.code === 1 && Array.isArray(res.masterList)) {
-  //               field.options = res.masterList.map((item: any) => ({
-  //                 value: item.Code,
-  //                 text: item.Text
-  //               }));
-  //             } else {
-  //               console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, res.message || 'No data available');
-  //             }
-  //           },
-  //           error: (err: any) => {
-  //             console.log(`Error fetching dropdown options for fieldID ${field.fieldID}:`, err.message);
-  //           }
-  //         });
-  //       }
-  //     }
-  //   });
-  //   this.educationForm = this.fb.group(formGroup);
-  // }
 
 
   createForm(fields: any[]): void {
@@ -268,7 +237,7 @@ export class EducationDetailsComponent {
                     if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
                         //  this.employeeDetails = employeeDetailsArray[0].dynamicData;
                         this.educationList = res.featchEmployeeDetailResponse;
-                        this.employeeDetails = this.dynamicFormService.BindMasterValue(res,this.tabID);
+                        this.employeeDetails = this.dynamicFormService.BindMasterValue(this.fields,res,this.tabID);
                         if (this.employeeDetails) {
                             // this.populateFormWithEmployeeDetails(this.employeeDetails);
                             this.showform = false;
@@ -296,6 +265,7 @@ export class EducationDetailsComponent {
   
   private populateFormWithEmployeeDetails(employeeDetails: any, educationList?:any): void {
     // Assuming employeeDetails is an object with key-value pairs
+    debugger
     Object.keys(employeeDetails.dynamicData).forEach(fieldName => {
       if(fieldName=='Code' || fieldName=='EmpID'|| fieldName=='EMPCode'){
         console.log(fieldName+" is not a formcontrol");

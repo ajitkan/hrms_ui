@@ -63,6 +63,8 @@ import { NotificationComponent } from './pages/shared-components/notification/no
 import { NotificationDetailsComponent } from './pages/shared-components/notification-details/notification-details.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
+import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
+import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
 
 
 @NgModule({
@@ -111,7 +113,9 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
     NotificationComponent,
     NotificationDetailsComponent,
     ProfileComponent,
-    ExperienceDetailsComponent
+    ExperienceDetailsComponent,
+    LeaveApplyComponent,
+    LeaveApprovalComponent
   ],
   imports: [
     BrowserModule,

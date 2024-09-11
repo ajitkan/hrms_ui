@@ -1,4 +1,4 @@
-<div *ngIf="alertMessage" class="alert alert-dismissible" 
+<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
   {{ alertMessage }}
@@ -13,7 +13,7 @@
           <ng-container *ngIf="field.controls !== 'BUTTON'">
             <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
             
-            <!-- Text Input -->
+         
             <input *ngIf="field.controls === 'TEXTFIELD'"
                    [type]="dynamicFormService.getFieldType(field.fieldDataType)"
                    [id]="field.fieldName"
@@ -21,7 +21,7 @@
                    [required]="field.isMandatory"
                    [disabled]="field.isEdit === false"/>
             
-            <!-- Dropdown -->
+           
             <select *ngIf="field.controls === 'DROPDOWNLIST'"
                     [id]="field.fieldName"
                     [formControlName]="field.fieldName"
@@ -30,7 +30,7 @@
               <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
             </select>
             
-            <!-- Datepicker -->
+          
             <input *ngIf="field.controls === 'DATEPICKER'"
                    type="date"
                    [id]="field.fieldName"
@@ -38,33 +38,28 @@
                    [required]="field.isMandatory" 
                    [disabled]="field.isEdit === false"/>
                    
-                   <!--  -->
-                   <!-- {{profileForm.get(field.fieldName)?.errors?.['minLength']}} -->
-                   <!-- {{(profileForm.get(field.fieldName))?.hasError('minlength')}}
-                   {{ field.fieldTitle }} -->
+                 
+                  
                    <div *ngIf="field.controls === 'TEXTFIELD'"> 
                     <small class="text-danger" *ngIf="profileForm.get(field.fieldName)?.errors?.['required']">
                       {{ field.fieldTitle }} is required.
                     </small>
-                    <!-- <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.errors?.['minLength']"> -->
+
                     <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.hasError('minlength')">
                       {{ field.fieldTitle }} must be at least {{ profileForm.get(field.fieldName)?.getError('minlength').requiredLength }} characters long.
                     </small>
                     <small class="text-danger" *ngIf="(profileForm.get(field.fieldName))?.hasError('maxlength')">
                       {{ field.fieldTitle }}  not be greater than {{ profileForm.get(field.fieldName)?.getError('maxlength').requiredLength }} characters long.
                     </small>
-                    <!-- <small class="text-danger" *ngIf="profileForm.get(field.fieldName)?.hasError('textOnly')">
-                      {{ field.fieldTitle }} should not contain numeric characters.
-                    </small> -->
-                    <!-- Add more validation messages as needed -->
+                   
                   </div>
-                   <!--  -->
+             
           </ng-container>
         </div>
       </ng-container>
     </div>
 
-    <!-- Button Row -->
+  
     <div class="button-container">
       <ng-container *ngFor="let field of fields">
         <button 
@@ -78,4 +73,138 @@
       </ng-container>
     </div>
   </form>
+
+
+
+</div> -->
+
+
+
+
+
+
+<div *ngIf="alertMessage" class="alert alert-dismissible" 
+     [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
+     role="alert">
+  {{ alertMessage }}
 </div>
+
+<div class="profile-container">
+  <div class="row">
+    <h3 style="width: 80%;">Profile Details</h3>
+    <button id="basic" type="button" class="btn btn-primary" (click)="showForm();" style="width: 18%; padding: 0.5%;">
+      <i class="bi bi-plus-circle"></i> Add Profile
+    </button>
+  </div>
+  
+  <hr>
+  <div  *ngIf="employeeDetails && (showform || employeeDetails.featchEmployeeDetailResponse.length <= 0)">
+    <form class="profileForm" [formGroup]="profileForm">
+      <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
+        <div *ngFor="let field of row" 
+            [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
+          
+        
+          <ng-container *ngIf="field.controls !== 'BUTTON'">
+            <label [for]="field.fieldName">{{ field.fieldTitle }}</label>
+            
+      
+            <input *ngIf="field.controls === 'TEXTFIELD'"
+                  [type]="dynamicFormService.getFieldType(field.fieldDataType)"
+                  [id]="field.fieldName"
+                  [formControlName]="field.fieldName"
+                  [required]="field.isMandatory"
+                  (input)="dynamicFormService.onTextInput($event)" />
+            
+           
+            <select *ngIf="field.controls === 'DROPDOWNLIST'"
+                    [id]="field.fieldName"
+                    [formControlName]="field.fieldName"
+                    [required]="field.isMandatory">
+              <option *ngFor="let option of field.options" [value]="option.value">{{ option.text }}</option>
+            </select>
+            
+      
+            <input *ngIf="field.controls === 'DATEPICKER'"
+                  type="date"
+                  [id]="field.fieldName"
+                  [formControlName]="field.fieldName"
+                  [required]="field.isMandatory" />
+          </ng-container>
+        </div>
+      </div>
+
+     
+      <div class="button-container">
+        <ng-container *ngFor="let field of fields">
+          <button 
+            *ngIf="field.controls === 'BUTTON'" 
+            type="button" 
+            (click)="onButtonClick(field.fieldTitle)">
+            <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
+            {{ field.fieldTitle }}
+          </button>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+
+
+  <div *ngIf="employeeDetails && employeeDetails.featchEmployeeDetailResponse.length > 0 && !showform">
+    <div class="accordion" id="accordionExample" *ngFor="let profile of employeeDetails.featchEmployeeDetailResponse; let i = index;">
+      <div class="accordion-item" style="margin: 0 9% 0 9%; bottom: 10px; position: relative;">
+        <h2 class="accordion-header" id="headingOne{{i}}">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + i" aria-expanded="true" [attr.aria-controls]="'collapseOne' + i">
+            {{profile.dynamicData.title}}  {{profile.dynamicData.FirstName}} {{profile.dynamicData.LastName}} <span class="ms-auto">{{profile.dynamicData.DateOfBirth}}</span>
+          </button>
+        </h2>
+        <div [id]="'collapseOne' + i" class="accordion-collapse collapse show" [attr.aria-labelledby]="'headingOne' + i" data-bs-parent="#accordionExample">
+
+          <div class="accordion-body">
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex" style="padding: 1%;">
+                  <div class="ms-3">
+                    <h5 class="card-title"><b>Full Name -</b> {{profile.dynamicData.FirstName}} {{profile.dynamicData.LastName}}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Date of Birth</td>
+                      <td>: {{profile.dynamicData.DateOfBirth}}</td>
+                    </tr>
+                    <tr>
+                      <td>Gender</td>
+                      <td>: {{profile.dynamicData.Gender}}</td>
+                    </tr>
+                    <tr>
+                      <td>EMP Code</td>
+                      <td>: {{profile.dynamicData.EMPCode}}</td>
+                    </tr>
+                    <tr>
+                      <td>Skills</td>
+                      <td>: {{profile.dynamicData.skills}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer d-flex justify-content-end">
+                <button class="btn btn-outline-primary me-2" (click)="EditEducation(profile, i)">
+                  <i class="bi bi-pencil-fill"></i> Edit
+                </button>
+                <button class="btn btn-outline-danger">
+                  <i class="bi bi-trash-fill"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
