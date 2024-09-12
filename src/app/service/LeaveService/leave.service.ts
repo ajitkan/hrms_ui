@@ -7,28 +7,20 @@ import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
   providedIn: 'root'
 })
 export class LeaveService {
-
-
-  leaveApplyRequest(payload: any): Observable<any> {
-    console.log('Leave Apply Request Payload:', payload); // Log the payload for debugging
-
-    // Static response simulating a successful API call
-    const response = {
-      code: 1,
-      status: 'Success',
-      message: 'Data retrieved successfully',
-      leavesRequest: [
-        {
-          message: 'Leave Request Sent Successfully.', // Success message for the leave request
-        },
-      ],
-    };
-
-    // Return the static response as an observable
-    return of(response);
-  }
   private apiUrl = 'https://localhost:7254/UserDetails/GetLeaveRequestsForApprover';
+  private apiUrl1 = 'https://localhost:7254/UserDetails/LeaveRequest';
+  private baseUrl = 'https://localhost:7254/UserDetails';
   constructor(private http : HttpClient) { }
+
+  fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
+    const url = `${this.baseUrl}/FetchEmployeeLeaveDetails`;
+    return this.http.post(url, { employeeCode });
+  }
+  applyLeave(leaveRequestPayload: any): Observable<any> {
+    return this.http.post(this.apiUrl1, leaveRequestPayload);
+  }
+ 
+  
 
   getLeaveRequests(leaveApprover: string): Observable<LeaveRequestDto[]> {
     const params = new HttpParams().set('leaveApprover', leaveApprover);

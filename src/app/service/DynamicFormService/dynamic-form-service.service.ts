@@ -78,7 +78,7 @@ export class DynamicFormService {
       .set('RecordType', recordType || null);
     console.log('Service call for fetch', params);
 
-    return this.httpClient.get(`${environment.apiUrl}/api/UserDetails/FeatchEmployeeDetail`, { params })
+    return this.httpClient.get(`${environment.apiUrl}/UserDetails/FeatchEmployeeDetail`, { params })
       .pipe(
         catchError((error: any) => {
           console.error('Error fetching employee details', error);

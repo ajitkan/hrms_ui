@@ -15,7 +15,7 @@ export class LeaveApprovalComponent {
   constructor(private leaveService: LeaveService) { }
 
   ngOnInit(): void {
-    this.fetchLeaveRequests('1'); // Pass the appropriate leaveApprover parameter
+    this.fetchLeaveRequests('K-102'); // Pass the appropriate leaveApprover parameter
   }
 
   fetchLeaveRequests(leaveApprover: string): void {

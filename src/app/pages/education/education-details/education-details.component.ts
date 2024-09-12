@@ -227,6 +227,7 @@ export class EducationDetailsComponent {
 
 
   fetchEmployeeDetails(): void {
+    debugger
     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
         .subscribe({
             next: (res: any) => {
