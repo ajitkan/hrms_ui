@@ -130,7 +130,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Initialize all tooltips on the page
-    $('[data-toggle="tooltip"]').tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   rejectLeaves() {

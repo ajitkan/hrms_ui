@@ -134,7 +134,7 @@
                     Reject
                   </button>
                 </span>
-                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Approved' ? 'Already Approved' : 'Click to Approve'">
+                <span data-toggle="tooltip" data-html="true" [title]="request.leaveStatus == 'Approved' ? 'Already Approved.You cannot approve it again at this time.' : 'Click to Approve'">
                   <button class="btn btn-approve" [disabled]="request.leaveStatus == 'Approved'" (click)="approveSingleLeave(request)">
                     Approve
                   </button>
