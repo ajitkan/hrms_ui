@@ -22,11 +22,11 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
   constructor(private leaveService: LeaveService) { }
 
   ngOnInit(): void {
+
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('No token found');
     }
-// debugger
     const decodedToken: any = jwtDecode(token);
     this.username = decodedToken?.unique_name;
     this.fetchLeaveRequests(this.username); // Pass the appropriate leaveApprover parameter

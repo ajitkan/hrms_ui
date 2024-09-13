@@ -379,28 +379,28 @@
   <div class="container mt-0">
     <div class="row mb-2 leave-history-section">
       <div class="col-md-2">
-        <h5>Leave History</h5> 
+        <h5>Leave History</h5>
       </div>
       <div class="col-md-8">
         <div class="d-flex justify-content-around text-center leave-status">
           <div>
-            <span class="badge bg-primary rounded-circle">7</span>
+            <span class="badge bg-primary rounded-circle">{{ allCount }}</span>
             <p>All</p>
           </div>
           <div>
-            <span class="badge bg-warning rounded-circle">1</span>
+            <span class="badge bg-warning rounded-circle">{{ openCount }}</span>
             <p>Open</p>
           </div>
           <div>
-            <span class="badge bg-success rounded-circle">6</span>
+            <span class="badge bg-success rounded-circle">{{ approvedCount}}</span>
             <p>Approved</p>
           </div>
           <div>
-            <span class="badge bg-danger rounded-circle">0</span>
+            <span class="badge bg-danger rounded-circle">{{ declinedCount }}</span>
             <p>Declined</p>
           </div>
           <div>
-            <span class="badge bg-secondary rounded-circle">0</span>
+            <span class="badge bg-secondary rounded-circle">{{ cancelledCount }}</span>
             <p>Cancelled</p>
           </div>
         </div>
@@ -409,42 +409,19 @@
         <button class="btn btn-primary holiday-list-btn">Holiday List</button>
       </div>
     </div>
+    
   
-    <h5>Leave Summary</h5> 
+    <h5>Leave Summary</h5>
     <div class="leave-summary-container d-flex">
-      <div class="leave-tab">
-        <h5>PL</h5>
-        <p>Available Privilege Leave</p>
-        <h6>9 Days</h6>
-      </div>
-      <div class="leave-tab">
-        <h5>CFF</h5>
-        <p>Available Comp OFF</p>
-        <h6>2 Days</h6>
-      </div>
-      <div class="leave-tab">
-        <h5>ML</h5>
-        <p>Available Maternity Leave</p>
-        <h6>182 Days</h6>
-      </div>
-      <div class="leave-tab">
-        <h5>SL</h5>
-        <p>Available Sick Leave</p>
-        <h6>8 Days</h6>
-      </div>
-      <div class="leave-tab">
-        <h5>PL</h5>
-        <p>Available Paternity Leave</p>
-        <h6>15 Days</h6>
-      </div>
-      <div class="leave-tab">
-        <h5>CL</h5>
-        <p>Available Casual Leave</p>
-        <h6>11 Days</h6>
+      <div *ngFor="let leave of leaveSummary" class="leave-tab">
+        <h5>{{ leave.leaveText }}</h5>
+        <p>Available {{ leave.leaveText }}</p>
+        <h6>{{ leave.balanceLeaves }} Days</h6>
       </div>
     </div>
+    
   
-    <h5 class="mt-4">Apply Leave</h5> 
+    <!-- <h5 class="mt-4">Apply Leave</h5> 
     <div class="row apply-leave-section">
       <div class="col-12">
         <form [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
@@ -496,7 +473,7 @@
                 </div>
               </div>
   
-              <!-- Approval Cards Section -->
+            
               <div class="row text-center approval-cards">
                 <div class="col-md-4">
                   <div class="approval-card">
@@ -538,13 +515,226 @@
             </div>
           </div>
   
-          <!-- Success Message -->
+          
           <div *ngIf="successMessage" class="alert alert-success ">
             {{ successMessage }}
           </div>
         </form>
       </div>
+    </div> -->
+
+
+    <h5 class="mt-4">Apply Leave</h5>
+    <div class="row apply-leave-section">
+      <div class="col-12">
+        <form [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
+          <div class="row">
+            <!-- Left Column: Leave Type, From Date, To Date, Leave Sub Category -->
+            <div class="col-md-6">
+              <!-- <div class="mb-3">
+                <label for="leaveType" class="form-label">Leave Type</label>
+                <select class="form-select" formControlName="leaveType">
+                  <option value="" disabled>Select Leave Type</option>
+                  <option value="1">Privilege Leave</option>
+                  <option value="2">Sick Leave</option>
+                  <option value="3">Casual Leave</option>
+                </select>
+                <div *ngIf="isSubmitted && f['leaveType'].errors" class="text-danger">
+                  Leave Type is required.
+                </div>
+              </div> -->
+
+                <div class="mb-3">
+                  <label for="leaveType" class="form-label">Leave Type</label>
+                  <select class="form-select" formControlName="leaveType">
+                    <option value="" disabled>Select Leave Type</option>
+                    <option *ngFor="let leaveType of leaveTypes" [value]="leaveType.leaveID">{{ leaveType.leaveText }}</option>
+                  </select>
+                  <div *ngIf="isSubmitted && f['leaveType'].errors" class="text-danger">
+                    Leave Type is required.
+                  </div>
+                </div>
+             
+              
+    
+              <!-- <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="fromDate" class="form-label">From Date</label>
+                    <input type="date" class="form-control" formControlName="fromDate">
+                    <div *ngIf="isSubmitted && f['fromDate'].errors" class="text-danger">
+                      From Date is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="toDate" class="form-label">To Date</label>
+                    <input type="date" class="form-control" formControlName="toDate">
+                    <div *ngIf="isSubmitted && f['toDate'].errors" class="text-danger">
+                      To Date is required.
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="fromDate" class="form-label">From Date</label>
+                    <input type="date" class="form-control" formControlName="fromDate">
+                    <div *ngIf="isSubmitted && f['fromDate'].errors" class="text-danger">
+                      From Date is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="toDate" class="form-label">To Date</label>
+                    <input type="date" class="form-control" formControlName="toDate">
+                    <div *ngIf="isSubmitted && f['toDate'].errors?.['required']" class="text-danger">
+                      To Date is required.
+                    </div>
+                    <div *ngIf="isSubmitted && f['toDate'].errors?.['dateRangeInvalid']" class="text-danger">
+                      To Date cannot be earlier than From Date.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+    
+              <!-- <div class="mb-2" style="display: none;">
+                <label for="leaveSubCategory" class="form-label">Leave Sub Category</label>
+                <select class="form-select" formControlName="leaveSubCategory">
+                  <option value="" disabled>Select Sub Category</option>
+                  <option value="1">Half-Day</option>
+                  <option value="2">Full-Day</option>
+                  <option value="3">Short Leave</option>
+                </select>
+                <div *ngIf="isSubmitted && f['leaveSubCategory'].errors" class="text-danger">
+                  Leave Sub Category is required.
+                </div>
+              </div> -->
+              <!-- <div class="col-md-6"> -->
+                <div class="col-mb-3">
+                  <label for="leaveReason" class="form-label">Leave Reason</label>
+                  <textarea 
+                    class="form-control" 
+                    formControlName="reason" 
+                    rows="3"
+                
+                    (input)="updateCharCount()"
+                  ></textarea>
+                  <div *ngIf="isSubmitted && f['reason'].errors" class="text-danger">
+                    <span *ngIf="f['reason'].errors?.['required']">Leave Reason is required.</span>
+                    <span *ngIf="f['reason'].errors?.['minlength']">Minimum 10 characters required.</span>
+                    <span *ngIf="f['reason'].errors?.['maxlength']">Maximum 500 characters allowed.</span>
+                  </div>
+                
+                  <!-- Custom character counter message -->
+                  <div class="text-muted" [ngClass]="{ 'text-danger': charCount > 500 }">
+                    <ng-container *ngIf="charCount <= 500; else exceededMessage">
+                      You have entered {{ charCount }} characters. You can enter up to 500 characters.
+                    </ng-container>
+                    <ng-template #exceededMessage>
+                      Maximum limit of 500 characters exceeded!
+                    </ng-template>
+                  </div>
+                </div>
+                
+                
+                
+              <!-- </div> -->
+            </div>
+    
+            <!-- Right Column: Email, Contact, and Approval Cards -->
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email ID</label>
+                <input type="email" class="form-control" formControlName="email">
+                <div *ngIf="isSubmitted && f['email'].errors" class="text-danger">
+                  <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+                  <span *ngIf="f['email'].errors?.['email']">Invalid email format.</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="text" class="form-control" formControlName="contact">
+                <div *ngIf="isSubmitted && f['contact'].errors" class="text-danger">
+                  <span *ngIf="f['contact'].errors?.['required']">Contact is required.</span>
+                  <span *ngIf="f['contact'].errors?.['pattern']">Invalid phone number.</span>
+                </div>
+              </div>
+    
+              <!-- Approval Cards Section -->
+              <!-- <div class="row text-center approval-cards" >
+                <div class="col-md-4">
+                  <div class="approval-card">
+                    <img src="https://via.placeholder.com/50" alt="Approval 1">
+                    <p>Approval 1</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="approval-card">
+                    <img src="https://via.placeholder.com/50" alt="Approval 2">
+                    <p>Approval 2</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="approval-card">
+                    <img src="https://via.placeholder.com/50" alt="Approval 3">
+                    <p>Approval 3</p>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="row text-center approval-cards">
+                <div class="col-md-4" *ngFor="let approver of leaveApprovers">
+                  <div class="approval-card">
+                  
+                    <img [src]="approver.profilePicture ? approver.profilePicture : 'https://via.placeholder.com/50'" 
+                         alt="Approver Image">
+                  
+                    <p>{{ approver.approverName }} <small> (Approval Level {{ approver.approvalLevel }}) </small></p>
+                  </div>
+                </div>
+              </div>
+
+             
+              
+            </div>
+          </div>
+    
+          <!-- Leave Reason and Submit/Cancel Buttons -->
+          <!-- <div class="row "> -->
+            <!-- <div class="col-md-6">
+              <div>
+                <label for="leaveReason" class="form-label">Leave Reason</label>
+                <textarea class="form-control" formControlName="reason" rows="2"></textarea>
+                <div *ngIf="isSubmitted && f['reason'].errors">
+                  <span *ngIf="f['reason'].errors?.['required']">Leave Reason is required.</span>
+                  <span *ngIf="f['reason'].errors?.['minlength']">Minimum 10 characters required.</span>
+                </div>
+              </div>
+            </div> -->
+    
+            <div class="col-md-12 text-end mt-6">
+              <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Cancel</button>
+              <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+          <!-- </div> -->
+    
+          <!-- Success Message -->
+          <div *ngIf="successMessage" class="alert alert-success mt-4">
+            {{ successMessage }}
+          </div>
+        </form>
+      </div>
     </div>
+    
+    
+
   </div>
   
 

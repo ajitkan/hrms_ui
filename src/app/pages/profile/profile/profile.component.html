@@ -1,4 +1,4 @@
-<!-- <div *ngIf="alertMessage" class="alert alert-dismissible" 
+ <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
   {{ alertMessage }}
@@ -76,13 +76,12 @@
 
 
 
-</div> -->
+</div> 
 
 
 
 
-
-
+<!-- 
 <div *ngIf="alertMessage" class="alert alert-dismissible" 
      [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
      role="alert">
@@ -150,7 +149,7 @@
   </div>
 
 
-  <div *ngIf="employeeDetails && employeeDetails.featchEmployeeDetailResponse.length > 0 && !showform">
+  <!-- <div *ngIf="employeeDetails && employeeDetails.featchEmployeeDetailResponse.length > 0 && !showform">
     <div class="accordion" id="accordionExample" *ngFor="let profile of employeeDetails.featchEmployeeDetailResponse; let i = index;">
       <div class="accordion-item" style="margin: 0 9% 0 9%; bottom: 10px; position: relative;">
         <h2 class="accordion-header" id="headingOne{{i}}">
@@ -204,7 +203,7 @@
         </div>
       </div>
     </div>
-  </div>
-</div> 
+  </div> -->
+<!-- </div>  --> 
 
 
