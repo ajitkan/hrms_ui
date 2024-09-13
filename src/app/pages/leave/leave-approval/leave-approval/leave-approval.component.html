@@ -81,8 +81,6 @@
   -->
 
 
-
-
   <div class="container-fluid">
     <div class="row">
       <!-- Leave Request Table -->
@@ -91,8 +89,12 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3>Leave Requests</h3>
           <div>
-            <button class="btn btn-reject">Reject</button>
-            <button class="btn btn-approve">Approve</button>
+            <span data-toggle="tooltip" data-placement="top" data-html="true" [title]="'Click to Reject'">
+               <button class="btn btn-reject" (click)="rejectLeaves()">Reject</button>
+            </span>
+            <span data-toggle="tooltip" data-placement="top" data-html="true" [title]="'Click to Approve'">
+              <button class="btn btn-approve"  (click)="approveLeaves()">Approve</button>
+            </span>
             <button class="btn btn-custom ms-2" (click)="toggleFilter()">Filter Leave Request</button>
           </div>
         </div>
@@ -101,7 +103,9 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col"><input type="checkbox"></th>
+              <th scope="col">
+                <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+              </th>
               <th scope="col">Employee Name</th>
               <th scope="col">Leave Type</th>
               <th scope="col">Date</th>
@@ -112,23 +116,31 @@
           </thead>
           <tbody>
             <tr *ngFor="let request of leaveRequests">
-              <td><input type="checkbox"></td>
-              <td> {{ request.firstName + " " + request.lastName + " ("  + request.employeeCode + ")"}}</td>
-              <td>{{ request.leaveType }}</td>
-              <!-- <td>{{ request.leaveStartDate |  date}} <br> - {{ request.leaveEndDate|  date}}</td> -->
               <td>
-                {{ request.leaveStartDate | date: 'MMM dd, yyyy' }} 
-                <br> 
-                - {{ request.leaveEndDate | date: 'MMM dd, yyyy' }}
-                <br>
-                <small>({{ getDaysDifference(request.leaveStartDate, request.leaveEndDate ,isHalfDay) }} days)</small>
+                <input type="checkbox" [(ngModel)]="request.selected" (change)="onCheckboxChange(request)">
               </td>
-              
+              <td>{{ request.firstName + " " + request.lastName + " (" + request.employeeCode + ")" }}</td>
+              <td>{{ request.leaveType ? request.leaveType : request.leaveCategory }}</td>
+              <td>
+                {{ request.leaveStartDate | date: 'MMM dd, yyyy' }} <br>
+                - {{ request.leaveEndDate | date: 'MMM dd, yyyy' }} <br>
+                <small>({{ getDaysDifference(request.leaveStartDate, request.leaveEndDate, isHalfDay) }} days)</small>
+              </td>
               <td>{{ request.leaveReason }}</td>
               <td [ngClass]="getStatusClass(request.leaveStatus)">{{ request.leaveStatus }}</td>
               <td>
-                <button class="btn btn-reject">Reject</button>
-                <button class="btn btn-approve">Approve</button>
+                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
+                  <button class="btn btn-reject" [disabled]="request.leaveStatus == 'Reject'" (click)="rejectSingleLeave(request)">
+                    Reject
+                  </button>
+                </span>
+                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Approved' ? 'Already Approved' : 'Click to Approve'">
+                  <button class="btn btn-approve" [disabled]="request.leaveStatus == 'Approved'" (click)="approveSingleLeave(request)">
+                    Approve
+                  </button>
+                </span>
+                <!-- <button class="btn btn-reject" data-toggle="tooltip" data-html="true" title="request.leaveStatus =='Reject'" [disabled]="request.leaveStatus =='Reject'" (click)="rejectSingleLeave(request)">Reject</button> -->
+                <!-- <button class="btn btn-approve" data-toggle="tooltip" data-html="true" title="" [disabled]="request.leaveStatus =='Approved'" (click)="approveSingleLeave(request)">Approve</button> -->
               </td>
             </tr>
           </tbody>
@@ -172,5 +184,4 @@
         </div>
       </div>
     </div>
-  </div>
-  
+  </div>  
