@@ -19,5 +19,6 @@ export interface LeaveRequestDto {
     createdDate: Date;
     updatedBy?: string; // Optional field
     updatedDate?: Date; // Optional field
+    selected: Boolean;
   }
   

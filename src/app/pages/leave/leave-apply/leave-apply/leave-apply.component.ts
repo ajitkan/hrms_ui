@@ -24,6 +24,7 @@ export class LeaveApplyComponent {
   leaveTypesMap: { [key: number]: string } = {};
   leaveSummaryItem:any;
   charCount = 0;
+
   constructor(private fb: FormBuilder, private leaveService: LeaveService) {
     // Initialize the form with validation rules
     this.leaveForm = this.fb.group({
@@ -148,7 +149,6 @@ debugger
     toDate: this.leaveForm.value.toDate,
     reason: this.leaveForm.value.reason
   };
-
   this.leaveService.applyLeave(leaveRequestPayload).subscribe({
     next: (response) => {
       this.successMessage = response.message || 'Leave applied successfully!';
