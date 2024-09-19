@@ -1,0 +1,122 @@
+
+
+
+
+
+
+<div class="container">
+  <div class="row leave-history-section">
+    <div class="col-md-2">
+      <h5>Regularization History</h5>
+    </div>
+    <div class="col-md-8">
+      <div class="d-flex justify-content-around text-center leave-status">
+        <div>
+          <span class="badge bg-primary rounded-circle">{{ allCount }}</span>
+          <p>All</p>
+        </div>
+        <div>
+          <span class="badge bg-warning rounded-circle">{{ openCount }}</span>
+          <p>Open</p>
+        </div>
+        <div>
+          <span class="badge bg-success rounded-circle">{{ approvedCount }}</span>
+          <p>Approved</p>
+        </div>
+        <div>
+          <span class="badge bg-danger rounded-circle">{{ declinedCount }}</span>
+          <p>Declined</p>
+        </div>
+        <div>
+          <span class="badge bg-secondary rounded-circle">{{ cancelledCount }}</span>
+          <p>Cancelled</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container2 mt-4">
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="attendanceDate" class="form-label">Select Attendance Date</label>
+        <input type="date" id="attendanceDate" class="form-control" (change)="onDateChange($event)">
+      </div>
+    
+      <!-- <div class="col-md-4"> 
+        <div class="row text-center approval-cards">
+          <div class="col-md-12" *ngFor="let detail of punchingDetailsArray">
+            <div class="approval-card">
+              <p><strong>Approval Level:</strong> {{ detail.approvalLevel }}</p>
+              <p>{{ detail.approverName }}</p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    
+  
+    <div class="row mb-4 mt-0">
+      <div class="col-md-12">
+        <h5>Attendance Details For: {{ attendanceDate | date }}</h5>
+      </div>
+    </div>
+
+    <form [formGroup]="regularizationForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="punchingDetailsArray.length > 0" class="mb-4 ">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="previousTimeIn" class="form-label">Punch In</label>
+            <input type="text" class="form-control" [value]="punchingDetailsArray[0]?.previousPunchIn" disabled>
+          </div>
+          <div class="col-md-3">
+            <label for="previousTimeOut" class="form-label">Punch Out</label>
+            <input type="text" class="form-control" [value]="punchingDetailsArray[0]?.previousPunchOut" disabled>
+          </div>
+
+          <div class="col-md-4"> 
+            <div class="row text-center approval-cards">
+              <div class="col-md-12" *ngFor="let detail of punchingDetailsArray">
+                <div class="approval-card">
+                  <p><strong>Approval Level:</strong> {{ detail.approvalLevel }}</p>
+                  <p>{{ detail.approverName }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div formArrayName="attendanceDetails">
+        <div *ngFor="let detail of attendanceDetails.controls; let i = index" [formGroupName]="i" class="attendance-details-row">
+          <div class="row mb-3 align-items-end">
+            <div class="col-md-3">
+              <label for="timeIn" class="form-label">Punch In</label>
+              <input type="time" class="form-control" formControlName="timeIn">
+            </div>
+            <div class="col-md-3">
+              <label for="timeOut" class="form-label">Punch Out</label>
+              <input type="time" class="form-control" formControlName="timeOut">
+            </div>
+            <div class="col-md-5">
+              <label for="remark" class="form-label">Remark</label>
+              <input type="text" class="form-control remark-field" formControlName="remark" placeholder="Enter remark">
+            </div>
+            <div class="col-md-1 text-end" *ngIf="i > 0">
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeAttendanceRow(i)">&times;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 text-end mt-4">
+        <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="resetForm()">Cancel</button>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Submit</button>
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    </form>
+  </div>
+</div>

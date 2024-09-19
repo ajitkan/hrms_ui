@@ -65,6 +65,7 @@ import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
 import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
 import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
+import { RegularizationApplyComponent } from './pages/attendance/regularization-apply/regularization-apply/regularization-apply.component';
 
 
 @NgModule({
@@ -115,7 +116,8 @@ import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-appro
     ProfileComponent,
     ExperienceDetailsComponent,
     LeaveApplyComponent,
-    LeaveApprovalComponent
+    LeaveApprovalComponent,
+    RegularizationApplyComponent
   ],
   imports: [
     BrowserModule,

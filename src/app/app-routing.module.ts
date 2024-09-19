@@ -49,6 +49,7 @@ import { BankDetailsComponent } from './pages/bank-details/bank-details/bank-det
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
 import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
 import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
+import { RegularizationApplyComponent } from './pages/attendance/regularization-apply/regularization-apply/regularization-apply.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -102,6 +103,9 @@ const routes: Routes = [
   },
   {
     path: 'leave-approval', component: LeaveApprovalComponent
+  },
+  {
+    path: 'regularization-apply', component: RegularizationApplyComponent
   },
   {
     path: 'jobpost', component: JobPostComponent

@@ -3,8 +3,9 @@
  
   .leave-history-section {
     padding: 20px;
-    background-color: #f0f1f56b;
+    background-color: #fff;
     border-radius: 10px;
+    margin: 0px;
   }
   
   .leave-history-section h5 {
@@ -108,11 +109,19 @@
 
 
 .container {
-    margin-top: 30px;
+    /* margin-top: 10px; */
     background-color: #f9f9f9;
+    /* background-color: #fff; */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+}
+.container2 {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 
@@ -132,7 +141,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 
@@ -188,14 +197,20 @@ button {
 .btn-primary {
     background-color: #3c70a7;
     border-color: #007bff;
+    color: white;
 }
 
 .btn-secondary {
     background-color: #6c757d;
     border-color: #6c757d;
+    color: white;
 }
 
-
+/* .btn-primary:hover {
+  background: #4258b8; 
+  transform: scale(1.05); 
+  color: whitesmoke;
+} */
 
 
 
@@ -227,14 +242,18 @@ button {
 
 
 
-button {
+/* button {
   padding: 8px 16px;
   border-radius: 6px;
   margin-top: 12px;
   border: none;
   cursor: pointer;
   font-size: 14px; 
-}
+  background: #6883d7;
+  color: white !important;
+  transition: background-color 0.3s, transform 0.2s;
+} */
+
 
 
 
@@ -245,7 +264,7 @@ button {
   border-radius: 6px; 
   border: 1px solid #ced4da; 
   background-color: #f8f9fa; 
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075); 
+  /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);  */
   margin-bottom: 12px;
   font-size: 14px; 
 }
@@ -263,7 +282,7 @@ button {
 .form-control:focus, .form-select:focus {
   border-color: #80bdff; 
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); 
+  /* box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);  */
 }
 
 
@@ -292,4 +311,188 @@ button {
 .text-danger {
   font-size: 0.75rem; 
   color: #dc3545; 
+}
+
+
+
+
+
+/* 
+--------------------------- */
+
+/* button:hover {
+  background: #4258b8; 
+  transform: scale(1.05); 
+  color: whitesmoke;
+}
+
+
+
+button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-top: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; 
+  background: #6883d7;
+  color: white !important;
+  transition: background-color 0.3s, transform 0.2s;
+} */
+
+
+
+button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-top: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: white; 
+  color: #4258b8; 
+  transition: background-color 0.3s, transform 0.2s;
+  border: 2px solid #6883d7; 
+}
+
+button:hover {
+  background: #ebf0ff;
+  transform: scale(1.05); 
+  color: #4258b8; 
+}
+
+
+/* Container for the dropdown menu and arrow */
+.dropdown-menu-container {
+  position: relative; 
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  padding: 10px 0;
+  display: none; 
+  position: absolute;
+  right: 0; 
+  top: 100%; 
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Show dropdown menu when toggled */
+.dropdown-menu.show{
+  display: block;
+  width: 320px;
+  left: auto;     
+  /* right: 20px ;  */
+  position: absolute; 
+  margin-top: 5px;
+}
+
+/* Heading styling */
+.dropdown-heading {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: rgb(83, 83, 218);
+}
+
+
+.dropdown-toggle i {
+  color: blue; 
+}
+/* Arrow styling */
+.dropdown-arrow {
+  position: absolute;
+  right: 16px; 
+  top: -8px; 
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ffffff; 
+}
+
+/* Styles for holiday items */
+.holiday-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.holiday-name {
+  font-size: 14px;
+}
+
+.holiday-date {
+  font-size: 12px;
+  color: #999;
+  margin-left: 70px; 
+}
+
+.no-holidays {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+
+.load-more .btn {
+  margin: 10px;
+}
+
+
+
+.worked-dates-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.worked-date-item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.date-card {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.date-card span {
+  margin-right: 10px;
+}
+
+.remove-btn {
+  background-color: transparent;
+  border: none;
+  color: #dc3545 !important;
+  cursor: pointer;
+  margin: auto;
+}
+
+.remove-btn i {
+  font-size: 14px;
+}
+
+.single-date-container {
+  margin-top: 15px;
+}
+
+.single-date-container .form-control {
+  width: 100%;
+}
+.remove-btn:hover {
+  color: #a71d2a; 
+  text-decoration: underline; 
 }
