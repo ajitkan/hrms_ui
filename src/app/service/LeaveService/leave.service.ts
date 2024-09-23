@@ -8,14 +8,32 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class LeaveService {
+  private apiUrl = 'https://localhost:7254/UserDetails/GetLeaveRequestsForApprover';
+  private apiUrl1 = 'https://localhost:7254/UserDetails/LeaveRequest';
+  private baseUrl = 'https://localhost:7254/UserDetails';
+  private holidayApiUrl = 'https://localhost:7254/UserDetails/FetchHolidayDetails';
   constructor(private http : HttpClient) { }
   
   fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
     const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;
     return this.http.post(`${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`, { employeeCode });
   }
-   
-  getLeaveRequests(payload: any): Observable<LeaveRequestDto[]> {
+  fetchHolidayDetails(employeeCode: string): Observable<any> {
+    const url = this.holidayApiUrl;
+    return this.http.post(url, { employeeCode });
+  }
+  
+  applyLeave(leaveRequestPayload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/UserDetails/LeaveRequest`, leaveRequestPayload);
+  }
+ 
+  fetchCompOffLeaves(employeeCode: string): Observable<any> {
+    debugger
+    const payload = { employeeCode }; 
+    return this.http.post<any>(`${this.baseUrl}/FetchCompOffLeaves`, payload);
+  }
+
+   getLeaveRequests(payload: any): Observable<LeaveRequestDto[]> {
     // const params = new HttpParams().set('leaveApprover', payload);
     return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/GetLeaveRequests`, payload);
   }

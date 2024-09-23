@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { jwtDecode } from 'jwt-decode';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { LeaveService } from 'src/app/service/LeaveService/leave.service';
 export class LeaveApplyComponent {
   leaveForm: FormGroup;
   successMessage: string = '';
+  errorMessage: string = '';
   isSubmitted: boolean = false;
   leaveHistory: any[] = [];
   leaveSummary:any[] = [];
@@ -25,6 +27,19 @@ export class LeaveApplyComponent {
   leaveSummaryItem:any;
   charCount = 0;
 
+  isHolidayListOpen: boolean = false;
+
+  compOffLeaves: any[] = [];
+  isCompOffSelected: boolean = false;
+  // maxDatesAllowed = 2; 
+  // minDatesAllowed = 1; 
+  removedDates: string[] = [];
+  minDatesRequired = 1;
+  showMessage: boolean = false;
+  holidays: Array<{ name: string, date: string }> = [];
+  private employeeCode: string = '';
+  private token: any;
+
   constructor(private fb: FormBuilder, private leaveService: LeaveService) {
     // Initialize the form with validation rules
     this.leaveForm = this.fb.group({
@@ -33,6 +48,8 @@ export class LeaveApplyComponent {
       toDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      // workedDate: [''] ,
+      workedDates: this.fb.array([]) ,
       // leaveSubCategory: ['', Validators.required],
       reason: ['', [Validators.required, Validators.maxLength(500)]]
     }, {
@@ -41,10 +58,151 @@ export class LeaveApplyComponent {
   }
   
  ngOnInit(){
-  this.fetchLeaveData('K-101'); 
+  this.token = JSON.parse(localStorage.getItem('token') as string);
+  const decodedToken: any = jwtDecode(this.token);
+  this.employeeCode = decodedToken.unique_name;
+  // this.fetchLeaveData('K-101'); 
+  this.fetchLeaveData(this.employeeCode); 
+  this.fetchCompOffLeaves(this.employeeCode);
+  this.loadHolidays();
   this.charCount = this.leaveForm.get('reason')?.value?.length || 0;
  }
 
+ get canAddDate(): boolean {
+  return this.removedDates.length > 0 || this.workedDates.length < this.minDatesRequired;
+}
+
+ get workedDates(): FormArray {
+  return this.leaveForm.get('workedDates') as FormArray;
+}
+
+
+//Working code 
+//  onLeaveTypeChange(event: any): void {
+//   debugger
+//   const leaveTypeId = this.leaveForm.value.leaveType;
+//   this.isCompOffSelected = leaveTypeId === '2'; // Adjust based on your leave type ID for Comp-Off
+
+//   if (this.isCompOffSelected) {
+//     this.fetchCompOffLeaves('K-101'); // Pass the actual employee code
+//     this.leaveForm.get('workedDate')?.setValidators([Validators.required]);
+//   } else {
+//     this.leaveForm.get('workedDate')?.clearValidators();
+//   }
+//   this.leaveForm.get('workedDate')?.updateValueAndValidity();
+// }
+  
+
+onLeaveTypeChange(event: any): void {
+  const leaveTypeId = this.leaveForm.value.leaveType;
+  this.isCompOffSelected = leaveTypeId === '2'; // Assuming '2' is Comp-Off
+
+  // Find the Comp-Off leave in the leave summary
+  const compOffLeave = this.leaveSummary.find((leave: any) => leave.leaveCategoryID === 2);
+  const compOffBalance = compOffLeave ? compOffLeave.balanceLeaves : 0;
+
+  this.showMessage = this.isCompOffSelected && compOffBalance === 0;
+
+  if (this.isCompOffSelected && compOffBalance === 0) {
+    this.errorMessage= 'You do not have any Comp-Off balance. Worked dates are not required.';
+    this.leaveForm.get('workedDates')?.clearValidators();
+    this.leaveForm.get('workedDates')?.disable();  // Disable the FormArray
+  } else if (this.isCompOffSelected && compOffBalance > 0) {
+    // this.clearMessage();
+    this.leaveForm.get('workedDates')?.setValidators([Validators.required, Validators.minLength(1)]);
+    this.leaveForm.get('workedDates')?.enable();  // Enable the FormArray
+  } else {
+    this.leaveForm.get('workedDates')?.clearValidators();
+    this.leaveForm.get('workedDates')?.disable();  // Disable the FormArray
+  }
+
+  this.leaveForm.get('workedDates')?.updateValueAndValidity();
+}
+
+  fetchCompOffLeaves(employeeCode: string): void {
+    const payload = { employeeCode };
+    console.log('Fetching CompOff Leaves with payload:', payload);
+    this.leaveService.fetchCompOffLeaves(employeeCode).subscribe({
+      next: (response) => {
+        console.log('CompOff Leaves Response:', response);
+        // Extract and format dates
+        this.compOffLeaves = response.leaves.map((leave: { workingDay: string | number | Date; }) => {
+          const date = new Date(leave.workingDay);
+          return date.toLocaleDateString('en-GB'); // 'en-GB' formats date as 'dd/MM/yyyy'
+        });
+        this.updateWorkedDates();
+      },
+      error: (error) => {
+        console.error('Error fetching CompOff leaves:', error);
+      }
+    });
+  }
+
+  updateWorkedDates(): void {
+    const dates = this.compOffLeaves.map(date => this.fb.control(date));
+    this.leaveForm.setControl('workedDates', this.fb.array(dates));
+  }
+
+
+
+
+  addWorkedDate(): void {
+    if (this.removedDates.length > 0) {
+      // Re-add a removed date if available
+      const dateToAdd = this.removedDates.pop();
+      this.workedDates.push(this.fb.control(dateToAdd));
+    } else {
+      // Add a new empty date if no removed dates are available
+      this.workedDates.push(this.fb.control(''));
+    }
+  }
+  get showValidationMessage(): boolean {
+    return this.isSubmitted && this.workedDates.length < this.minDatesRequired;
+  }
+
+  removeWorkedDate(index: number): void {
+    // Remove the date and store it in removedDates
+    const removedDate = this.workedDates.at(index).value;
+    this.removedDates.push(removedDate);
+    this.workedDates.removeAt(index);
+  }
+
+ // Toggle holiday dropdown
+ toggleHolidayList() {
+  this.isHolidayListOpen = !this.isHolidayListOpen;
+}
+
+// Load more holidays (placeholder for actual implementation)
+loadMoreHolidays() {
+  console.log('Load more holidays');
+  
+}
+   // Holiday list array (could be fetched from an API)
+  
+  //  holidays: Array<{ name: string, date: string }> = [
+  //   { name: 'New Year\'s Day', date: '2024-01-01' },
+  //   { name: 'Republic Day', date: '2024-01-26' },
+  //   { name: 'Good Friday', date: '2024-03-29' },
+  //   { name: 'Labour Day', date: '2024-05-01' },
+  //   { name: 'Independence Day', date: '2024-08-15' },
+  //   { name: 'Gandhi Jayanti', date: '2024-10-02' },
+  //   { name: 'Diwali', date: '2024-10-31' },
+  //   { name: 'Christmas Day', date: '2024-12-25' },
+  //   { name: 'Eid al-Fitr', date: '2024-04-10' },  // Example, date might vary
+  //   { name: 'Eid al-Adha', date: '2024-06-17' },  // Example, date might vary
+  //   { name: 'Leave', date: '2024-07-01' } // Example leave entry
+  // ];
+  
+  loadHolidays(): void {
+    this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe(response => {
+      if (response.code === 1) {
+        this.holidays = response.holidayList.map((holiday: { holidayName: any; date: any; }) => ({
+          name: holiday.holidayName,
+          date: holiday.date
+        }));
+      }
+    });
+  }
  updateCharCount() {
   this.charCount = this.leaveForm.get('reason')?.value?.length || 0;
 }
@@ -67,48 +225,19 @@ dateRangeValidator(fromDateKey: string, toDateKey: string) {
     }
   };
 }
- 
-// applyLeave() {
-//   this.isSubmitted = true;
-
-//   if (this.leaveForm.invalid) {
-//     console.log('Form is invalid:', this.leaveForm.errors); 
-//     return;
-//   }
-
- 
-//   const leaveRequestPayload = {
-//     employeeCode: 'K-101', 
-//     leaveCategory: this.leaveForm.value.leaveType,
-//     leaveSubCategory: this.leaveForm.value.leaveSubCategory || 0, 
-//     fromDate: this.leaveForm.value.fromDate,
-//     toDate: this.leaveForm.value.toDate,
-//     reason: this.leaveForm.value.reason
-//   };
-
-//   this.leaveService.applyLeave(leaveRequestPayload).subscribe({
-//     next: (response) => {
-     
-//       this.successMessage = response.message || 'Leave applied successfully!';
-//       this.leaveForm.reset();
-//       this.isSubmitted = false;
-//     },
-//     error: (error) => {
-      
-//       const errorMessage = error.error?.message || 'Error applying leave. Please try again later.';
-//       console.error('Error applying leave:', error);
-//       this.successMessage = errorMessage;
-//     }
-//   });
-// }
 applyLeave() {
   this.isSubmitted = true;
 
+  // Clear previous messages
+  this.successMessage = '';
+  this.errorMessage = '';
+
+  // Validate the form
   if (this.leaveForm.invalid) {
     console.log('Form is invalid:', this.leaveForm.errors); 
     return;
   }
-debugger
+
   // Calculate the number of leave days
   const leaveTypeId = this.leaveForm.value.leaveType;
   const numberOfLeaveDays = this.calculateNumberOfDays(); // Your method to calculate the number of leave days
@@ -119,49 +248,82 @@ debugger
   const availableLeaveBalance = this.getLeaveBalance(leaveTypeId);
   console.log(`Available Leave Balance for ${leaveTypeId}: ${availableLeaveBalance}`);
 
+  // Check leave balance
+  if (numberOfLeaveDays > availableLeaveBalance) {
+    this.errorMessage = `You are not eligible to apply ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+    return;
+  }
   // if (numberOfLeaveDays > availableLeaveBalance) {
   //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
   //   return;
   // }
 
   // Check if the leave type is Comp-Off
-  const isCompOff = leaveTypeId === 1;
+  const isCompOff = leaveTypeId === 2;
 
   if (isCompOff) {
-    // Handle validation for Comp-Off leave
+    // Validate for Comp-Off leave
+    const workedDates = this.leaveForm.value.workedDates || [];
+    if (workedDates.length < 1) {
+      this.errorMessage = 'At least one Worked Date is required for Comp-Off leave.';
+      return;
+    }
+
     if (numberOfLeaveDays > availableLeaveBalance) {
-      this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of Comp-Off leave because you have only ${availableLeaveBalance} days available.`;
+      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of Comp-Off leave because you have only ${availableLeaveBalance} days available.`;
+      return;
+    }
+
+    // For example, ensure the number of worked days matches the requested leave days
+    if (workedDates.length < numberOfLeaveDays) {
+      this.errorMessage = `You have selected ${workedDates.length} worked days, but ${numberOfLeaveDays} days are required.`;
       return;
     }
   } else {
     // Handle validation for other leave types
+    if (numberOfLeaveDays > availableLeaveBalance) {
+      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+      return;
+    }
     // if (numberOfLeaveDays > availableLeaveBalance) {
     //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
     //   return;
     // }
   }
 
+  // Prepare the leave request payload
   const leaveRequestPayload = {
-    employeeCode: 'K-101', 
+    employeeCode: this.employeeCode, 
     leaveCategory: leaveTypeId,
     leaveSubCategory: this.leaveForm.value.leaveSubCategory || 1, 
     fromDate: this.leaveForm.value.fromDate,
     toDate: this.leaveForm.value.toDate,
-    reason: this.leaveForm.value.reason
+    reason: this.leaveForm.value.reason,
+    workedDates: isCompOff ? this.leaveForm.value.workedDates : [] // Include worked dates for Comp-Off
   };
+
+  // Submit the leave request
   this.leaveService.applyLeave(leaveRequestPayload).subscribe({
     next: (response) => {
       this.successMessage = response.message || 'Leave applied successfully!';
-      this.leaveForm.reset();
-      this.isSubmitted = false;
+      // this.leaveForm.reset();
+      // this.isSubmitted = false;
+      if (leaveTypeId === '2') {  
+        this.leaveForm.get('workedDates')?.clearValidators();
+        this.leaveForm.get('workedDates')?.updateValueAndValidity();  
+    }
+      this.resetForm();
     },
     error: (error) => {
       const errorMessage = error.error?.message || 'Error applying leave. Please try again later.';
       console.error('Error applying leave:', error);
-      this.successMessage = errorMessage;
+      this.errorMessage = errorMessage;
     }
   });
 }
+
+
+
 fetchLeaveData(employeeCode: string): void {
   this.leaveService.fetchEmployeeLeaveDetails(employeeCode).subscribe((response: any) => {
     if (response.code === 1) {
@@ -279,6 +441,9 @@ calculateLeaveCounts(): void {
   // getApproverByLevel(level: number): any {
   //   return this.leaveApprovers?.find(approver => approver.approvalLevel === level) || null;
   // }
-  
+  // get showAddButton(): boolean {
+  //   // Show button if there are removed dates
+  //   return this.removedDates.size > 0;
+  // }
   
 }

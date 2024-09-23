@@ -65,6 +65,7 @@ import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { ExperienceDetailsComponent } from './pages/experience-details/experience-details/experience-details.component';
 import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
 import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
+import { RegularizationApplyComponent } from './pages/attendance/regularization-apply/regularization-apply/regularization-apply.component';
 import { LeaveHistoryComponent } from './pages/leave/leave-history/leave-history.component';
 import { PunchTimeComponent } from './pages/punch-time/punch-time.component';
 import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-time-approval.component';
@@ -119,6 +120,7 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     ExperienceDetailsComponent,
     LeaveApplyComponent,
     LeaveApprovalComponent,
+    RegularizationApplyComponent
     LeaveHistoryComponent,
     PunchTimeComponent,
     PunchTimeApprovalComponent
