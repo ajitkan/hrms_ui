@@ -15,8 +15,8 @@ export class LeaveService {
   constructor(private http : HttpClient) { }
   
   fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
-    const url = `${environment.apiUrl}/FetchEmployeeLeaveDetails`;
-    return this.http.post(url, { employeeCode });
+    const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;
+    return this.http.post(`${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`, { employeeCode });
   }
   fetchHolidayDetails(employeeCode: string): Observable<any> {
     const url = this.holidayApiUrl;
@@ -33,9 +33,19 @@ export class LeaveService {
     return this.http.post<any>(`${this.baseUrl}/FetchCompOffLeaves`, payload);
   }
 
-  getLeaveRequests(leaveApprover: string): Observable<LeaveRequestDto[]> {
-    const params = new HttpParams().set('leaveApprover', leaveApprover);
-    return this.http.get<LeaveRequestDto[]>(this.apiUrl, { params });
+   getLeaveRequests(payload: any): Observable<LeaveRequestDto[]> {
+    // const params = new HttpParams().set('leaveApprover', payload);
+    return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/GetLeaveRequests`, payload);
+  }
+
+  getLeaveHistory(payload: any): Observable<LeaveRequestDto[]> {
+    // const params = new HttpParams().set('leaveApprover', payload);
+    return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/FetchLeaveHistory`, payload);
+  }
+
+  getRegularizationRequests(payload: any): Observable<LeaveRequestDto[]> {
+    // const params = new HttpParams().set('leaveApprover', payload);
+    return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/FetchRegularizationRequests`, payload);
   }
 
   applyLeave(leaveRequestPayload: any): Observable<any> {
@@ -44,5 +54,13 @@ export class LeaveService {
 
   approveLeaveRequest(leaveApprovalPayload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/UserDetails/LeaveApproval`, leaveApprovalPayload);
+  }
+
+  approveRegularizationRequest(leaveApprovalPayload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/UserDetails/RegularizationApproval`, leaveApprovalPayload);
+  }
+
+  searchEmployee(payload:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/UserDetails/GetEmployeeDetails`,payload);
   }
 }

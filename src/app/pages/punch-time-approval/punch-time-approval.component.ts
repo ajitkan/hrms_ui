@@ -1,18 +1,17 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
+import { Subject, debounceTime } from 'rxjs';
+import { LeaveRequestDto, RegularizationRequestDto } from 'src/app/models/leave-request.dto';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
-import * as $ from 'jquery'; 
-import { debounceTime, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-leave-approval',
-  templateUrl: './leave-approval.component.html',
-  styleUrls: ['./leave-approval.component.css']
+  selector: 'app-punch-time-approval',
+  templateUrl: './punch-time-approval.component.html',
+  styleUrls: ['./punch-time-approval.component.css']
 })
-export class LeaveApprovalComponent implements OnInit, AfterViewInit {
+export class PunchTimeApprovalComponent {
   selectAll: boolean = false;
-  leaveRequests: LeaveRequestDto[] = [];
+  leaveRequests: any = [];
   isHalfDay : boolean =false;
   electAll: boolean = false;
   currentPage: number = 1;
@@ -62,15 +61,15 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     //   return;
     // }
     const payload = {
-      leaveApprover: this.username,
+      RegApprover: this.username,
       pageNumber: page,
       pageSize: this.pageSize
     };
 
-    this.leaveService.getLeaveRequests(payload)
+    this.leaveService.getRegularizationRequests(payload)
       .subscribe({
-        next: (data: LeaveRequestDto[]) => {
-          this.leaveRequests = data;
+        next: (data: any) => {
+          this.leaveRequests = data[0].requests;
           console.log(this.leaveRequests);
         },
         error: (error) => {
@@ -98,21 +97,8 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     return dayDiff;
   }
   
-  
-  
   filterVisible = false;
-  // leaveRequests = [
-  //   {
-  //     employeeName: 'Niraj Wani',
-  //     leaveType: 'Privilege Leave',
-  //     date: "12 Nov'24 - 14 Nov'24",
-  //     days: 3,
-  //     reason: 'Out of Station',
-  //     status: 'Pending',
-  //   }
-  //   // Add more leave requests as needed
-  // ];
-
+  
   toggleFilter() {
     this.filterVisible = !this.filterVisible;
   }
@@ -127,7 +113,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
 
   toggleSelectAll() {
     this.selectedRequests = [];
-    this.leaveRequests.forEach(request => {
+    this.leaveRequests.forEach((request:any) => {
       request.selected = this.selectAll;
       if (this.selectAll) {
         this.selectedRequests.push(request);
@@ -143,7 +129,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     }
 
     // Update 'selectAll' checkbox state based on individual selections
-    this.selectAll = this.leaveRequests.every(r => r.selected);
+    this.selectAll = this.leaveRequests.every((r:any) => r.selected);
   }
 
    approveLeaves() {    
@@ -180,7 +166,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
         "Reason":request.leaveReason.toString(),
         "Status":'Approved'//request.leaveStatus.toString()
       }
-      let result =  await this.leaveService.approveLeaveRequest(payload).subscribe({
+      let result =  await this.leaveService.approveRegularizationRequest(payload).subscribe({
         next: (response:any) => {
           if(response.code ==1)
             alert(response.message);
@@ -226,7 +212,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
   clearSelection() {
     this.selectedRequests = [];
     this.selectAll = false;
-    this.leaveRequests.forEach(request => request.selected = false);
+    this.leaveRequests.forEach((request:any) => request.selected = false);
   }
 
   updateRequestStatus(request: any) {
@@ -253,26 +239,26 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     // }
   }
   applyFilter() {
-    debugger;
-    const payload = {
-        "leaveApprover": this.username,
-        "pageNumber": 1,
-        "pageSize": 2,
-        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
-        "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
-        "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
-        "endDate": this.filter.endDate !=''?this.filter.endDate:null
-        };
+    // debugger;
+    // const payload = {
+    //     "RegApprover": this.username,
+    //     "pageNumber": 1,
+    //     "pageSize": 2,
+    //     "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
+    //     "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
+    //     "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
+    //     "endDate": this.filter.endDate !=''?this.filter.endDate:null
+    //     };
 
-    this.leaveService.getLeaveRequests(payload).subscribe({
-      next: (data: LeaveRequestDto[]) => {
-        this.leaveRequests = data;
-        this.filterVisible = false; // Close the filter panel after applying
-      },
-      error: (error) => {
-        console.error('Error applying filter', error);
-      }
-    });
+    // this.leaveService.getRegularizationRequests(payload).subscribe({
+    //   next: (data: RegularizationRequestDto[]) => {
+    //     this.leaveRequests = data;
+    //     this.filterVisible = false; // Close the filter panel after applying
+    //   },
+    //   error: (error) => {
+    //     console.error('Error applying filter', error);
+    //   }
+    // });
   }
   async onEmployeeNameInputChange(event: any) {debugger;
     const value = event.target.value;
@@ -331,4 +317,5 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     this.fetchLeaveRequests(this.currentPage);
     this.toggleFilter();
   }
+
 }
