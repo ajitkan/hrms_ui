@@ -1,16 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { debounceTime, Subject } from 'rxjs';
 import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
-import * as $ from 'jquery'; 
-import { debounceTime, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-leave-approval',
-  templateUrl: './leave-approval.component.html',
-  styleUrls: ['./leave-approval.component.css']
+  selector: 'app-punch-time',
+  templateUrl: './punch-time.component.html',
+  styleUrls: ['./punch-time.component.css']
 })
-export class LeaveApprovalComponent implements OnInit, AfterViewInit {
+export class PunchTimeComponent {
   selectAll: boolean = false;
   leaveRequests: LeaveRequestDto[] = [];
   isHalfDay : boolean =false;
@@ -30,10 +29,6 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     EmployeeCode:''
   };
   leaveStatus: string = ''; // This will be bound to the selected status
-
-  // leaveRequests = [
-  //   // Your leave request objects here
-  // ];
   selectedRequests: any[] = [];
   username: any;
   token: string | null | undefined;
@@ -51,27 +46,31 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     
     this.employeeNameChange$.pipe(
       debounceTime(300) // Adjust the debounce time as necessary
-    ).subscribe(searchTerm => {
+    ).subscribe((searchTerm: string) => {
       this.onEmployeeNameChange(searchTerm);
-    });  
-
+      });  
+       
   }
   fetchLeaveRequests(page: number){
-    // if (!this.token) {
-    //   console.error('Token not found. Cannot fetch notifications.');
-    //   return;
-    // }
     const payload = {
-      leaveApprover: this.username,
-      pageNumber: page,
-      pageSize: this.pageSize
+      // leaveApprover: this.username,
+      // pageNumber: page,
+      // pageSize: this.pageSize
+      EmployeeCode: this.username//,
+      // pageNumber: page,
+      // pageSize: this.pageSize
     };
 
-    this.leaveService.getLeaveRequests(payload)
+    this.leaveService.getLeaveHistory(payload)
       .subscribe({
         next: (data: LeaveRequestDto[]) => {
           this.leaveRequests = data;
-          console.log(this.leaveRequests);
+          // console.log(this.leaveRequests);
+          this.leaveRequests.filter((employee:any) =>{
+            if(Object.values(employee).includes(this.username)){
+              this.filter.employeeName = employee.firstName + ' ' + employee.lastName + ' ' + employee.employeeCode
+            }
+           });
         },
         error: (error) => {
           console.error('Error fetching leave requests', error);
@@ -93,26 +92,12 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     // Adjust for half-day leaves
     if (isHalfDay) {
       dayDiff -= 0.5;  // Subtract half a day
-    }
-    
+    } 
     return dayDiff;
   }
   
-  
-  
   filterVisible = false;
-  // leaveRequests = [
-  //   {
-  //     employeeName: 'Niraj Wani',
-  //     leaveType: 'Privilege Leave',
-  //     date: "12 Nov'24 - 14 Nov'24",
-  //     days: 3,
-  //     reason: 'Out of Station',
-  //     status: 'Pending',
-  //   }
-  //   // Add more leave requests as needed
-  // ];
-
+  
   toggleFilter() {
     this.filterVisible = !this.filterVisible;
   }
@@ -146,81 +131,9 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     this.selectAll = this.leaveRequests.every(r => r.selected);
   }
 
-   approveLeaves() {    
-     this.selectedRequests.forEach(async request => {      
-      console.log(request);
-      if(request.leaveStatus!='Approved'){
-        let result =  await this.approveSingleLeave(request);
-        console.log("result : ",result)
-      }
-     });
-    this.clearSelection();
-  }
-
   ngAfterViewInit(): void {
     // Initialize all tooltips on the page
     ($('[data-toggle="tooltip"]') as any).tooltip();
-  }
-
-  rejectLeaves() {
-    this.selectedRequests.forEach(async request => {
-      if(request.leaveStatus!='Reject'){
-        let result =  await this.rejectSingleLeave(request);
-        console.log("result : ",result)
-      }
-    });
-    this.clearSelection();
-  }
-
-   async approveSingleLeave(request: any) {
-    if(request.leaveStatus !='Approved'){
-      let payload = {
-        "UserID":this.username.toString(),//request.employeeCode.toString(),
-        "LeaveID":request.requestID.toString(),
-        "Reason":request.leaveReason.toString(),
-        "Status":'Approved'//request.leaveStatus.toString()
-      }
-      let result =  await this.leaveService.approveLeaveRequest(payload).subscribe({
-        next: (response:any) => {
-          if(response.code ==1)
-            alert(response.message);
-          request.leaveStatus = 'Approved'
-        this.updateRequestStatus(request);
-        },
-        error: (error:any) => {
-         alert(error.message);
-        }
-      });
-    }
-    else{
-      alert("leave already Approved");
-    }
-  }
-
-  async rejectSingleLeave(request: any) {
-    // request.leaveStatus = 'Rejected';
-    // this.updateRequestStatus(request);
-    let payload = {
-      "UserID":this.username.toString(),//request.employeeCode.toString(),
-      "LeaveID":request.requestID.toString(),
-      "Reason":request.leaveReason.toString(),
-      "Status":'Reject'//request.leaveStatus.toString()
-    }
-    let result =  await this.leaveService.approveLeaveRequest(payload).subscribe({
-      next: (response:any) => {
-        if(response.code ==1){
-          request.leaveStatus = 'Reject'
-          alert(response.message);
-          this.updateRequestStatus(request);
-        } 
-        else
-        alert(response.message);
-      },
-      error: (error:any) => {
-       alert(error.message);
-      }
-    });
-      console.log("result : ",result);
   }
 
   clearSelection() {
@@ -236,35 +149,35 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     this.leaveService.searchEmployee({"EmpSearch":"Ga"});
   }
 
-
   getTotalPages(): number {
     return Math.ceil(this.leaveRequests.length / this.pageSize);
   }
-
 
   getPageNumbers(): number[] {
     return Array.from({ length: this.getTotalPages() }, (v, k) => k + 1);
   }
 
   goToPage(page: number) {
-    // if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
       this.fetchLeaveRequests(this.currentPage);
-    // }
   }
+resetfilter(){
+  this.fetchLeaveRequests(this.currentPage);
+  this.toggleFilter();
+}
+
   applyFilter() {
-    debugger;
     const payload = {
-        "leaveApprover": this.username,
+        // "leaveApprover": this.username,
         "pageNumber": 1,
         "pageSize": 2,
-        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
+        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: this.username,
         "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
         "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
         "endDate": this.filter.endDate !=''?this.filter.endDate:null
         };
 
-    this.leaveService.getLeaveRequests(payload).subscribe({
+    this.leaveService.getLeaveHistory(payload).subscribe({
       next: (data: LeaveRequestDto[]) => {
         this.leaveRequests = data;
         this.filterVisible = false; // Close the filter panel after applying
@@ -298,6 +211,13 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
       const payload = { EmpSearch: employeeName };
       this.leaveService.searchEmployee(payload).subscribe({
         next: (employees: any) => {
+          if(this.leaveRequests.length<=0){
+            employees.employeeList.filter((employee:any) =>{
+              if(Object.values(employee).includes(this.username)){
+                this.filter.employeeName = employee.firstName + ' ' + employee.lastName + ' ' + employee.employeeCode
+              }
+             });
+          }
           this.filteredEmployees = employees.employeeList; 
         },
         error: (error) => {
@@ -325,10 +245,5 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
   setLeaveStatus(status: string) {
     this.filter.leaveStatus = status;
      this.leaveStatus = status;
-  }
-
-  resetfilter(){
-    this.fetchLeaveRequests(this.currentPage);
-    this.toggleFilter();
   }
 }

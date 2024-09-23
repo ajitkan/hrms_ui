@@ -21,4 +21,15 @@ export interface LeaveRequestDto {
     updatedDate?: Date; // Optional field
     selected: Boolean;
   }
-  
+
+  export interface RegularizationRequestDto {
+    [x: string]:any;
+    regDate: string;
+    employeeCode: string;
+    actualPunchInTime: Date;
+    actualPunchOutTime: Date;
+    newPunchInTime: Date;
+    newPunchOutTime: Date;
+    remark: string;
+    selected: Boolean;
+  }

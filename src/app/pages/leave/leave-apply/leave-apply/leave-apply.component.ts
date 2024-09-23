@@ -119,10 +119,10 @@ debugger
   const availableLeaveBalance = this.getLeaveBalance(leaveTypeId);
   console.log(`Available Leave Balance for ${leaveTypeId}: ${availableLeaveBalance}`);
 
-  if (numberOfLeaveDays > availableLeaveBalance) {
-    this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
-    return;
-  }
+  // if (numberOfLeaveDays > availableLeaveBalance) {
+  //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+  //   return;
+  // }
 
   // Check if the leave type is Comp-Off
   const isCompOff = leaveTypeId === 1;
@@ -135,10 +135,10 @@ debugger
     }
   } else {
     // Handle validation for other leave types
-    if (numberOfLeaveDays > availableLeaveBalance) {
-      this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
-      return;
-    }
+    // if (numberOfLeaveDays > availableLeaveBalance) {
+    //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+    //   return;
+    // }
   }
 
   const leaveRequestPayload = {
