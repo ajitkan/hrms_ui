@@ -117,7 +117,7 @@
       <aside *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
         <div id="sidebar" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
+            <!-- <ul class="nav flex-column">
               <li *ngFor="let screen of screens" class="nav-item">
                 <a 
                   class="nav-link d-flex align-items-center" 
@@ -127,9 +127,35 @@
                   <span class="nav-text">{{ screen.screenDisplayName }}</span>
                 </a>
               </li>
+            </ul> -->
+            <ul class="nav flex-column">
+              <li *ngFor="let screen of screens" class="nav-item">
+                <a 
+                  class="nav-link d-flex align-items-center" 
+                  (click)="logScreenURL(screen.screenURL); navigateToURL(screen.screenURL); !screen.screenURL ? fetchTabs(screen.screenID) : null">  
+                  <i class="fas fa-icon mr-2"></i>
+                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                </a>
+              </li>
             </ul>
+            
+            
           </div>
         </div>
+        <!-- <div class="sidebar-left" data-simplebar style="height: 100%;">
+          <ul class="nav flex-column">
+            <li *ngFor="let screen of screens" class="nav-item">
+              <a 
+                class="nav-link d-flex align-items-center" 
+                [routerLink]="screen.screenURL ? screen.screenURL : null" 
+                (click)="screen.screenURL ? navigateTo(screen.screenURL) : fetchTabs(screen.screenID)">
+                <i class="fas fa-icon mr-2"></i>
+                <span class="nav-text">{{ screen.screenDisplayName }}</span>
+              </a>
+            </li>
+          </ul>
+        </div> -->
+        
       </aside>
 
       <!-- Additional Sidebar for Tabs -->

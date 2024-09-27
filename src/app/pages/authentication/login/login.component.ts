@@ -476,5 +476,59 @@ export class LoginComponent {
     }
   }
 
-  
+  checkIn() {
+    const companyCode = this.loginForm.get('companyCode')?.value;
+    const employeeCode = this.loginForm.get('employeeCode')?.value;
+    const employeeID = this.loginForm.get('employeeID')?.value || 1; 
+
+    if (!employeeCode) {
+      this.toastr.error('Please enter Employee Code to Check-In', 'Error');
+      return;
+    }
+debugger
+    // Prepare payload for Check-In
+    const payload = {
+      companyCode: companyCode,
+      employeeCode: employeeCode,
+      employeeID: employeeID,
+      action: 1 // 1 indicates Check-In
+    };
+
+    this.authService.insertAttendanceDetails(payload).subscribe({
+      next: (res: any) => {
+        this.toastr.success('Checked In successfully', 'Success');
+      },
+      error: (err: any) => {
+        this.toastr.error('Check-In failed', 'Error');
+      }
+    });
+  }
+
+  checkOut(){
+    const companyCode = this.loginForm.get('companyCode')?.value;
+    const employeeCode = this.loginForm.get('employeeCode')?.value;
+    const employeeID = this.loginForm.get('employeeID')?.value || 1; 
+
+    if (!employeeCode) {
+      this.toastr.error('Please enter Employee Code to Check-Out', 'Error');
+      return;
+    }
+debugger
+    // Prepare payload for Check-Out
+    const payload = {
+      companyCode: companyCode,
+      employeeCode: employeeCode,
+      employeeID: employeeID,
+      action: 2// 1 indicates Check-Out
+    };
+
+    this.authService.insertAttendanceDetails(payload).subscribe({
+      next: (res: any) => {
+        this.toastr.success('Checked Out successfully', 'Success');
+      },
+      error: (err: any) => {
+        this.toastr.error('Check-Out failed', 'Error');
+      }
+    });
+  }
 }
