@@ -123,7 +123,7 @@ onLeaveTypeChange(event: any): void {
     const payload = { employeeCode };
     console.log('Fetching CompOff Leaves with payload:', payload);
     this.leaveService.fetchCompOffLeaves(employeeCode).subscribe({
-      next: (response) => {
+      next: (response:any) => {
         console.log('CompOff Leaves Response:', response);
         // Extract and format dates
         this.compOffLeaves = response.leaves.map((leave: { workingDay: string | number | Date; }) => {
@@ -132,7 +132,7 @@ onLeaveTypeChange(event: any): void {
         });
         this.updateWorkedDates();
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Error fetching CompOff leaves:', error);
       }
     });
@@ -194,7 +194,7 @@ loadMoreHolidays() {
   // ];
   
   loadHolidays(): void {
-    this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe(response => {
+    this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe((response:any) => {
       if (response.code === 1) {
         this.holidays = response.holidayList.map((holiday: { holidayName: any; date: any; }) => ({
           name: holiday.holidayName,
@@ -304,7 +304,7 @@ applyLeave() {
 
   // Submit the leave request
   this.leaveService.applyLeave(leaveRequestPayload).subscribe({
-    next: (response) => {
+    next: (response:any) => {
       this.successMessage = response.message || 'Leave applied successfully!';
       // this.leaveForm.reset();
       // this.isSubmitted = false;
@@ -314,7 +314,7 @@ applyLeave() {
     }
       this.resetForm();
     },
-    error: (error) => {
+    error: (error:any) => {
       const errorMessage = error.error?.message || 'Error applying leave. Please try again later.';
       console.error('Error applying leave:', error);
       this.errorMessage = errorMessage;

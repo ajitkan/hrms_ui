@@ -1,0 +1,102 @@
+/* .calendar-table {
+    width: 100%;
+  }
+  
+  .calendar-day {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .date {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .day-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    margin: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .date {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .day-name {
+    font-size: 14px;
+  }
+  
+  .status {
+    font-size: 12px;
+    color: #007bff;
+  }
+  
+  .remark {
+    font-size: 10px;
+    color: #999;
+  }
+  .table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .day-box {
+    padding: 10px;
+    text-align: center;
+    height: 100px;
+  }
+  
+  .holiday {
+    background-color: #ffcccc;
+  }
+  
+  .weekoff {
+    background-color: #cceeff;
+  }
+  
+  .no-status {
+    background-color: #e6e6e6;
+  }
+  
+  td {
+    vertical-align: top;
+  }
+   */
+
+   .weekoff {
+    background-color: #cceeff; /* Blue for Weekends */
+  }
+  
+  .holiday {
+    background-color: #ffcccc; /* Red for Holidays */
+  }
+  
+  .no-status {
+    background-color: #e6e6e6; /* Gray for No Status */
+  }
+  
+  .day-box {
+    padding: 10px;
+    text-align: center;
+    height: 100px;
+  }
+  .list-group-item{
+    border: none !important;
+  }
+  th{
+    background-color: #4c6fbf;
+    color: white;
+    text-transform: capitalize !important;
+  }
+  .list-group{
+    border: none !important;
+  }

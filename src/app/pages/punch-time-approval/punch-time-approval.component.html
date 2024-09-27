@@ -95,6 +95,7 @@
               <th scope="col" class="col-2">New PunchIn Time</th>
               <th scope="col" class="col-2">New PunchOut Time</th>
               <th scope="col" class="col-1">Remark</th>
+              <th scope="col" class="col-1">Status</th>
               <th scope="col" class="col-2">Action</th>
               </tr>
           </thead>
@@ -107,24 +108,26 @@
               <!-- <td>{{ request.employeeCode }}</td> -->
               <td>{{ request.regDate | date }}</td>
               <td>
-                {{ request.actualPunchInTime |date }} <br>{{request.actualPunchInTime | date:"HH:mm"}}
-                <br>
+                 {{request.actualPunchInTime | date:"HH:mm"}}
+                
                 <!-- <small>({{ getDaysDifference(request.leaveStartDate, request.leaveEndDate, isHalfDay) }} days)</small> -->
               </td>
-              <td> {{ request.actualPunchOutTime |date  }} <br>{{request.actualPunchOutTime | date:"HH:mm"}} </td>
-              <td> {{ request.newPunchInTime |date }} <br>{{request.newPunchInTime | date:"HH:mm"}}</td> 
-              <td> {{ request.newPunchOutTime |date }}<br>{{request.newPunchOutTime | date:"HH:mm"}} </td>  
+              <td> {{request.actualPunchOutTime | date:"HH:mm"}} </td>
+              <td> {{request.newPunchInTime | date:"HH:mm"}}</td> 
+              <td> {{request.newPunchOutTime | date:"HH:mm"}} </td>  
               <td>{{ request.remark }}</td> 
+              <td>{{request.regStatusText}}</td>
+              <!-- <td>{{request.regStatus}}</td> -->
               <!-- <td [ngClass]="getStatusClass(request.leaveStatus)">{{ request.leaveStatus }}</td> -->
               <td>
-                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
-                  <button class="btn btn-reject" [disabled]="request.leaveStatus == 'Reject'" (click)="rejectSingleLeave(request)">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.regStatusText == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
+                  <button class="btn btn-reject" [disabled]="request.regStatusText == 'Reject'" (click)="rejectSingleLeave(request)">
                     Reject
                   </button>
                 </span>
                 <br>
-                <span data-toggle="tooltip" data-html="true" [title]="request.leaveStatus == 'Approved' ? 'Already Approved.You cannot approve it again at this time.' : 'Click to Approve'">
-                  <button class="btn btn-approve mt-1" [disabled]="request.leaveStatus == 'Approved'" (click)="approveSingleLeave(request)">
+                <span data-toggle="tooltip" data-html="true" [title]="request.regStatusText == 'Approved' ? 'Already Approved.You cannot approve it again at this time.' : 'Click to Approve'">
+                  <button class="btn btn-approve mt-1" [disabled]="request.regStatusText == 'Approved'" (click)="approveSingleLeave(request)">
                     Approve
                   </button>
                 </span>

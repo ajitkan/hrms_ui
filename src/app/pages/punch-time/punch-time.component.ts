@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { debounceTime, Subject } from 'rxjs';
-import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
+import { LeaveRequestDto, RegularizationRequestDto } from 'src/app/models/leave-request.dto';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
 
 @Component({
-  selector: 'app-punch-time',
+  selector: 'regurlization-history',
   templateUrl: './punch-time.component.html',
   styleUrls: ['./punch-time.component.css']
 })
 export class PunchTimeComponent {
   selectAll: boolean = false;
-  leaveRequests: LeaveRequestDto[] = [];
+  leaveRequests: any = [];
   isHalfDay : boolean =false;
   electAll: boolean = false;
   currentPage: number = 1;
@@ -29,6 +29,10 @@ export class PunchTimeComponent {
     EmployeeCode:''
   };
   leaveStatus: string = ''; // This will be bound to the selected status
+
+  // leaveRequests = [
+  //   // Your leave request objects here
+  // ];
   selectedRequests: any[] = [];
   username: any;
   token: string | null | undefined;
@@ -46,33 +50,29 @@ export class PunchTimeComponent {
     
     this.employeeNameChange$.pipe(
       debounceTime(300) // Adjust the debounce time as necessary
-    ).subscribe((searchTerm: string) => {
+    ).subscribe((searchTerm:any) => {
       this.onEmployeeNameChange(searchTerm);
-      });  
-       
+    });  
+
   }
   fetchLeaveRequests(page: number){
+    // if (!this.token) {
+    //   console.error('Token not found. Cannot fetch notifications.');
+    //   return;
+    // }
     const payload = {
-      // leaveApprover: this.username,
-      // pageNumber: page,
-      // pageSize: this.pageSize
-      EmployeeCode: this.username//,
-      // pageNumber: page,
-      // pageSize: this.pageSize
+      employeeCode: this.username,
+      pageNumber: page,
+      pageSize: this.pageSize
     };
 
-    this.leaveService.getLeaveHistory(payload)
+    this.leaveService.getRegularizationRequests(payload)
       .subscribe({
-        next: (data: LeaveRequestDto[]) => {
-          this.leaveRequests = data;
-          // console.log(this.leaveRequests);
-          this.leaveRequests.filter((employee:any) =>{
-            if(Object.values(employee).includes(this.username)){
-              this.filter.employeeName = employee.firstName + ' ' + employee.lastName + ' ' + employee.employeeCode
-            }
-           });
+        next: (data: any) => {
+          this.leaveRequests = data[0].requests;
+          console.log(this.leaveRequests);
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error fetching leave requests', error);
         }
       });
@@ -92,7 +92,8 @@ export class PunchTimeComponent {
     // Adjust for half-day leaves
     if (isHalfDay) {
       dayDiff -= 0.5;  // Subtract half a day
-    } 
+    }
+    
     return dayDiff;
   }
   
@@ -112,7 +113,7 @@ export class PunchTimeComponent {
 
   toggleSelectAll() {
     this.selectedRequests = [];
-    this.leaveRequests.forEach(request => {
+    this.leaveRequests.forEach((request:any) => {
       request.selected = this.selectAll;
       if (this.selectAll) {
         this.selectedRequests.push(request);
@@ -128,18 +129,23 @@ export class PunchTimeComponent {
     }
 
     // Update 'selectAll' checkbox state based on individual selections
-    this.selectAll = this.leaveRequests.every(r => r.selected);
+    this.selectAll = this.leaveRequests.every((r:any) => r.selected);
   }
+
+  //  approveLeaves() {    
+  //    this.selectedRequests.forEach(async request => {      
+  //     console.log(request);
+  //     if(request.leaveStatus!='Approved'){
+  //       let result =  await this.approveSingleLeave(request);
+  //       console.log("result : ",result)
+  //     }
+  //    });
+  //   this.clearSelection();
+  // }
 
   ngAfterViewInit(): void {
     // Initialize all tooltips on the page
     ($('[data-toggle="tooltip"]') as any).tooltip();
-  }
-
-  clearSelection() {
-    this.selectedRequests = [];
-    this.selectAll = false;
-    this.leaveRequests.forEach(request => request.selected = false);
   }
 
   updateRequestStatus(request: any) {
@@ -158,31 +164,29 @@ export class PunchTimeComponent {
   }
 
   goToPage(page: number) {
+    // if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
       this.fetchLeaveRequests(this.currentPage);
+    // }
   }
-resetfilter(){
-  this.fetchLeaveRequests(this.currentPage);
-  this.toggleFilter();
-}
-
   applyFilter() {
+    // debugger;
     const payload = {
-        // "leaveApprover": this.username,
+        "RegApprover": this.username,
         "pageNumber": 1,
         "pageSize": 2,
-        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: this.username,
+        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
         "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
         "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
         "endDate": this.filter.endDate !=''?this.filter.endDate:null
         };
 
-    this.leaveService.getLeaveHistory(payload).subscribe({
-      next: (data: LeaveRequestDto[]) => {
-        this.leaveRequests = data;
+    this.leaveService.getRegularizationRequests(payload).subscribe({
+      next: (data: any[]) => {
+        this.leaveRequests = data[0].requests;
         this.filterVisible = false; // Close the filter panel after applying
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Error applying filter', error);
       }
     });
@@ -211,16 +215,9 @@ resetfilter(){
       const payload = { EmpSearch: employeeName };
       this.leaveService.searchEmployee(payload).subscribe({
         next: (employees: any) => {
-          if(this.leaveRequests.length<=0){
-            employees.employeeList.filter((employee:any) =>{
-              if(Object.values(employee).includes(this.username)){
-                this.filter.employeeName = employee.firstName + ' ' + employee.lastName + ' ' + employee.employeeCode
-              }
-             });
-          }
           this.filteredEmployees = employees.employeeList; 
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error searching for employees', error);
         }
       });
@@ -246,4 +243,10 @@ resetfilter(){
     this.filter.leaveStatus = status;
      this.leaveStatus = status;
   }
+
+  resetfilter(){
+    this.fetchLeaveRequests(this.currentPage);
+    this.toggleFilter();
+  }
+
 }

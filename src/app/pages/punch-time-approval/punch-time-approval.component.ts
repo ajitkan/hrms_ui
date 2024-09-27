@@ -40,17 +40,11 @@ export class PunchTimeApprovalComponent {
 
   ngOnInit(): void {
 
-    this.token = localStorage.getItem('token');
-    if (!this.token) {
-      throw new Error('No token found');
-    }
-    const decodedToken: any = jwtDecode(this.token);
-    this.username = decodedToken?.unique_name;
-    this.fetchLeaveRequests(this.currentPage); // Pass the appropriate leaveApprover parameter
+     this.fetchLeaveRequests(this.currentPage); // Pass the appropriate leaveApprover parameter
     
     this.employeeNameChange$.pipe(
       debounceTime(300) // Adjust the debounce time as necessary
-    ).subscribe(searchTerm => {
+    ).subscribe((searchTerm:any) => {
       this.onEmployeeNameChange(searchTerm);
     });  
 
@@ -61,7 +55,7 @@ export class PunchTimeApprovalComponent {
     //   return;
     // }
     const payload = {
-      RegApprover: this.username,
+      RegApprover: this.getUserName(),//this.username,
       pageNumber: page,
       pageSize: this.pageSize
     };
@@ -72,7 +66,7 @@ export class PunchTimeApprovalComponent {
           this.leaveRequests = data[0].requests;
           console.log(this.leaveRequests);
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error fetching leave requests', error);
         }
       });
@@ -159,27 +153,33 @@ export class PunchTimeApprovalComponent {
   }
 
    async approveSingleLeave(request: any) {
-    if(request.leaveStatus !='Approved'){
+    const user = this.getUserName();
+    
+    if (request && request.regStatusText !== 'Approved') {
       let payload = {
-        "UserID":this.username.toString(),//request.employeeCode.toString(),
-        "LeaveID":request.requestID.toString(),
-        "Reason":request.leaveReason.toString(),
-        "Status":'Approved'//request.leaveStatus.toString()
+        UserID: user, // Ensure the user is valid
+        RegID: request.regID.toString(), // Make sure requestID is valid
+        Status: 'Approved'
+      };
+
+      try {
+        await this.leaveService.approveRegularizationRequest(payload).subscribe({
+          next: (response: any) => {
+            if (response.code === 1) {
+              alert(response.message);
+              request.regStatusText = 'Approved';
+              this.updateRequestStatus(request);
+            }
+          },
+          error: (error: any) => {
+            alert(error.message);
+          }
+        });
+      } catch (error) {
+        console.error('Error approving leave request', error);
       }
-      let result =  await this.leaveService.approveRegularizationRequest(payload).subscribe({
-        next: (response:any) => {
-          if(response.code ==1)
-            alert(response.message);
-          request.leaveStatus = 'Approved'
-        this.updateRequestStatus(request);
-        },
-        error: (error:any) => {
-         alert(error.message);
-        }
-      });
-    }
-    else{
-      alert("leave already Approved");
+    } else {
+      alert("Leave already approved or invalid request");
     }
   }
 
@@ -187,15 +187,15 @@ export class PunchTimeApprovalComponent {
     // request.leaveStatus = 'Rejected';
     // this.updateRequestStatus(request);
     let payload = {
-      "UserID":this.username.toString(),//request.employeeCode.toString(),
-      "LeaveID":request.requestID.toString(),
-      "Reason":request.leaveReason.toString(),
+      "UserID":this.getUserName().toString(),//request.employeeCode.toString(),
+      "RegID":request.regID.toString(),
       "Status":'Reject'//request.leaveStatus.toString()
+      // "Reason":request.leaveReason.toString(),
     }
-    let result =  await this.leaveService.approveLeaveRequest(payload).subscribe({
+    let result =  await this.leaveService.approveRegularizationRequest(payload).subscribe({
       next: (response:any) => {
         if(response.code ==1){
-          request.leaveStatus = 'Reject'
+          request.regStatusText = 'Reject'
           alert(response.message);
           this.updateRequestStatus(request);
         } 
@@ -239,26 +239,26 @@ export class PunchTimeApprovalComponent {
     // }
   }
   applyFilter() {
-    // debugger;
-    // const payload = {
-    //     "RegApprover": this.username,
-    //     "pageNumber": 1,
-    //     "pageSize": 2,
-    //     "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
-    //     "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
-    //     "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
-    //     "endDate": this.filter.endDate !=''?this.filter.endDate:null
-    //     };
+    debugger;
+    const payload = {
+        "RegApprover": this.username,
+        "pageNumber": 1,
+        "pageSize": 2,
+        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
+        "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
+        "RegStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
+        "endDate": this.filter.endDate !=''?this.filter.endDate:null
+        };
 
-    // this.leaveService.getRegularizationRequests(payload).subscribe({
-    //   next: (data: RegularizationRequestDto[]) => {
-    //     this.leaveRequests = data;
-    //     this.filterVisible = false; // Close the filter panel after applying
-    //   },
-    //   error: (error) => {
-    //     console.error('Error applying filter', error);
-    //   }
-    // });
+    this.leaveService.getRegularizationRequests(payload).subscribe({
+      next: (data: any) => {
+        this.leaveRequests = data[0].requests;
+        this.filterVisible = false; // Close the filter panel after applying
+      },
+      error: (error:any) => {
+        console.error('Error applying filter', error);
+      }
+    });
   }
   async onEmployeeNameInputChange(event: any) {debugger;
     const value = event.target.value;
@@ -286,7 +286,7 @@ export class PunchTimeApprovalComponent {
         next: (employees: any) => {
           this.filteredEmployees = employees.employeeList; 
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error searching for employees', error);
         }
       });
@@ -317,5 +317,14 @@ export class PunchTimeApprovalComponent {
     this.fetchLeaveRequests(this.currentPage);
     this.toggleFilter();
   }
-
+ getUserName(){
+  this.token = localStorage.getItem('token');
+    if (!this.token) {
+      throw new Error('No token found');
+    }
+    const decodedToken: any = jwtDecode(this.token);
+    this.username = decodedToken?.unique_name;
+    console.log("username",this.username)
+    return this.username;
+ }
 }

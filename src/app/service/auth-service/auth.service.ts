@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class AuthService {
-   private apiUrl = environment.apiUrl;
+  //  private apiUrl = environment.apiUrl;
    private userSubject: BehaviorSubject<User>;  
    public user: Observable<User>;
   
@@ -27,19 +27,19 @@ public get userValue() {
   login(companyCode: string, employeeCode: string, password: string): Observable<any> {
   
     const payload = { companyCode, employeeCode, password };
-    return this.http.post(`${this.apiUrl}/Login`, payload);
+    return this.http.post(`${environment.apiUrl}/Login`, payload);
   }
 
   unlockedUser(payload:any): Observable<any> {
    
-    return this.http.post(`${this.apiUrl}/UnlockedUser`, payload);
+    return this.http.post(`${environment.apiUrl}/UnlockedUser`, payload);
   }
 
   forgotPassword(payload:any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/ForgotPassword`, payload);
+    return this.http.post(`${environment.apiUrl}/ForgotPassword`, payload);
   }
   changePassword(token: string, payload: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/ChangePassword`, payload, {
+    return this.http.post(`${environment.apiUrl}/ChangePassword`, payload, {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
@@ -66,7 +66,7 @@ getUserName(){
     const username = this.getUserName();//decodedToken?.unique_name; 
 
     // Call the logout API
-    return this.http.post(`${this.apiUrl}/LogOut`, { username },{
+    return this.http.post(`${environment.apiUrl}/LogOut`, { username },{
       headers: { Authorization: `Bearer ${token}` }}).pipe(
       catchError(error => {
         throw error;
@@ -81,14 +81,14 @@ getUserName(){
   }// auth.service.ts
 resetPassword(payload: {currentPassword:string; newPassword: string; userName: string; companyCode: string }, token: string): Observable<any> {
 
-  return this.http.post<any>(`${this.apiUrl}/ChangePassword`, payload, {
+  return this.http.post<any>(`${environment.apiUrl}/ChangePassword`, payload, {
     headers: { Authorization: `Bearer ${token}` }
   });
 }
 
   
 getNotifications(payload:{userName:string,pageNumber: number, pageSize: number},token:string): Observable<any> {
-  return this.http.post<any>(`${this.apiUrl}/FetchNotification`, payload ,{
+  return this.http.post<any>(`${environment.apiUrl}/FetchNotification`, payload ,{
     headers: { Authorization: `Bearer ${token}`}
   }); 
 }

@@ -121,8 +121,7 @@
               <li *ngFor="let screen of screens" class="nav-item">
                 <a 
                   class="nav-link d-flex align-items-center" 
-                  [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
+                  (click)=" fetchTabs(screen.screenID)">  
                   <i class="fas fa-icon mr-2"></i>
                   <span class="nav-text">{{ screen.screenDisplayName }}</span>
                 </a>

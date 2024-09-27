@@ -33,7 +33,7 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params:any) => {
       this.tabID = params['tabID'];
       this.token = JSON.parse(localStorage.getItem('token') as string);
       const decodedToken: any = jwtDecode(this.token);

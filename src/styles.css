@@ -1,3 +1,6 @@
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 .toast-top-right{
     top: 12px;
     right: 0;
@@ -41,8 +44,22 @@ p{
 .copyright p {
     font-weight: 500;
 }
-app-profile,app-dashboard,app-contact-details,app-bank-details,app-education-details,app-experience-details,app-leave-approval,app-leave-history,app-punch-time-approval 
+app-profile,app-dashboard,app-contact-details,app-bank-details,app-education-details,app-experience-details,app-leave-approval,app-leave-history,app-punch-time-approval,app-leave-apply,regurlization-history,app-attendence-calender,mwl-demo-component
 
   {
     width: 100%;
 }
+.cal-month-view .cal-header{
+    border: 1px solid;
+}
+/* .cal-weekend{
+     background-color: beige;
+} */
+
+.cal-month-view .cal-header .cal-cell{
+    background-color: #4c6fbf !important;
+    color: white;
+  }
+  .list-group-item{
+    border: none !important ;
+  }

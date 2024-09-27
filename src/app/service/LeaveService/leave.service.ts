@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { Observable, of } from 'rxjs';
 import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
 import { environment } from 'src/environments/environments';
@@ -48,9 +49,9 @@ export class LeaveService {
     return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/FetchRegularizationRequests`, payload);
   }
 
-  applyLeave(leaveRequestPayload: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/UserDetails/LeaveRequest`, leaveRequestPayload);
-  }
+  // applyLeave(leaveRequestPayload: any): Observable<any> {
+  //   return this.http.post(`${environment.apiUrl}/UserDetails/LeaveRequest`, leaveRequestPayload);
+  // }
 
   approveLeaveRequest(leaveApprovalPayload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/UserDetails/LeaveApproval`, leaveApprovalPayload);
@@ -62,5 +63,14 @@ export class LeaveService {
 
   searchEmployee(payload:any):Observable<any>{
     return this.http.post(`${environment.apiUrl}/UserDetails/GetEmployeeDetails`,payload);
+  }
+  getAttendanceData(payload:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/UserDetails/GetCalendarDetails`,payload);
+  }
+
+  getEmployeeCode(){
+    const token = JSON.parse(localStorage.getItem('token') as string);
+    const decodedToken: any = jwtDecode(token);
+    return decodedToken.unique_name;
   }
 }

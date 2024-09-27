@@ -177,10 +177,15 @@ showBackButton = false;
             next: (res: any) => {
               if(res.code == 1){
                 console.log('Tabs for given screens is :',res.tabResponces);
-                this.tabs = res.tabResponces;
-                this.isFirstSidebarVisible = false;
-                this.isSecondSidebarVisible = true;
+                if(res.tabResponces.length>0){
+                  this.tabs = res.tabResponces;
+                  this.isFirstSidebarVisible = false;
+                  this.isSecondSidebarVisible = true;
+                }
                 // this.navigateBasedOnRoute();
+                debugger;
+                if(screen.screenURL!=null)
+                this.router.navigate([screen.screenURL]);
               }
               else
                 console.log(res.message);
