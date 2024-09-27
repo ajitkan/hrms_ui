@@ -10,6 +10,7 @@ import { ApiService } from './service/api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+[x: string]: any;
   title = 'hrms_ui';
   IsLogin = false;
   IsLogout = true;
@@ -35,9 +36,21 @@ showBackButton = false;
 
   selectScreen(screen: any): void {
     this.selectedScreen = screen;
+    debugger
+    if(this.selectedScreen ='onboarding'){
+      this.router.navigateByUrl('');
+    }
     if(screen!='' ){
       this.fetchTabs(screen.screenID);
     }
+  }
+  navigateToURL(url: string | null) {
+    if (url) {
+      window.location.href = url; // Navigate to the absolute URL
+    }
+  }
+  logScreenURL(screenURL: string | null) {
+    console.log('Navigating to:', screenURL);
   }
   // selectTab(tab: any) {
    

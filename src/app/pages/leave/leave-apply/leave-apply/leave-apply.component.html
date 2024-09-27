@@ -20,7 +20,7 @@
         </div>
         <div>
           <span class="badge bg-danger rounded-circle">{{ declinedCount }}</span>
-          <p>Declined</p>
+          <p>Rejected</p>
         </div>
         <div>
           <span class="badge bg-secondary rounded-circle">{{ cancelledCount }}</span>
@@ -102,31 +102,6 @@
                 </div>
               </div>
 
-
-            <!-- this is WOrking -->
-              <!-- <div class="mb-3" *ngIf="isCompOffSelected">
-                <label for="workedDates" class="form-label">Worked Dates</label>
-
-                <div class="worked-dates-container" formArrayName="workedDates">
-                  <div *ngFor="let date of workedDates.controls; let i = index" class="worked-date-item">
-                    <div class="date-card">
-                      <span>{{ date.value | date: 'dd/MM/yyyy'}}</span>
-                      <button type="button" class="btn btn-danger btn-sm remove-btn" (click)="removeWorkedDate(i)">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <button *ngIf="canAddDate" type="button" class="btn btn-primary mt-2" (click)="addWorkedDate()">
-                  Add Date
-                </button>
-               
-                <div *ngIf="showValidationMessage" class="text-danger">
-                  At least {{ minDatesRequired }} Worked Dates are required.
-                </div>
-              </div> -->
-
               <div class="mb-3" *ngIf="isCompOffSelected && !showMessage">
                 <label for="workedDates" class="form-label">Worked Dates</label>
               
@@ -149,9 +124,8 @@
                   At least {{ minDatesRequired }} Worked Dates are required.
                 </div>
               </div>
-              
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label for="fromDate" class="form-label">From Date</label>
@@ -173,6 +147,54 @@
                     </div>
                   </div>
                 </div>
+              </div> -->
+              <div class="row">
+                <!-- From Date -->
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="fromDate" class="form-label">From Date</label>
+                    <input type="date" class="form-control" formControlName="fromDate">
+                    <!-- Show validation error messages -->
+                    <div *ngIf="isSubmitted && f['fromDate'].errors?.['required']" class="text-danger">
+                      From Date is required.
+                    </div>
+                    <div *ngIf="!isSubmitted && f['fromDate'].errors?.['invalidFromDate']" class="text-danger">
+                      From Date must be within the last month.
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- To Date -->
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="toDate" class="form-label">To Date</label>
+                    <input type="date" class="form-control" formControlName="toDate">
+                    <!-- Show validation error messages -->
+                    <div *ngIf="isSubmitted && f['toDate'].errors?.['required']" class="text-danger">
+                      To Date is required.
+                    </div>
+                    <div *ngIf="isSubmitted && f['toDate'].errors?.['dateRangeInvalid']" class="text-danger">
+                      To Date cannot be earlier than From Date.
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Leave Count -->
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="leaveCount" class="form-label">Leave Count</label>
+                    <input type="text" class="form-control" [value]="leaveCount" readonly>
+                  </div>
+                </div>
+              </div>
+              <!-- <div *ngIf="leaveCount" class="alert alert-info mt-3">
+                The leave count for the selected period is {{ leaveCount }}. 
+               
+              </div> -->
+
+              <!-- Leave Count Message -->
+              <div *ngIf="leaveCount > balanceLeaves" class="alert alert-danger mt-3">
+                The leave count for the selected period is {{ leaveCount }}. You only have {{ balanceLeaves }} days available.
               </div>
 
               <div class="mb-3">

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
@@ -39,22 +40,42 @@ export class LeaveApplyComponent {
   holidays: Array<{ name: string, date: string }> = [];
   private employeeCode: string = '';
   private token: any;
+  leaveCount: number | [] = []; 
+  availableLeaveBalance:any;
+  balanceLeaves:any;
 
-  constructor(private fb: FormBuilder, private leaveService: LeaveService) {
+  constructor(private fb: FormBuilder, private leaveService: LeaveService, private http:HttpClient ) {
     // Initialize the form with validation rules
     this.leaveForm = this.fb.group({
       leaveType: ['', Validators.required],
-      fromDate: ['', Validators.required],
+      // fromDate: ['', Validators.required],
+      // toDate: ['', Validators.required],
+      fromDate: ['', [Validators.required, this.fromDateValidator()]],
       toDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       // workedDate: [''] ,
       workedDates: this.fb.array([]) ,
       // leaveSubCategory: ['', Validators.required],
-      reason: ['', [Validators.required, Validators.maxLength(500)]]
-    }, {
-      validator: this.dateRangeValidator('fromDate', 'toDate') // Add custom validator here
+      reason: ['', [Validators.required, Validators.maxLength(500)]],
+     
+    }, 
+    {
+      Validators: this.dateRangeValidator('fromDate', 'toDate') // Add custom validator here
     });
+
+    this.leaveForm.get('fromDate')?.valueChanges.subscribe(value => {
+      if (value && this.leaveForm.get('toDate')?.value) {
+        this.fetchLeaveCount();
+      }
+    });
+    
+    this.leaveForm.get('toDate')?.valueChanges.subscribe(value => {
+      if (value && this.leaveForm.get('fromDate')?.value) {
+        this.fetchLeaveCount();
+      }
+    });
+    
   }
   
  ngOnInit(){
@@ -76,6 +97,54 @@ export class LeaveApplyComponent {
   return this.leaveForm.get('workedDates') as FormArray;
 }
 
+checkDatesAndFetchLeaveCount(): void {
+  const fromDate = this.leaveForm.get('fromDate')?.value;
+  const toDate = this.leaveForm.get('toDate')?.value;
+  const leaveType = this.leaveForm.get('leaveType')?.value;
+
+  // Check if all required fields are filled
+  if (fromDate && toDate && leaveType) {
+    console.log('Dates and leave type selected, calling fetchLeaveCount...');
+    this.fetchLeaveCount();
+  } else {
+    console.log('Waiting for both dates and leave type to be selected...');
+  }
+}
+
+
+// fetchLeaveCount(): void {
+//   const fromDate = this.leaveForm.get('fromDate')?.value;
+//   const toDate = this.leaveForm.get('toDate')?.value;
+//   const leaveType = this.leaveForm.get('leaveType')?.value;
+
+//   // Ensure these three fields have values
+//   if (leaveType && fromDate && toDate) {
+//     const payload = {
+//       employeeCode: this.employeeCode, // Use the actual employee code
+//       fromDate: fromDate,
+//       toDate: toDate,
+//       leaveCategory: leaveType // Assuming leaveType corresponds to leaveCategory
+//     };
+
+//     console.log('Sending API request with payload:', payload);
+
+//     this.http.post('https://localhost:7254/UserDetails/GetEmployeeLeaveCount', payload)
+//       .subscribe((response: any) => {
+//         if (response && response.code === 1) {
+//           console.log('API response received:', response);
+//           this.leaveCount = response.getEmployeeLeaveCounts[0]?.leaveCount || 0;
+//         } else {
+//           console.log('Unexpected API response:', response);
+//         }
+//       }, error => {
+//         console.error('Error fetching leave count', error);
+//       });
+//   } else {
+//     console.log('fromDate, toDate, or leaveType is missing.');
+//   }
+// }
+
+
 
 //Working code 
 //  onLeaveTypeChange(event: any): void {
@@ -91,7 +160,40 @@ export class LeaveApplyComponent {
 //   }
 //   this.leaveForm.get('workedDate')?.updateValueAndValidity();
 // }
-  
+fetchLeaveCount(): void {
+  const fromDate = this.leaveForm.get('fromDate')?.value;
+  const toDate = this.leaveForm.get('toDate')?.value;
+  const leaveType = this.leaveForm.get('leaveType')?.value;
+
+  if (leaveType && fromDate && toDate) {
+    const payload = {
+      employeeCode: this.employeeCode,
+      fromDate: fromDate,
+      toDate: toDate,
+      leaveCategory: leaveType
+    };
+
+    this.leaveService.fetchLeaveCount(payload).subscribe({
+      next: (response: any) => {
+        if (response && response.code === 1) {
+          this.leaveCount = response.getEmployeeLeaveCounts[0]?.leaveCount || 0;
+          console.log('Leave count:', this.leaveCount);
+        } else {
+          console.log('Unexpected API response:', response);
+        }
+      },
+      error: (err: any) => {
+        console.error('Error fetching leave count:', err);
+      },
+      complete: () => {
+        console.log('Leave count fetch complete');
+      }
+    });
+  } else {
+    console.log('fromDate, toDate, or leaveType is missing.');
+  }
+}
+
 
 onLeaveTypeChange(event: any): void {
   const leaveTypeId = this.leaveForm.value.leaveType;
@@ -177,21 +279,7 @@ loadMoreHolidays() {
   console.log('Load more holidays');
   
 }
-   // Holiday list array (could be fetched from an API)
-  
-  //  holidays: Array<{ name: string, date: string }> = [
-  //   { name: 'New Year\'s Day', date: '2024-01-01' },
-  //   { name: 'Republic Day', date: '2024-01-26' },
-  //   { name: 'Good Friday', date: '2024-03-29' },
-  //   { name: 'Labour Day', date: '2024-05-01' },
-  //   { name: 'Independence Day', date: '2024-08-15' },
-  //   { name: 'Gandhi Jayanti', date: '2024-10-02' },
-  //   { name: 'Diwali', date: '2024-10-31' },
-  //   { name: 'Christmas Day', date: '2024-12-25' },
-  //   { name: 'Eid al-Fitr', date: '2024-04-10' },  // Example, date might vary
-  //   { name: 'Eid al-Adha', date: '2024-06-17' },  // Example, date might vary
-  //   { name: 'Leave', date: '2024-07-01' } // Example leave entry
-  // ];
+
   
   loadHolidays(): void {
     this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe((response:any) => {
@@ -207,21 +295,92 @@ loadMoreHolidays() {
   this.charCount = this.leaveForm.get('reason')?.value?.length || 0;
 }
 
+// fromDateValidator() {
+//   return (control: any) => {
+//     const today = new Date();
+//     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+//     const selectedDate = new Date(control.value);
+//     debugger
+//     if (selectedDate < lastMonth || selectedDate > today) {
+//       return { invalidFromDate: true }; // Error: date not in the allowed range
+//     }
+//     return null; // Valid date
+//   };
+// }
+
+fromDateValidator() {
+  return (control: any) => {
+    if (!control.value) return null; // Handle the case when no date is provided
+
+    const today = new Date();
+    const selectedDate = new Date(control.value);
+
+    // Get the previous month (1 month before the current month)
+    const oneMonthBefore = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+
+    // Check if the selected date is earlier than 1 month before today
+    if (selectedDate < oneMonthBefore) {
+      return { invalidFromDate: true }; // Error: selected date is more than 1 month in the past
+    }
+
+    return null; // Valid date
+  };
+}
+
+
+
+// dateRangeValidator(fromDateKey: string, toDateKey: string) {
+//   return (formGroup: FormGroup) => {
+//     const fromDateControl = formGroup.controls[fromDateKey];
+//     const toDateControl = formGroup.controls[toDateKey];
+
+//     if (toDateControl.errors && !toDateControl.errors['dateRangeInvalid']) {
+//       // Return if another validator has already found an error on the toDateControl
+//       return;
+//     }
+
+//     // Set error if To Date is less than From Date
+//     if (new Date(toDateControl.value) < new Date(fromDateControl.value)) {
+//       toDateControl.setErrors({ dateRangeInvalid: true });
+//     } else {
+//       toDateControl.setErrors(null); // Clear the error if validation passes
+//     }
+//   };
+// }
+
+// fromDateValidator() {
+//   return (control: any) => {
+//     if (!control.value) return null; // Handle the case when no date is provided
+
+//     const today = new Date();
+//     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+//     const selectedDate = new Date(control.value);
+
+//     // Ensure that the selected date is within the last month and today
+//     if (selectedDate < lastMonth || selectedDate > today) {
+//       return { invalidFromDate: true }; // Error: date not in allowed range
+//     }
+//     return null; // Valid date
+//   };
+// }
+
+// Custom validator for checking the date range
 dateRangeValidator(fromDateKey: string, toDateKey: string) {
   return (formGroup: FormGroup) => {
     const fromDateControl = formGroup.controls[fromDateKey];
     const toDateControl = formGroup.controls[toDateKey];
 
     if (toDateControl.errors && !toDateControl.errors['dateRangeInvalid']) {
-      // Return if another validator has already found an error on the toDateControl
       return;
     }
 
-    // Set error if To Date is less than From Date
-    if (new Date(toDateControl.value) < new Date(fromDateControl.value)) {
-      toDateControl.setErrors({ dateRangeInvalid: true });
-    } else {
-      toDateControl.setErrors(null); // Clear the error if validation passes
+    // Validate that To Date is not earlier than From Date
+    if (fromDateControl.value && toDateControl.value) {
+      if (new Date(toDateControl.value) < new Date(fromDateControl.value)) {
+        toDateControl.setErrors({ dateRangeInvalid: true });
+      } else {
+        toDateControl.setErrors(null); // Clear the error if validation passes
+      }
     }
   };
 }
@@ -245,12 +404,12 @@ applyLeave() {
   console.log('Leave Type ID from Form:', leaveTypeId);
   console.log('Number of Leave Days:', numberOfLeaveDays);
 
-  const availableLeaveBalance = this.getLeaveBalance(leaveTypeId);
-  console.log(`Available Leave Balance for ${leaveTypeId}: ${availableLeaveBalance}`);
+   this.availableLeaveBalance = this.getLeaveBalance(leaveTypeId);
+  console.log(`Available Leave Balance for ${leaveTypeId}: ${this.availableLeaveBalance}`);
 
   // Check leave balance
-  if (numberOfLeaveDays > availableLeaveBalance) {
-    this.errorMessage = `You are not eligible to apply ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+  if (numberOfLeaveDays > this.availableLeaveBalance) {
+    this.errorMessage = `You are not eligible to apply ${numberOfLeaveDays} days of leave because you have only ${this.availableLeaveBalance} days available.`;
     return;
   }
   // if (numberOfLeaveDays > availableLeaveBalance) {
@@ -269,8 +428,8 @@ applyLeave() {
       return;
     }
 
-    if (numberOfLeaveDays > availableLeaveBalance) {
-      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of Comp-Off leave because you have only ${availableLeaveBalance} days available.`;
+    if (numberOfLeaveDays > this.availableLeaveBalance) {
+      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of Comp-Off leave because you have only ${this.availableLeaveBalance} days available.`;
       return;
     }
 
@@ -281,8 +440,8 @@ applyLeave() {
     }
   } else {
     // Handle validation for other leave types
-    if (numberOfLeaveDays > availableLeaveBalance) {
-      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+    if (numberOfLeaveDays > this.availableLeaveBalance) {
+      this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${this.availableLeaveBalance} days available.`;
       return;
     }
     // if (numberOfLeaveDays > availableLeaveBalance) {
@@ -329,8 +488,13 @@ fetchLeaveData(employeeCode: string): void {
     if (response.code === 1) {
       this.leaveHistory = response.data.leaveHistory;
       this.leaveSummary = response.data.leaveSummary;
+      console.log('leaveSummary',this.leaveSummary)
       this.empContactAndEmails =response.data.empContactAndEmails;
       this.leaveApprovers = response.data.leaveApprovers;
+
+      if (this.leaveSummary.length > 0) {
+        this.balanceLeaves = this.leaveSummary[0].balanceLeaves;
+      }
 
       console.log('Emailand contact -->' ,this.empContactAndEmails);
        // Patch the form with the email and contact data
