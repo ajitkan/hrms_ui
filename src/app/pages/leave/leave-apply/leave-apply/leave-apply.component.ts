@@ -412,6 +412,10 @@ applyLeave() {
     this.errorMessage = `You are not eligible to apply ${numberOfLeaveDays} days of leave because you have only ${this.availableLeaveBalance} days available.`;
     return;
   }
+  // if (numberOfLeaveDays > availableLeaveBalance) {
+  //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+  //   return;
+  // }
 
   // Check if the leave type is Comp-Off
   const isCompOff = leaveTypeId === 2;
@@ -440,6 +444,10 @@ applyLeave() {
       this.errorMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${this.availableLeaveBalance} days available.`;
       return;
     }
+    // if (numberOfLeaveDays > availableLeaveBalance) {
+    //   this.successMessage = `You are not eligible to apply for ${numberOfLeaveDays} days of leave because you have only ${availableLeaveBalance} days available.`;
+    //   return;
+    // }
   }
 
   // Prepare the leave request payload

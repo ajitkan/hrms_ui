@@ -80,11 +80,13 @@
   </div>
   -->
 
+  
 
   <div class="container-fluid">
     <div class="row">
       <!-- Leave Request Table -->
-      <div [ngClass]="filterVisible ? 'col-md-9' : 'full-width'" id="table-column">
+      <!-- <div [ngClass]="filterVisible ? 'col-md-9' : 'full-width'" id="table-column"> -->
+      <div class="'full-width'" id="table-column">
         <!-- Header and Action Buttons -->
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3>Leave Requests</h3>
@@ -99,6 +101,134 @@
           </div>
         </div>
   
+        <div class="filter-panel" *ngIf="filterVisible">
+          <div class="filter-content">
+            <!-- <h3>Apply Filters</h3> -->
+            <h3>Apply Filters <button class="float-right p-0" (click)="toggleFilter()"><i class="fa fa-times-circle fs-3"></i></button></h3>
+          
+            <!-- <form (ngSubmit)="applyFilter()">
+              <div class="mb-3">
+                <label for="employeeName">Employee Name</label>
+                <input [(ngModel)]="filter.employeeName" 
+                       (input)="onEmployeeNameInputChange($event)" 
+                       type="text" 
+                       class="form-control" 
+                       id="employeeName" 
+                       placeholder="Search Employee Name">
+              </div>
+              <div class="mb-3">
+                <label for="financialYear">Financial Year</label>
+                <input [(ngModel)]="filter.financialYear" 
+                       type="text" 
+                       class="form-control" 
+                       id="financialYear" 
+                       placeholder="e.g. 2023-2024">
+              </div>
+              <button type="submit" class="btn btn-success">Apply</button>
+              <button type="button" class="btn btn-secondary" (click)="toggleFilter()">Close</button>
+            </form> -->
+            <form (ngSubmit)="applyFilter()">
+              <div class="mb-3">
+                <label for="employeeName">Employee Name</label>
+                <!-- <input [(ngModel)]="filter.employeeName" 
+                       (input)="onEmployeeNameInputChange($event)" 
+                       type="text" 
+                       class="form-control" 
+                       id="employeeName" 
+                       placeholder="Search Employee Name">
+                -->
+                <!-- Dropdown to display fetched employees -->
+                <!-- <select [(ngModel)]="filter.selectedEmployee" 
+                        class="form-control mt-2" 
+                        id="employeeDropdown" 
+                        *ngIf="filteredEmployees.length > 0">
+                  <option *ngFor="let employee of filteredEmployees" [value]="employee.EmployeeCode">
+                    {{employee.FirstName +' '+employee.LastName }}
+                  </option>
+                </select> -->
+
+        <input [(ngModel)]="filter.employeeName" 
+               (input)="onEmployeeNameInputChange($event)" 
+               type="text" 
+               class="form-control" 
+               id="employeeName" 
+               name="employeeName"
+               placeholder="Search Employee Name"
+               autocomplete="off">
+
+              <!-- Autocomplete dropdown -->
+              <ul *ngIf="filteredEmployees.length > 0" 
+                  class="dropdown-menu show" 
+                  style="width: 100%;  z-index: 1000; top: 100%; left: 0;">
+                <li *ngFor="let employee of filteredEmployees" 
+                    (click)="selectEmployee(employee)" 
+                    class="dropdown-item">
+                  {{ employee.FirstName+' '+ employee.LastName +'       ' +employee.EmployeeCode}}
+                </li>
+              </ul>
+              </div>        
+             
+              
+              <div class="mb-3">
+                <label class="form-label">Leave Status</label>
+                <div>
+                  <button type="button" class="btn btn-success me-2"  [ngClass]="{'border': leaveStatus === 'Approved', 'btn-success': leaveStatus !== 'Approved'}"(click)="setLeaveStatus('Approved')">Approved</button>
+                  <button type="button" class="btn btn-warning me-2" [ngClass]="{'border': leaveStatus === 'Pending', 'btn-warning': leaveStatus !== 'Pending'}" (click)="setLeaveStatus('Pending')">Pending</button>
+                  <button type="button" class="btn btn-danger" [ngClass]="{'border': leaveStatus === 'Reject', 'btn-danger': leaveStatus !== 'Reject'}" (click)="setLeaveStatus('Reject')">Reject</button>
+                </div>
+
+                <!-- <div>
+                  <button type="button" class="btn border-blue"
+                          [ngClass]="{'btn-success': leaveStatus === 'Approved', 'btn-outline-success': leaveStatus !== 'Approved'}"
+                          (click)="setLeaveStatus('Approved')">
+                    Approved
+                  </button>
+              
+                  <button type="button" class="btn border-blue"
+                          [ngClass]="{'btn-warning': leaveStatus === 'Pending', 'btn-outline-warning': leaveStatus !== 'Pending'}"
+                          (click)="setLeaveStatus('Pending')">
+                    Pending
+                  </button>
+              
+                  <button type="button" class="btn border-blue"
+                          [ngClass]="{'btn-danger': leaveStatus === 'Reject', 'btn-outline-danger': leaveStatus !== 'Reject'}"
+                          (click)="setLeaveStatus('Reject')">
+                    Reject
+                  </button>
+                </div> -->
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Date Range</label>
+                <!-- <label for="financialYear">Date Range</label> -->
+                <!-- <input [(ngModel)]="filter.financialYear" 
+                       type="text" 
+                       class="form-control" 
+                       id="financialYear" 
+                       placeholder="e.g. 2023-2024"> -->
+                       <select class="form-select" id="financialYear">
+                        <option value="10">Select Date Range</option>
+                        <option value="10">10 days</option>
+                        <option value="30">30 days</option>
+                        <option value="90">90 days</option>
+                        <option value="365">1 year</option>
+                      </select> 
+                <div class="row">
+                  <div class="col">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="startDate" [(ngModel)]="filter.startDate" name="startDate">
+                  </div>
+                  <div class="col">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="endDate" [(ngModel)]="filter.endDate" name="endDate">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success">Apply</button>
+              <button type="button" class="btn btn-secondary" (click)="resetfilter();">Reset</button>
+            </form>
+          </div>
+        </div>
         <!-- Leave Request Table -->
         <table class="table table-striped">
           <thead>
@@ -134,7 +264,7 @@
                     Reject
                   </button>
                 </span>
-                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Approved' ? 'Already Approved' : 'Click to Approve'">
+                <span data-toggle="tooltip" data-html="true" [title]="request.leaveStatus == 'Approved' ? 'Already Approved.You cannot approve it again at this time.' : 'Click to Approve'">
                   <button class="btn btn-approve" [disabled]="request.leaveStatus == 'Approved'" (click)="approveSingleLeave(request)">
                     Approve
                   </button>
@@ -143,21 +273,30 @@
                 <!-- <button class="btn btn-approve" data-toggle="tooltip" data-html="true" title="" [disabled]="request.leaveStatus =='Approved'" (click)="approveSingleLeave(request)">Approve</button> -->
               </td>
             </tr>
+            <tr *ngIf="leaveRequests.length<=0">
+              <td colspan="7" >No Records Found!!!</td>
+            </tr>
           </tbody>
         </table>
   
         <!-- Pagination -->
-        <div class="page-navigation d-flex justify-content-between align-items-center">
+        <!-- <div class="page-navigation d-flex justify-content-between align-items-center">
           <div>Page 1/10</div>
           <div>
             <button class="btn btn-custom">Previous</button>
             <button class="btn btn-custom">Next</button>
           </div>
+        </div> -->
+
+        <div class="pagination" *ngIf="leaveRequests.length>1">
+          <button [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">Previous</button>
+          <button *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="goToPage(page)">{{ page }}</button>
+          <button [class.disabled]="currentPage === getTotalPages()" (click)="goToPage(currentPage + 1)">Next</button>
         </div>
       </div>
   
       <!-- Filter Section -->
-      <div *ngIf="filterVisible" class="col-md-3">
+      <!-- <div *ngIf="filterVisible" class="col-md-3">
         <div class="filter-section" id="filter-section">
           <h5>Filter Leave Request</h5>
           <div class="mb-3">
@@ -182,6 +321,6 @@
             <small>Last 15 Days</small>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>  

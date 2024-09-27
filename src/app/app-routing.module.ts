@@ -50,6 +50,9 @@ import { ExperienceDetailsComponent } from './pages/experience-details/experienc
 import { LeaveApplyComponent } from './pages/leave/leave-apply/leave-apply/leave-apply.component';
 import { LeaveApprovalComponent } from './pages/leave/leave-approval/leave-approval/leave-approval.component';
 import { RegularizationApplyComponent } from './pages/attendance/regularization-apply/regularization-apply/regularization-apply.component';
+import { LeaveHistoryComponent } from './pages/leave/leave-history/leave-history.component';
+import { PunchTimeComponent } from './pages/punch-time/punch-time.component';
+import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-time-approval.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -129,6 +132,12 @@ const routes: Routes = [
   },
   {
     path: 'emp-personal-details', component: PersonalDetailsComponent
+  },
+  {
+    path:'leave-history',component:LeaveHistoryComponent
+  },
+  {
+    path:'regularization-approve',component:PunchTimeApprovalComponent
   },
   // {
   //   path:'emp-employement-history',component:EmploymentDetailsComponent

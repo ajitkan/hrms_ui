@@ -14,6 +14,7 @@ export class LeaveService {
   // private holidayApiUrl = 'https://localhost:7254/UserDetails/FetchHolidayDetails';
   // constructor(private http : HttpClient) { }
   
+
   // fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
   //   const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;
   //   return this.http.post(url, { employeeCode });
@@ -22,6 +23,20 @@ export class LeaveService {
   //   const url = this.holidayApiUrl;
   //   return this.http.post(url, { employeeCode });
   // }
+
+  // fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
+  //   const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;
+  //   return this.http.post(`${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`, { employeeCode });
+  // }
+  // fetchHolidayDetails(employeeCode: string): Observable<any> {
+  //   const url = this.holidayApiUrl;
+  //   return this.http.post(url, { employeeCode });
+  // }
+  
+  // applyLeave(leaveRequestPayload: any): Observable<any> {
+  //   return this.http.post(`${environment.apiUrl}/UserDetails/LeaveRequest`, leaveRequestPayload);
+  // }
+
  
   // fetchCompOffLeaves(employeeCode: string): Observable<any> {
   //   debugger
@@ -61,9 +76,26 @@ export class LeaveService {
     return this.http.post<any>(`${this.baseUrl}/UserDetails/FetchCompOffLeaves`, payload);
   }
 
+
   getLeaveRequests(leaveApprover: string): Observable<LeaveRequestDto[]> {
     const params = new HttpParams().set('leaveApprover', leaveApprover);
     return this.http.get<LeaveRequestDto[]>(`${this.baseUrl}/UserDetails/GetLeaveRequestsForApprover`, { params });
+  }
+
+  //  getLeaveRequests(payload: any): Observable<LeaveRequestDto[]> {
+  //   // const params = new HttpParams().set('leaveApprover', payload);
+  //   return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/GetLeaveRequests`, payload);
+  // }
+
+  getLeaveHistory(payload: any): Observable<LeaveRequestDto[]> {
+    // const params = new HttpParams().set('leaveApprover', payload);
+    return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/FetchLeaveHistory`, payload);
+  }
+
+  getRegularizationRequests(payload: any): Observable<LeaveRequestDto[]> {
+    // const params = new HttpParams().set('leaveApprover', payload);
+    return this.http.post<LeaveRequestDto[]>(`${environment.apiUrl}/UserDetails/FetchRegularizationRequests`, payload);
+
   }
 
   applyLeave(leaveRequestPayload: any): Observable<any> {
@@ -77,5 +109,13 @@ export class LeaveService {
   fetchLeaveCount(payload: any): Observable<any> {
     const url = `${this.baseUrl}/UserDetails/GetEmployeeLeaveCount`;
     return this.http.post<any>(url, payload);
+  }
+
+  approveRegularizationRequest(leaveApprovalPayload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/UserDetails/RegularizationApproval`, leaveApprovalPayload);
+  }
+
+  searchEmployee(payload:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/UserDetails/GetEmployeeDetails`,payload);
   }
 }
