@@ -8,7 +8,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
 import { ImportAttendancesComponent } from './pages/time-and-attendance/import-attendances/import-attendances.component';
 
-import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
+// import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { EmployeeListDataComponent } from './pages/EmployeeDataManagement/employee-list-data.component';
 import { EmplyeeDetailsSummaryComponent } from './pages/EmployeeData/employee-details-summary/employee-details-summary.component';
 import { PersonalDetailsComponent } from './pages/EmployeeData/personal-details/personal-details.component';
@@ -53,6 +53,7 @@ import { RegularizationApplyComponent } from './pages/attendance/regularization-
 import { LeaveHistoryComponent } from './pages/leave/leave-history/leave-history.component';
 import { PunchTimeComponent } from './pages/punch-time/punch-time.component';
 import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-time-approval.component';
+import { AttendenceCalenderComponent } from './pages/attendence-calender/attendence-calender.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -110,9 +111,9 @@ const routes: Routes = [
   {
     path: 'regularization-apply', component: RegularizationApplyComponent
   },
-  {
-    path: 'jobpost', component: JobPostComponent
-  },
+  // {
+  //   path: 'jobpost', component: JobPostComponent
+  // },
   {
     path: 'add-attendance', component: AddAttendanceComponent
   },
@@ -138,6 +139,12 @@ const routes: Routes = [
   },
   {
     path:'regularization-approve',component:PunchTimeApprovalComponent
+  },
+  {
+    path:'regurlization-history',component:PunchTimeComponent
+  },
+  {
+    path:'timesheet',component:AttendenceCalenderComponent
   },
   // {
   //   path:'emp-employement-history',component:EmploymentDetailsComponent

@@ -51,7 +51,7 @@ export class LeaveHistoryComponent implements OnInit, AfterViewInit {
     
     this.employeeNameChange$.pipe(
       debounceTime(300) // Adjust the debounce time as necessary
-    ).subscribe(searchTerm => {
+    ).subscribe((searchTerm:any) => {
       this.onEmployeeNameChange(searchTerm);
       });  
        
@@ -81,7 +81,7 @@ export class LeaveHistoryComponent implements OnInit, AfterViewInit {
             }
            });
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error fetching leave requests', error);
         }
       });
@@ -282,7 +282,7 @@ resetfilter(){
         this.leaveRequests = data;
         this.filterVisible = false; // Close the filter panel after applying
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Error applying filter', error);
       }
     });
@@ -320,7 +320,7 @@ resetfilter(){
           }
           this.filteredEmployees = employees.employeeList; 
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error searching for employees', error);
         }
       });

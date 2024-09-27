@@ -386,7 +386,7 @@ export class HeaderComponent {
           console.warn('Logout response did not indicate success:', res);
         }
       },
-      error: (error) => {
+      error: (error:any) => {
       
         console.error('Logout failed', error);
       }
@@ -459,7 +459,7 @@ export class HeaderComponent {
           this.loading = false; // Reset loading state
         }
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Error fetching notifications:', error);
         this.loading = false; // Reset loading state
       }

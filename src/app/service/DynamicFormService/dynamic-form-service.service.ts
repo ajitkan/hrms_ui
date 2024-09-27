@@ -27,7 +27,7 @@ export class DynamicFormService {
       formGroup[field.fieldName] = [field.defaultValue || '', validators];
 
       if (field.controls === 'DROPDOWNLIST') {
-        this.fetchDropdownOptions(field.fieldID, field.tabID).subscribe(options => {
+        this.fetchDropdownOptions(field.fieldID, field.tabID).subscribe((options:any) => {
           field.options = options;
         });
       }
