@@ -120,7 +120,7 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     ExperienceDetailsComponent,
     LeaveApplyComponent,
     LeaveApprovalComponent,
-    RegularizationApplyComponent
+    RegularizationApplyComponent,
     LeaveHistoryComponent,
     PunchTimeComponent,
     PunchTimeApprovalComponent

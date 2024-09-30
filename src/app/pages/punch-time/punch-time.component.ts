@@ -220,7 +220,7 @@ resetfilter(){
           }
           this.filteredEmployees = employees.employeeList; 
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error searching for employees', error);
         }
       });
