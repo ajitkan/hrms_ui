@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params:any) => {
       this.tabID = params['tabID'];
       this.token = JSON.parse(localStorage.getItem('token') as string);
       this.Roles = JSON.parse(localStorage.getItem('roles') as string);
@@ -241,10 +241,10 @@ fetchEmployeeDetails(): void {
                   const employeeDetailsArray = res.featchEmployeeDetailResponse;
                   if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
                       // const employeeDetails = employeeDetailsArray[0].dynamicData;
-                      this.educationList = res.featchEmployeeDetailResponse;
+                      this.educationList = res.featchEmployeeDetailResponse[0];
                       this.employeeDetails = this.dynamicFormService.BindMasterValue(this.fields,res,this.tabID);
                       if (this.employeeDetails) {
-                          // this.populateFormWithEmployeeDetails(this.employeeDetails);
+                          this.populateFormWithEmployeeDetails(this.employeeDetails.featchEmployeeDetailResponse[0]);
                           this.showform = false;
                           console.log('Employee Details:', this.employeeDetails);
                       } else {

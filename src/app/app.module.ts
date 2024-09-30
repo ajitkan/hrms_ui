@@ -12,7 +12,7 @@ import { ExpensepiechatComponent } from './pages/shared-components/expensepiecha
 import { PrjstatuschartComponent } from './pages/shared-components/prjstatuschart/prjstatuschart.component';
 import { EmpdeptchartComponent } from './pages/shared-components/empdeptchart/empdeptchart.component';
 import { PaymentbarchartComponent } from './pages/shared-components/paymentbarchart/paymentbarchart.component';
-import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
+// import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+// import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AddAttendanceComponent } from './pages/time-and-attendance/add-attendance/add-attendance.component';
 import { ImportAttendancesComponent } from './pages/time-and-attendance/import-attendances/import-attendances.component';
 import { EmplyeeDetailsSummaryComponent } from './pages/EmployeeData/employee-details-summary/employee-details-summary.component';
@@ -69,6 +69,10 @@ import { RegularizationApplyComponent } from './pages/attendance/regularization-
 import { LeaveHistoryComponent } from './pages/leave/leave-history/leave-history.component';
 import { PunchTimeComponent } from './pages/punch-time/punch-time.component';
 import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-time-approval.component';
+import { AttendenceCalenderComponent } from './pages/attendence-calender/attendence-calender.component';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -83,7 +87,7 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     EmpdeptchartComponent,
     PaymentbarchartComponent,
     EmployeeListDataComponent,
-    JobPostComponent,
+    // JobPostComponent,
     AddAttendanceComponent,
     ImportAttendancesComponent,
     EmplyeeDetailsSummaryComponent,
@@ -123,7 +127,8 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     RegularizationApplyComponent,
     LeaveHistoryComponent,
     PunchTimeComponent,
-    PunchTimeApprovalComponent
+    PunchTimeApprovalComponent,
+    AttendenceCalenderComponent
   ],
   imports: [
     BrowserModule,
@@ -131,6 +136,10 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     FormsModule,
     CommonModule,
     HttpClientModule,
@@ -143,7 +152,7 @@ import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-ti
     }),
     NgbModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule,
+    // Ng2SearchPipeModule,
     RecaptchaModule
   
        
