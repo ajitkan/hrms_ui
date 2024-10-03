@@ -2,7 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
-import * as $ from 'jquery'; 
+import $ from 'jquery';
+
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({

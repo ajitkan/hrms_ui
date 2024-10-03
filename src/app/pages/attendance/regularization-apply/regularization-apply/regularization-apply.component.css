@@ -59,6 +59,7 @@
     border-radius: 10px;
     /* margin-bottom: 20px; */
     margin: 0;
+    cursor: pointer;
   }
   
   .leave-history-section h5 {
