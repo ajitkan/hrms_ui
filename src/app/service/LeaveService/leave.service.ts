@@ -78,7 +78,7 @@ export class LeaveService {
   }
 
 
-  getLeaveRequests(leaveApprover: string): Observable<LeaveRequestDto[]> {
+  getLeaveRequests(leaveApprover: any): Observable<LeaveRequestDto[]> {
     const params = new HttpParams().set('leaveApprover', leaveApprover);
     return this.http.get<LeaveRequestDto[]>(`${this.baseUrl}/UserDetails/GetLeaveRequestsForApprover`, { params });
   }

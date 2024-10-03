@@ -2,7 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
-import * as $ from 'jquery'; 
+import $ from 'jquery';
+
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({
@@ -255,13 +256,13 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
   applyFilter() {
     debugger;
     const payload = {
-        "leaveApprover": this.username,
-        "pageNumber": 1,
-        "pageSize": 2,
-        "employeeCode": this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
-        "startDate": this.filter.startDate !='' ? this.filter.startDate : null,
-        "leaveStatus": this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
-        "endDate": this.filter.endDate !=''?this.filter.endDate:null
+        leaveApprover: this.username,
+        pageNumber: 1,
+        pageSize: 2,
+        employeeCode: this.filter.EmployeeCode!=''? this.filter.EmployeeCode: null,
+        startDate: this.filter.startDate !='' ? this.filter.startDate : null,
+        leaveStatus: this.filter.leaveStatus !=''?this.filter.leaveStatus:null,
+        endDate: this.filter.endDate !=''?this.filter.endDate:null
         };
 
     this.leaveService.getLeaveRequests(payload).subscribe({
