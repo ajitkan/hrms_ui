@@ -73,6 +73,7 @@ import { AttendenceCalenderComponent } from './pages/attendence-calender/attende
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ResetSessionComponent } from './pages/authentication/reset-session/reset-session.component';
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     LeaveHistoryComponent,
     PunchTimeComponent,
     PunchTimeApprovalComponent,
-    AttendenceCalenderComponent
+    AttendenceCalenderComponent,
+    ResetSessionComponent
   ],
   imports: [
     BrowserModule,

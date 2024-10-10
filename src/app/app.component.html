@@ -106,11 +106,12 @@
 
 
 
-<div class="wrapper">
+<div class="wrapper" [ngClass]="{ 'dimmed-background': isModalOpen }">
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
   <app-change-password *ngIf="isSnapshot"></app-change-password>
 
   <div *ngIf="IsLogin" class="page-wrapper">
+    
     <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
 
     <div class="main-content d-flex">
@@ -159,3 +160,4 @@
   </div>
   <app-footer></app-footer>
 </div>
+<app-reset-session *ngIf="isModalOpen" (isModalOpen)="isModalOpen = false" ></app-reset-session>

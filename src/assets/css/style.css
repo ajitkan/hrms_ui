@@ -17473,3 +17473,42 @@ html[dir=rtl] .sidebar li > a .caret:before {
 .navbar .navbar-right{
   margin: 0;
 }
+.half-day {
+  /* background-color: #fff9c4;  */
+  /* Light yellow for half-day */
+  /* background-color:linear-gradient(to right, #ffcccb 50%, #fff9c4 50%) */
+  /* background:linear-gradient(to right, #ece7e7 50%, #0d6efd 50%) */
+  
+}
+.week-off {
+  background-color: #eeeeee; /* Light gray for week-off */
+}
+
+.absent {
+  background-color: #ffcdd2; /* Light red for absent */
+}
+
+.present {
+  /* background-color: #c8e6c9;  */
+  background: #ece7e7 !important;
+  /* Light green for present */
+}
+
+.no-status {
+  background-color: #fce4ec; /* Light pink for no status */
+}
+.holiday{
+ color:  #4c6fbf !important;
+}
+.w14{
+  width: 14.27% !important;
+}
+.h100{
+   height: 100px !important;
+}
+.week{
+  color: #0dcaf0 !important;
+}
+.fs10{
+  font-size: 10px;
+}

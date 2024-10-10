@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject, catchError, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environments';
 
@@ -11,6 +11,11 @@ import { environment } from 'src/environments/environments';
 })
 export class AuthService {
   //  private apiUrl = environment.apiUrl;
+  private modalOpenSubject = new BehaviorSubject<boolean>(false);
+  modalOpen$ = this.modalOpenSubject.asObservable();
+
+  // Method to trigger modal open
+  
    private userSubject: BehaviorSubject<User>;  
    public user: Observable<User>;
   
@@ -20,7 +25,9 @@ export class AuthService {
     this.user = this.userSubject.asObservable();
     
   }
-
+  openModal() {
+    this.modalOpenSubject.next(true);
+  }
 public get userValue() {
   return this.userSubject.value;
 }
@@ -66,8 +73,7 @@ getUserName(){
     const username = this.getUserName();//decodedToken?.unique_name; 
 
     // Call the logout API
-    return this.http.post(`${environment.apiUrl}/LogOut`, { username },{
-      headers: { Authorization: `Bearer ${token}` }}).pipe(
+    return this.http.post(`${environment.apiUrl}/LogOut`, { username }).pipe(
       catchError(error => {
         throw error;
       })
@@ -103,4 +109,8 @@ getNotifications(payload:{userName:string,pageNumber: number, pageSize: number},
 
 //   return this.http.post(url, payload, { headers });
 // }
+insertAttendanceDetails(payload: { employeeCode: string, employeeID: number, action: number }): Observable<any> {
+  return this.http.post(`${environment.apiUrl}/UserDetails/InsertAttendanceDetails`, payload);
+}
+
 }

@@ -100,3 +100,97 @@
   .list-group{
     border: none !important;
   }
+
+
+
+  /* Style for specific calendar cells */
+
+  /* .week-off {
+    background-color: #eeeeee; /* Light gray for week-off */
+  } */
+  
+  /* .absent {
+    background-color: #ffcdd2; /* Light red for absent */
+  } */
+  
+  /* .present { */
+    /* background-color: #c8e6c9;  */
+    /* background-color: #ece7e7; */
+    /* Light green for present */
+  /* } */
+  
+  /* .no-status {
+    background-color: #fce4ec; /* Light pink for no status */
+  } */
+
+  
+  /* Existing styles for today and weekend */
+  .cal-today {
+    border: 2px solid #64b5f6; /* Blue border for today */
+  }
+  
+  .cal-weekend {
+    background-color: #ffebee; /* Light red for weekends */
+  }
+  
+  .calendar-container {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .calendar-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .custom-day-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 2px;
+  }
+  .cal-day-cell.half-day {
+    background-color: #ffeb3b; /* Yellow for Half Day */
+  }
+  .cal-day-cell.week-off {
+    background-color: #90caf9; /* Light Blue for Week Off */
+  }
+  .cal-day-cell.absent {
+    background-color: #ef9a9a; /* Light Red for Absent */
+  }
+  /* .cal-day-cell.present {
+    background-color: #a5d6a7; /* Light Green for Present */
+  } */
+  .cal-day-cell.no-status {
+    background-color: #cfd8dc; /* Light Gray for No Status */
+  }  
+  .weekoff,.weekdays{
+    background-color: black !important;
+  }
+
+  .cal-day-with-badge .cal-day-badge {
+    background-color: red; /* Set badge color */
+    color: white;
+  }
+  .badge-remark {
+    background-color: #f0ad4e; /* Change color based on your needs */
+    border-radius: 4px;
+    padding: 5px;
+    margin: 2px 0;
+    display: inline-block;
+    font-size: 12px;
+    color: #fff;
+  }
+  .w14{
+    width: 14.27% !important;
+  }

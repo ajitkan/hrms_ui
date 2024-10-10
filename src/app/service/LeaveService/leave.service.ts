@@ -9,19 +9,14 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class LeaveService {
-  private apiUrl = 'https://localhost:7254/UserDetails/GetLeaveRequestsForApprover';
-  private apiUrl1 = 'https://localhost:7254/UserDetails/LeaveRequest';
-  private baseUrl = 'https://localhost:7254/UserDetails';
-  private holidayApiUrl = 'https://localhost:7254/UserDetails/FetchHolidayDetails';
-  constructor(private http : HttpClient) { }
+   constructor(private http : HttpClient) { }
   
   fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
     const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;
     return this.http.post(`${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`, { employeeCode });
   }
   fetchHolidayDetails(employeeCode: string): Observable<any> {
-    const url = this.holidayApiUrl;
-    return this.http.post(url, { employeeCode });
+    return this.http.post(`${environment.apiUrl}/UserDetails/FetchHolidayDetails`, { employeeCode });
   }
   
   applyLeave(leaveRequestPayload: any): Observable<any> {
@@ -31,7 +26,7 @@ export class LeaveService {
   fetchCompOffLeaves(employeeCode: string): Observable<any> {
     debugger
     const payload = { employeeCode }; 
-    return this.http.post<any>(`${this.baseUrl}/FetchCompOffLeaves`, payload);
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/FetchCompOffLeaves`, payload);
   }
 
    getLeaveRequests(payload: any): Observable<LeaveRequestDto[]> {
@@ -72,5 +67,9 @@ export class LeaveService {
     const token = JSON.parse(localStorage.getItem('token') as string);
     const decodedToken: any = jwtDecode(token);
     return decodedToken.unique_name;
+  }
+  fetchLeaveCount(payload: any): Observable<any> {
+    // const url = `${this.baseUrl}/UserDetails/GetEmployeeLeaveCount`;
+    return this.http.post<any>(`${environment.apiUrl}/UserDetails/GetEmployeeLeaveCount`, payload);
   }
 }

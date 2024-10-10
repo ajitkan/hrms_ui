@@ -38,7 +38,7 @@ export class ContactDetailsComponent implements OnInit {
       this.token = JSON.parse(localStorage.getItem('token') as string);
       const decodedToken: any = jwtDecode(this.token);
       debugger
-      this.roleID = decodedToken.nameid;
+      this.roleID = (JSON.parse(localStorage.getItem('roles') as string)).roleID;//decodedToken.nameid;
       this.employeeCode = decodedToken.unique_name;
 
       this.fetchFields();
@@ -96,7 +96,8 @@ export class ContactDetailsComponent implements OnInit {
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
         formGroup[field.fieldName] = this.fb.control(
-          { value: field.defaultValue || '', disabled: isDisabled },
+          { value: field.defaultValue?field.defaultValue:'',
+             disabled: isDisabled },
           validators
         );
 
@@ -280,10 +281,10 @@ export class ContactDetailsComponent implements OnInit {
         const control = this.contactForm.get(fieldName);
         if (control) {
             if (fieldName === 'title') {
-                control.setValue(employeeDetails[fieldName]);
+                control.setValue(employeeDetails[fieldName]!=''?employeeDetails[fieldName]:'');
                 this.dynamicFormService.onDropDownChange(this.contactForm, { fieldName, fieldValue: employeeDetails[fieldName] });
             } else {
-                control.setValue(employeeDetails[fieldName]);
+                control.setValue(employeeDetails[fieldName]!=''?employeeDetails[fieldName]:'');
             }
         } else {
             console.warn(`Form control for field '${fieldName}' does not exist.`);

@@ -24,6 +24,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                 const error = "Session Expired Kindly LogIn again.....";
                 console.error(err);
                 // this.authService.logout();
+                // this.authService.openModal();
+                return throwError(() => error);
+            }
+            else if ([401].includes(err.status) && !this.accountService.userValue) {
+                const error = "Session Expired Kindly LogIn again.....";
+                console.error(err);
+                // this.authService.logout();
+                this.authService.openModal();
                 return throwError(() => error);
             }
             else {
