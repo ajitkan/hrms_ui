@@ -66,7 +66,7 @@ export class PunchTimeApprovalComponent {
           this.leaveRequests = data[0].requests;
           console.log(this.leaveRequests);
         },
-        error: (error:any) => {
+        error: (error: any) => {
           console.error('Error fetching leave requests', error);
         }
       });
