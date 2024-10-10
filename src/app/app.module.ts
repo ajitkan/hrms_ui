@@ -73,6 +73,9 @@ import { AttendenceCalenderComponent } from './pages/attendence-calender/attende
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+// import { CalendarComponent } from './pages/calendar/calendar/calendar.component';
+import { ApplyResignationComponent } from './pages/separation/apply-resignation/apply-resignation/apply-resignation.component';
+import { ApproveResignationComponent } from './pages/separation/approve-resignation/approve-resignation/approve-resignation.component';
 
 
 @NgModule({
@@ -128,7 +131,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     LeaveHistoryComponent,
     PunchTimeComponent,
     PunchTimeApprovalComponent,
-    AttendenceCalenderComponent
+    AttendenceCalenderComponent,
+    // CalendarComponent,
+    ApplyResignationComponent,
+    ApproveResignationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,191 @@
+<!-- 
+
+
+
+
+
+<div class="container mt-2 mb-2">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h3>Resignation Apply</h3>
+        </div>
+        <div class="card-body">
+        
+          <form [formGroup]="resignationForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+              <div class="col-md-12 mb-3">
+                <label class="form-label">Employee Name</label>
+                <input type="text" class="form-control" [value]="employeeName" readonly />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3">
+                <label for="resignationDate" class="form-label">Date of Resignation</label>
+                <input type="text" id="resignationDate" class="form-control" [value]="today | date" readonly />
+              </div>
+              
+
+              <div class="col-md-6 mb-3">
+                <label for="exitReason" class="form-label"> Reason</label>
+                <select id="exitReason" class="form-control select-dropdown" formControlName="exitReason">
+                    <option value="" disabled> <small>Select Reason</small> </option>
+                    <option *ngFor="let reason of exitReasons" [value]="reason">{{ reason }}</option>
+                </select>
+            </div>
+            
+              
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="noticePeriod" class="form-label">Notice Period (in days)</label>
+                <input type="number" id="noticePeriod" class="form-control" formControlName="noticePeriod" />
+              </div>
+              <div class="col-md-6">
+                <label for="lastWorkingDay" class="form-label">Last Working Day</label>
+                <input 
+                  type="date" 
+                  id="lastWorkingDay" 
+                  class="form-control" 
+                  formControlName="lastWorkingDay" 
+                  />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="shortNotice" class="form-label">Remark</label>
+                <textarea id="shortNotice" class="form-control" rows="3" formControlName="shortNotice" placeholder="Please describe the reason ..."></textarea>
+              </div>
+            </div>
+
+          
+
+            <div class="row text-center approval-cards">
+              <div class="col-md-4" *ngFor="let approver of approverList">
+                <div class="approval-card">
+                  <img 
+                    [src]="approver.profilePicture ? approver.profilePicture : 'https://via.placeholder.com/50'"
+                    alt="Approver Image"
+                    class="img-fluid rounded-circle" 
+                  />
+                  <p>{{ approver.approverName }} 
+                    <small> (Approval Level {{ approver.approvalLevel }}) </small>
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+ 
+            <div class="col-md-12 text-end mt-6">
+              <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Cancel</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!resignationForm.valid">Apply Resignation</button>
+            </div>
+
+         
+          <div *ngIf="successMessage" class="alert alert-success mt-2">
+            {{ successMessage }}
+          </div>
+
+        
+          <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+            {{ errorMessage }}
+          </div>
+          </form>
+         
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+<div class="container mt-2 mb-2">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h3>Resignation Apply</h3>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="resignationForm" (ngSubmit)="onSubmit()">
+          
+            <div class="row mb-3">
+              <div class="col-md-12 mb-3">
+                <label class="form-label">Employee Name</label>
+                <input type="text" class="form-control" [value]="employeeName" readonly />
+              </div>
+            </div>
+
+            <!-- Resignation Date and Reason Fields -->
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3">
+                <label for="resignationDate" class="form-label">Date of Resignation</label>
+                <input type="text" id="resignationDate" class="form-control" [value]="today | date:'yyyy-MM-dd'" readonly />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="exitReason" class="form-label">Reason</label>
+                <select id="exitReason" class="form-control select-dropdown" formControlName="exitReason">
+                  <option value="" disabled><small>Select Reason</small></option>
+                  <option *ngFor="let reason of exitReasons" [value]="reason">{{ reason }}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Notice Period and Last Working Day Fields -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="noticePeriod" class="form-label">Notice Period (in days)</label>
+                <input type="number" id="noticePeriod" class="form-control" formControlName="noticePeriod" />
+              </div>
+              <div class="col-md-6">
+                <label for="lastWorkingDay" class="form-label">Last Working Day</label>
+                <input type="date" id="lastWorkingDay" class="form-control" formControlName="lastWorkingDay" />
+              </div>
+            </div>
+
+            <!-- Remark Field -->
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="shortNotice" class="form-label">Remark</label>
+                <textarea id="shortNotice" class="form-control" rows="3" formControlName="shortNotice" placeholder="Please describe the reason ..."></textarea>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="col-md-12 text-end mt-4">
+              <!-- Show Cancel and Apply buttons only if rolid is not 2 -->
+              <ng-container *ngIf="roleid !== '4'">
+                <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!resignationForm.valid">Apply Resignation</button>
+              </ng-container>
+
+              <!-- Conditionally display Approve and Reject buttons if rolid is 2 -->
+              <button *ngIf="roleid === '4'" type="button" class="btn btn-success me-2" (click)="approveResignation('Approved')">Approve</button>
+              <button *ngIf="roleid === '4'" type="button" class="btn btn-danger" (click)="rejectResignation('Reject')">Reject</button>
+            </div>
+
+            <!-- Success Message -->
+            <div *ngIf="successMessage" class="alert alert-success mt-2">
+              {{ successMessage }}
+            </div>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+              {{ errorMessage }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

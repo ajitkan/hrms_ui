@@ -1,0 +1,274 @@
+/* 
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .card-header {
+    background-color: #004085;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 15px;
+    border-bottom: none;
+  }
+  
+  .card-body {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 0.25rem 0.25rem;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+
+  textarea,
+  input[type="date"],
+  input[type="number"],
+  select {
+    border-radius: 0.375rem;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+  }
+  
+  textarea::placeholder,
+  input::placeholder {
+    font-style: italic;
+  }
+
+  .approver-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .approver-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .approver-card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .approver-card.selected {
+    border: 2px solid #28a745;
+  }
+  
+  .approver-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .approver-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+
+  .btn-success {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+   */
+
+
+
+
+
+
+
+
+
+/* 
+   ------------------------------------------------------------------------ */
+
+
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background-color: #ffffff;
+    /* width: 600px; */
+    width: 222%
+  }
+  
+  .card-header {
+    /* background-color: #0056b3;
+    color: white;
+    padding: 8px 12px; 
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    font-size: 1.2rem;  
+    font-weight: 600;     */
+    color: #4277af;
+    background-color: white;
+  }
+  
+
+
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+    color: #333333;
+  }
+  
+  input[type="date"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  textarea::placeholder,
+  input::placeholder {
+    color: #888888;
+    font-style: italic;
+  }
+  
+
+  /* .btn-success {
+    background-color: #28a745;
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  } */
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+    font-size: 0.9rem;
+  }
+
+  .approver-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .approver-card {
+    width: 30%; 
+  }
+
+  button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background: white; 
+    color: #4258b8; 
+    transition: background-color 0.3s, transform 0.2s;
+    border: 2px solid #6883d7; 
+    text-transform: none;
+  }
+  
+  button:hover {
+    background: #ebf0ff;
+    /* transform: scale(1.05);  */
+    color: #4258b8; 
+
+  }
+
+    button {
+      padding: 7px 15px;
+      border-radius: 5px;
+  }
+  
+  .btn-primary {
+      background-color: #3c70a7;
+      border-color: #3c70a7;
+      color: white;
+  }
+  
+  .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+      color: white;
+  }
+  
+  .form-control {
+    font-size: 14px;
+    padding: 20px;
+    
+  }
+
+  .form-control:disabled, .form-control[readonly] {
+    background-color: #f8f9fa;
+    opacity: 1;
+}
+
+.form-control {
+  font-size: 14px;
+  padding: 20px; /* Default padding for other inputs */
+}
+
+.form-control.select-dropdown {
+  padding: 10px; /* Adjusted padding for select dropdown */
+  height: auto; /* Ensure the height accommodates the padding */
+  appearance: none; /* Optional: Removes default arrow */
+}
+
+/* 
+------------------------------------------------------ */
+
+
+
