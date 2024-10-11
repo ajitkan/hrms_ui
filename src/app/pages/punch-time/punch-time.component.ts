@@ -217,7 +217,7 @@ export class PunchTimeComponent {
         next: (employees: any) => {
           this.filteredEmployees = employees.employeeList; 
         },
-        error: (error:any) => {
+        error: (error: any) => {
           console.error('Error searching for employees', error);
         }
       });

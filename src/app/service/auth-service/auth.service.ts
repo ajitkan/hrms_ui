@@ -99,16 +99,7 @@ getNotifications(payload:{userName:string,pageNumber: number, pageSize: number},
   }); 
 }
   
-// getNotifications(payload: any, token: string): Observable<any> {
-//   const url = `${this.apiUrl}/FetchNotification`;
-  
-//   const headers = new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Authorization': `Bearer ${token}`
-//   });
 
-//   return this.http.post(url, payload, { headers });
-// }
 insertAttendanceDetails(payload: { employeeCode: string, employeeID: number, action: number }): Observable<any> {
   return this.http.post(`${environment.apiUrl}/UserDetails/InsertAttendanceDetails`, payload);
 }

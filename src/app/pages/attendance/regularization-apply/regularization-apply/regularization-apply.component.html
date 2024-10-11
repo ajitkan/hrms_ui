@@ -5,10 +5,11 @@
 
 
 <div class="container">
-  <div class="row leave-history-section">
-    <div class="col-md-2">
-      <!-- <h5>Regularization History</h5> -->
-      <a [routerLink]="['/regurlization-history']">Regularization History</a>
+  <div class="row leave-history-section" [routerLink]="['/regurlization-history']">
+
+    <div class="col-md-3">
+      <h5>Regularization History</h5>
+      <!-- <a [routerLink]="['/regurlization-history']">Regularization History</a> -->
     </div>
     <div class="col-md-8">
       <div class="d-flex justify-content-around text-center leave-status">
@@ -26,7 +27,7 @@
         </div>
         <div>
           <span class="badge bg-danger rounded-circle">{{ declinedCount }}</span>
-          <p>Declined</p>
+          <p>Rejected</p>
         </div>
         <div>
           <span class="badge bg-secondary rounded-circle">{{ cancelledCount }}</span>
@@ -36,10 +37,10 @@
     </div>
   </div>
 
-  <div class="container2 mt-4">
+  <div class="container2 mt-2">
 
     <div class="row mb-4">
-      <div class="col-md-6">
+      <div class="col-md-6 attendanceDate">
         <label for="attendanceDate" class="form-label">Select Attendance Date</label>
         <input type="date" id="attendanceDate" class="form-control" (change)="onDateChange($event)">
       </div>
@@ -58,33 +59,38 @@
     
   
     <div class="row mb-4 mt-0">
-      <div class="col-md-12">
-        <h5>Attendance Details For: {{ attendanceDate | date }}</h5>
+      <div class="col-md-12 myclassformarginleft" *ngIf="punchingDetailsArray.length > 0">
+        <h5>
+          Attendance Details For: 
+          <span class="highlight-date">{{ attendanceDate | date }}</span>
+        </h5>
       </div>
     </div>
 
     <form [formGroup]="regularizationForm" (ngSubmit)="onSubmit()">
-      <div *ngIf="punchingDetailsArray.length > 0" class="mb-4 ">
+      <div  *ngIf="punchingDetailsArray.length > 0" class="mb-4 ">
         <div class="row">
-          <div class="col-md-3">
-            <label for="previousTimeIn" class="form-label">Punch In</label>
+          <div class="col-md-3 myclassformarginleft">
+            <label for="previousTimeIn" class="form-label ">Punch In</label>
             <input type="text" class="form-control" [value]="punchingDetailsArray[0]?.previousPunchIn" disabled>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 myclassformarginleft">
             <label for="previousTimeOut" class="form-label">Punch Out</label>
             <input type="text" class="form-control" [value]="punchingDetailsArray[0]?.previousPunchOut" disabled>
           </div>
 
-          <div class="col-md-4"> 
+          <!-- <div class="col-md-4"> 
             <div class="row text-center approval-cards">
               <div class="col-md-12" *ngFor="let detail of punchingDetailsArray">
                 <div class="approval-card">
-                  <p><strong>Approval Level:</strong> {{ detail.approvalLevel }}</p>
-                  <p>{{ detail.approverName }}</p>
+                  <img [src]="detail.profilePicture ? detail.profilePicture : 'https://via.placeholder.com/50'"
+                  alt="Approver Image">
+                  <p><strong>{{ detail.approverName }}</strong> </p>
+                  <p> <small> Approval Level{{ detail.approvalLevel }}</small></p>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         
       </div>
@@ -103,9 +109,23 @@
             <div class="col-md-5">
               <label for="remark" class="form-label">Remark</label>
               <input type="text" class="form-control remark-field" formControlName="remark" placeholder="Enter remark">
+               <!-- <textarea class="form-control remark-field" rows="3" roformControlName="remark" placeholder="Enter remark">     </textarea> -->
             </div>
             <div class="col-md-1 text-end" *ngIf="i > 0">
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeAttendanceRow(i)">&times;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12"> 
+        <div class="row text-center approval-cards">
+          <div class="col-md-12" *ngFor="let detail of punchingDetailsArray">
+            <div class="approval-card">
+              <img [src]="detail.profilePicture ? detail.profilePicture : 'https://via.placeholder.com/50'"
+              alt="Approver Image">
+              <p><strong>{{ detail.approverName }}</strong> </p>
+              <p> <small> Approval Level{{ detail.approvalLevel }}</small></p>
             </div>
           </div>
         </div>

@@ -1,121 +1,48 @@
-/* 
-  
 
-  .leave-history-section {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    margin: 0px;
+.form-control, .form-select, #leaveReason {
+    padding: 19px; 
+    border-radius: 6px; 
+    border: 1px solid #ced4da; 
+    background-color: #f8f9fa; 
+    
+    margin-bottom: 12px;
+    font-size: 14px; 
   }
   
-  .leave-history-section h5 {
-    font-size: 18px;
-    font-weight: 600;
+  
+  .form-select {
+    height: 40px; 
+    padding: 8px 20px; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
   }
   
-  .leave-status div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #80bdff; 
+    outline: none;
+  
   }
   
-  .badge {
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   
-
-.container {
-   width: 150%;
-    margin: 2%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-h5 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-.form-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.form-control {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    border-radius: 4px;
-}
-
-.btn {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    text-transform: none;
-}
-
-.btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
-    margin-top: 2%;
-}
-
-.btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-outline-secondary {
-    border-color: #6c757d;
-    color: #6c757d;
-    margin-top: 2%;
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
-}
-
-.alert {
-    font-size: 0.85rem;
-    padding: 8px 12px;
-    border-radius: 4px;
-}
-
-.attendance-details-row {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-.mb-3 {
-    margin-bottom: 1rem !important;
-}
-
-
-.remark-field {
-    width: 100%;
-}
-
-
- */
-
-
-
-
+  .form-select::after {
+    content: '▼'; 
+    font-size: 12px; 
+    color: #6c757d; 
+    position: absolute;
+    right: 12px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+  }
 
  /* Container and Section Styling */
 .container {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    width: 200%;
+    width: 195%;
     height: auto;
   }
   
@@ -130,7 +57,9 @@ h5 {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    margin: 0;
+    cursor: pointer;
   }
   
   .leave-history-section h5 {
@@ -140,14 +69,15 @@ h5 {
   }
   
   /* Leave Status Badges */
-  .leave-status {
+  .leave-status div {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .leave-status div {
+  /* .leave-status div {
     text-align: center;
-  }
+  } */
   
   .badge {
     font-size: 18px;
@@ -180,15 +110,15 @@ h5 {
   }
   
   /* Form Styling */
-  .form-label {
+  /* .form-label {
     font-weight: 500;
-  }
+  } */
   
-  .form-control {
+  /* .form-control {
     padding: 10px;
     border-radius: 5px;
     width: 100%;
-  }
+  } */
   
   .remark-field {
     width: 100%;
@@ -198,24 +128,26 @@ h5 {
     margin-bottom: 16px;
   }
   
-  /* Attendance Details */
+
   .attendance-details-row {
-    padding: 10px;
+    padding: 20px;
     background-color: #f7f9fc;
     border-radius: 8px;
     margin-bottom: 10px;
   }
   
   .attendance-details-row input {
-    padding: 10px;
+    padding: 20px;
   }
   
-  /* Buttons */
+
   button {
     padding: 8px 16px;
     border-radius: 5px;
     margin-top: 10px;
   }
+
+
   
   .btn-outline-secondary {
     border: 2px solid #6c757d;
@@ -240,7 +172,7 @@ h5 {
     transition: 0.2s;
   }
   
-  /* Success and Error Messages */
+
   .alert {
     padding: 10px;
     border-radius: 5px;
@@ -256,50 +188,7 @@ h5 {
     color: #721c24;
   }
   
-  /* Approval Cards */
-  /* .approval-cards {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-  } */
-  
-  /* .approval-card {
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    flex-grow: 1;
-    margin: 10px;
-  } */
-  
-  /* .approval-card p {
-    margin: 10px 0;
-    font-weight: 500;
-  } */
-  
-
-
-
-  /* Approval Cards */
-/* .approval-cards {
-   
-    display: flex;
-    justify-content: flex-end; 
-    flex-wrap: wrap; 
-  } */
-  
-  /* .approval-card {
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-   
-    flex-grow: 1;
-   
-    max-width: 150px; 
-    margin-left: 30px;
-  } */
+ 
   
   .approval-card {
   background: #f8f9fa;
@@ -307,4 +196,24 @@ h5 {
     padding: 15px;
     border-radius: 6px;
     margin-left: 23px;
+}
+
+
+  
+.form-control:disabled {
+    background-color: #f8f9fa;
+    opacity: 1;
+}
+
+.approval-card img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.attendanceDate{
+    margin-left: 16px;
+}
+
+.myclassformarginleft{
+    margin-left: 16px;
 }
