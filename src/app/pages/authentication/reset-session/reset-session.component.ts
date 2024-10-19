@@ -52,6 +52,7 @@ export class ResetSessionComponent {
         keyboard: false,    // Prevent closing with escape key
       });
 
+      
       // When the modal is closed, set the reference back to null
       this.modalRef.result.then(
         () => this.modalRef = null,  // On modal close

@@ -54,9 +54,9 @@ export class LeaveService {
   //   return this.http.post(`${environment.apiUrl}/UserDetails/LeaveRequest`, leaveRequestPayload);
   // }
 
-  // approveLeaveRequest(leaveApprovalPayload: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/UserDetails/LeaveApproval`, leaveApprovalPayload);
-  // }
+  approveLeaveRequest(leaveApprovalPayload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/UserDetails/LeaveApproval`, leaveApprovalPayload);
+  }
 
   // fetchLeaveCount(payload: any): Observable<any> {
   //   const url = `${environment.apiUrl}//UserDetails/GetEmployeeLeaveCount`;

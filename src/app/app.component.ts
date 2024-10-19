@@ -12,8 +12,8 @@ import { ResetSessionComponent } from './pages/authentication/reset-session/rese
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-[x: string]: any;
-  @ViewChild(ResetSessionComponent) resetLoginModalComponent!: ResetSessionComponent;
+  @ViewChild(ResetSessionComponent)
+  resetLoginModalComponent!: ResetSessionComponent;
 
   title = 'hrms_ui';
   IsLogin = false;
@@ -79,35 +79,25 @@ ngAfterViewInit(): void {
 
   selectScreen(screen: any): void {
     this.selectedScreen = screen;
-    debugger
     if(this.selectedScreen ='onboarding'){
+
       this.router.navigateByUrl('');
+
     }
     if(screen!='' ){
       this.fetchTabs(screen.screenID);
     }
   }
-  navigateToURL(url: string | null) {
-    if (url) {
-      window.location.href = url; // Navigate to the absolute URL
-    }
-  }
-  logScreenURL(screenURL: string | null) {
-    console.log('Navigating to:', screenURL);
-  }
-  // selectTab(tab: any) {
-   
-  //   this.selectedTab = tab;
-
-  //   if (tab && tab.route) {
-      
-  //     this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
-  //   } 
-  //   else {
-  //     console.warn('No route provided for the selected tab');
-  //   }
-  // }
   
+ navigateToURL(url: string | null) {
+
+  if (url) {
+
+    window.location.href = url; // Navigate to the absolute URL
+
+  }
+
+}
   selectTab(tab: any) {
     // Check if the selected tab is the "Back" tab
     if (tab && tab.tabTitle === 'Back') {
@@ -155,7 +145,7 @@ ngAfterViewInit(): void {
 
  
 
-  openModal(): void {
+  openModal(){
     if (this.resetLoginModalComponent) {
       this.resetLoginModalComponent.openModal();
     }
