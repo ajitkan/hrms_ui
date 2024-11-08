@@ -1,7 +1,6 @@
 /* General styles */
 .container-fluid {
     padding: 20px;
-    width: 120%;
 }
 
 .d-flex {
@@ -26,9 +25,12 @@
     flex: 1; /* Takes up the remaining space */
     width: 100%; /* Full width for table column */
 }
-/* .container-fluid{
-    width: 133%;
-} */
+.container-fluid{
+    width: 125%;
+}
+container-fluid2{
+    width: 100%;
+}
 
 
 .full-width {

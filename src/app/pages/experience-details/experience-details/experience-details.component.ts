@@ -15,9 +15,9 @@ export class ExperienceDetailsComponent {
 
 
   public experienceDetailsForm!: FormGroup<any>;
- 
+
   // public bankdetailsForm!: FormGroup;
- 
+
   public fields: any[] = [];
   public alertMessage: string | null = null;
   public alertType: 'success' | 'error' | 'info' | null = null;
@@ -34,7 +34,7 @@ export class ExperienceDetailsComponent {
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private location :Location
+    private location: Location
   ) {
     this.experienceDetailsForm = this.fb.group({});
   }
@@ -59,7 +59,7 @@ export class ExperienceDetailsComponent {
         if (res.code === 1) {
           this.fields = res.fieldResponces || [];
           this.createForm(this.fields);
-          this.fetchEmployeeDetails();  
+          this.fetchEmployeeDetails();
         } else {
           console.error('Error fetching fields:', res.message);
         }
@@ -115,14 +115,14 @@ export class ExperienceDetailsComponent {
         if (field.isMandatory) {
           validators.push(Validators.required);
         }
-        if (field.fieldDataType =='TEXT') {
+        if (field.fieldDataType == 'TEXT') {
           validators.push(Validators.minLength(field.minLength));
           validators.push(this.dynamicFormService.textOnlyValidator());
-         }
+        }
 
-        if(field.fieldDataType =='EMAIL'){
+        if (field.fieldDataType == 'EMAIL') {
           //if (field.fieldDataType =='TEXT') {
-            validators.push(Validators.email);
+          validators.push(Validators.email);
         }
 
         if (field.fieldDataType === 'NUMBER') {
@@ -216,21 +216,21 @@ export class ExperienceDetailsComponent {
 
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
-  
+
     // Set recordType based on button clicked
     this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-  
+
     if (fieldTitle === 'Save & Next' || fieldTitle === 'Save As Draft' || fieldTitle === 'Back') {
       this.onSubmit(fieldTitle);
     } else {
       console.log('Unknown action:', fieldTitle);
     }
   }
-  
+
   onSubmit(fieldTitle: string): void {
     console.log('Form Valid:', this.experienceDetailsForm.valid);
     console.log('Form Errors:', this.experienceDetailsForm.errors);
-  
+
     if (!this.experienceDetailsForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.experienceDetailsForm.getRawValue();
       const extraData = {
@@ -239,7 +239,7 @@ export class ExperienceDetailsComponent {
         createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-  
+
       this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
         next: (response: { message: string | null }) => {
           if (fieldTitle === 'Save & Next') {
@@ -272,26 +272,65 @@ export class ExperienceDetailsComponent {
       this.alertType = 'error';
     }
   }
-  fetchEmployeeDetails(): void {
-    // debugger
-    // this.employeeCode = this.profileForm.get('EmployeeCode')?.value || '';
-    // console.log('employeeCode'),this.employeeCode;
-    // const recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
+  // fetchEmployeeDetails(): void {
+  //   this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         console.log('res--->', res);
 
+  //         if (res.code === 1) {
+
+  //           const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
+  //           if (employeeDetails && Array.isArray(employeeDetails)) {
+  //             this.populateFormWithEmployeeDetails(employeeDetails);
+  //             this.cdr.detectChanges();
+  //             console.log('Employee Details:', employeeDetails);
+  //           } else {
+  //             console.error('No employee details found or invalid format:', employeeDetails);
+  //           }
+  //         } else {
+  //           console.error('Error fetching employee details:', res.message);
+  //         }
+  //       },
+  //       error: (err: any) => {
+  //         console.error('Error:', err.message);
+  //       }
+  //     });
+  // }
+
+
+  // private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
+
+  //   employeeDetails.forEach(detail => {
+  //     if (detail.isApplicable) {
+  //       const control = this.experienceDetailsForm.get(detail.fieldName);
+  //       if (control) {
+  //         control.setValue(detail.fieldValue);
+  //       } else {
+  //         console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
+  //       }
+  //     }
+  //   });
+  // }
+
+  fetchEmployeeDetails(): void {
     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
         .subscribe({
             next: (res: any) => {
-              console.log('res--->',res);
-              
+                console.log('res--->', res);
+  
                 if (res.code === 1) {
-                  
-                    const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
-                    if (employeeDetails && Array.isArray(employeeDetails)) {
-                        this.populateFormWithEmployeeDetails(employeeDetails);
-                        this.cdr.detectChanges();
-                        console.log('Employee Details:', employeeDetails);
+                    const employeeDetailsArray = res.featchEmployeeDetailResponse;
+                    if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
+                        const employeeDetails = employeeDetailsArray[0].dynamicData;
+                        if (employeeDetails) {
+                            this.populateFormWithEmployeeDetails(employeeDetails);
+                            console.log('Employee Details:', employeeDetails);
+                        } else {
+                            console.error('No employee details found or invalid format:', employeeDetails);
+                        }
                     } else {
-                        console.error('No employee details found or invalid format:', employeeDetails);
+                        console.error('No employee details found or invalid format:', employeeDetailsArray);
                     }
                 } else {
                     console.error('Error fetching employee details:', res.message);
@@ -301,24 +340,25 @@ export class ExperienceDetailsComponent {
                 console.error('Error:', err.message);
             }
         });
-}
+  }
 
 
-private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
-    
-    employeeDetails.forEach(detail => {
-        if (detail.isApplicable) {
-            const control = this.experienceDetailsForm.get(detail.fieldName);
-            if (control) {
-                control.setValue(detail.fieldValue);
+  private populateFormWithEmployeeDetails(employeeDetails: any): void {
+    // Assuming employeeDetails is an object with key-value pairs
+    Object.keys(employeeDetails).forEach(fieldName => {
+        const control = this.experienceDetailsForm.get(fieldName);
+        if (control) {
+            if (fieldName === 'title') {
+                control.setValue(employeeDetails[fieldName]);
+                this.dynamicFormService.onDropDownChange(this.experienceDetailsForm, { fieldName, fieldValue: employeeDetails[fieldName] });
             } else {
-                console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
+                control.setValue(employeeDetails[fieldName]);
             }
+        } else {
+            console.warn(`Form control for field '${fieldName}' does not exist.`);
         }
     });
-}
-
-
+  }
 
   private getNextTabID(currentTabID: number): number {
     const totalTabs = 11;
