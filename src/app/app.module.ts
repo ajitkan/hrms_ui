@@ -73,7 +73,14 @@ import { AttendenceCalenderComponent } from './pages/attendence-calender/attende
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+// import { CalendarComponent } from './pages/calendar/calendar/calendar.component';
+import { ApplyResignationComponent } from './pages/separation/apply-resignation/apply-resignation/apply-resignation.component';
+import { ApproveResignationComponent } from './pages/separation/approve-resignation/approve-resignation/approve-resignation.component';
+import { ResignationChecklistComponent } from './pages/separation/resignation-checklist/resignation-checklist/resignation-checklist.component';
+
 import { ResetSessionComponent } from './pages/authentication/reset-session/reset-session.component';
+
 
 
 @NgModule({
@@ -130,7 +137,14 @@ import { ResetSessionComponent } from './pages/authentication/reset-session/rese
     PunchTimeComponent,
     PunchTimeApprovalComponent,
     AttendenceCalenderComponent,
+
+    // CalendarComponent,
+    ApplyResignationComponent,
+    ApproveResignationComponent,
+    ResignationChecklistComponent
+
     ResetSessionComponent
+
   ],
   imports: [
     BrowserModule,

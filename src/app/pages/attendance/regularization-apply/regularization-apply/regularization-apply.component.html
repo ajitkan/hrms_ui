@@ -95,29 +95,64 @@
         
       </div>
 
-      <div formArrayName="attendanceDetails">
+      <!-- <div formArrayName="attendanceDetails">
         <div *ngFor="let detail of attendanceDetails.controls; let i = index" [formGroupName]="i" class="attendance-details-row">
           <div class="row mb-3 align-items-end">
             <div class="col-md-3">
               <label for="timeIn" class="form-label">Punch In</label>
-              <input type="time" class="form-control" formControlName="timeIn">
+              <input type="time" class="form-control" formControlName="timeIn" required>
             </div>
             <div class="col-md-3">
               <label for="timeOut" class="form-label">Punch Out</label>
-              <input type="time" class="form-control" formControlName="timeOut">
+              <input type="time" class="form-control" formControlName="timeOut" required>
+              
             </div>
             <div class="col-md-5">
               <label for="remark" class="form-label">Remark</label>
               <input type="text" class="form-control remark-field" formControlName="remark" placeholder="Enter remark">
-               <!-- <textarea class="form-control remark-field" rows="3" roformControlName="remark" placeholder="Enter remark">     </textarea> -->
+
             </div>
             <div class="col-md-1 text-end" *ngIf="i > 0">
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeAttendanceRow(i)">&times;</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
+
+      <form [formGroup]="regularizationForm" (ngSubmit)="onSubmit()">
+        <div formArrayName="attendanceDetails">
+          <div *ngFor="let detail of attendanceDetails.controls; let i = index" [formGroupName]="i" class="attendance-details-row">
+            <div class="row mb-3 align-items-end">
+              <div class="col-md-3">
+                <label for="timeIn" class="form-label">Punch In</label>
+                <input type="time" class="form-control" formControlName="timeIn" required />
+                <small class="text-danger" *ngIf="detail.get('timeIn')?.hasError('required') && detail.get('timeIn')?.touched">Punch In is required</small>
+              </div>
+      
+              <div class="col-md-3">
+                <label for="timeOut" class="form-label">Punch Out</label>
+                <input type="time" class="form-control" formControlName="timeOut" required />
+                <small class="text-danger" *ngIf="detail.get('timeOut')?.hasError('required') && detail.get('timeOut')?.touched">Punch Out is required</small>
+              </div>
+      
+              <div class="col-md-5">
+                <label for="remark" class="form-label">Remark</label>
+                <input type="text" class="form-control remark-field" formControlName="remark" placeholder="Enter remark" />
+                <small class="text-danger" *ngIf="detail.get('remark')?.hasError('required') && detail.get('remark')?.touched">Remark is required</small>
+              </div>
+      
+              <div class="col-md-1 text-end" *ngIf="i > 0">
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeAttendanceRow(i)">&times;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- <button type="button" class="btn btn-primary" (click)="addAttendanceRow()">Add Row</button>
+        <button type="submit" class="btn btn-success" [disabled]="regularizationForm.invalid">Submit</button> -->
+      </form>
+      
       <div class="col-md-12"> 
         <div class="row text-center approval-cards">
           <div class="col-md-12" *ngFor="let detail of punchingDetailsArray">

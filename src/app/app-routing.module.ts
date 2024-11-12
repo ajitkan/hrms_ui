@@ -54,6 +54,10 @@ import { LeaveHistoryComponent } from './pages/leave/leave-history/leave-history
 import { PunchTimeComponent } from './pages/punch-time/punch-time.component';
 import { PunchTimeApprovalComponent } from './pages/punch-time-approval/punch-time-approval.component';
 import { AttendenceCalenderComponent } from './pages/attendence-calender/attendence-calender.component';
+// import { CalendarComponent } from './pages/calendar/calendar/calendar.component';
+import { ApplyResignationComponent } from './pages/separation/apply-resignation/apply-resignation/apply-resignation.component';
+import { ApproveResignationComponent } from './pages/separation/approve-resignation/approve-resignation/approve-resignation.component';
+import { ResignationChecklistComponent } from './pages/separation/resignation-checklist/resignation-checklist/resignation-checklist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -143,9 +147,24 @@ const routes: Routes = [
   {
     path:'regurlization-history',component:PunchTimeComponent
   },
+  // {
+  //   path:'timesheet',component:AttendenceCalenderComponent
+  // },
+
   {
-    path:'timesheet',component:AttendenceCalenderComponent
+    path: 'apply-resignation',
+    component: ApplyResignationComponent
   },
+  {
+    path: 'approve-resignation',
+    component: ApproveResignationComponent
+  },
+
+  {
+    path: 'resignation-checklist',
+    component: ResignationChecklistComponent
+  },
+  
   // {
   //   path:'emp-employement-history',component:EmploymentDetailsComponent
   // },
