@@ -52,9 +52,9 @@ export class RegularizationApplyComponent {
 
   createAttendanceRow(): FormGroup {
     return this.fb.group({
-      timeIn: [''],
-      timeOut: [''],
-      remark: ['']
+      timeIn: ['', Validators.required],
+      timeOut: ['',Validators.required],
+      remark: ['',Validators.required]
     });
   }
 
