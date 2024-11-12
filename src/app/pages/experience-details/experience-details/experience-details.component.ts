@@ -45,7 +45,7 @@ export class ExperienceDetailsComponent {
       this.token = JSON.parse(localStorage.getItem('token') as string);
       const decodedToken: any = jwtDecode(this.token);
       debugger
-      this.roleID = decodedToken.nameid;
+      this.roleID = (JSON.parse(localStorage.getItem('roles') as string)).roleID;//decodedToken.nameid;
       this.employeeCode = decodedToken.unique_name;
 
       this.fetchFields();
@@ -137,7 +137,7 @@ export class ExperienceDetailsComponent {
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
         formGroup[field.fieldName] = this.fb.control(
-          { value: field.defaultValue || '', disabled: isDisabled },
+          { value: field.defaultValue!=''? field.defaultValue : ''},//, disabled: isDisabled },
           validators
         );
 

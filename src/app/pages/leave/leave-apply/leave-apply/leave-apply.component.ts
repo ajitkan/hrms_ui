@@ -600,14 +600,5 @@ calculateLeaveCounts(): void {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Adding 1 to include the end date
   
     return diffDays;
-  }
-  
-  // getApproverByLevel(level: number): any {
-  //   return this.leaveApprovers?.find(approver => approver.approvalLevel === level) || null;
-  // }
-  // get showAddButton(): boolean {
-  //   // Show button if there are removed dates
-  //   return this.removedDates.size > 0;
-  // }
-  
+  }  
 }

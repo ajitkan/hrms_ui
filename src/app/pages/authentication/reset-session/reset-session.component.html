@@ -1,0 +1,178 @@
+<!-- 
+   <div *ngIf="!isSnapshot" class="modal-header" #changePasswordModel>
+    <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeChangePasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div *ngIf="!isSnapshot" class="modal-body">
+    <div *ngIf="alertMessage" [ngClass]="'alert alert-' + alertType">
+        {{ alertMessage }}
+      </div>
+      
+    <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePasswordForm()">
+        <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control"
+                required>
+            <div *ngIf="cp['currentPassword'].touched && cp['currentPassword'].invalid" class="text-danger">
+                Current Password is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" formControlName="newPassword" class="form-control" required>
+            <div *ngIf="cp['newPassword'].touched && cp['newPassword'].invalid" class="text-danger">
+                New Password is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmNewPassword">Confirm New Password</label>
+            <input type="password" id="confirmNewPassword" formControlName="confirmNewPassword" class="form-control"
+                required>
+            <div *ngIf="cp['confirmNewPassword'].touched && cp['confirmNewPassword'].invalid" class="text-danger">
+                Confirm New Password is required.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+ 
+<div *ngIf="isSnapshot" class="reset-password-wrapper">
+    
+    <div class="reset-password-container">
+        <div *ngIf="alertMessage" [ngClass]="'alert alert-' + alertType">
+            {{ alertMessage }}
+          </div>
+      <h3 class="mb-4 mt-0">Reset Password</h3>
+     
+      <form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetPassword()">
+        <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input
+              type="password"
+              id="currentPassword"
+              formControlName="currentPassword"
+              class="form-control"
+            />
+            <div *ngIf="resetPasswordForm.get('currentPassword')?.invalid && resetPasswordForm.get('currentPassword')?.touched">
+              <small class="text-danger">Password is required and must be at least 6 characters.</small>
+            </div>
+          </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input
+            type="password"
+            id="newPassword"
+            formControlName="newPassword"
+            class="form-control"
+          />
+          <div *ngIf="resetPasswordForm.get('newPassword')?.invalid && resetPasswordForm.get('newPassword')?.touched">
+            <small class="text-danger">Password is required and must be at least 6 characters.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control"
+          />
+          <div *ngIf="resetPasswordForm.get('confirmPassword')?.invalid && resetPasswordForm.get('confirmPassword')?.touched">
+            <small class="text-danger">Confirm password is required and Entered new password and confirm new password are not match..</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" >Reset Password</button>
+      </form>
+    </div>
+  </div> -->
+<!-- ResetLoginModalComponent -->
+
+<ng-template #resetLoginModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Reset Session</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- Form content goes here -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Form fields for companyCode, employeeCode, password, etc. -->
+      <div class="form-container">
+        <div class="login-section text-center clearfix CredentialsDiv p10">
+          <h3 class="text-center loginlabel">Your session has expired. Please reset your login.</h3>
+          
+          <!-- Company Code Field -->
+          <div class="form-group">
+            <label for="companyCode" class="float-left loginlabel">Company Code</label>
+            <input 
+              formControlName="companyCode" 
+              id="txtCompanyCode" 
+              placeholder="Company Code" 
+              class="form-control" 
+              [ngClass]="{'is-invalid': loginForm.get('companyCode')?.touched && loginForm.get('companyCode')?.invalid}">
+            
+            <!-- Validation Message for Company Code -->
+            <div *ngIf="loginForm.get('companyCode')?.touched && loginForm.get('companyCode')?.invalid" class="text-danger error-message">
+              <div *ngIf="loginForm.get('companyCode')?.errors?.['required']">Company Code is required.</div>
+            </div>
+          </div>
+    
+          <!-- Employee Code Field -->
+          <div class="form-group">
+            <label for="employeeCode" class="float-left loginlabel">Employee Code</label>
+            <input 
+              formControlName="employeeCode" 
+              id="txtEmpCode" 
+              placeholder="Employee Code" 
+              class="form-control" 
+              [ngClass]="{'is-invalid': loginForm.get('employeeCode')?.touched && loginForm.get('employeeCode')?.invalid}">
+            
+            <!-- Validation Message for Employee Code -->
+            <div *ngIf="loginForm.get('employeeCode')?.touched && loginForm.get('employeeCode')?.invalid" class="text-danger error-message">
+              <div *ngIf="loginForm.get('employeeCode')?.errors?.['required']">Employee Code is required.</div>
+            </div>
+          </div>
+    
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="password" class="float-left loginlabel">Password</label>
+            <div class="input-group">
+              <input 
+                formControlName="password" 
+                [type]="passwordVisible ? 'text' : 'password'" 
+                id="txtPassword" 
+                placeholder="Password" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}">
+              
+              <div class="input-group-append">
+                <span class="input-group-text showpass" (click)="togglePasswordVisibility()">
+                  <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </span>
+              </div>
+            </div>
+    
+            <!-- Validation Message for Password -->
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger error-message">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+            </div>
+          </div>
+    
+          <!-- Login Button -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block border-white" [disabled]="loginForm.invalid" style="background-color: #0032A4;">Login</button>
+          </div>
+    
+          <!-- Close Button -->
+          <div class="modal-footer form-group">
+            <button type="button" class="btn btn-primary" (click)="onClose()">Close</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -63,14 +63,14 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Date Range</label>
+                <!-- <label class="form-label">Date Range</label>
                        <select class="form-select" id="financialYear">
                         <option value="10">Select Date Range</option>
                         <option value="10">10 days</option>
                         <option value="30">30 days</option>
                         <option value="90">90 days</option>
                         <option value="365">1 year</option>
-                      </select> 
+                      </select>  -->
                 <div class="row">
                   <div class="col">
                     <label for="startDate" class="form-label">Start Date</label>
@@ -99,7 +99,7 @@
               <th scope="col">Date</th>
               <th scope="col">Reason</th>
               <th scope="col">Status</th>
-              <!-- <th scope="col">Action</th> -->
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -116,18 +116,18 @@
               </td>
               <td>{{ request.leaveReason }}</td>
               <td [ngClass]="getStatusClass(request.leaveStatus)">{{ request.leaveStatus }}</td>
-              <!-- <td>
-                <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
+               <td>
+              <!--  <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
                   <button class="btn btn-reject" [disabled]="request.leaveStatus == 'Reject'" (click)="rejectSingleLeave(request)">
                     Reject
                   </button>
-                </span>
+                </span>-->
                 <span data-toggle="tooltip" data-html="true" [title]="request.leaveStatus == 'Approved' ? 'Already Approved.You cannot approve it again at this time.' : 'Click to Approve'">
-                  <button class="btn btn-approve" [disabled]="request.leaveStatus == 'Approved'" (click)="approveSingleLeave(request)">
-                    Approve
+                  <button class="btn btn-approve" [disabled]="request.leaveStatus == 'Approved'" >
+                    Withdraw 
                   </button>
                 </span>
-              </td> -->
+              </td>
             </tr>
             <tr *ngIf="leaveRequests.length<=0">
               <td colspan="7" >No Records Found!!!</td>

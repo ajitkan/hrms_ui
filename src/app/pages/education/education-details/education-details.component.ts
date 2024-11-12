@@ -25,7 +25,7 @@ export class EducationDetailsComponent {
   private token: any;
   private recordType: string | null = null;
   private employeeCode: string = '';// New property for employeeCode
-  showform=false;
+  showform=true;
   employeeDetails:any;
   educationList: any;
 //   {
@@ -66,7 +66,7 @@ export class EducationDetailsComponent {
       this.token = JSON.parse(localStorage.getItem('token') as string);
       const decodedToken: any = jwtDecode(this.token);
       debugger
-      this.roleID = decodedToken.nameid;
+      this.roleID = (JSON.parse(localStorage.getItem('roles') as string)).roleID;//decodedToken.nameid;
       this.employeeCode = decodedToken.unique_name;
 
       this.fetchFields();
@@ -113,8 +113,9 @@ export class EducationDetailsComponent {
           // validators.push(Validators.required);
           // debugger;
           // validators.push(Validators.email);//Validators.pattern("^[a-z0-9._%+-]+@[a-z.-]+\\.[a-z]{2,4}$")])
-
-          validators.push(Validators.minLength(field.minLength));
+          if(field.minLength!=null){
+            validators.push(Validators.minLength(field.minLength));
+          }
           if(field.maxLength != null){
           validators.push(Validators.maxLength(field.maxLength));
           }
@@ -172,23 +173,23 @@ export class EducationDetailsComponent {
         return null;
       };
     }
-  onButtonClick(fieldTitle: string): void {
+  onButtonClick(educationForm:FormGroup,fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
 
     // Set recordType based on button clicked
     this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
 
     if (fieldTitle === 'Save & Next') {
-      this.onSubmit('Save & Next');
+      this.onSubmit(educationForm,'Save & Next');
     } else if (fieldTitle === 'Save As Draft') {
-      this.onSubmit('Save As Draft');
+      this.onSubmit(educationForm,'Save As Draft');
     } else {
       console.log('Unknown action:', fieldTitle);
     }
   }
 
-  onSubmit(fieldTitle: string): void {
-    if (this.educationForm.valid || fieldTitle === 'Save As Draft') {
+  onSubmit(educationForm:FormGroup,fieldTitle: string): void {
+    if (educationForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.educationForm.getRawValue();
       const extraData = {
         employeeID: formValues.employeeID,
@@ -237,12 +238,12 @@ export class EducationDetailsComponent {
                     const employeeDetailsArray = res.featchEmployeeDetailResponse;
                     if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
                         //  this.employeeDetails = employeeDetailsArray[0].dynamicData;
-                        this.educationList = res.featchEmployeeDetailResponse;
+                        this.educationList = res.featchEmployeeDetailResponse.dynamicData;
                         this.employeeDetails = this.dynamicFormService.BindMasterValue(this.fields,res,this.tabID);
                         if (this.employeeDetails) {
-                            // this.populateFormWithEmployeeDetails(this.employeeDetails);
+                             this.populateFormWithEmployeeDetails(employeeDetailsArray);
                             this.showform = false;
-                            console.log('Employee Details:', this.employeeDetails);
+                            console.log('Employee Details:', employeeDetailsArray);
                         } else {
                             console.error('No employee details found or invalid format:', this.employeeDetails);
                         }
@@ -260,34 +261,76 @@ export class EducationDetailsComponent {
   }
   
   EditEducation(education:any,index:any){
-    this.showform = true;
+    this.showform = false;
     this.populateFormWithEmployeeDetails(education,this.educationList);
   }
   
-  private populateFormWithEmployeeDetails(employeeDetails: any, educationList?:any): void {
-    // Assuming employeeDetails is an object with key-value pairs
-    debugger
-    Object.keys(employeeDetails.dynamicData).forEach(fieldName => {
-      if(fieldName=='Code' || fieldName=='EmpID'|| fieldName=='EMPCode'){
-        console.log(fieldName+" is not a formcontrol");
-      }
-      else{
-        const control = this.educationForm.get(fieldName);
-        if (control) {
-            if (fieldName === 'title') {
-                control.setValue(employeeDetails.dynamicData[fieldName]);
-                this.dynamicFormService.onDropDownChange(this.educationForm, { fieldName, fieldValue: employeeDetails.dynamicData[fieldName] });
+  // private populateFormWithEmployeeDetails(educationDetails: any[], educationList?:any): void {
+  //   // Assuming employeeDetails is an object with key-value pairs
+  //   // debugger
+  //   Object.keys(educationDetails).forEach((education:any) => {
+  //     Object.keys(education.dynamicData).forEach((fieldName:any)=>{
+  //       if(fieldName=='Code' || fieldName=='EmpID'|| fieldName=='EMPCode'){
+  //         console.log(fieldName+" is not a formcontrol");
+  //       }
+  //       else{
+  //         const control = this.educationForm.get(fieldName);
+  //         if (control) {
+  //             if (fieldName === 'title') {
+  //                 control.setValue(education.dynamicData[fieldName]);
+  //                 this.dynamicFormService.onDropDownChange(this.educationForm, { fieldName, fieldValue: education.dynamicData[fieldName] });
+  //             } else {
+  //                 control.setValue(education.dynamicData[fieldName]);
+  //             }
+  //         } else {
+  //             console.warn(`Form control for field '${fieldName}' does not exist.`);
+  //         }
+  //       }
+  //     }) ;
+      
+  //   });
+  //   console.log("SetValue of Form is",this.educationForm);
+  // }
+
+
+  private populateFormWithEmployeeDetails(educationDetails: any[], educationList?: any): void {
+    // Loop through each item in the educationDetails array
+    educationDetails.forEach((education: any) => {
+      // Check if the `dynamicData` object is present
+      if (education.dynamicData) {
+        // Iterate through each key-value pair in the dynamicData object
+        Object.keys(education.dynamicData).forEach((fieldName: any) => {
+          // Skip these fields as they are not form controls
+          if (fieldName === 'Code' || fieldName === 'EmpID' || fieldName === 'EMPCode') {
+            console.log(fieldName + " is not a form control");
+          } else {
+            // Get the form control from the form group using the fieldName
+            const control = this.educationForm.get(fieldName);
+            if (control) {
+              // Handle specific form control behaviors
+              if (fieldName === 'title') {
+                control.setValue(education.dynamicData[fieldName]);
+                // Trigger any dropdown-related changes for the form
+                this.dynamicFormService.onDropDownChange(this.educationForm, {
+                  fieldName,
+                  fieldValue: education.dynamicData[fieldName]
+                });
+              } else {
+                // Set the value of the form control
+                control.setValue(education.dynamicData[fieldName]);
+              }
             } else {
-                control.setValue(employeeDetails.dynamicData[fieldName]);
+              console.warn(`Form control for field '${fieldName}' does not exist.`);
             }
-        } else {
-            console.warn(`Form control for field '${fieldName}' does not exist.`);
-        }
+          }
+        });
+      } else {
+        console.warn('No dynamicData found in the educationDetails item');
       }
     });
-    console.log("SetValue of Form is",this.educationForm);
-  }
-
+  
+    console.log("SetValue of Form is", this.educationForm);
+  }  
 
 
   private getNextTabID(currentTabID: number): number {
@@ -299,6 +342,7 @@ export class EducationDetailsComponent {
 
   showForm(){
     this.showform = !this.showform;
+    this.educationForm.reset();
   }
 }
 

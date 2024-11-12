@@ -12,14 +12,14 @@
 <div class="education-container">
   <div class="row">
     <h3 style="width: 80%;">Education Details</h3>
-    <button id="basic" type="button" class="btn btn-primary" (click)="showForm();" style="width: 18%; padding: 0.5%;">
+    <button  *ngIf="!showform" id="basic" type="button" class="btn btn-primary" (click)="showForm();" style="width: 18%; padding: 0.5%;">
       <i class="bi bi-plus-circle"></i> Add Education
     </button>
   </div>
   
   <hr>
-  <div  *ngIf="employeeDetails && (showform || employeeDetails.featchEmployeeDetailResponse.length<=0)" >
-    <form class="educationForm"[formGroup]="educationForm">
+  <div  *ngIf="showform || (employeeDetails && employeeDetails.featchEmployeeDetailResponse.length<=0)" >
+    <form class=" mt-4 educationForm"[formGroup]="educationForm">
       <div *ngFor="let row of dynamicFormService.getRows(fields); trackBy: dynamicFormService.trackByFn" class="form-row">
         <div *ngFor="let field of row" 
             [ngClass]="{'col-6': dynamicFormService.isSingleFieldOrButtonRow(row), 'form-group': true}">
@@ -60,7 +60,7 @@
           <button 
             *ngIf="field.controls === 'BUTTON'" 
             type="button" 
-            (click)="onButtonClick(field.fieldTitle)">
+            (click)="onButtonClick(educationForm,field.fieldTitle)">
             <fa-icon [icon]="['fas', field.iconName]"></fa-icon>
             {{ field.fieldTitle }}
           </button>
@@ -69,7 +69,7 @@
     </form>
   </div>
 
-<div *ngIf="employeeDetails && employeeDetails.featchEmployeeDetailResponse.length>0 && !showform">
+<div *ngIf="!showform || (employeeDetails && employeeDetails.featchEmployeeDetailResponse.length>0)">
 <div class="accordion" id="accordionExample" *ngFor="let education of employeeDetails.featchEmployeeDetailResponse; let i=index;">
     <!-- First Panel -->
     <div class="accordion-item" style="

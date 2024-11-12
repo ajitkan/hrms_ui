@@ -65,8 +65,7 @@
                     style="background-color: #4c6fbf;"
                     >
                     <i class="fas fa-less-than"></i>
-                    </div>
-                   
+                    </div>                  
                 </div>
                 </div>
                 <div class="col-md-4">
@@ -86,325 +85,42 @@
                             <i class="fas fa-greater-than"></i>
                         </div>
                     </div>
-
-                        <!-- <div
-                        class="btn btn-primary"
-                        (click)="setView(CalendarView.Month)"
-                        [class.active]="view === CalendarView.Month"
-                        >
-                        Month
-                        </div>
-                        <div
-                        class="btn btn-primary"
-                        (click)="setView(CalendarView.Week)"
-                        [class.active]="view === CalendarView.Week"
-                        >
-                        Week
-                        </div>
-                        <div
-                        class="btn btn-primary"
-                        (click)="setView(CalendarView.Day)"
-                        [class.active]="view === CalendarView.Day"
-                        >
-                        Day
-                        </div>
-                    </div> -->
                 </div>
             </div>
         <br />
         <div [ngSwitch]="view">
             <mwl-calendar-month-view
-            *ngSwitchCase="CalendarView.Month"
-            [viewDate]="viewDate"
-            [events]="events"
-            [refresh]="refresh"
-            
-            (dayClicked)="dayClicked($event.day)"
-            (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)"
-            >
-            </mwl-calendar-month-view>
-            <!-- <mwl-calendar-week-view
-            *ngSwitchCase="CalendarView.Week"
-            [viewDate]="viewDate"
-            [events]="events"
-            [refresh]="refresh"
-            (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)"
-            >
-            </mwl-calendar-week-view>
-            <mwl-calendar-day-view
-            *ngSwitchCase="CalendarView.Day"
-            [viewDate]="viewDate"
-            [events]="events"
-            [refresh]="refresh"
-            (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)"
-            >
-            </mwl-calendar-day-view> -->
-        </div>
-  
-  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-  
-  <!-- <br /><br /><br /> -->
-  
-  <!-- <h3>
-    Edit events
-    <button class="btn btn-primary float-end" (click)="addEvent()">
-      Add new
-    </button>
-    <div class="clearfix"></div>
-  </h3> -->
-  
-  <!-- <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Primary color</th>
-          <th>Secondary + text color</th>
-          <th>Starts at</th>
-          <th>Ends at</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-  
-      <tbody>
-        <tr *ngFor="let event of events">
-          <td>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="event.title"
-              (keyup)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              type="color"
-              [(ngModel)]="event.color.primary"
-              (change)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              type="color"
-              [(ngModel)]="event.color.secondary"
-              (change)="refresh.next()"
-            />
-            <input
-              type="color"
-              [ngModel]="event.color.secondaryText ?? '#1e90ff'"
-              (ngModelChange)="event.color.secondaryText = $event"
-              (change)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.start"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.end"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteEvent(event)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
-<!--   
-  <ng-template #modalContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Event action occurred</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        Action:
-        <pre>{{ modalData?.action }}</pre>
-      </div>
-      <div>
-        Event:
-        <pre>{{ modalData?.event | json }}</pre>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="close()">
-        OK
-      </button>
-    </div>
-  </ng-template> -->
-  
-            <!-- <div  class="row text-center">
-                <div  class="col-md-4">
-                  <div  class="btn-group">
-                    <div  class="btn btn-primary">
-                      <i class="fa-solid fa-less-than"></i>
-                    </div>
-              </div>
-                </div>
-                <div  class="col-md-4">
-                  <h3 >September 2024</h3>
-                </div>
-                <div class="col-md-4">
-                    <div  class="btn-group">
-                    
-                    
-                    <div  class="btn btn-primary">
-                      <i class="fa-solid fa-greater-than"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="calendar">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="border-radius: 10px 0 0 0;">Sun</th>
-                      <th>Mon</th>
-                      <th>Tue</th>
-                      <th>Wed</th>
-                      <th>Thu</th>
-                      <th>Fri</th>
-                      <th style="border-radius: 0 10px 0 0;">Sat</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let week of weeks">
-                      <td *ngFor="let day of week">
-                        <div class="day-box" [ngClass]="getDayClass(day)">
-                          <span *ngIf="day.date">{{ day.date | date: 'd' }}</span>
-                          <span *ngIf="!day.date"></span> 
-                          <br />
-                          <span>{{ day.finalStatusName=='NoStatus'?'':day.finalStatusName }}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div> -->
-              
-            <!-- <div class="calendar">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Sun</th>
-                      <th>Mon</th>
-                      <th>Tue</th>
-                      <th>Wed</th>
-                      <th>Thu</th>
-                      <th>Fri</th>
-                      <th>Sat</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let week of weeks">
-                      <td *ngFor="let day of week">
-                        <div class="day-box" [ngClass]="getDayClass(day)">
-                          <span>{{ day.date | date: 'd' }}</span>
-                          <br />
-                          <span>{{ day.finalStatusName }}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div> -->
-              
-            <!-- <div class="calendar">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Sun</th>
-                      <th>Mon</th>
-                      <th>Tue</th>
-                      <th>Wed</th>
-                      <th>Thu</th>
-                      <th>Fri</th>
-                      <th>Sat</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let week of weeks">
-                      <td *ngFor="let day of week">
-                        <div class="day-box" [ngClass]="getDayClass(day)">
-                          <span>{{ day.date | date: 'd' }}</span>
-                          <br />
-                          <span>{{ day.finalStatusName }}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div> -->
-            <!-- <div class="calendar-container">
-                <div class="row">
-                  <div class="col" *ngFor="let day of calendarDays">
-                    <div class="day-box">
-                      <div class="date">{{ day.date }}</div>
-                      <div class="day-name">{{ day.day }}</div>
-                      <div class="remark">{{ day.status }}</div>
-                      <div class="remark">{{ day.remark }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-            <!-- Calendar Table for Whole Month -->
-            <!-- <table class="table table-bordered text-center">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody id="calendarBody">
-                    <tr *ngFor="let week of calendar">
-                        <td *ngFor="let day of week">
-                            <div *ngIf="day">
-                                <span>{{ day.date | date: 'dd' }}</span>
-                                <br>
-                                <span>{{ day.status }}</span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
-        </div>
+                *ngSwitchCase="CalendarView.Month"
+                [viewDate]="viewDate"
+                [dayModifier]="dayModifier"
+                [events]="events"
+                [refresh]="refresh"
+               
+                (dayClicked)="dayClicked($event.day)"
+                 (eventTimesChanged)="eventTimesChanged($event)"
+                [eventTitleTemplate]="customEventTemplate"
+                [ngClass]="viewDay==0  || viewDay==6? 'weekoff':'weekdays'"
+                >
 
-        <!-- Attendance Summary Section -->
+            </mwl-calendar-month-view>
+                <ng-template #customEventTemplate let-event="event">
+                    <div *ngFor="let event of events">
+                        <div class="cal-day-badge" [ngClass]="event.meta.remarks">
+                            {{ event.meta.remarks }}
+                        </div>
+                    </div>
+                    <div 
+                    class="custom-day-cell"
+                    [ngStyle]="{'background-color': getCellBackgroundColor(event.date)}">
+                    {{ event.date | date: 'd' }}
+                    </div>
+                    <div *ngFor="let event of events">
+                        <span class="badge" *ngIf="event.showBadge">Event Badge</span>
+                      </div>
+                </ng-template>          
+            </div>
+        </div>
+       <!-- Attendance Summary Section -->
         <div class="col-md-2">
             <div class="card" style="border: none;">
                 <div class="card-body p-0">
@@ -421,33 +137,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- <div *ngIf="attendanceRecords && (attendanceRecords.attendanceRecords.length > 0); else noRecords">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Attendance ID</th>
-          <th>Employee Code</th>
-          <th>Attendance Date</th>
-          <th>Status</th>
-          <th>Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let record of attendanceRecords.attendanceRecords">
-          <td>{{ record.attendanceID }}</td>
-          <td>{{ record.employeeCode }}</td>
-          <td>{{ record.attendanceDate | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ record.finalStatusName }}</td>
-          <td>{{ record.systemRemark }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <ng-template #noRecords>
-    <p>No attendance records available.</p>
-  </ng-template> -->
-  

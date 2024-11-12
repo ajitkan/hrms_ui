@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params:any) => {
-      this.tabID = params['tabID'];
+      this.tabID = 'tabID' in params ? params['tabID']: 1;
       this.token = JSON.parse(localStorage.getItem('token') as string);
       this.Roles = JSON.parse(localStorage.getItem('roles') as string);
       this.roleID = this.Roles.roleID;
@@ -96,8 +96,9 @@ export class ProfileComponent implements OnInit {
         
         // Initialize the control with its value and disabled state
         const isDisabled = field.isEdit === false;
+        debugger;
         formGroup[field.fieldName] = this.fb.control(
-          { value: field.defaultValue || ''}, //disabled: isDisabled },
+          { value: field.defaultValue?field.defaultValue:''}, //disabled: isDisabled },
           validators
         );
   
@@ -105,6 +106,12 @@ export class ProfileComponent implements OnInit {
 
         // Fetch dropdown options if the field is a dropdown
         if (field.controls === 'DROPDOWNLIST') {
+          // let masterPayload = {
+          //   fieldID:field.fieldID,
+          //   tabID:field.tabID,
+          //   Param1:
+          //   Param2:
+          // }
           this.dynamicFormService.fetchDropdownOptions(field.fieldID, field.tabID).subscribe({
             next: (res: any) => {
               if (res.code === 1 && Array.isArray(res.masterList)) {
@@ -125,7 +132,9 @@ export class ProfileComponent implements OnInit {
     });
   
     // Create the form group
+    debugger;
     this.profileForm = this.fb.group(formGroup);
+    // this.profileForm.reset();
   }
   
   onButtonClick(fieldTitle: string): void {
@@ -186,51 +195,7 @@ export class ProfileComponent implements OnInit {
       this.alertType = 'error';
     }
   }
-  
-//   fetchEmployeeDetails(): void {
-//     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
-//         .subscribe({
-//             next: (res: any) => {
-//               console.log('res--->',res);
-              
-//                 if (res.code === 1) {
-                  
-//                     const employeeDetails = res.featchEmployeeDetailResponse; // Ensure this property name matches
-//                     if (employeeDetails && Array.isArray(employeeDetails)) {
-//                         this.populateFormWithEmployeeDetails(employeeDetails);
-//                         console.log('Employee Details:', employeeDetails);
-//                     } else {
-//                         console.error('No employee details found or invalid format:', employeeDetails);
-//                     }
-//                 } else {
-//                     console.error('Error fetching employee details:', res.message);
-//                 }
-//             },
-//             error: (err: any) => {
-//                 console.error('Error:', err.message);
-//             }
-//         });
-// }
-
-// private populateFormWithEmployeeDetails(employeeDetails: any[]): void {
-//     // Assuming profileForm is a FormGroup
-//     employeeDetails.forEach(detail => {
-//         if (detail.isApplicable) {
-//           debugger;
-//             const control = this.profileForm.get(detail.fieldName);
-//             if (control) {
-//               if(detail.fieldName === 'title'){
-//                 control.setValue(detail.fieldValue);
-//                 this.dynamicFormService.onDropDownChange(this.profileForm,detail);
-//               }
-//               control.setValue(detail.fieldValue);
-//             } else {
-//                 console.warn(`Form control for field '${detail.fieldName}' does not exist.`);
-//             }
-//         }
-//     });
-// }
-
+ 
 fetchEmployeeDetails(): void {
   this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
       .subscribe({
@@ -242,6 +207,7 @@ fetchEmployeeDetails(): void {
                   if (employeeDetailsArray && Array.isArray(employeeDetailsArray) && employeeDetailsArray.length > 0) {
                       // const employeeDetails = employeeDetailsArray[0].dynamicData;
                       this.educationList = res.featchEmployeeDetailResponse[0];
+                      debugger;
                       this.employeeDetails = this.dynamicFormService.BindMasterValue(this.fields,res,this.tabID);
                       if (this.employeeDetails) {
                           this.populateFormWithEmployeeDetails(this.employeeDetails.featchEmployeeDetailResponse[0]);
@@ -276,10 +242,11 @@ private populateFormWithEmployeeDetails(employeeDetails: any, educationList?:any
       const control = this.profileForm.get(fieldName);
       if (control) {
           if (fieldName === 'title') {
-              control.setValue(employeeDetails.dynamicData[fieldName]);
+            
+              control.setValue(employeeDetails.dynamicData[fieldName]!=''?employeeDetails.dynamicData[fieldName]:'');
               this.dynamicFormService.onDropDownChange(this.profileForm, { fieldName, fieldValue: employeeDetails.dynamicData[fieldName] });
           } else {
-              control.setValue(employeeDetails.dynamicData[fieldName]);
+              control.setValue(employeeDetails.dynamicData[fieldName]!=''?employeeDetails.dynamicData[fieldName]:'');
           }
       } else {
           console.warn(`Form control for field '${fieldName}' does not exist.`);

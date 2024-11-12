@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { Role } from './models/roles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from './service/api.service';
+import { AuthService } from './service/auth-service/auth.service';
+import { ResetSessionComponent } from './pages/authentication/reset-session/reset-session.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,9 @@ import { ApiService } from './service/api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-[x: string]: any;
+  @ViewChild(ResetSessionComponent)
+  resetLoginModalComponent!: ResetSessionComponent;
+
   title = 'hrms_ui';
   IsLogin = false;
   IsLogout = true;
@@ -33,38 +37,67 @@ export class AppComponent {
   backTab: any | null = null; 
 previousScreenID: any | null = null; 
 showBackButton = false;
+isModalOpen: boolean = false;
+
+constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
+  private authService: AuthService,
+){
+  this.authService.modalOpen$.subscribe((state: boolean) => {
+    this.isModalOpen = state;
+  });
+}
+ngOnInit(){
+  this.isSecondSidebarVisible = false;
+  this.token = JSON.parse(localStorage.getItem('token')as string);
+  if (this.router.url.includes('reset-password')) {
+    this.isSnapshot = true;
+  }
+  
+  console.log("IsLogin",this.IsLogin);
+  console.log('Notification count',this.notificationCount);
+  // alert("login Success");
+  // this.IsLogin = true;
+  this.userLogIn = JSON.parse(sessionStorage.getItem('user')! as string);
+  if(this.token!=null){
+    this.IsLogin = true;
+    this.screens = JSON.parse(localStorage.getItem('screens') as string);
+    this.isSnapshot = false;
+  }
+    this.authService.modalOpen$.subscribe(() => {
+    this.resetLoginModalComponent.openModal();
+  });
+
+}
+ngAfterViewInit(): void {
+  // Trigger the modal after view initialization to avoid undefined errors
+  if (this.authService) {
+    this.authService.modalOpen$.subscribe(() => {
+      this.openModal();
+    });
+  }
+}
 
   selectScreen(screen: any): void {
     this.selectedScreen = screen;
-    debugger
     if(this.selectedScreen ='onboarding'){
+
       this.router.navigateByUrl('');
+
     }
     if(screen!='' ){
       this.fetchTabs(screen.screenID);
     }
   }
-  navigateToURL(url: string | null) {
-    if (url) {
-      window.location.href = url; // Navigate to the absolute URL
-    }
-  }
-  logScreenURL(screenURL: string | null) {
-    console.log('Navigating to:', screenURL);
-  }
-  // selectTab(tab: any) {
-   
-  //   this.selectedTab = tab;
-
-  //   if (tab && tab.route) {
-      
-  //     this.router.navigate([tab.route], { queryParams: { tabID: tab.tabID } });
-  //   } 
-  //   else {
-  //     console.warn('No route provided for the selected tab');
-  //   }
-  // }
   
+ navigateToURL(url: string | null) {
+
+  if (url) {
+
+    window.location.href = url; // Navigate to the absolute URL
+
+  }
+
+}
   selectTab(tab: any) {
     // Check if the selected tab is the "Back" tab
     if (tab && tab.tabTitle === 'Back') {
@@ -110,36 +143,13 @@ showBackButton = false;
     TimeSection:true
   };
 
-  constructor(private router:Router,private route:ActivatedRoute,private httpService:ApiService,
-    private modalService: NgbModal,
-  ){
-  }
-  ngOnInit(){
-    this.token = JSON.parse(localStorage.getItem('token')as string);
-    if (this.router.url.includes('reset-password')) {
-      this.isSnapshot = true;
-      // this.isResetPasswordRoute = true;
-      // this.openChangePasswordModal();
-      
-    }
-    
-    console.log("IsLogin",this.IsLogin);
-    console.log('Notification count',this.notificationCount);
-    // alert("login Success");
-    // this.IsLogin = true;
-    this.userLogIn = JSON.parse(sessionStorage.getItem('user')! as string);
-    if(this.token!=null){
-      this.IsLogin = true;
-      this.screens = JSON.parse(localStorage.getItem('screens') as string);
-      this.isSnapshot = false;
-    }
-    // if(localStorage.getItem('LoggedIn') !== null){
-    //   this.IsLogin = Boolean(localStorage.getItem('LoggedIn'))
-    // }
-
-  }
-
  
+
+  openModal(){
+    if (this.resetLoginModalComponent) {
+      this.resetLoginModalComponent.openModal();
+    }
+  }
 
   get isAdmin() {
     // this.userLogIn = JSON.parse(sessionStorage.getItem('user')!);
@@ -164,10 +174,12 @@ showBackButton = false;
     if (!event.isLoggedIn) {
       this.screens = [];
       this.notificationCount = 0;
+      this.isSecondSidebarVisible = false;
       // debugger;
       //localStorage.removeItem('LoggedIn');
     } else {
       // debugger;
+      this.isSecondSidebarVisible = false;
       this.screens = event.screens;
       this.notificationCount = event.notificationCount.notification;
       // this.isCollapsed = event.isCollapsed;
@@ -215,46 +227,6 @@ showBackButton = false;
     }
     return;
   }
-
-
-  // fetchTabs(screenID: any) {
-  //   var screens = JSON.parse(localStorage.getItem('screens') as string);
-    
-  //   if (screens != null) {
-  //     screens.forEach((screen: any) => {
-  //       if (screen.screenID == screenID) {
-  //         this.previousScreenID = screen.screenID; // Store the current screen ID
-  
-  //         this.httpService.fetchTabs(screen.roleID, screen.screenID).subscribe({
-  //           next: (res: any) => {
-  //             if (res.code == 1) {
-  //               console.log('Tabs for given screens is :', res.tabResponces);
-  //               this.tabs = res.tabResponces;
-  
-  //               debugger
-  //               this.backTab = this.tabs.find((tab: any) => tab.tabTitle === 'Back');
-  //               this.showBackButton = !!this.backTab;
-  
-  //               this.isFirstSidebarVisible = false;
-  //               this.isSecondSidebarVisible = true;
-  //             } else {
-  //               console.log(res.message);
-  //             }
-  //           },
-  //           error: (err: any) => {
-  //             console.log(err.message);
-  //           }
-  //         });
-  //       } else {
-  //         return;
-  //       }
-  //     });
-  //   }
-  //   return;
-  // }
-  
-  
-
   navigateBack() {
     if (this.previousScreenID) {
       this.fetchTabs(this.previousScreenID);

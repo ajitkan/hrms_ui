@@ -39,7 +39,7 @@ export class BankDetailsComponent {
       this.token = JSON.parse(localStorage.getItem('token') as string);
       const decodedToken: any = jwtDecode(this.token);
       debugger
-      this.roleID = decodedToken.nameid;
+      this.roleID = (JSON.parse(localStorage.getItem('roles') as string)).roleID;//decodedToken.nameid;
       this.employeeCode = decodedToken.unique_name;
 
       this.fetchFields();
