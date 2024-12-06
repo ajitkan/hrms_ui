@@ -17494,8 +17494,8 @@ html[dir=rtl] .sidebar li > a .caret:before {
   /* Light green for present */
 }
 
-.no-status {
-  background-color: #fce4ec; /* Light pink for no status */
+/* .no-status {
+  background-color: #fce4ec; 
 }
 .holiday{
  color:  #4c6fbf !important;
@@ -17511,4 +17511,19 @@ html[dir=rtl] .sidebar li > a .caret:before {
 }
 .fs10{
   font-size: 10px;
-}
+} */
+
+
+
+
+
+
+
+/* Global styles for the selected-day class */
+/* .selected-day {
+  background-color: rgb(255, 250, 240) !important;
+  border: 2px solid #3498db;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+} */

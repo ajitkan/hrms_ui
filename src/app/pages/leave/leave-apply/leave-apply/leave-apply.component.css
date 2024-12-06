@@ -114,7 +114,7 @@
     /* background-color: #fff; */
     padding: 20px;
     border-radius: 10px;
-    width: 195%;
+    width: 100%;
     /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
 }
 .container2 {
@@ -496,4 +496,14 @@ button:hover {
 .remove-btn:hover {
   color: #a71d2a; 
   text-decoration: underline; 
+}
+
+
+
+.bs-datepicker {
+  z-index: 1050 !important; /* Ensure it appears above other elements */
+}
+
+.bs-datepicker .bs-datepicker-body {
+  background-color: #e44a4a;
 }

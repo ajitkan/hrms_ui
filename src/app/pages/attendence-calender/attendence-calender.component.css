@@ -1,87 +1,15 @@
-/* .calendar-table {
-    width: 100%;
-  }
-  
-  .calendar-day {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .date {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .calendar-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-  
-  .day-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    width: 100px;
-    margin: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .date {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .day-name {
-    font-size: 14px;
-  }
-  
-  .status {
-    font-size: 12px;
-    color: #007bff;
-  }
-  
-  .remark {
-    font-size: 10px;
-    color: #999;
-  }
-  .table {
-    width: 100%;
-    table-layout: fixed;
-  }
-  
-  .day-box {
-    padding: 10px;
-    text-align: center;
-    height: 100px;
-  }
-  
-  .holiday {
-    background-color: #ffcccc;
-  }
-  
-  .weekoff {
-    background-color: #cceeff;
-  }
-  
-  .no-status {
-    background-color: #e6e6e6;
-  }
-  
-  td {
-    vertical-align: top;
-  }
-   */
+/* 
 
    .weekoff {
-    background-color: #cceeff; /* Blue for Weekends */
+    background-color: #cceeff; 
   }
   
   .holiday {
-    background-color: #ffcccc; /* Red for Holidays */
+    background-color: #ffcccc; 
   }
   
   .no-status {
-    background-color: #e6e6e6; /* Gray for No Status */
+    background-color: #e6e6e6; 
   }
   
   .day-box {
@@ -103,34 +31,13 @@
 
 
 
-  /* Style for specific calendar cells */
-
-  /* .week-off {
-    background-color: #eeeeee; /* Light gray for week-off */
-  } */
-  
-  /* .absent {
-    background-color: #ffcdd2; /* Light red for absent */
-  } */
-  
-  /* .present { */
-    /* background-color: #c8e6c9;  */
-    /* background-color: #ece7e7; */
-    /* Light green for present */
-  /* } */
-  
-  /* .no-status {
-    background-color: #fce4ec; /* Light pink for no status */
-  } */
-
-  
-  /* Existing styles for today and weekend */
+ 
   .cal-today {
-    border: 2px solid #64b5f6; /* Blue border for today */
+    border: 2px solid #64b5f6; 
   }
   
   .cal-weekend {
-    background-color: #ffebee; /* Light red for weekends */
+    background-color: #ffebee; 
   }
   
   .calendar-container {
@@ -160,30 +67,29 @@
     padding: 2px;
   }
   .cal-day-cell.half-day {
-    background-color: #ffeb3b; /* Yellow for Half Day */
+    background-color: #ffeb3b;
   }
   .cal-day-cell.week-off {
-    background-color: #90caf9; /* Light Blue for Week Off */
+    background-color: #90caf9; 
   }
   .cal-day-cell.absent {
-    background-color: #ef9a9a; /* Light Red for Absent */
+    background-color: #ef9a9a; 
   }
-  /* .cal-day-cell.present {
-    background-color: #a5d6a7; /* Light Green for Present */
-  } */
+
+
   .cal-day-cell.no-status {
-    background-color: #cfd8dc; /* Light Gray for No Status */
+    background-color: #cfd8dc; 
   }  
   .weekoff,.weekdays{
     background-color: black !important;
   }
 
   .cal-day-with-badge .cal-day-badge {
-    background-color: red; /* Set badge color */
+    background-color: red; 
     color: white;
   }
   .badge-remark {
-    background-color: #f0ad4e; /* Change color based on your needs */
+    background-color: #f0ad4e; 
     border-radius: 4px;
     padding: 5px;
     margin: 2px 0;
@@ -194,3 +100,283 @@
   .w14{
     width: 14.27% !important;
   }
+
+
+
+
+  .calendar-container {
+    width: 100%;
+  }
+  
+  .day-container {
+    text-align: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .status-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red; 
+    margin: 0 auto 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+  }
+  
+  .text-black {
+    color: #000;
+  }
+  
+  .text-danger {
+    color: #f44336;
+  }
+  
+  .holiday {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .week {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .table-bordered td:hover .status-circle {
+    transform: scale(1.2); 
+    transition: transform 0.2s ease-in-out;
+  }
+   */
+
+
+
+
+
+
+
+
+   .calendar-container {
+    width: 100%;
+  }
+  
+  .day-container {
+    text-align: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .bi-circle-fill {
+    font-size: 12px; /* Adjust circle size */
+    display: inline-block;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+  }
+  
+  .text-danger {
+    color: #f44336 !important; 
+   
+  }
+  
+  .table-bordered td:hover .bi-circle-fill {
+    transform: scale(1.2); /* Slight enlargement on hover */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+
+  .calendar-container {
+    width: 100%;
+  }
+  
+  .day-container {
+    text-align: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .bi-circle-fill {
+    font-size: 12px; /* Adjust circle size */
+    display: inline-block;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .text-absent {
+    color: #f44336; /* Red for "Absent" */
+  }
+
+  
+  .text-leave-apply {
+    color: #ff9800; /* Orange for "Leave Apply" */
+  }
+  
+  .text-half-day {
+    color: #ffc107; /* Yellow for "Half Day" */
+  }
+  
+  .text-leave-approved {
+    color: #4caf50; /* Green for "Leave Approved" */
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+   
+  }
+  
+  .table-bordered td:hover .bi-circle-fill {
+    transform: scale(1.2); /* Slight enlargement on hover */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+
+
+
+  /* Style for the circle indicating status */
+.status-circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.white-circle {
+  background-color: white;
+}
+
+.red-circle {
+  background-color: red; /* Red circle for absent */
+}
+
+.gray-circle {
+  background-color: gray;
+}
+
+.blue-circle {
+  background-color: blue;
+}
+
+.yellow-circle {
+  background-color: yellow;
+}
+
+.green-circle {
+  background-color: green;
+}
+
+/* .tooltip-container {
+  display: inline-block;
+}
+
+.tooltip-container i {
+  cursor: pointer;
+} */
+
+/* Show the tooltip when hovering on the circle */
+[data-bs-toggle="tooltip"]:hover::after {
+  content: attr(title);
+  display: block;
+  background-color: gray;
+  color: white;
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+/* [title] {
+  pointer-events: none; 
+} */
+
+
+
+
+[data-bs-toggle="tooltip"]:hover::after {
+  content: attr(data-title); 
+  display: block;
+  background-color: gray;
+  color: white;
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+/* [data-bs-toggle="tooltip"] {
+  position: relative;
+ 
+} */
+
+/* .tooltip-inner {
+  white-space: pre-line;  
+  background-color: #333; 
+  color: white;           
+  font-size: 12px;        
+  padding: 10px;         
+  border-radius: 5px;     
+} */
+
+
+/* [data-bs-toggle="tooltip"]:hover::after {
+ 
+  margin-top: 2px;
+} */
+
+
+
+
+
+
+.no-status {
+  background-color: #fce4ec; 
+}
+.holiday{
+ color:  #4c6fbf !important;
+}
+.w14{
+  width: 14.27% !important;
+}
+.h100{
+   height: 100px !important;
+}
+.week{
+  color: #0dcaf0 !important;
+}
+.fs10{
+  font-size: 10px;
+}
+
+
+
+
+      h3 {
+        margin: 0 0 10px;
+      }
+
+      pre {
+        background-color: #f5f5f5;
+        padding: 15px;
+      }
+      thead > tr > th{
+        background-color: #4c6fbf;
+        color:white;
+        height: auto;
+        text-transform: none;
+      }
+

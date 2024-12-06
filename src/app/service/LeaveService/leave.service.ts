@@ -10,6 +10,16 @@ import { environment } from 'src/environments/environments';
 })
 export class LeaveService {
    constructor(private http : HttpClient) { }
+
+
+   getDailyEmployeeGreetings(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetAllDailyEmployeeGreetings`);
+  }
+
+// Send greetings to employees (trigger the greeting sending process)
+sendEmployeeGreetings(): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/UserDetails/SendEmployeeGreetings`, {});
+}
   
   fetchEmployeeLeaveDetails(employeeCode: string): Observable<any> {
     const url = `${environment.apiUrl}/UserDetails/FetchEmployeeLeaveDetails`;

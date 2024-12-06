@@ -48,7 +48,7 @@
     
      -->
 
-     <!-- <div class="container mt-5">
+<!-- <div class="container mt-5">
         <h3>Attendance Calendar</h3>
         <table class="table table-bordered text-center">
           <thead>
@@ -74,136 +74,380 @@
           </tbody>
         </table>
       </div> -->
-      
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid row m-auto p-3">
-            <a class="navbar-brand col-2" href="#"><h5>Attendance Calendar</h5></a>
-            <div class="d-flex justify-content-between align-items-center col-10 rowmb-3">
-                <div class="col-8">
-                    <span style="color: #4c6fbf;font-weight: 600;">Month : </span>
-                    <select class="form-select d-inline-block w-auto me-2" id="monthSelector"(change)="onMonthChange($event)">
-                        <!-- Months will be added dynamically -->
-                         <!-- <option value="month.key">{{month}}</option> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid row m-auto p-3">
+    <a class="navbar-brand col-2" href="#">
+      <h5>Calendar</h5>
+    </a>
+    <div class="d-flex justify-content-between align-items-center col-10 rowmb-3">
+      <div class="col-8">
+        <span style="color: #4c6fbf;font-weight: 600;">Month : </span>
+        <!-- <select class="form-select d-inline-block w-auto me-2" id="monthSelector"(change)="onMonthChange($event)">
+                       
+                        
                          <option *ngFor="let month of monthNames" [value]="month">{{month}}</option>
-                        </select>
-                    <!-- <option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option><option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option></select> -->
-                    <span style="color: #4c6fbf;font-weight: 600;">Year : </span>
-                    <select class="form-select d-inline-block w-auto me-2" id="yearSelector" [(ngModel)]="currentYear" (change)="onYearChange($event)">
-                        <!-- Years will be added dynamically -->
-                        <option *ngFor="let year of years" [value]="year">{{year}}</option>
-                    </select>
-                    <!-- <option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select> -->
-                    <span style="color: #4c6fbf;font-weight: 600;">Shift : </span>
-                    <select class="form-select d-inline-block w-auto">
-                        <option>General: 9.00 - 18.00</option>
-                        <!-- Add other shifts -->
-                    </select>
-                </div>
-                <div class="col-4">
-                    <button class="btn btn-primary col-8" style="    text-transform: capitalize;" [routerLink]="['/regularization-apply']" [queryParams]="{ tabID: 9 }"  >Regularize Attendance</button>
-                    <button class="btn btn-primary col-8 mt-2" style="    text-transform: capitalize;" [routerLink]="['/leave-apply']" [queryParams]="{ tabID: 7 }" >Apply Leave</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+                        </select> -->
+
+        <select class="form-select d-inline-block w-auto me-2" id="monthSelector" [(ngModel)]="selectedMonth"
+          (change)="onMonthChange($event)">
+          <option *ngFor="let month of monthNames; let i = index" [value]="i">{{ month }}</option>
+
+        </select>
+        <!-- <option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option><option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option></select> -->
+        <span style="color: #4c6fbf;font-weight: 600;">Year : </span>
+        <select class="form-select d-inline-block w-auto me-2" id="yearSelector" [(ngModel)]="currentYear"
+          (change)="onYearChange($event)">
+          <!-- Years will be added dynamically -->
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+        <!-- <option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select> -->
+        <!-- <span style="color: #4c6fbf;font-weight: 600;">Shift : </span>
+        <select class="form-select d-inline-block w-auto">
+          <option>General: 9.00 - 18.00</option>
+        
+        </select> -->
+        <!-- <span style="color: #4c6fbf; font-weight: 600;">Shift : </span>
+<span class="form-select d-inline-block w-auto border-0 bg-light">9.00 - 18.00</span> -->
+        <span style="color: #4c6fbf; font-weight: 600;">Shift : </span>
+        <span class="d-inline-block w-auto border-0 bg-light p-2">9.00 - 18.00</span>
+
+
+      </div>
+      <!-- <div class="col-4">
+        <button class="btn btn-primary col-8" style="    text-transform: capitalize;"
+          [routerLink]="['/regularization-apply']" [queryParams]="{ tabID: 9 }">Regularize </button>
+        <button class="btn btn-primary col-8 mt-2" style="    text-transform: capitalize;"
+          [routerLink]="['/leave-apply']" [queryParams]="{ tabID: 7 }">Apply Leave</button>
+      </div> -->
+
+      <div class="col-4">
+        <button class="btn btn-primary col-8" style="text-transform: capitalize;" [routerLink]="['/leave-apply']"
+          [queryParams]="{
+            tabID: 7,
+            selectedDate: selectedDay?.date?.toISOString()  
+          }">
+          Apply Leave
+        </button>
+      </div>
+
+
+      <!-- <div class="col-4">
+        <button class="btn btn-primary col-8" style="text-transform: capitalize;"
+          [routerLink]="['/regularization-apply']" 
+          [queryParams]="{ tabID: 9, selectedDate: selectedDay.date.toISOString() }">
+          Regularize
+        </button>
+      
+        <button class="btn btn-primary col-8 mt-2" style="text-transform: capitalize;"
+          [routerLink]="['/leave-apply']" 
+          [queryParams]="{ tabID: 7, selectedDate: selectedDay.date.toISOString() }">
+          Apply Leave
+        </button>
+      </div>  -->
+
+    </div>
+  </div>
+</nav>
 
 <div class="row employeesearch" style="width: 100%;">
-    <div class="col-md-2">
-        <label for="employeeName">Employee Name</label>
-           
-    <input [(ngModel)]="employeeName" 
-           (input)="onEmployeeNameInputChange($event)" 
-           type="text" 
-           class="form-control" 
-           id="employeeName" 
-           name="employeeName"
-           placeholder="Search Employee Name"
-           autocomplete="off">
+  <div class="col-md-1">
+    <!--  <label for="employeeName">Employee Name</label>
 
-          <!-- Autocomplete dropdown -->
-          <ul *ngIf="filteredEmployees && filteredEmployees.length > 0 && !employeeSelected" 
-              class="dropdown-menu show" 
-              style="top: 10%;left: 2%;">
-            <li *ngFor="let employee of filteredEmployees" 
-                (click)="selectEmployee(employee)" 
-                class="dropdown-item">
-              {{ employee.FirstName+' '+ employee.LastName +'       ' +employee.EmployeeCode}}
-            </li>
-          </ul>
-    </div>
+    <input [(ngModel)]="employeeName" (input)="onEmployeeNameInputChange($event)" type="text" class="form-control"
+      id="employeeName" name="employeeName" placeholder="Search Employee Name" autocomplete="off">
 
-    <!-- Calendar Section -->
-    <div class="col-md-8">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="btn-group">
-                    <div
-                    class="btn btn-primary"
-                    (click)="PreviousMonth()"
-                    style="background-color: #4c6fbf;"
-                    >
-                    <i class="fas fa-less-than"></i>
-                    </div>                  
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>                
-            </div>
-            <div class="col-md-4">
-                <div class="btn-group">
-                    <div
-                        class="btn btn-primary"
-                        style="background-color: #4c6fbf;"
-                        (click)="nextMonth()"
-                        >
-                        <i class="fas fa-greater-than"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let week of calendarData">
-                    <!-- <td *ngFor="let day of week" [ngClass]=" {'background': day.status=='HalfDay'?'linear-gradient(to right, #ffcccb 50%, #ffff99 50%)':getDayClass(day)}"> -->
-                    <td  class="w14 h100" *ngFor="let day of week" [ngClass]="getDayClass(day)">
-                      <div class="row" *ngIf="day">
-                          <!-- <span *ngIf="day.status">{{ day.status!='NoStatus'?day.status!='Leave'? day.status=='Holiday'?day.remark:'':day.remark:'' }}</span>  -->
-                          <!-- <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'"> -->
-                              <!-- <span class="col-6 fs-8 text-start" data-toggle="tooltip" data-html="true" data-placement="top" [title]="day.status!='NoStatus'?day.checkIn - day.checkOut:''" *ngIf="day.status">{{ day.status!='NoStatus'? day.status=='Holiday'?day.remark:day.status:'' }} </span>  -->
-                              <span class="col-6 fs-8 text-start" data-toggle="tooltip" data-html="true" data-placement="top">{{ day.status!='NoStatus'? day.status=='Holiday'?day.remark:day.status:'' }} </span> 
-                              <span class="col-6 text-end"> <h4>{{day.date.getDate()}}</h4></span><br>
-                              <div *ngIf="day.status=='Present' || day.status=='HalfDay' " class="border border-black col-11 p-1 m-auto ">
-                                <span class="fs10 text-black">{{day.checkIn+" - "+day.checkOut}}</span>
-                                 <span class="fs10 text-black">
-                                    Work Hrs- 
-                                    {{
-                                        (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) / 60 | number:'2.0-0'
-                                      }}:
-                                      {{
-                                        (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) % 60
-                                      }} hr
-                                 </span>
-                              </div>
-                               <!-- Display the day number -->
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+   
+    <ul *ngIf="filteredEmployees && filteredEmployees.length > 0 && !employeeSelected" class="dropdown-menu show"
+      style="top: 10%;left: 2%;">
+      <li *ngFor="let employee of filteredEmployees" (click)="selectEmployee(employee)" class="dropdown-item">
+        {{ employee.FirstName+' '+ employee.LastName +' ' +employee.EmployeeCode}}
+      </li>
+    </ul>-->
+  </div>
+
+  <!-- Calendar Section -->
+  <!-- <div class="col-md-9">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
+            <i class="fas fa-less-than"></i>
           </div>
-    <br />
-    
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
+      </div>
+      <div class="col-md-4 ">
+        <div class="btn-group">
+          <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
+            <i class="fas fa-greater-than"></i>
+          </div>
+        </div>
+      </div>
     </div>
-   <!-- Attendance Summary Section -->
-    <div class="col-md-2">
+    <div class="row mt-3">
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of calendarData">
+
+              <td class="w14 h100" *ngFor="let day of week" [ngClass]="getDayClass(day)">
+                <div class="row" *ngIf="day">
+ 
+                  <span class="col-6 fs-8 text-start" data-toggle="tooltip" data-html="true" data-placement="top">{{
+                    day.status!='NoStatus'? day.status=='Holiday'?day.remark:day.status:'' }} </span>
+                  <span class="col-6 text-end">
+                    <h4>{{day.date.getDate()}}</h4>
+                  </span><br>
+                  <div *ngIf="day.status=='Present' || day.status=='HalfDay' "
+                    class="border border-black col-11 p-1 m-auto ">
+                    <span class="fs10 text-black">{{day.checkIn+" - "+day.checkOut}}</span>
+                    <span class="fs10 text-black">
+                      Work Hrs-
+                      {{
+                      (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) / 60 | number:'2.0-0'
+                      }}:
+                      {{
+                      (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) % 60
+                      }} hr
+                    </span>
+                  </div>
+                  
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br />
+
+  </div> -->
+
+  <!-- Calendar Section -->
+  <!-- <div class="col-md-9">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
+            <i class="fas fa-less-than"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
+            <i class="fas fa-greater-than"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of calendarData">
+              <td class="w14 h100" *ngFor="let day of week" [ngClass]="getDayClass(day)">
+                <div class="row" *ngIf="day">
+                  <span class="col-6 fs-8 text-start"></span>
+                  <span class="col-6 text-end">
+                    <h4>{{ day.date.getDate() }}</h4>
+                  </span><br>
+  
+                
+                  <div *ngIf="day.status !== 'NoStatus'" class="text-center">
+                    <span class="status-circle" [ngClass]="day.status" 
+                      [attr.title]="day.status === 'Absent' ? day.remark : ''">
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br />
+  </div>  
+   -->
+
+
+  <div class="col-md-8">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
+            <i class="fas fa-less-than"></i>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="col-md-4">
+        <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
+            <i class="fas fa-greater-than"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody>
+         
+
+             <!-- <tr *ngFor="let week of calendarData">
+              <td 
+                class="w14 h100" 
+                *ngFor="let day of week" 
+                [ngClass]="[
+                  day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
+                  getDayClass(day)
+                ]"
+                (click)="selectDay(day)"
+                [attr.data-bs-toggle]="day?.fullStatus ? 'tooltip' : null"
+                [attr.title]="day?.fullStatus || ''">
+                <div class="row" *ngIf="day">
+                  <span class="col-6 fs-8 text-start"></span>
+                  <span class="col-6 text-end">
+                    <h4>{{ day.date.getDate() }}</h4>
+                  </span>
+                  <br />
+                </div>
+              </td>
+            </tr> -->
+            
+           
+            <!-- <tr *ngFor="let week of calendarData">
+              <td
+                class="w14 h100"
+                *ngFor="let day of week"
+                [ngClass]="[
+                  day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
+                  getDayClass(day)
+                ]"
+                (click)="selectDay(day)"
+                [attr.data-bs-toggle]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? 'tooltip' : null"
+                [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''"
+              >
+                <div class="row" *ngIf="day">
+                  <span class="col-6 fs-8 text-start">
+                  
+                    <span *ngIf="day.fullStatus === 'WeekOff'">🌟</span>
+                    <span *ngIf="day.fullStatus === 'LeaveApplied'">📝</span>
+                    <span *ngIf="day.fullStatus === 'LeaveApproved'">✅</span>
+                    <span *ngIf="day.fullStatus === 'Holiday'">🎉</span>
+                    <span *ngIf="day.fullStatus === 'HalfDay'">⏳</span>
+                    <span *ngIf="day.fullStatus === 'NoStatus'"></span>
+                  </span>
+                  <span class="col-6 text-end">
+                    <h4>{{ day.date.getDate() }}</h4>
+                  </span>
+                </div>
+              </td>
+            </tr> -->
+            
+
+
+            <tr *ngFor="let week of calendarData">
+              <td
+                class="w14 h100"
+                *ngFor="let day of week"
+                [ngClass]="[
+                  day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
+                  getDayClass(day)
+                ]"
+                (click)="selectDay(day)"
+                [attr.data-bs-toggle]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? 'tooltip' : null"
+                
+                [attr.data-title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''" 
+              >
+              <!-- [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? getTooltipContent(day) : ''" -->
+               
+
+             
+              
+                <div class="row" *ngIf="day">
+                  <span class="col-6 fs-8 text-start">
+                    <span *ngIf="day.fullStatus?.toLowerCase().trim()  === 'present'">✔️</span>
+
+                    <span *ngIf="day.fullStatus === 'WeekOff'">🌟</span> 
+                    <span *ngIf="day.fullStatus === 'LeaveApplied'">📝</span> 
+                    <span *ngIf="day.fullStatus === 'LeaveApproved'">✅</span> 
+                    <span *ngIf="day.fullStatus === 'Holiday'">🎉</span> 
+                    <span *ngIf="day.fullStatus === 'HalfDay'">⏳</span> 
+                    <!-- <span *ngIf="day.fullStatus === 'Absent'">❌</span>  -->
+                    <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'">❌</span>
+
+
+              
+                  </span>
+                  <span class="col-6 text-end">
+                    <h4>{{ day.date.getDate() }}</h4>
+                  </span>
+                </div>
+                
+              </td>
+              
+            </tr>
+            
+
+
+            
+          </tbody>
+          
+        </table>
+        
+      </div>
+      
+    </div>
+
+    
+    <br />
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Attendance Summary Section -->
+  <!-- <div class="col-md-2">
         <div class="card" style="border: none;">
             <div class="card-body p-0">
                 <h6 class="card-title">Attendance &amp; Summary</h6>
@@ -216,11 +460,26 @@
                 </ul>
             </div>
         </div>
+    </div> -->
+  <div class="col-md-2">
+    <div class="card" style="border: none;">
+      <div class="card-body p-0">
+        <h6 class="card-title">Attendance Summary</h6>
+        <ul class="list-group" style="border: 1px solid; padding: 5px;">
+          <li class="list-group-item">Present days: {{ attendanceSummary?.present }}</li>
+          <li class="list-group-item text-danger">Absent days: {{ attendanceSummary?.absent }}</li>
+          <li class="list-group-item text-primary">Leave Apply: {{ attendanceSummary?.leaveApply }}</li>
+          <li class="list-group-item text-warning">Half day: {{ attendanceSummary?.halfDay }}</li>
+          <li class="list-group-item text-success">Leave Approved: {{ attendanceSummary?.leaveApproved }}
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
-      <div class="container">
-        
-        <!-- <div class="row">
+<div class="container">
+
+  <!-- <div class="row">
           <div class="col text-center">
             <div class="btn-group">
               <button (click)="PreviousMonth()" class="btn btn-primary"><i class="fa-solid fa-less-than"></i></button>
@@ -229,6 +488,5 @@
             </div>
           </div>
         </div> -->
-        
-      </div>
-      
+
+</div>

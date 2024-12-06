@@ -1,106 +1,5 @@
 <!-- 
 
-
-<div class="wrapper">
-  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
-  <app-change-password *ngIf="isSnapshot"></app-change-password>
-
-  <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
-
-    <div class="main-content d-flex">
-      <aside  *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
-        <div id="sidebar" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
-              <li *ngFor="let screen of screens" class="nav-item">
-                <a 
-                  class="nav-link d-flex align-items-center" 
-                  [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
-                  <i class="fas fa-icon mr-2"></i>
-                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-      
-      <aside *ngIf="isSecondSidebarVisible && tabs!=null" class="left1-sidebar sidebar-light" id="right-sidebar">
-        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column" *ngFor="let tab of tabs">
-              <li class="nav-item" (click)="selectTab(tab)">
-                <a class="nav-link d-flex align-items-center">
-                  <span class="nav-text">{{tab.tabTitle}}</span>
-                </a>
-              </li>
-            
-            </ul>
-          </div>
-        </div>
-      </aside>
-      
-      <router-outlet></router-outlet>
-    </div>
- 
-  </div>
-  <app-footer></app-footer>
-</div> -->
-
-<!-- 
-<div class="wrapper">
-  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
-  <app-change-password *ngIf="isSnapshot"></app-change-password>
-
-  <div *ngIf="IsLogin" class="page-wrapper">
-    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
-
-    <div class="main-content d-flex">
-      <aside *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
-        <div id="sidebar" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
-              <li *ngFor="let screen of screens" class="nav-item">
-                <a 
-                  class="nav-link d-flex align-items-center" 
-                  [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                  (click)="!screen.screenURL ? fetchTabs(screen.screenID) : null">  
-                  <i class="fas fa-icon mr-2"></i>
-                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-
-   
-      <aside *ngIf="isSecondSidebarVisible && tabs != null" class="left1-sidebar sidebar-light" id="right-sidebar">
-        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
-          <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <ul class="nav flex-column">
-            
-
-            
-              <li *ngFor="let tab of tabs" class="nav-item" (click)="selectTab(tab)">
-                <a class="nav-link d-flex align-items-center">
-                  <span class="nav-text">{{tab.tabTitle}}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-
-  <app-footer></app-footer>
-</div> -->
-
 <div class="wrapper" [ngClass]="{ 'dimmed-background': isModalOpen }">
   <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
   <app-change-password *ngIf="isSnapshot"></app-change-password>
@@ -113,16 +12,7 @@
       <aside *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
         <div id="sidebar" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
-            <!-- <ul class="nav flex-column">
-              <li *ngFor="let screen of screens" class="nav-item">
-                <a 
-                  class="nav-link d-flex align-items-center" 
-                  (click)=" fetchTabs(screen.screenID)">  
-                  <i class="fas fa-icon mr-2"></i>
-                  <span class="nav-text">{{ screen.screenDisplayName }}</span>
-                </a>
-              </li>
-            </ul> -->
+           
             <ul class="nav flex-column">
               <li *ngFor="let screen of screens" class="nav-item">
                 <a 
@@ -137,32 +27,20 @@
             
           </div>
         </div>
-        <!-- <div class="sidebar-left" data-simplebar style="height: 100%;">
-          <ul class="nav flex-column">
-            <li *ngFor="let screen of screens" class="nav-item">
-              <a 
-                class="nav-link d-flex align-items-center" 
-                [routerLink]="screen.screenURL ? screen.screenURL : null" 
-                (click)="screen.screenURL ? navigateTo(screen.screenURL) : fetchTabs(screen.screenID)">
-                <i class="fas fa-icon mr-2"></i>
-                <span class="nav-text">{{ screen.screenDisplayName }}</span>
-              </a>
-            </li>
-          </ul>
-        </div> -->
+       
         
       </aside>
 
-      <!-- Additional Sidebar for Tabs -->
+      
       <aside *ngIf="isSecondSidebarVisible && tabs != null" class="left1-sidebar sidebar-light" id="right-sidebar">
         <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
           <div class="sidebar-left" data-simplebar style="height: 100%;">
             <ul class="nav flex-column">
               <li *ngFor="let tab of tabs" class="nav-item">
-                <!-- Check if the tab is the "Back" tab -->
+               
                 <ng-container *ngIf="tab.tabTitle === 'Back'; else normalTab">
                   <button class="back-button" (click)="handleBackClick()">
-                    <i class="fas fa-arrow-left"></i> <!-- Back icon -->
+                    <i class="fas fa-arrow-left"></i> 
                     Back
                   </button>
                 </ng-container>
@@ -181,4 +59,71 @@
   </div>
   <app-footer></app-footer>
 </div>
-<app-reset-session *ngIf="isModalOpen" (isModalOpen.isModalOpen)="isModalOpen = true" ></app-reset-session>
+<app-reset-session *ngIf="isModalOpen" (isModalOpen.isModalOpen)="isModalOpen = true" ></app-reset-session> -->
+
+
+
+
+
+
+<div class="wrapper" [ngClass]="{ 'dimmed-background': isModalOpen }">
+  <app-login *ngIf="!IsLogin && !isSnapshot" (isLogin)="IsLoggedin($event)"></app-login>
+  <app-change-password *ngIf="isSnapshot"></app-change-password>
+
+  <div *ngIf="IsLogin" class="page-wrapper">
+    <app-header (isLogin)="IsLoggedin($event)" (isCollapse)="isCollapse($event)" [notificationCount]="notificationCount"></app-header>
+
+    <div class="main-content d-flex">
+      <aside *ngIf="isFirstSidebarVisible" class="left-sidebar sidebar-dark" id="left-sidebar" [class.isCollapsedSideBar]="isCollapsedSideBar">
+        <div id="sidebar" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <!-- Tree View for Screens and Tabs -->
+            <ul class="nav flex-column">
+              <li *ngFor="let screen of screens" class="nav-item">
+                <div class="tree-node">
+                  <span (click)="toggleScreen(screen)">
+                    <i class="fas" [ngClass]="{'fa-caret-right': !screen.expanded, 'fa-caret-down': screen.expanded}"></i>
+                    <span class="nav-text">{{ screen.screenDisplayName }}</span>
+                  </span>
+                  <!-- Display Tabs if Screen is Expanded -->
+                  <ul *ngIf="screen.expanded">
+                    <li *ngFor="let tab of screen.tabs" class="nav-item">
+                      <a class="nav-link d-flex align-items-center" (click)="selectTab(tab)">
+                        <span class="nav-text">{{ tab.tabTitle }}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <aside *ngIf="isSecondSidebarVisible && tabs != null" class="left1-sidebar sidebar-light" id="right-sidebar">
+        <div id="sidebar-tabs" class="sidebar sidebar-with-footer">
+          <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <ul class="nav flex-column">
+              <li *ngFor="let tab of tabs" class="nav-item">
+                <ng-container *ngIf="tab.tabTitle === 'Back'; else normalTab">
+                  <button class="back-button" (click)="handleBackClick()">
+                    <i class="fas fa-arrow-left"></i> Back
+                  </button>
+                </ng-container>
+                <ng-template #normalTab>
+                  <a class="nav-link d-flex align-items-center" (click)="selectTab(tab)">
+                    <span class="nav-text">{{ tab.tabTitle }}</span>
+                  </a>
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+<app-reset-session *ngIf="isModalOpen" (isModalOpen.isModalOpen)="isModalOpen = true"></app-reset-session>

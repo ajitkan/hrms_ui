@@ -14,7 +14,7 @@ import { EmpdeptchartComponent } from './pages/shared-components/empdeptchart/em
 import { PaymentbarchartComponent } from './pages/shared-components/paymentbarchart/paymentbarchart.component';
 // import { JobPostComponent } from './pages/recruiter/job-post/job-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+// import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -141,7 +141,7 @@ import { ResetSessionComponent } from './pages/authentication/reset-session/rese
     // CalendarComponent,
     ApplyResignationComponent,
     ApproveResignationComponent,
-    ResignationChecklistComponent
+    ResignationChecklistComponent,
 
     ResetSessionComponent
 
@@ -160,7 +160,7 @@ import { ResetSessionComponent } from './pages/authentication/reset-session/rese
     CommonModule,
     HttpClientModule,
     
-    BsDatepickerModule.forRoot(),
+    // BsDatepickerModule.forRoot(),
     // ToastrModule.forRoot(),
     ToastrModule.forRoot({
       // positionClass: 'toast-top-center',

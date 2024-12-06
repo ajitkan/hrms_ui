@@ -8,6 +8,9 @@ import { LeaveService } from 'src/app/service/LeaveService/leave.service';
 import { startOfMonth, addMonths, subMonths } from 'date-fns';
 import { color, index } from 'd3';
 import { DatePipe } from '@angular/common';
+// import bootstrap, { Tooltip } from 'bootstrap';
+import bootstrap, { Tooltip } from 'bootstrap';
+
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -46,196 +49,25 @@ export interface AttendanceResponse {
   attendanceRecords: AttendanceRecord[];
 }
 
-const sampleAttendanceData = [
-  {
-    attendanceID: 30,
-    empID: 5,
-    employeeCode: "K-105",
-    shiftID: 4,
-    attendanceDate: "2024-10-02T00:00:00",
-    finalStatusID: 7,
-    finalStatusName: "Holiday",
-    systemRemark: "Gandhi Jayanti",
-    isApplicable: true
-  },
-  {
-    attendanceID: 45,
-    empID: 5,
-    employeeCode: "K-105",
-    shiftID: 4,
-    attendanceDate: "2024-10-05T00:00:00",
-    finalStatusID: 9,
-    finalStatusName: "WeekOff",
-    systemRemark: "Weekly Off",
-    isApplicable: true
-  },
-  {
-    attendanceID: 100,
-    empID: 5,
-    employeeCode: "K-105",
-    shiftID: 4,
-    attendanceDate: "2024-10-16T00:00:00",
-    finalStatusID: 8,
-    finalStatusName: "NoStatus",
-    systemRemark: "Status Pending",
-    isApplicable: true
-  },
-  // ... Add more sample data as required
-];
+
 
 
 @Component({
-  selector: 'mwl-demo-component',
+  // selector: 'mwl-demo-component',app-attendence-calender
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      h3 {
-        margin: 0 0 10px;
-      }
 
-      pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-      }
-      thead > tr > th{
-        background-color: #4c6fbf;
-      }
-    `,
-  ],
-  templateUrl:'./calender-demo.component.html'
+  selector: 'app-attendence-calender',
+  templateUrl:'./calender-demo.component.html',
+  styleUrls: ['./attendence-calender.component.css']
   // templateUrl: './attendence-calender.component.html',
 })
 export class AttendenceCalenderComponent {
-  // calendarData: any[][] = []; // Final calendar data for the month
-  // attendanceRecords: any[] = []; // Holds the attendance records from the API
-  // employeeCode: string | null = null;
-  // CurrentMonth:any; 
-  // constructor(private attendanceService: LeaveService, private cdr: ChangeDetectorRef) {}
-
-  // ngOnInit(): void {
-  //   const payload = {
-  //     employeeCode: this.employeeCode ? this.employeeCode : this.attendanceService.getEmployeeCode(),
-  //     month: (new Date().getMonth()+1 ).toString(), // Current month
-  //     year: new Date().getFullYear().toString() // Current year
-  //   };
-  //   this.fetchAttendanceData(payload);
-  // }
-
-  // // Fetch attendance data from the API
-  // fetchAttendanceData(payload: any,action?:string,current?:any) {
-  //   this.attendanceService.getAttendanceData(payload).subscribe(response => {
-  //     if (response.code === 1 && response.status === 'Successful') {
-  //       this.attendanceRecords = response.attendanceRecords;
-
-  //       // Generate the calendar only after receiving the attendance records
-  //       if(action==='Prev'){
-  //         this.CurrentMonth = (new Date(this.attendanceRecords[0].attendanceDate).getMonth()-1).toString();
-  //         this.generateCalendar(new Date().getFullYear(),this.CurrentMonth-1);
-  //         // Trigger change detection manually if using OnPush strategy
-  //         this.cdr.detectChanges();
-  //       }
-  //       else if(action==='Next'){
-  //         this.CurrentMonth = (new Date(this.attendanceRecords[0].attendanceDate).getMonth()+2).toString();
-  //         this.generateCalendar(new Date().getFullYear(), this.CurrentMonth+1);
-  //         // Trigger change detection manually if using OnPush strategy
-  //         this.cdr.detectChanges();
-  //       }
-  //       else{
-  //         this.CurrentMonth = (new Date().getMonth()+1).toString();
-  //         debugger;
-  //         this.generateCalendar(new Date().getFullYear(), this.CurrentMonth);
-  //         // Trigger change detection manually if using OnPush strategy
-  //         this.cdr.detectChanges();
-  //       }
-  //     }
-  //   });
-  // }
-
-  // // Generate the calendar data dynamically
-  // generateCalendar(year: number, month: number) {
-  //   const firstDay = new Date(year, month, 1);
-  //   const lastDay = new Date(year, month + 1, 0);
-  //   let date = new Date(firstDay);
-  //   let week: any[] = [];
-
-  //   this.calendarData = []; // Reset calendarData before generating the new calendar
-
-  //   // Calculate the number of empty slots before the first day of the month
-  //   const startDay = firstDay.getDay(); // Get the weekday index (0=Sun, 1=Mon, etc.)
-
-  //   // Fill the initial week with empty slots until the first day of the month
-  //   for (let i = 0; i < startDay; i++) {
-  //     week.push(null);
-  //   }
-
-  //   // Fill the calendar days with the actual dates and corresponding statuses
-  //   while (date <= lastDay) {
-  //     // Match attendance record for the current date
-  //     const attendanceRecord = this.attendanceRecords.find(
-  //       record => new Date(record.attendanceDate).toDateString() === date.toDateString()
-  //     );
-
-  //     week.push({
-  //       date: new Date(date),
-  //       status: attendanceRecord ? attendanceRecord.finalStatusName : null
-  //     });
-
-  //     // Move to the next day
-  //     date.setDate(date.getDate() + 1);
-
-  //     // If the week is complete (7 days), push to the calendarData and start a new week
-  //     if (week.length === 7) {
-  //       this.calendarData.push(week);
-  //       week = [];
-  //     }
-  //   }
-
-  //   // Fill the remaining slots in the last week if incomplete
-  //   while (week.length < 7) {
-  //     week.push(null);
-  //   }
-
-  //   // Push the final week to the calendar
-  //   if (week.length > 0) {
-  //     this.calendarData.push(week);
-  //   }
-  // }
-
-  // // Return the appropriate CSS class based on the day status
-  // getDayClass(day: any) {
-  //   if (!day) return 'bg-light'; // Default class for empty cells
-  //   switch (day.status) {
-  //     case 'Holiday':
-  //       return 'bg-warning text-white';
-  //     case 'WeekOff':
-  //       return 'bg-info text-white';
-  //     case 'NoStatus':
-  //       return 'bg-secondary text-white';
-  //     default:
-  //       return '';
-  //   }
-  // }
-
-  // nextMonth(){
-  //   const payload = {
-  //     employeeCode: this.employeeCode ? this.employeeCode : this.attendanceService.getEmployeeCode(),
-  //     month: (new Date().getMonth()+1 ).toString(), // Current month
-  //     year: new Date().getFullYear().toString() // Current year
-  //   };
-  //   this.fetchAttendanceData(payload,'Next' );
-  // }
-  // PreviousMonth(){
-  //   const payload = {
-  //     employeeCode: this.employeeCode ? this.employeeCode : this.attendanceService.getEmployeeCode(),
-  //     month: (new Date().getMonth()-1 ).toString(), // Current month
-  //     year: new Date().getFullYear().toString() // Current year
-  //   };
-  //   this.fetchAttendanceData(payload,'Prev');
-  // }
+ 
   monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
+  selectedMonth: number = new Date().getMonth(); // Set current month as default
   years: number[] = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034];
 
   filteredEmployees:any;
@@ -243,135 +75,517 @@ export class AttendenceCalenderComponent {
   // employeeCode: any;
   calendarData: any[][] = []; // Final calendar data for the month
   attendanceRecords: any[] = []; // Holds the attendance records from the API
+  attendanceSummary:any;
+
   employeeCode: string | null = null;
   employeeName:any;
   currentYear: number = new Date().getFullYear();
   currentMonth: number = new Date().getMonth(); // Track the displayed month (0-11)
-  Month=''
+  Month:any;
+  // Month : any = new Date().getMonth();
   employeeNameChange$:any =new Subject();
   employeeSelected = false;
+  selectedDay: any = null; 
+  leaveReason: string = ''; 
   @ViewChild('dropdown-menu') container!: ElementRef;
   // selectedYear = new Date().getFullYear();
   constructor(private attendanceService: LeaveService, private cdr: ChangeDetectorRef, private datePipe:DatePipe, private renderer: Renderer2) {}
 
   ngOnInit(): void {
+
+    // this.getDayClass(this.day);
     this.employeeCode = this.attendanceService.getEmployeeCode();
     this.loadAttendanceData(this.currentYear, this.currentMonth);
+    this.cdr.detectChanges();
 
     this.employeeNameChange$.pipe(
           debounceTime(300) // Adjust the debounce time as necessary
         ).subscribe((searchTerm:any) => {
           this.onEmployeeNameChange(searchTerm);
         });
+
+        // setTimeout(() => {
+        //   const tooltipTriggerList = [].slice.call(
+        //     document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        //   );
+        //   tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        //     new Tooltip(tooltipTriggerEl);
+        //   });
+        // }, 0);
   }
    
-  // Fetch attendance data based on the year and month
-  loadAttendanceData(year: number, month: number) {
-    const payload = {
-      employeeCode: this.employeeCode,
-      month: (month + 1).toString(), // Convert zero-based month to 1-based
-      year: year.toString(),
-    };
 
-    this.attendanceService.getAttendanceData(payload).subscribe((response) => {
-      if (response.code === 1 && response.status === 'Successful') {
-        this.attendanceRecords = response.attendanceRecords;
+  ngAfterViewInit() {
+    const tooltipTriggerList: HTMLElement[] = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 
-        // Generate the calendar only after receiving the attendance records
-        this.generateCalendar(year, month);
-        this.Month = this.monthNames[ response.attendanceRecords.length>0? new Date(response.attendanceRecords[0].attendanceDate).getMonth():month]
-        // Trigger change detection manually if using OnPush strategy
-        this.cdr.detectChanges();
-      }
+    tooltipTriggerList.forEach((tooltipTriggerEl: HTMLElement) => {
+      new Tooltip(tooltipTriggerEl);  // Initialize Tooltip
     });
   }
+  
+  // getTooltipContent(day: any): string {
+  //   // Find the corresponding attendance record for the day
+  //   const attendanceRecord = this.attendanceRecords.find(record => 
+  //     new Date(record.attendanceDate).toDateString() === day.date.toDateString()
+  //   );
 
-  // Generate the calendar data dynamically based on year and month
-  generateCalendar(year: number, month: number) {
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    let date = new Date(firstDay);
-    let week: any[] = [];
+  //   console.log('-->', attendanceRecord);
+    
+  
+  //   // If no record is found, set default status
+  //   const attendanceStatus = attendanceRecord?.finalStatusName || 'No status available';
+  //   console.log('------' , attendanceStatus);
+    
+  //   const checkIn = attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord.finalStatusName)
+  //     ? this.datePipe.transform(attendanceRecord.actualPunchInTime, 'HH:mm') : 'Not Available';
+  //     console.log(',,,', checkIn);
+      
+  //   const checkOutTime = attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord.finalStatusName)
+  //     ? this.datePipe.transform(attendanceRecord.actualPunchOutTime, 'HH:mm') : 'Not Available';
+  // console.log('chekin chekout for tooltip',checkIn);
+  
+  //   // Return content with line breaks for each new line
+  //   return `Attendance Status - ${attendanceStatus}\nCheck In - ${checkIn}\nCheck Out - ${checkOutTime}`;
+  // }
+  
+  formatTime(time: string): string {
+    // You can customize the format based on your input time format
+    const date = new Date(time);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+  
+  
+  
+  selectDay(day: any) {
+    this.selectedDay = day;  
+ 
+    console.log('this.selectedDay---> ',this.selectedDay );
+    
+  }
+  isSameDate(date1: Date, date2: Date): boolean {
+    return date1.getDate() === date2.getDate() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getFullYear() === date2.getFullYear();
+  }
+  
+  
 
-    this.calendarData = []; // Reset calendarData before generating the new calendar
+ 
+  applyLeave() {
+    if (this.leaveReason.trim()) {
+      this.selectedDay.status = 'LeaveApplied';
+      this.selectedDay.remark = this.leaveReason;  // Store the leave reason
 
-    // Calculate the number of empty slots before the first day of the month
-    const startDay = firstDay.getDay(); // Get the weekday index (0=Sun, 1=Mon, etc.)
+      // Reset selected day and leave reason
+      this.selectedDay = null;
+      this.leaveReason = '';
 
-    // Fill the initial week with empty slots until the first day of the month
-    for (let i = 0; i < startDay; i++) {
-      week.push(null);
-    }
-
-    // Fill the calendar days with the actual dates and corresponding statuses
-    while (date <= lastDay) {``
-      // Match attendance record for the current date
-      const attendanceRecord = this.attendanceRecords.find(
-        (record) => new Date(record.attendanceDate).toDateString() === date.toDateString()
-      );
-
-      week.push({
-        date: new Date(date),
-        status: attendanceRecord ? attendanceRecord.finalStatusName : null,
-        remark: attendanceRecord ? attendanceRecord.systemRemark : null,
-        checkIn: attendanceRecord && (attendanceRecord.finalStatusName =='Present' || attendanceRecord.finalStatusName =='HalfDay')? this.datePipe.transform(attendanceRecord.actualPunchInTime, 'HH:mm'):'',
-        checkOut:attendanceRecord && (attendanceRecord.finalStatusName =='Present' || attendanceRecord.finalStatusName =='HalfDay')? this.datePipe.transform(attendanceRecord.actualPunchOutTime, 'HH:mm') :''
-      });
-
-      // Move to the next day
-      date.setDate(date.getDate() + 1);
-
-      // If the week is complete (7 days), push to the calendarData and start a new week
-      if (week.length === 7) {
-        this.calendarData.push(week);
-        week = [];
-      }
-    }
-
-    // Fill the remaining slots in the last week if incomplete
-    while (week.length < 7) {
-      week.push(null);
-    }
-
-    // Push the final week to the calendar
-    if (week.length > 0) {
-      this.calendarData.push(week);
+      alert('Leave applied successfully!');
+    } else {
+      alert('Please provide a reason for leave.');
     }
   }
+
+ 
+ 
+//   loadAttendanceData(year: number, month: number) {
+//     const payload = {
+//       employeeCode: this.employeeCode,
+//       month: (month + 1).toString(), // Convert zero-based month to 1-based
+//       year: year.toString(),
+//     };
+  
+//     this.attendanceService.getAttendanceData(payload).subscribe((response) => {
+//       if (response.code === 1 && response.status === 'Successful') {
+//         this.attendanceRecords = response.attendanceRecords;
+//         console.log('this.attendanceRecords-->', this.attendanceRecords);
+  
+//         // Calculate the counts for each attendance status
+//         this.attendanceSummary = this.calculateAttendanceSummary(this.attendanceRecords);
+//         // console.log('this.attendanceSummary ----', this.attendanceSummary);
+  
+//         // Generate the calendar only after receiving the attendance records
+//         this.generateCalendar(year, month);
+  
+//         // Assign the correct month name
+//         const monthIndex = response.attendanceRecords.length > 0
+//           ? new Date(response.attendanceRecords[0].attendanceDate).getMonth()
+//           : month;
+//         this.Month = this.monthNames[monthIndex]; // Directly use the month name
+  
+//         // Trigger change detection manually if using OnPush strategy
+//         this.cdr.detectChanges();
+//       }
+//     });
+//   }
+  
+//   calculateAttendanceSummary(records: any[]) {
+//     const summary = {
+//       present: 0,
+//       absent: 0,
+//       leaveApply: 0,
+//       halfDay: 0,
+//       leaveApproved: 0,
+//     };
+  
+//     // Use a set to keep track of unique attendance dates
+//     const seenDates = new Set<string>();
+  
+//     // Iterate through the records and count each status
+//     records.forEach(record => {
+//       const attendanceDate = record.attendanceDate; // Assuming attendanceDate is the unique date field
+  
+//       // Check if this date has already been processed
+//       if (!seenDates.has(attendanceDate)) {
+//         // Mark this date as processed
+//         seenDates.add(attendanceDate);
+  
+//         // Process the attendance status
+//         switch (record.finalStatusName.trim()) {  // Trimming any extra spaces
+//           case 'Present':
+//             summary.present++;
+//             break;
+//           case 'Absent':
+//             summary.absent++;
+//             break;
+//           case 'LeaveApplied':
+//             summary.leaveApply++;
+//             break;
+//           case 'Half day':
+//             summary.halfDay++;
+//             break;
+//           case 'LeaveApproved':
+//             summary.leaveApproved++;
+//             break;
+//           default:
+//             console.warn('Unknown status:', record.finalStatusName); // Log unexpected status names
+//             break;
+//         }
+//       }
+//     });
+  
+//     console.log('Attendance Summary:', summary); // Log the calculated summary
+//     return summary;
+//   }
+  
+
+//     generateCalendar(year: number, month: number) {
+//     const firstDay = new Date(year, month, 1);
+//     const lastDay = new Date(year, month + 1, 0);
+//     const attendanceMap = new Map(
+//       this.attendanceRecords.map(record => [new Date(record.attendanceDate).toDateString(), record])
+//     );
+  
+//     let date = new Date(firstDay);
+//     let week: any[] = [];
+//     this.calendarData = [];
+  
+//     const startDay = firstDay.getDay();
+//     for (let i = 0; i < startDay; i++) week.push(null);
+  
+//     const statusMapping: { [key: string]: string } = {
+//       Present: '', Absent: '', Holiday: '', WeekOff: 'WO', NoStatus: '', HalfDay: 'HD', LeaveApplied: 'LA', LeaveApproved: 'LA'
+//     };
+  
+//     while (date <= lastDay) {
+//       const todayString = date.toDateString();
+//       const attendanceRecord = attendanceMap.get(todayString);
+  
+//       week.push({
+//         date: new Date(date),
+//         // status: attendanceRecord ? statusMapping[attendanceRecord.finalStatusName] || attendanceRecord.finalStatusName : null,
+//         // fullStatus: attendanceRecord?.finalStatusName || null,
+
+//         status: attendanceRecord ? (statusMapping[attendanceRecord.finalStatusName?.trim()] || attendanceRecord.finalStatusName) : null,
+//         fullStatus: attendanceRecord?.finalStatusName?.trim() || null,
+
+//         remark: attendanceRecord?.systemRemark || null,
+//         checkIn: attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord.finalStatusName)
+//           ? this.datePipe.transform(attendanceRecord.actualPunchInTime, 'HH:mm')
+//           : '',
+//         checkOut: attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord.finalStatusName)
+//           ? this.datePipe.transform(attendanceRecord.actualPunchOutTime, 'HH:mm')
+//           : ''
+//       });
+//       console.log('Full status for day: ', attendanceRecord?.finalStatusName);
+//       date.setDate(date.getDate() + 1);
+//       if (week.length === 7) {
+//         this.calendarData.push(week);
+//         week = [];
+//       }
+//     }
+  
+//     if (week.length) {
+//       while (week.length < 7) week.push(null);
+//       this.calendarData.push(week);
+//     }
+//   }
+  
+
+
+// getDayClass(day: any): string {
+//   if (!day) return 'bg-light'; // Default class for empty cells
+
+//   // Ensure fullStatus is a non-null, non-undefined string
+//   const fullStatus = day.fullStatus?.trim() || '';
+
+//   switch (fullStatus) {
+//     case 'Holiday':
+//       return 'holiday';
+//     case 'WeekOff':
+//       return 'week';
+//     case 'NoStatus':
+//       return '';
+//     case 'HalfDay':
+//       return 'text-warning';
+//     case 'LeaveApproved':
+//       return 'text-success';
+//     case 'LeaveApplied':
+//       return 'text-primary';
+//     case 'Present':
+//       return 'text-black';
+//     case 'Absent':
+//       return 'text-danger';
+//     default:
+//       return '';
+//   }
+// }
+
+ 
+loadAttendanceData(year: number, month: number) {
+  const payload = {
+    employeeCode: this.employeeCode,
+    month: (month + 1).toString(), // Convert zero-based month to 1-based
+    year: year.toString(),
+  };
+
+  this.attendanceService.getAttendanceData(payload).subscribe((response) => {
+    if (response.code === 1 && response.status === 'Successful') {
+      this.attendanceRecords = response.attendanceRecords || [];
+      console.log('Attendance Records:', this.attendanceRecords);
+
+      // Calculate attendance summary
+      this.attendanceSummary = this.calculateAttendanceSummary(this.attendanceRecords);
+      console.log('Attendance Summary:', this.attendanceSummary);
+
+      // Generate calendar
+      this.generateCalendar(year, month);
+
+      // Assign the correct month name
+      const monthIndex = this.attendanceRecords.length > 0
+        ? new Date(this.attendanceRecords[0].attendanceDate).getMonth()
+        : month;
+      this.Month = this.monthNames[monthIndex];
+
+      this.cdr.detectChanges(); // Trigger change detection
+    }
+  });
+}
+
+// calculateAttendanceSummary(records: any[]) {
+//   const summary = {
+//     present: 0,
+//     absent: 0,
+//     leaveApply: 0,
+//     halfDay: 0,
+//     leaveApproved: 0,
+//   };
+
+//   const seenDates = new Set<string>();
+//   records.forEach(record => {
+//     const attendanceDate = record.attendanceDate;
+//     if (!seenDates.has(attendanceDate)) {
+//       seenDates.add(attendanceDate);
+//       const finalStatus = record.finalStatusName?.trim();
+//       switch (finalStatus) {
+//         case 'Present':
+//           summary.present++;
+//           break;
+//         case 'Absent':
+//           summary.absent++;
+//           break;
+//         case 'LeaveApplied':
+//           summary.leaveApply++;
+//           break;
+//         case 'Half day':
+//           summary.halfDay++;
+//           break;
+//         case 'LeaveApproved':
+//           summary.leaveApproved++;
+//           break;
+//         default:
+//           console.warn('Unknown status:', finalStatus);
+//           break;
+//       }
+//     }
+//   });
+//   return summary;
+// }
+
+calculateAttendanceSummary(records: any[]) {
+  const summary = {
+    present: 0,
+    absent: 0,
+    leaveApply: 0,
+    halfDay: 0,
+    leaveApproved: 0,
+  };
+
+  records.forEach(record => {
+    const finalStatus = record.finalStatusName?.trim();
+    switch (finalStatus) {
+      case 'Present':
+        summary.present++;
+        break;
+      case 'Absent':
+        summary.absent++;
+        break;
+      case 'LeaveApplied':
+        summary.leaveApply++;
+        break;
+      case 'Half day':
+        summary.halfDay++;
+        break;
+      case 'LeaveApproved':
+        summary.leaveApproved++;
+        break;
+      default:
+        console.warn('Unknown status:', finalStatus);
+        break;
+    }
+  });
+
+  return summary;
+}
+
+
+generateCalendar(year: number, month: number) {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const attendanceMap = new Map(
+    this.attendanceRecords.map(record => [new Date(record.attendanceDate).toDateString(), record])
+  );
+
+  let date = new Date(firstDay);
+  let week: any[] = [];
+  this.calendarData = [];
+  const startDay = firstDay.getDay();
+  for (let i = 0; i < startDay; i++) week.push(null);
+
+  const statusMapping: { [key: string]: string } = {
+    Present: '', Absent: '', Holiday: '', WeekOff: 'WO', NoStatus: '', HalfDay: 'HD', LeaveApplied: 'LA', LeaveApproved: 'LA'
+  };
+
+  while (date <= lastDay) {
+    const todayString = date.toDateString();
+    const attendanceRecord = attendanceMap.get(todayString);
+
+    week.push({
+      date: new Date(date),
+      status: attendanceRecord ? (statusMapping[attendanceRecord.finalStatusName?.trim()] || attendanceRecord.finalStatusName) : null,
+      fullStatus: attendanceRecord?.finalStatusName?.trim() || null,
+      remark: attendanceRecord?.systemRemark || null,
+      checkIn: attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord?.finalStatusName)
+        ? this.datePipe.transform(attendanceRecord.actualPunchInTime, 'HH:mm')
+        : '',
+      checkOut: attendanceRecord && ['Present', 'HalfDay'].includes(attendanceRecord?.finalStatusName)
+        ? this.datePipe.transform(attendanceRecord.actualPunchOutTime, 'HH:mm')
+        : ''
+    });
+    date.setDate(date.getDate() + 1);
+    if (week.length === 7) {
+      this.calendarData.push(week);
+      week = [];
+    }
+  }
+
+  if (week.length) {
+    while (week.length < 7) week.push(null);
+    this.calendarData.push(week);
+  }
+  console.log('Generated Calendar Data:', this.calendarData);
+}
+
+getDayClass(day: any): string {
+  if (!day) return 'bg-light'; // Default class for empty cells
+
+  const fullStatus = (day.fullStatus || '').trim(); // Ensure it's a string and trim
+  switch (fullStatus) {
+    case 'Holiday':
+      return 'holiday';
+    case 'WeekOff':
+      return 'week';
+    case 'NoStatus':
+      return '';
+    case 'HalfDay':
+      return 'text-warning';
+    case 'LeaveApproved':
+      return 'text-success';
+    case 'LeaveApplied':
+      return 'text-primary';
+    case 'Present':
+      return 'text-black';
+    case 'Absent':
+      return 'text-danger';
+    default:
+      return '';
+  }
+}
+
+
+  getEventColorClass(status: string | null): string {
+    switch (status) {
+      case 'Absent':
+        return 'text-absent';
+      case 'LeaveApplied':
+        return 'text-leave-apply';
+      case 'HalfDay':
+        return 'text-half-day';
+      case 'LeaveApproved':
+        return 'text-leave-approved';
+      default:
+        return ''; // No circle for undefined statuses
+    }
+  }
+  
+  
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'Present':
+        return '#4caf50'; // Green
+      case 'Absent':
+        return '#f44336'; // Red
+      case 'Holiday':
+        return '#2196f3'; // Blue
+      case 'WeekOff':
+        return '#ff9800'; // Orange
+      case 'HalfDay':
+        return '#ffc107'; // Yellow
+      case 'LeaveApproved':
+        return '#8bc34a'; // Light Green
+      case 'LeaveApplied':
+        return '#03a9f4'; // Light Blue
+      default:
+        return '#e0e0e0'; // Gray for NoStatus or default
+    }
+  }
+  
+ 
+  
+  
 convertTimeToMinutes(time: string): number {
     const [hours, minutes] = time.split(':').map(Number);
     return hours * 60 + minutes;
   }
-  // Return the appropriate CSS class based on the day status
-  getDayClass(day: any) {
-    if (!day) return 'bg-light'; // Default class for empty cells
-    switch (day.status) {
-      case 'Holiday':
-        return ' holiday';
-      case 'WeekOff':
-        return 'week';
-      case 'NoStatus':
-        return '';
-      case 'HalfDay':
-        return 'text-warning';
-      case 'Leave':
-        return day.remark == 'Leave Approved'?'text-success':'text-primary ';//' text-primary ';
-      // case 'Leave':
-      //   return 'bg-success text-white';
-      case 'Present':
-        return 'text-black';
-      case 'Absent':
-      return 'text-danger';
-      default:
-        return '';
-    }
+
+  onMonthChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const monthIndex = parseInt(target.value, 10); // Get the selected month index
+    this.selectedMonth = monthIndex;
+    this.loadAttendanceData(this.currentYear, monthIndex); // Reload data for the selected month
   }
-  onMonthChange(event:any){
-    const selectedMonth = event.target.value;
-    this.currentMonth = this.monthNames.indexOf(selectedMonth);
-    console.log('Selected Month:', this.monthNames.indexOf(selectedMonth));
-    this.loadAttendanceData(this.currentYear, this.monthNames.indexOf(selectedMonth));
-  }
+
+ 
   onYearChange(event:any){
     const selectedYear = event.target.value;
     console.log('Selected Year:', selectedYear);
@@ -400,6 +614,7 @@ convertTimeToMinutes(time: string): number {
     }
     this.loadAttendanceData(this.currentYear, this.currentMonth);
   }
+  
   onEmployeeNameInputChange(event: any) {
     const value = event.target.value;
     // console.log("employee search trigger!!!!")
@@ -444,5 +659,10 @@ convertTimeToMinutes(time: string): number {
   //     this.renderer.addClass(this.container.nativeElement, 'hide');
   //   // }
   //   // this.isActive = !this.isActive;
+ 
+ 
   // }
+
+
+  
 }

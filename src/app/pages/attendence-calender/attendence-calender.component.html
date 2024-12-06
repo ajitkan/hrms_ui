@@ -1,16 +1,69 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid row m-auto p-3">
-        <a class="navbar-brand col-2" href="#"><h5>Attendance Calendar</h5></a>
+        <a class="navbar-brand col-2" href="#">
+            <h5>Attendance Calendar</h5>
+        </a>
         <div class="d-flex justify-content-between align-items-center col-10 rowmb-3">
             <div class="col-8">
                 <span style="color: #4c6fbf;font-weight: 600;">Month : </span>
-                <select class="form-select d-inline-block w-auto me-2" id="monthSelector">
-                    <!-- Months will be added dynamically -->
-                <option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option><option value="0">January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option><option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option></select>
+                <!-- <select class="form-select d-inline-block w-auto me-2" id="monthSelector">
+                    
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select> -->
+
+                <select class="form-select d-inline-block w-auto me-2" id="monthSelector" [(ngModel)]="selectedMonth">
+                    <option *ngFor="let month of monthNames; let i = index" [value]="i">{{ month }}</option>
+                </select>
+
                 <span style="color: #4c6fbf;font-weight: 600;">Year : </span>
                 <select class="form-select d-inline-block w-auto me-2" id="yearSelector">
                     <!-- Years will be added dynamically -->
-                <option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                </select>
                 <span style="color: #4c6fbf;font-weight: 600;">Shift : </span>
                 <select class="form-select d-inline-block w-auto">
                     <option>General: 9.00 - 18.00</option>
@@ -18,8 +71,10 @@
                 </select>
             </div>
             <div class="col-4">
-                <button class="btn btn-primary col-8" style="    text-transform: capitalize;" [routerLink]="['/regularization-apply']" [queryParams]="{ tabID: 9 }"  >Regularize Attendance</button>
-                <button class="btn btn-primary col-8 mt-2" style="    text-transform: capitalize;" [routerLink]="['/leave-apply']" [queryParams]="{ tabID: 7 }" >Apply Leave</button>
+                <button class="btn btn-primary col-8" style="    text-transform: capitalize;"
+                    [routerLink]="['/regularization-apply']" [queryParams]="{ tabID: 9 }">Regularize Attendance</button>
+                <button class="btn btn-primary col-8 mt-2" style="    text-transform: capitalize;"
+                    [routerLink]="['/leave-apply']" [queryParams]="{ tabID: 7 }">Apply Leave</button>
             </div>
         </div>
     </div>
@@ -27,113 +82,156 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <!-- Team Member Sidebar -->
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <label for="employeeName">Employee Name</label>
-               
-        <input [(ngModel)]="employeeName" 
-               (input)="onEmployeeNameInputChange($event)" 
-               type="text" 
-               class="form-control" 
-               id="employeeName" 
-               name="employeeName"
-               placeholder="Search Employee Name"
-               autocomplete="off">
 
-              <!-- Autocomplete dropdown -->
-              <ul *ngIf="filteredEmployees && filteredEmployees.length > 0" 
-                  class="dropdown-menu show" 
-                  style="top: 10%;left: 2%;">
-                <li *ngFor="let employee of filteredEmployees" 
-                    (click)="selectEmployee(employee)" 
-                    class="dropdown-item">
-                  {{ employee.FirstName+' '+ employee.LastName +'       ' +employee.EmployeeCode}}
+            <input [(ngModel)]="employeeName" (input)="onEmployeeNameInputChange($event)" type="text"
+                class="form-control" id="employeeName" name="employeeName" placeholder="Search Employee Name"
+                autocomplete="off">
+
+            
+            <ul *ngIf="filteredEmployees && filteredEmployees.length > 0" class="dropdown-menu show"
+                style="top: 10%;left: 2%;">
+                <li *ngFor="let employee of filteredEmployees" (click)="selectEmployee(employee)" class="dropdown-item">
+                    {{ employee.FirstName+' '+ employee.LastName +' ' +employee.EmployeeCode}}
                 </li>
-              </ul>
-        </div>
+            </ul>
+        </div> -->
 
         <!-- Calendar Section -->
-        <div class="col-md-8">
+        <!-- <div class="col-md-8">
             <div class="row text-center">
                 <div class="col-md-4">
-                <div class="btn-group">
-                    <div
-                    class="btn btn-primary"
-                    mwlCalendarPreviousView
-                    [view]="view"
-                    [(viewDate)]="viewDate"
-                    (viewDateChange)="closeOpenMonthViewDay()"
-                    style="background-color: #4c6fbf;"
-                    >
-                    <i class="fas fa-less-than"></i>
-                    </div>                  
-                </div>
+                    <div class="btn-group">
+                        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="closeOpenMonthViewDay()" style="background-color: #4c6fbf;">
+                            <i class="fas fa-less-than"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                <h3 style="color: #4c6fbf;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                    <h3 style="color: #4c6fbf;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group">
-                        <div
-                            class="btn btn-primary"
-                            mwlCalendarNextView
-                            [view]="view"
-                            [(viewDate)]="viewDate"
-                            (viewDateChange)="closeOpenMonthViewDay()"
-                            style="background-color: #4c6fbf;"
-                            (click)="nextMonth()"
-                            >
+                        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="closeOpenMonthViewDay()" style="background-color: #4c6fbf;"
+                            (click)="nextMonth()">
                             <i class="fas fa-greater-than"></i>
                         </div>
                     </div>
                 </div>
             </div>
-        <br />
-        <div [ngSwitch]="view">
-            <mwl-calendar-month-view
-                *ngSwitchCase="CalendarView.Month"
-                [viewDate]="viewDate"
-                [dayModifier]="dayModifier"
-                [events]="events"
-                [refresh]="refresh"
-               
-                (dayClicked)="dayClicked($event.day)"
-                 (eventTimesChanged)="eventTimesChanged($event)"
-                [eventTitleTemplate]="customEventTemplate"
-                [ngClass]="viewDay==0  || viewDay==6? 'weekoff':'weekdays'"
-                >
+            <br />
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"
+                    [dayModifier]="dayModifier" [events]="events" [refresh]="refresh"
+                    (dayClicked)="dayClicked($event.day)" (eventTimesChanged)="eventTimesChanged($event)"
+                    [eventTitleTemplate]="customEventTemplate"
+                    [ngClass]="viewDay==0  || viewDay==6? 'weekoff':'weekdays'">
 
-            </mwl-calendar-month-view>
+                </mwl-calendar-month-view>
                 <ng-template #customEventTemplate let-event="event">
                     <div *ngFor="let event of events">
                         <div class="cal-day-badge" [ngClass]="event.meta.remarks">
                             {{ event.meta.remarks }}
                         </div>
                     </div>
-                    <div 
-                    class="custom-day-cell"
-                    [ngStyle]="{'background-color': getCellBackgroundColor(event.date)}">
-                    {{ event.date | date: 'd' }}
+                    <div class="custom-day-cell" [ngStyle]="{'background-color': getCellBackgroundColor(event.date)}">
+                        {{ event.date | date: 'd' }}
                     </div>
                     <div *ngFor="let event of events">
                         <span class="badge" *ngIf="event.showBadge">Event Badge</span>
-                      </div>
-                </ng-template>          
+                    </div>
+                </ng-template>
             </div>
+        </div> -->
+
+
+
+        <!-- Calendar Section -->
+        <div class="col-md-8">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
+                            <i class="fas fa-less-than"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
+                            <i class="fas fa-greater-than"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr *ngFor="let week of calendarData">
+                                <td class="w14 h100" *ngFor="let day of week" [ngClass]="{
+                      'selected-day': day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date),
+                      [getDayClass(day)]: true // Apply other status-based classes dynamically
+                    }" (click)="selectDay(day)">
+                                    <div class="row" *ngIf="day">
+                                        <span class="col-6 fs-8 text-start"></span>
+                                        <span class="col-6 text-end">
+                                            <h4>{{ day.date.getDate() }}</h4>
+                                        </span><br>
+
+                                        <!-- Circle for each status, visible only on hover -->
+                                        <div *ngIf="day.status !== 'NoStatus'" class="text-center">
+                                            <span class="status-circle" [ngClass]="day.status"
+                                                [attr.title]="day.status === 'Absent' ? day.remark : ''">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
         </div>
-       <!-- Attendance Summary Section -->
+
+
+
+
+        <!-- Attendance Summary Section -->
+
+
+        <!-- Attendance Summary Section-->
         <div class="col-md-2">
             <div class="card" style="border: none;">
                 <div class="card-body p-0">
                     <h6 class="card-title">Attendance &amp; Summary</h6>
-                    <ul class="list-group" style="    border: 1px solid; padding: 5px;">
-                        <li class="list-group-item">Present days: 26</li>
-                        <li class="list-group-item text-danger">Absent days: 2</li>
-                        <li class="list-group-item text-primary">Leave Apply: 1</li>
-                        <li class="list-group-item text-warning">Half day: 1</li>
-                        <li class="list-group-item text-success">Leave Approved: 1</li>
+                    <ul class="list-group" style="border: 1px solid; padding: 5px;">
+                        <li class="list-group-item">Present days: {{ attendanceSummary.present }}</li>
+                        <li class="list-group-item text-danger">Absent days: {{ attendanceSummary.absent }}</li>
+                        <li class="list-group-item text-primary">Leave Apply: {{ attendanceSummary.leaveApply }}</li>
+                        <li class="list-group-item text-warning">Half day: {{ attendanceSummary.halfDay }}</li>
+                        <li class="list-group-item text-success">Leave Approved: {{ attendanceSummary.leaveApproved }}
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

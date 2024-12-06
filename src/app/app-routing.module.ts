@@ -147,9 +147,9 @@ const routes: Routes = [
   {
     path:'regurlization-history',component:PunchTimeComponent
   },
-  // {
-  //   path:'timesheet',component:AttendenceCalenderComponent
-  // },
+  {
+    path:'timesheet',component:AttendenceCalenderComponent
+  },
 
   {
     path: 'apply-resignation',
