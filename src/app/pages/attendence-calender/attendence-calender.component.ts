@@ -123,6 +123,7 @@ export class AttendenceCalenderComponent {
     });
   }
   
+  
   // getTooltipContent(day: any): string {
   //   // Find the corresponding attendance record for the day
   //   const attendanceRecord = this.attendanceRecords.find(record => 
@@ -520,11 +521,11 @@ getDayClass(day: any): string {
     case 'HalfDay':
       return 'text-warning';
     case 'LeaveApproved':
-      return 'text-success';
+      return 'LeaveApproved';
     case 'LeaveApplied':
-      return 'text-primary';
+      return 'leaveApplied';
     case 'Present':
-      return 'text-black';
+      return 'Present';
     case 'Absent':
       return 'text-danger';
     default:
@@ -549,22 +550,43 @@ getDayClass(day: any): string {
   }
   
   
+  // getStatusColor(status: string): string {
+  //   switch (status) {
+  //     case 'Present':
+  //       return '#4caf50'; // Green
+  //     case 'Absent':
+  //       return '#f44336'; // Red
+  //     case 'Holiday':
+  //       return '#2196f3'; // Blue
+  //     case 'WeekOff':
+  //       return '#0d6efd'; // Orange
+  //     case 'HalfDay':
+  //       return '#ffc107'; // Yellow
+  //     case 'LeaveApproved':
+  //       return '#8bc34a'; // Light Green
+  //     case 'LeaveApplied':
+  //       return '#e0e0e9'; // Light Blue
+  //     default:
+  //       return '#e0e0e0'; // Gray for NoStatus or default
+  //   }
+  // }
+  
   getStatusColor(status: string): string {
     switch (status) {
       case 'Present':
-        return '#4caf50'; // Green
+        return '#4caf50'; // Green for Present
       case 'Absent':
-        return '#f44336'; // Red
+        return '#f44336'; // Red for Absent
       case 'Holiday':
-        return '#2196f3'; // Blue
+        return '#673ab7'; // Purple for Holiday
       case 'WeekOff':
-        return '#ff9800'; // Orange
+        return '#0dcaf0'; // Olive for WeekOff (distinct from HalfDay and Absent)
       case 'HalfDay':
-        return '#ffc107'; // Yellow
+        return '#ffc107'; // Yellow for HalfDay
       case 'LeaveApproved':
-        return '#8bc34a'; // Light Green
+        return '#80cbc1'; // Light Green for LeaveApproved (distinct from Present)
       case 'LeaveApplied':
-        return '#03a9f4'; // Light Blue
+        return '#e91e63'; // Cyan for LeaveApplied
       default:
         return '#e0e0e0'; // Gray for NoStatus or default
     }

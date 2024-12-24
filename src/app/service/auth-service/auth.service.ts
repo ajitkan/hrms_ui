@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, catchError, Observable, Subject } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environments';
@@ -19,7 +20,7 @@ export class AuthService {
    private userSubject: BehaviorSubject<User>;  
    public user: Observable<User>;
   
-  constructor(private http: HttpClient) {  
+  constructor(private http: HttpClient,private toastr: ToastrService) {  
     
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
     this.user = this.userSubject.asObservable();
@@ -103,5 +104,44 @@ getNotifications(payload:{userName:string,pageNumber: number, pageSize: number},
 insertAttendanceDetails(payload: { employeeCode: string, employeeID: number, action: number }): Observable<any> {
   return this.http.post(`${environment.apiUrl}/UserDetails/InsertAttendanceDetails`, payload);
 }
+
+ 
+handleAttendance(
+  companyCode: string,
+  employeeCode: string,
+  employeeID: number,
+  action: number // 1 for Check-In, 2 for Check-Out
+) {
+  if (!employeeCode) {
+    this.toastr.error(
+      `Please enter Employee Code to ${action === 1 ? 'Check-In' : 'Check-Out'}`,
+      'Error'
+    );
+    return;
+  }
+
+  const payload = {
+    companyCode,
+    employeeCode,
+    employeeID,
+    action,
+  };
+
+  this.insertAttendanceDetails(payload).subscribe({
+    next: (res: any) => {
+      this.toastr.success(
+        `${action === 1 ? 'Checked In' : 'Checked Out'} successfully`,
+        'Success'
+      );
+    },
+    error: (err: any) => {
+      this.toastr.error(
+        `${action === 1 ? 'Check-In' : 'Check-Out'} failed`,
+        'Error'
+      );
+    },
+  });
+}
+
 
 }

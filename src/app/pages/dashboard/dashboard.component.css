@@ -116,9 +116,12 @@ h4.card-header{
   border-color: #0056b3;
 }
 
-.dropdown-menu-container {
+/* .dropdown-menu-container {
   position: relative;
-  margin: 30px;
+  margin: 50px;
+} */
+.card-body{
+  cursor: pointer !important;
 }
 
 .dropdown-menu {
@@ -212,12 +215,25 @@ h4.card-header{
 
 /* Show dropdown menu when toggled */
 .dropdown-menu.show{
-  display: block;
-  width: 320px;
-  left: auto;     
-  /* right: 20px ;  */
-  position: absolute; 
-  margin-top: 5px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px; /* Fixed width */
+  max-height: 400px; /* Limit the height */
+  overflow-y: hidden; /* Enable scrolling for large lists */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
+  
+}
+.holiday-dropdown-menu {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 380px; /* Fixed width */
+  max-height: 400px; /* Limit the height */
+  overflow-y: hidden; /* Enable scrolling for large lists */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
 }
 
 /* Heading styling */
@@ -261,6 +277,35 @@ h4.card-header{
   font-weight: 600;
 }
 
+
+
+
+.holiday-row {
+  display: grid; /* Use CSS Grid for fixed layout */
+  grid-template-columns: 1fr auto; /* Flexible space for the name, fixed for the button */
+  align-items: center; /* Vertically center the content */
+  gap: 30px; /* Add space between the name and button */
+  padding:8px 8px 8px 10px; /* Add padding for a more spaced-out look */
+  border-bottom: 1px solid #e0e0e0; /* Optional: For separating rows visually */
+ 
+}
+/* .holiday-name {
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+} */
+
+/* .Send-Message-btn {
+  background: #88b4e3;
+  color: white;
+  text-transform: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+
 .holiday-date {
   font-size: 12px;
   color: #999;
@@ -287,22 +332,14 @@ h4.card-header{
 
 
 
-/* .Send-Message-btn btn-sm {
-  float: right;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  margin-bottom: 10px;
-  text-transform: none;
-  margin: 5px;
-} */
+
 
 .Send-Message-btn {
   float: right;
   background: #007bff;
 color: white;
 text-transform: none;
-margin-left:100px;
+margin-left:108px;
 
 }
 
@@ -317,12 +354,15 @@ margin-left:100px;
 }
 .w14{
   width: 14.27% !important;
+
+  
 }
 .h100{
    height: 100px !important;
 }
 .week{
   color: #0dcaf0 !important;
+  background-color:#d3d9f14d;
 }
 .absent{
   color: red !important;
@@ -349,3 +389,160 @@ thead > tr > th{
 } 
 
 
+
+
+@media (min-width: 1200px) {
+  .h4, h4 {
+      font-size: 1.2rem;
+  }
+}
+
+
+.legend {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+
+[data-bs-toggle="tooltip"]:hover::after {
+  content: attr(data-title); 
+  display: block;
+  background-color: gray;
+  color: white;
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 1000;
+  white-space: nowrap;
+} 
+
+[data-bs-toggle="tooltip"]:hover::after {
+  content: attr(title);
+  display: block;
+  background-color: gray;
+  color: white;
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 11px;
+  z-index: 1000;
+}
+
+.leaveApplied{
+  color:#e91e63 !important
+}
+.Present{
+  color: #4caf50;
+}
+.LeaveApproved{
+  color: #80cbc1 ;
+}
+
+
+
+
+
+
+
+
+/* Container for the holiday dropdown */
+.holiday-dropdown-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Slightly darker background overlay */
+  padding: 20px; /* Padding around the container */
+  box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+
+/* Menu styling */
+.holiday-dropdown-menu {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 380px; /* Fixed width */
+  max-height: 400px; /* Limit the height */
+  overflow-y: hidden; /* Enable scrolling for large lists */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
+}
+
+/* Heading styling */
+.holiday-dropdown-heading {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #4e2acf;
+  text-align: center; /* Center the heading */
+ 
+}
+
+
+
+
+/* Add some responsive tweaks */
+@media (max-width: 600px) {
+  .holiday-dropdown-menu {
+    width: 90%; /* Make the menu more responsive on smaller screens */
+  }
+}
+
+
+
+/* Calendar Table Styling */
+.calendar-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  width: 14.28%;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.status-container {
+  margin-bottom: 5px;
+}
+
+/* Selected Day Highlight */
+.selected-day {
+  background-color: #f0f8ff;
+  border: 2px solid #007bff;
+}
+
+/* Prevent Content Expansion */
+.date-text {
+  font-size: 14px;
+  line-height: 1.2;
+}

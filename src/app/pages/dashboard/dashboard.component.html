@@ -1,7 +1,8 @@
 <main _ngcontent-muo-c27="" role="main" class="col col-lg-12 px-4 main-content"
   style="border: 1px black; border-radius: 10px;">
   <div _ngcontent-muo-c27="" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1">
-    <h1 _ngcontent-muo-c27="" class="h2" style="margin: 0;/* background-color: blue; */color: #4C6FBF;">Dashboard</h1>
+    <h1 _ngcontent-muo-c27="" class="h2" style="margin: 0;/* background-color: blue; */color: #4C6FBF;">Employee Data
+      Management</h1>
   </div>
   <hr _ngcontent-muo-c27="" style="margin-top: 1rem 0 0 0;">
   <div _ngcontent-muo-c27="" class="row">
@@ -12,85 +13,8 @@
   padding: 1%;
 ">
           <div _ngcontent-muo-c27="" class="row">
-            <!-- <div _ngcontent-muo-c27="" class="col-md-7">
-              <div _ngcontent-muo-c27="" class="card">
-                <div _ngcontent-muo-c27="" class="card-header bg-primary text-white"> Calendar </div>
-                <div _ngcontent-muo-c27="" class="card-body" style="
-  padding: 0;
-">
-                  <table _ngcontent-muo-c27="" class="table table-bordered">
-                    <thead _ngcontent-muo-c27="">
-                      <tr _ngcontent-muo-c27="">
-                        <th _ngcontent-muo-c27="">Sun</th>
-                        <th _ngcontent-muo-c27="">Mon</th>
-                        <th _ngcontent-muo-c27="">Tue</th>
-                        <th _ngcontent-muo-c27="">Wed</th>
-                        <th _ngcontent-muo-c27="">Thu</th>
-                        <th _ngcontent-muo-c27="">Fri</th>
-                        <th _ngcontent-muo-c27="">Sat</th>
-                      </tr>
-                    </thead>
-                    <tbody _ngcontent-muo-c27="" style="
-  padding: 0;
-  margin: 0;
-">
-                      <tr _ngcontent-muo-c27="" style="
-  margin: 0;
-  padding: 0;
-">
-                        <td _ngcontent-muo-c27=""></td>
-                        <td _ngcontent-muo-c27=""></td>
-                        <td _ngcontent-muo-c27=""></td>
-                        <td _ngcontent-muo-c27=""></td>
-                        <td _ngcontent-muo-c27="" class="working">1</td>
-                        <td _ngcontent-muo-c27="" class="absent">2</td>
-                        <td _ngcontent-muo-c27="" class="leave">3</td>
-                      </tr>
-                      <tr _ngcontent-muo-c27="">
-                        <td _ngcontent-muo-c27="" class="holiday">4</td>
-                        <td _ngcontent-muo-c27="" class="half-day">5</td>
-                        <td _ngcontent-muo-c27="">6</td>
-                        <td _ngcontent-muo-c27="">7</td>
-                        <td _ngcontent-muo-c27="">8</td>
-                        <td _ngcontent-muo-c27="">9</td>
-                        <td _ngcontent-muo-c27="">10</td>
-                      </tr>
-                      <tr _ngcontent-muo-c27="">
-                        <td _ngcontent-muo-c27="">11</td>
-                        <td _ngcontent-muo-c27="">12</td>
-                        <td _ngcontent-muo-c27="">13</td>
-                        <td _ngcontent-muo-c27="">14</td>
-                        <td _ngcontent-muo-c27="">15</td>
-                        <td _ngcontent-muo-c27="">16</td>
-                        <td _ngcontent-muo-c27="">17</td>
-                      </tr>
-                      <tr _ngcontent-muo-c27="">
-                        <td _ngcontent-muo-c27="">18</td>
-                        <td _ngcontent-muo-c27="">19</td>
-                        <td _ngcontent-muo-c27="">20</td>
-                        <td _ngcontent-muo-c27="">21</td>
-                        <td _ngcontent-muo-c27="">22</td>
-                        <td _ngcontent-muo-c27="">23</td>
-                        <td _ngcontent-muo-c27="">24</td>
-                      </tr>
-                      <tr _ngcontent-muo-c27="">
-                        <td _ngcontent-muo-c27="">25</td>
-                        <td _ngcontent-muo-c27="">26</td>
-                        <td _ngcontent-muo-c27="">27</td>
-                        <td _ngcontent-muo-c27="">28</td>
-                        <td _ngcontent-muo-c27="">29</td>
-                        <td _ngcontent-muo-c27="">30</td>
-                        <td _ngcontent-muo-c27="">31</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-              <h3 style="color: #4c6fbf;">{{ currentMonth + " - " + currentYear}}</h3>
-            </div> -->
-            <div class="row">
+
+            <!-- <div class="row">
               <div class="col">
                 <table class="table table-sm table-bordered">
                   <thead>
@@ -98,79 +22,301 @@
                       <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     <tr *ngFor="let week of calendarData">
-                      <td
-                        class="w14 
-                        "
-                        *ngFor="let day of week"
-                        [ngClass]="[
+                      <td class="w14 
+                        " *ngFor="let day of week" [ngClass]="[
                           day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
                           getDayClass(day)
-                        ]"
-                        (click)="selectDay(day)"
+                        ]" (click)="selectDay(day)"
                         [attr.data-bs-toggle]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? 'tooltip' : null"
-                        [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''"
-                      >
-        
-        
-                     
-                      
-                        <div class="row" *ngIf="day">
-                          <span class="col-6 fs-8 text-start">
-                            <span *ngIf="day.fullStatus === 'Present'">✔️</span>
-        
-                            <span *ngIf="day.fullStatus === 'WeekOff'">🌟</span> 
-                            <span *ngIf="day.fullStatus === 'LeaveApplied'">📝</span> 
-                            <span *ngIf="day.fullStatus === 'LeaveApproved'">✅</span> 
-                            <span *ngIf="day.fullStatus === 'Holiday'">🎉</span> 
-                            <span *ngIf="day.fullStatus === 'HalfDay'">⏳</span> 
-                            <span *ngIf="day.fullStatus === 'Absent'">❌</span> 
-                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'">❌</span> 
+                        [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''">
 
-                      
+
+
+
+                        <div class="row" *ngIf="day">
+                         
+                          <span class="col-6 fs-8 text-start">
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'present'"
+                              [style.color]="getStatusColor('Present')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'weekoff'"
+                              [style.color]="getStatusColor('WeekOff')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapplied'"
+                              [style.color]="getStatusColor('LeaveApplied')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapproved'"
+                              [style.color]="getStatusColor('LeaveApproved')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'holiday'"
+                              [style.color]="getStatusColor('Holiday')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'halfday'"
+                              [style.color]="getStatusColor('HalfDay')">■</span>
+                            <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'"
+                              [style.color]="getStatusColor('Absent')">■</span>
                           </span>
+
                           <span class="col-5 text-end">
                             <h4>{{ day.date.getDate() }}</h4>
                           </span>
                         </div>
-                        
+
                       </td>
-                      
+
+
                     </tr>
-                    
-        
-        
-                    
+
+
+
+
                   </tbody>
-                  
+
                 </table>
+
                 
+                
+                <div class="d-flex flex-column align-items-center justify-content-start ms-3">
+                  <button type="button" class="btn btn-success btn-sm mb-2" (click)="checkIn()">Check In</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="checkOut()">Check Out</button>
+                </div>
+
               </div>
-              
-            </div>
+
+
+            </div> -->
 
 
 
-            <!-- <div _ngcontent-muo-c27="" class="col-md-5">
-              <div _ngcontent-muo-c27="" class="card">
-                <div _ngcontent-muo-c27="" class="card-header"> Attendance &amp; Summary </div>
-                <div _ngcontent-muo-c27="" class="card-body">
-                  <p _ngcontent-muo-c27="">Present days: 26</p>
-                  <p _ngcontent-muo-c27="">Absent days: 3</p>
-                  <p _ngcontent-muo-c27="">Leave Apply: 2</p><button _ngcontent-muo-c27="" class="btn btn-success">Check
-                    In</button><button _ngcontent-muo-c27="" class="btn btn-outline-secondary">Check Out</button>
+            <div class="row">
+              <div class="d-flex align-items-start">
+                <!-- Calendar Section -->
+                <div class="flex-grow-1">
+                  <table class="table table-sm table-bordered calendar-table">
+                    <thead>
+                      <tr>
+                        <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let week of calendarData">
+                        <td class="w14"
+                          *ngFor="let day of week"
+                          [ngClass]="[
+                            day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
+                            getDayClass(day)
+                          ]"
+                          (click)="selectDay(day)"
+                          [attr.data-bs-toggle]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? 'tooltip' : null"
+                          [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''">
+                          <div class="day-content">
+                            <div class="status-container">
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'"
+                                    [style.color]="getStatusColor('Absent')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'present'"
+                                    [style.color]="getStatusColor('Present')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'holiday'"
+                                    [style.color]="getStatusColor('Holiday')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'weekoff'"
+                                    [style.color]="getStatusColor('WeekOff')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'halfday'"
+                                    [style.color]="getStatusColor('HalfDay')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapproved'"
+                                    [style.color]="getStatusColor('LeaveApproved')">■</span>
+                              <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapplied'"
+                                    [style.color]="getStatusColor('LeaveApplied')">■</span>
+                            </div>
+                            <div class="date-text">{{ day.date.getDate() }}</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            
+                <!-- Buttons Section -->
+                <div class="d-flex flex-column align-items-center justify-content-start ms-3">
+                  <button type="button" class="btn btn-primary btn-sm mb-2" (click)="checkIn()">Check In</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" (click)="checkOut()">Check Out</button>
                 </div>
               </div>
-            </div> -->
+              <!-- <div class="d-flex flex-column align-items-center justify-content-start ms-3">
+                <button type="button" class="btn btn-primary btn-sm mb-2" (click)="checkIn()">Check In</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="checkOut()">Check Out</button>
+              </div> -->
+            </div>
+            
+            
+
+          </div>
+          <!-- Legend -->
+          <div class="legend">
+            <span [style.color]="getStatusColor('Present')">■ Present</span>
+            <span [style.color]="getStatusColor('Absent')">■ Absent</span>
+            <span [style.color]="getStatusColor('WeekOff')">■ WeekOff</span>
+            <span [style.color]="getStatusColor('LeaveApplied')">■ Leave Applied</span>
+            <span [style.color]="getStatusColor('LeaveApproved')">■ Leave Approved</span>
+            <span [style.color]="getStatusColor('Holiday')">■ Holiday</span>
+            <span [style.color]="getStatusColor('HalfDay')">■ Half Day</span>
           </div>
         </div>
 
 
+      </div>
 
+
+    </div>
+
+
+
+    <!-- </div>
+        
+           <div class="legend">
+            <span [style.color]="getStatusColor('Present')">■ Present</span>
+            <span [style.color]="getStatusColor('Absent')">■ Absent</span>
+            <span [style.color]="getStatusColor('WeekOff')">■ WeekOff</span>
+            <span [style.color]="getStatusColor('LeaveApplied')">■ Leave Applied</span>
+            <span [style.color]="getStatusColor('LeaveApproved')">■ Leave Approved</span>
+            <span [style.color]="getStatusColor('Holiday')">■ Holiday</span>
+            <span [style.color]="getStatusColor('HalfDay')">■ Half Day</span>
+          </div>
+  
+    </div>
+     -->
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">Events & Celebrations</div>
+        <div class="card-body">
+          <p *ngIf="categoryCounts['Birthday']" (click)="toggleDropdown('Birthday')">
+            <span class="icon">🎂</span>
+            {{ categoryCounts['Birthday'] }} Birthdays <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Event Invite']" (click)="toggleDropdown('Event Invite')">
+            <span class="icon">📬</span>
+            {{ categoryCounts['Event Invite'] }} Event Invites <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Work Anniversary']" (click)="toggleDropdown('Work Anniversary')">
+            <span class="icon">💼</span>
+            {{ categoryCounts['Work Anniversary'] }} Work Anniversaries <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Marriage Anniversary']" (click)="toggleDropdown('Marriage Anniversary')">
+            <span class="icon">💍</span>
+            {{ categoryCounts['Marriage Anniversary'] }} Marriage Anniversaries <span class="arrow">&#9660;</span>
+          </p>
+        </div>
+      </div>
+      <br>
+
+
+
+      <!-- Dropdown menu for selected category -->
+      <!-- <div class="dropdown-menu-container" *ngIf="isDropdownOpen">
+        <ul id="holidayDropdownMenu" class="dropdown-menu show">
+          <h6 class="dropdown-heading">{{ selectedCategory }} List</h6>
+          <div *ngFor="let employee of filteredEmployees">
+            <div class="holiday-item">
+              <div class="holiday-header d-flex justify-content-between align-items-center">
+                <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
+             
+                <button class="Send-Message-btn btn-sm" (click)="sendMessageToEmployee(employee)">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="filteredEmployees.length === 0">
+            <p class="no-holidays">No {{ selectedCategory }} available.</p>
+          </div>
+        </ul>
+      </div> -->
+
+      <div class="holiday-dropdown-container" *ngIf="isDropdownOpen">
+        <ul id="holidayDropdownMenu" class="holiday-dropdown-menu">
+          <h6 class="holiday-dropdown-heading">{{ selectedCategory }} List</h6>
+          <div *ngFor="let employee of filteredEmployees">
+            <div class="holiday-item">
+              <div class="holiday-row">
+                <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
+                <button class="Send-Message-btn btn-sm" (click)="sendMessageToEmployee(employee)">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="filteredEmployees.length === 0">
+            <p class="no-holidays">No {{ selectedCategory }} available.</p>
+          </div>
+        </ul>
+      </div>
+
+
+
+      <div class="card">
+        <div class="card-header">Upcoming Holiday</div>
+        <div class="card-body">
+
+          <div *ngIf="holidays.length > 0">
+            <div class="holiday-item" *ngFor="let holiday of upcomingHolidays | slice:0:2">
+              <div class="holiday-header">
+                <span class="holiday-name">{{ holiday.name }}</span>
+                <span class="holiday-date">{{ holiday.date | date }}</span>
+              </div>
+            </div>
+
+
+            <button class="view-all-btn btn btn-sm" (click)="toggleHolidayList($event)">
+              View all
+              <i class="mdi mdi-chevron-down"></i>
+            </button>
+
+
+            <!-- <div class="dropdown-menu-container" *ngIf="isHolidayListOpen">
+              <ul id="holidayDropdownMenu" class="dropdown-menu show">
+                <h6 class="dropdown-heading">Holiday List</h6>
+                <div *ngFor="let holiday of holidays">
+                  <div class="holiday-item">
+                    <div class="holiday-header">
+                      <span class="holiday-name">{{ holiday.name }}</span>
+                      <span class="holiday-date">{{ holiday.date | date }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="holidays.length === 0">
+                  <p class="no-holidays">No holidays available.</p>
+                </div>
+                <div class="dropdown-arrow"></div>
+              </ul>
+            </div> -->
+
+            <div class="holiday-dropdown-container" *ngIf="isHolidayListOpen">
+              <div class="holiday-dropdown-menu">
+                <h6 class="dropdown-heading">Holiday List</h6>
+                <div *ngFor="let holiday of holidays">
+                  <div class="holiday-item">
+                    <div class="holiday-header">
+                      <span class="holiday-name">{{ holiday.name }}</span>
+                      <span class="holiday-date">{{ holiday.date | date }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="holidays.length === 0">
+                  <p class="no-holidays">No holidays available.</p>
+                </div>
+                <div class="holiday-dropdown-arrow"></div>
+              </div>
+            </div>
+
+
+          </div>
+          <div *ngIf="holidays.length === 0">
+            <p class="no-holidays">No holidays available.</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div _ngcontent-muo-c27="" class="col-md-3">
+
+
+    <!-- My Payslip  Rewards and  -->
+    <!-- <div _ngcontent-muo-c27="" class="col-md-3">
       <div _ngcontent-muo-c27="" class="row">
         <div _ngcontent-muo-c27="" class="col-md-12">
           <div _ngcontent-muo-c27="" class="card">
@@ -212,11 +358,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div _ngcontent-muo-c27="" class="row mt-4"></div>
   <div _ngcontent-muo-c27="" class="row">
-    <div _ngcontent-muo-c27="" class="col-md-3">
+
+    <!-- HRMS DOCUMENT -->
+    <!-- <div _ngcontent-muo-c27="" class="col-md-3">
       <div _ngcontent-muo-c27="" class="card">
         <div _ngcontent-muo-c27="" class="card-header"> HRMS Documents </div>
         <div _ngcontent-muo-c27="" class="card-body">
@@ -230,82 +378,15 @@
 "><i class="fa fa-eye" aria-hidden="true"></i></button></div>
         </div>
       </div>
-    </div>
-    <!-- <div _ngcontent-muo-c27="" class="col-md-3">
-      <div _ngcontent-muo-c27="" class="card">
-        <div _ngcontent-muo-c27="" class="card-header"> Events &amp; Celebrations </div>
-        <div _ngcontent-muo-c27="" class="card-body">
-          <p _ngcontent-muo-c27="">4 Birthdays</p>
-          <p _ngcontent-muo-c27="">2 Event Invites</p>
-          <p _ngcontent-muo-c27="">6 Work Anniversary</p>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">Events & Celebrations</div>
-        <div class="card-body">
-          <p *ngIf="categoryCounts['Birthday']">{{ categoryCounts['Birthday'] }} Birthdays</p>
-          <p *ngIf="categoryCounts['Event Invite']">{{ categoryCounts['Event Invite'] }} Event Invites</p>
-          <p *ngIf="categoryCounts['Work Anniversary']">{{ categoryCounts['Work Anniversary'] }} Work Anniversaries</p>
-          <p *ngIf="categoryCounts['Marriage Anniversary']">{{ categoryCounts['Marriage Anniversary'] }} Marriage Anniversaries</p>
-         
-        </div>
-      </div>
-    </div>
-     -->
-
-
-
-    <!-- <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">Events & Celebrations</div>
-        <div class="card-body">
-          <p *ngIf="categoryCounts['Birthday']" (click)="toggleDropdown('Birthday')">
-           
-            <span class="icon">🎉</span>
-            {{ categoryCounts['Birthday'] }} Birthdays <span class="arrow">&#9660;</span>
-          </p>
-          <p *ngIf="categoryCounts['Event Invite']" (click)="toggleDropdown('Event Invite')">
-            {{ categoryCounts['Event Invite'] }} Event Invites<span class="arrow">&#9660;</span>
-          </p>
-          <p *ngIf="categoryCounts['Work Anniversary']" (click)="toggleDropdown('Work Anniversary')">
-            {{ categoryCounts['Work Anniversary'] }} Work Anniversaries <span class="arrow">&#9660;</span>
-          </p>
-          <p *ngIf="categoryCounts['Marriage Anniversary']" (click)="toggleDropdown('Marriage Anniversary')">
-            {{ categoryCounts['Marriage Anniversary'] }} Marriage Anniversaries<span class="arrow">&#9660;</span>
-          </p>
-        </div>
-      </div>
-
-    
-      <div class="dropdown-menu-container" *ngIf="isDropdownOpen">
-        <ul id="holidayDropdownMenu" class="dropdown-menu show">
-          <h6 class="dropdown-heading">{{ selectedCategory }} List</h6>
-          <div *ngFor="let employee of filteredEmployees">
-            <div class="holiday-item">
-              <div class="holiday-header">
-                <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
-                <span class="holiday-date">{{ employee.emailID }}</span>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="filteredEmployees.length === 0">
-            <p class="no-holidays">No {{ selectedCategory }} available.</p>
-          </div>
-          <div class="dropdown-arrow"></div>
-          <button class="btn btn-primary mt-2" (click)="sendMessagesForCategory()">
-            Send Message
-          </button>
-        </ul>
-      </div>
     </div> -->
 
 
 
 
-    <div class="col-md-3">
+
+
+
+    <!-- <div class="col-md-3">
       <div class="card">
         <div class="card-header">Events & Celebrations</div>
         <div class="card-body">
@@ -325,7 +406,7 @@
         </div>
       </div>
 
-      <!-- Dropdown menu for selected category -->
+   
       <div class="dropdown-menu-container" *ngIf="isDropdownOpen">
         <ul id="holidayDropdownMenu" class="dropdown-menu show">
           <h6 class="dropdown-heading">{{ selectedCategory }} List</h6>
@@ -333,7 +414,7 @@
             <div class="holiday-item">
               <div class="holiday-header d-flex justify-content-between align-items-center">
                 <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
-                <!-- <span class="holiday-date">{{ employee.emailID }}</span> -->
+              
                 <button class="Send-Message-btn btn-sm" (click)="sendMessageToEmployee(employee)">
                   Send Message
                 </button>
@@ -345,62 +426,17 @@
           </div>
         </ul>
       </div>
-    </div>
-
-
-
-    <!-- <div _ngcontent-muo-c27="" class="col-md-3">
-      <div _ngcontent-muo-c27="" class="card">
-        <div _ngcontent-muo-c27="" class="card-header"> Upcoming Holiday </div>
-        <div _ngcontent-muo-c27="" class="card-body">
-         
-          <div *ngIf="holidays.length > 0">
-           
-            <button  class="dropdown-toggle nav-link" (click)="toggleHolidayList()" href="javascript:void(0)">
-              <i class="btn-primary"></i> View all
-              <i class="mdi mdi-chevron-down"></i> 
-            </button>
-            <div class="dropdown-menu-container">
-              <ul id="holidayDropdownMenu" class="dropdown-menu" [ngClass]="{'show': isHolidayListOpen}">
-                <h6 class="dropdown-heading">Holiday List</h6>
-                <div *ngIf="holidays.length > 0">
-                  <div class="holiday-item" *ngFor="let holiday of holidays">
-                    <div class="holiday-header">
-                      <span class="holiday-name">{{ holiday.name }}</span>
-                      <span class="holiday-date">{{ holiday.date | date}}</span>
-                    </div>
-                  </div>
-                 
-                </div>
-                <div *ngIf="holidays.length === 0">
-                  <p class="no-holidays">No holidays available.</p>
-                </div>
-    
-                <div class="dropdown-arrow"></div>
-              </ul>
-    
-            </div>
-            <div class="holiday-item" *ngFor="let holiday of holidays">
-              <div class="holiday-header">
-                <span class="holiday-name">{{ holiday.name }}</span>
-                <span class="holiday-date">{{ holiday.date | date }}</span>
-              </div>
-            </div>
-            
-           
-          </div>
-          <div *ngIf="holidays.length === 0">
-            <p class="no-holidays">No holidays available.</p>
-          </div>
-        </div>
-      </div>
     </div> -->
 
+
+
+
+    <!-- 
     <div class="col-md-3">
       <div class="card">
         <div class="card-header">Upcoming Holiday</div>
         <div class="card-body">
-          <!-- Display the first two holidays -->
+         
           <div *ngIf="holidays.length > 0">
             <div class="holiday-item" *ngFor="let holiday of holidays | slice:0:2">
               <div class="holiday-header">
@@ -409,13 +445,13 @@
               </div>
             </div>
 
-            <!-- "View all" button in blue color, aligns to the right -->
+          
             <button class="view-all-btn btn btn-sm" (click)="toggleHolidayList($event)">
               View all
               <i class="mdi mdi-chevron-down"></i>
             </button>
 
-            <!-- Full holiday list dropdown menu -->
+        
             <div class="dropdown-menu-container" *ngIf="isHolidayListOpen">
               <ul id="holidayDropdownMenu" class="dropdown-menu show">
                 <h6 class="dropdown-heading">Holiday List</h6>
@@ -439,11 +475,45 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <!-- <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">Upcoming Holidays</div>
+        <div class="card-body">
+         
+          <div *ngIf="holidays.length > 0">
+            <div class="holiday-item" *ngFor="let holiday of upcomingHolidays">
+              <div class="holiday-header">
+                <span class="holiday-name">{{ holiday.name }}</span>
+                <span class="holiday-date">{{ holiday.date | date }}</span>
+              </div>
+            </div>
+    
+           
+            <button
+              class="btn btn-sm btn-primary view-all-btn"
+              (click)="toggleHolidayList($event)"
+              *ngIf="holidays.length > 2"
+            >
+              {{ isHolidayListOpen ? 'Collapse' : 'View all' }}
+              <i
+                class="mdi"
+                [ngClass]="isHolidayListOpen ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+              ></i>
+            </button>
+          </div>
+    
+         
+          <div *ngIf="holidays.length === 0">
+            <p class="text-muted">No upcoming holidays available.</p>
+          </div>
+        </div>
+      </div>
+    </div>  -->
 
 
-
-    <div _ngcontent-muo-c27="" class="col-md-3">
+    <!-- <div _ngcontent-muo-c27="" class="col-md-3">
       <div _ngcontent-muo-c27="" class="card">
         <div _ngcontent-muo-c27="" class="card-header"> IT Help Desk </div>
         <div _ngcontent-muo-c27="" class="card-body row"><button _ngcontent-muo-c27=""
@@ -454,6 +524,6 @@
   padding: 0;
 ">Pending tickets</button></div>
       </div>
-    </div>
+    </div> -->
   </div>
 </main>

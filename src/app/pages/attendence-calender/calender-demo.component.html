@@ -166,125 +166,8 @@
     </ul>-->
   </div>
 
-  <!-- Calendar Section -->
-  <!-- <div class="col-md-9">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
-            <i class="fas fa-less-than"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
-      </div>
-      <div class="col-md-4 ">
-        <div class="btn-group">
-          <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
-            <i class="fas fa-greater-than"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let week of calendarData">
 
-              <td class="w14 h100" *ngFor="let day of week" [ngClass]="getDayClass(day)">
-                <div class="row" *ngIf="day">
- 
-                  <span class="col-6 fs-8 text-start" data-toggle="tooltip" data-html="true" data-placement="top">{{
-                    day.status!='NoStatus'? day.status=='Holiday'?day.remark:day.status:'' }} </span>
-                  <span class="col-6 text-end">
-                    <h4>{{day.date.getDate()}}</h4>
-                  </span><br>
-                  <div *ngIf="day.status=='Present' || day.status=='HalfDay' "
-                    class="border border-black col-11 p-1 m-auto ">
-                    <span class="fs10 text-black">{{day.checkIn+" - "+day.checkOut}}</span>
-                    <span class="fs10 text-black">
-                      Work Hrs-
-                      {{
-                      (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) / 60 | number:'2.0-0'
-                      }}:
-                      {{
-                      (convertTimeToMinutes(day.checkOut) - convertTimeToMinutes(day.checkIn)) % 60
-                      }} hr
-                    </span>
-                  </div>
-                  
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <br />
 
-  </div> -->
-
-  <!-- Calendar Section -->
-  <!-- <div class="col-md-9">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div class="btn btn-primary" (click)="PreviousMonth()" style="background-color: #4c6fbf;">
-            <i class="fas fa-less-than"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h3 style="color: #4c6fbf;">{{ Month + " - " + currentYear}}</h3>
-      </div>
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div class="btn btn-primary" style="background-color: #4c6fbf;" (click)="nextMonth()">
-            <i class="fas fa-greater-than"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let week of calendarData">
-              <td class="w14 h100" *ngFor="let day of week" [ngClass]="getDayClass(day)">
-                <div class="row" *ngIf="day">
-                  <span class="col-6 fs-8 text-start"></span>
-                  <span class="col-6 text-end">
-                    <h4>{{ day.date.getDate() }}</h4>
-                  </span><br>
-  
-                
-                  <div *ngIf="day.status !== 'NoStatus'" class="text-center">
-                    <span class="status-circle" [ngClass]="day.status" 
-                      [attr.title]="day.status === 'Absent' ? day.remark : ''">
-                    </span>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <br />
-  </div>  
-   -->
 
 
   <div class="col-md-8">
@@ -319,57 +202,7 @@
           <tbody>
          
 
-             <!-- <tr *ngFor="let week of calendarData">
-              <td 
-                class="w14 h100" 
-                *ngFor="let day of week" 
-                [ngClass]="[
-                  day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
-                  getDayClass(day)
-                ]"
-                (click)="selectDay(day)"
-                [attr.data-bs-toggle]="day?.fullStatus ? 'tooltip' : null"
-                [attr.title]="day?.fullStatus || ''">
-                <div class="row" *ngIf="day">
-                  <span class="col-6 fs-8 text-start"></span>
-                  <span class="col-6 text-end">
-                    <h4>{{ day.date.getDate() }}</h4>
-                  </span>
-                  <br />
-                </div>
-              </td>
-            </tr> -->
-            
            
-            <!-- <tr *ngFor="let week of calendarData">
-              <td
-                class="w14 h100"
-                *ngFor="let day of week"
-                [ngClass]="[
-                  day?.date && selectedDay?.date && isSameDate(day.date, selectedDay.date) ? 'selected-day' : '',
-                  getDayClass(day)
-                ]"
-                (click)="selectDay(day)"
-                [attr.data-bs-toggle]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? 'tooltip' : null"
-                [attr.title]="day?.fullStatus && day.fullStatus !== 'NoStatus' ? (day?.remark || day?.fullStatus) : ''"
-              >
-                <div class="row" *ngIf="day">
-                  <span class="col-6 fs-8 text-start">
-                  
-                    <span *ngIf="day.fullStatus === 'WeekOff'">🌟</span>
-                    <span *ngIf="day.fullStatus === 'LeaveApplied'">📝</span>
-                    <span *ngIf="day.fullStatus === 'LeaveApproved'">✅</span>
-                    <span *ngIf="day.fullStatus === 'Holiday'">🎉</span>
-                    <span *ngIf="day.fullStatus === 'HalfDay'">⏳</span>
-                    <span *ngIf="day.fullStatus === 'NoStatus'"></span>
-                  </span>
-                  <span class="col-6 text-end">
-                    <h4>{{ day.date.getDate() }}</h4>
-                  </span>
-                </div>
-              </td>
-            </tr> -->
-            
 
 
             <tr *ngFor="let week of calendarData">
@@ -392,23 +225,58 @@
               
                 <div class="row" *ngIf="day">
                   <span class="col-6 fs-8 text-start">
-                    <span *ngIf="day.fullStatus?.toLowerCase().trim()  === 'present'">✔️</span>
+                    <!-- <span *ngIf="day.fullStatus?.toLowerCase().trim()  === 'present'">✔️</span>
 
                     <span *ngIf="day.fullStatus === 'WeekOff'">🌟</span> 
                     <span *ngIf="day.fullStatus === 'LeaveApplied'">📝</span> 
                     <span *ngIf="day.fullStatus === 'LeaveApproved'">✅</span> 
                     <span *ngIf="day.fullStatus === 'Holiday'">🎉</span> 
                     <span *ngIf="day.fullStatus === 'HalfDay'">⏳</span> 
-                    <!-- <span *ngIf="day.fullStatus === 'Absent'">❌</span>  -->
-                    <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'">❌</span>
+                    
+                    <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'">❌</span> -->
 
+                    <!-- <span class="col-6 fs-8 text-start">
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'present'" style="color: green;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'weekoff'" style="color: blue;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapplied'" style="color: grey;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapproved'" style="color: green;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'holiday'" style="color: gold;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'halfday'" style="color: orange;">■</span>
+                      <span *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'" style="color: red;">■</span>
+                    </span> -->
+                    
 
-              
+                    
+                    <span class="col-6 fs-8 text-start">
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'present'" 
+                        [style.color]="getStatusColor('Present')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'weekoff'" 
+                        [style.color]="getStatusColor('WeekOff')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapplied'" 
+                        [style.color]="getStatusColor('LeaveApplied')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'leaveapproved'" 
+                        [style.color]="getStatusColor('LeaveApproved')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'holiday'" 
+                        [style.color]="getStatusColor('Holiday')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'halfday'" 
+                        [style.color]="getStatusColor('HalfDay')">■</span>
+                      <span 
+                        *ngIf="day.fullStatus?.toLowerCase().trim() === 'absent'" 
+                        [style.color]="getStatusColor('Absent')">■</span>
+                    </span>
+                    
                   </span>
                   <span class="col-6 text-end">
                     <h4>{{ day.date.getDate() }}</h4>
                   </span>
                 </div>
+                 
                 
               </td>
               
@@ -425,8 +293,19 @@
       
     </div>
 
-    
-    <br />
+
+    <!-- <br /> -->
+         <!-- Legend -->
+ <div class="legend">
+  <span [style.color]="getStatusColor('Present')">■ Present</span>
+  <span [style.color]="getStatusColor('Absent')">■ Absent</span>
+  <span [style.color]="getStatusColor('WeekOff')">■ WeekOff</span>
+  <span [style.color]="getStatusColor('LeaveApplied')">■ Leave Applied</span>
+  <span [style.color]="getStatusColor('LeaveApproved')">■ Leave Approved</span>
+  <span [style.color]="getStatusColor('Holiday')">■ Holiday</span>
+  <span [style.color]="getStatusColor('HalfDay')">■ Half Day</span>
+</div>
+
   </div>
 
 
@@ -446,31 +325,17 @@
 
 
 
-  <!-- Attendance Summary Section -->
-  <!-- <div class="col-md-2">
-        <div class="card" style="border: none;">
-            <div class="card-body p-0">
-                <h6 class="card-title">Attendance &amp; Summary</h6>
-                <ul class="list-group" style="    border: 1px solid; padding: 5px;">
-                    <li class="list-group-item">Present days: 26</li>
-                    <li class="list-group-item text-danger">Absent days: 2</li>
-                    <li class="list-group-item text-primary">Leave Apply: 1</li>
-                    <li class="list-group-item text-warning">Half day: 1</li>
-                    <li class="list-group-item text-success">Leave Approved: 1</li>
-                </ul>
-            </div>
-        </div>
-    </div> -->
+ 
   <div class="col-md-2">
     <div class="card" style="border: none;">
       <div class="card-body p-0">
         <h6 class="card-title">Attendance Summary</h6>
         <ul class="list-group" style="border: 1px solid; padding: 5px;">
-          <li class="list-group-item">Present days: {{ attendanceSummary?.present }}</li>
+          <li class="list-group-item Present" >Present days: {{ attendanceSummary?.present }}</li>
           <li class="list-group-item text-danger">Absent days: {{ attendanceSummary?.absent }}</li>
-          <li class="list-group-item text-primary">Leave Apply: {{ attendanceSummary?.leaveApply }}</li>
+          <li class="list-group-item leaveApplied">Leave Apply: {{ attendanceSummary?.leaveApply }}</li>
           <li class="list-group-item text-warning">Half day: {{ attendanceSummary?.halfDay }}</li>
-          <li class="list-group-item text-success">Leave Approved: {{ attendanceSummary?.leaveApproved }}
+          <li class="list-group-item LeaveApproved">Leave Approved: {{ attendanceSummary?.leaveApproved }}
           </li>
         </ul>
       </div>

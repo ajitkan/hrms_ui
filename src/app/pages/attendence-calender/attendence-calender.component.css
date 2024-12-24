@@ -298,9 +298,7 @@
   border-radius: 5px;
   font-size: 12px;
 }
-/* [title] {
-  pointer-events: none; 
-} */
+
 
 
 
@@ -356,13 +354,23 @@
    height: 100px !important;
 }
 .week{
-  color: #0dcaf0 !important;
+  color: #0dcaf0 !important; 
+ background-color:#f0f1f54d;
+
 }
 .fs10{
   font-size: 10px;
 }
 
-
+.leaveApplied{
+  color:#e91e63 !important
+}
+.Present{
+  color: #4caf50;
+}
+.LeaveApproved{
+  color: #80cbc1 ;
+}
 
 
       h3 {
@@ -380,3 +388,19 @@
         text-transform: none;
       }
 
+
+
+      .legend {
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 14px;
+      }
+      
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      

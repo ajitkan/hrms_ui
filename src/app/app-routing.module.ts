@@ -61,19 +61,14 @@ import { ResignationChecklistComponent } from './pages/separation/resignation-ch
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // {
-  //   path:'login',component:LoginComponent
-  // },
-  // {
-  //   path:'',component:DashboardComponent,
-  //   canActivate:[AuthGuard]
-  // },
+
   {
     path: 'home', component: DashboardComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
-    path: 'Admin', component: AdminDashboardComponent
+    path: 'Admin', component: AdminDashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login', component: LoginComponent,
@@ -148,7 +143,7 @@ const routes: Routes = [
     path:'regurlization-history',component:PunchTimeComponent
   },
   {
-    path:'timesheet',component:AttendenceCalenderComponent
+    path:'attendence',component:AttendenceCalenderComponent
   },
 
   {

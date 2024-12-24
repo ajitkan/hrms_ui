@@ -2,6 +2,9 @@ import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/cor
 import { DateTimeComponent } from '../shared-components/date-time/date-time.component';
 import { LeaveService } from 'src/app/service/LeaveService/leave.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { Tooltip } from 'bootstrap';
+import { AuthService } from 'src/app/service/auth-service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 // import { DateTimeComponent } from '../shared-components/date-time/date-time.component'
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +21,8 @@ export class DashboardComponent {
   // showCheckInButton = false;
   employeeCode ='K-101'
   holidays: Array<{ name: string, date: string }> = [];
+  displayedHolidays: { name: string; date: string }[] = [];
+  upcomingHolidays: { name: string; date: string }[] = [];
   categoryCounts: { [key: string]: number } = {};
   loading = true;
   error: string | null = null;
@@ -26,7 +31,7 @@ export class DashboardComponent {
   isPopupVisible: boolean = false;
   selectedCategory: string = '';
   filteredEmployees: any[] = [];
-  isDropdownOpen: boolean = false;
+  isDropdownOpen = false;
   calendarData: any[][] = []; 
   selectedDay: any = null; 
   currentYear: number = new Date().getFullYear();
@@ -39,8 +44,10 @@ export class DashboardComponent {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  constructor(private leaveService:LeaveService,private cdr: ChangeDetectorRef, private datePipe:DatePipe){
-     this.loadHolidays();
+  constructor(private leaveService:LeaveService,private cdr: ChangeDetectorRef, private datePipe:DatePipe
+    ,private attendanceService:AuthService, private toastr: ToastrService
+  ){
+     
   }
 
   ngOnInit(): void {
@@ -48,9 +55,17 @@ export class DashboardComponent {
     this.employeeCode = this.leaveService.getEmployeeCode();
     this.loadAttendanceData(this.currentYear, this.currentMonth);
     this.fetchEmployeeGreetings();
+    this.loadHolidays();
   }
 
+  ngAfterViewInit() {
+    const tooltipTriggerList: HTMLElement[] = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 
+    tooltipTriggerList.forEach((tooltipTriggerEl: HTMLElement) => {
+      new Tooltip(tooltipTriggerEl);  // Initialize Tooltip
+    });
+  }
+  
   
  
   loadAttendanceData(year: number, month: number) {
@@ -249,19 +264,28 @@ export class DashboardComponent {
         return counts;
       }, {});
     }
-  toggleHolidayList(event: Event): void {
-    this.isHolidayListOpen = !this.isHolidayListOpen;
-    event.stopPropagation(); // Prevent click from closing immediately
-  }
+  // toggleHolidayList(event: Event): void {
+  //   this.isHolidayListOpen = !this.isHolidayListOpen;
+  //   event.stopPropagation(); // Prevent click from closing immediately
+  // }
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
+    // if (this.isDropdownOpen) {
+    // this.isDropdownOpen = !this.isDropdownOpen;
+    // }
     if (this.isHolidayListOpen) {
       this.isHolidayListOpen = false;
     }
+
     // if (this.isDropdownOpen) {
     //   this.isDropdownOpen = false;
     // }
   }
+
+
+  
+  
+
 
   toggleButtons(): void {
     this.isShow = !this.isShow;
@@ -271,20 +295,59 @@ export class DashboardComponent {
   }
  
 
-  loadHolidays(): void {
-    this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe((response:any) => {
-      if (response.code === 1) {
-        this.holidays = response.holidayList.map((holiday: { holidayName: any; date: any; }) => ({
+  // loadHolidays(): void {
+  //   this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe((response:any) => {
+  //     if (response.code === 1) {
+  //       this.holidays = response.holidayList.map((holiday: { holidayName: any; date: any; }) => ({
          
           
+  //         name: holiday.holidayName,
+  //         date: holiday.date
+  //       }));
+  //       console.log('holiday-------->',this.holidays)
+  //     }
+  //   });
+  // }
+  loadHolidays(): void {
+    this.leaveService.fetchHolidayDetails(this.employeeCode).subscribe((response: any) => {
+      if (response.code === 1) {
+        const today = new Date(); // Today's date
+
+        // Map all holidays from response
+        this.holidays = response.holidayList.map((holiday: { holidayName: string; date: string }) => ({
           name: holiday.holidayName,
           date: holiday.date
         }));
-        console.log('holiday-------->',this.holidays)
+
+        // Filter upcoming holidays
+        this.upcomingHolidays = this.holidays.filter(
+          (holiday: { date: string }) => new Date(holiday.date) >= today
+        );
+
+        // Initially display only first 2 upcoming holidays
+        this.displayedHolidays = this.upcomingHolidays.slice(0, 2);
+
+        console.log('All holidays:', this.holidays);
+        console.log('Upcoming holidays:', this.upcomingHolidays);
       }
     });
   }
 
+  toggleHolidayList(event: Event): void {
+    this.isHolidayListOpen = !this.isHolidayListOpen;
+
+    if (this.isHolidayListOpen) {
+      // Show all holidays when "View All" is clicked
+      this.displayedHolidays = this.holidays;
+    } else {
+      // Collapse back to upcoming holidays
+      this.displayedHolidays = this.upcomingHolidays.slice(0, 2);
+    }
+
+    event.stopPropagation(); // Prevent unwanted event bubbling
+  }
+
+  
 
   toggleDropdown(category: string): void {
     if (this.selectedCategory === category && this.isDropdownOpen) {
@@ -306,6 +369,7 @@ export class DashboardComponent {
   }
 
   sendMessageToEmployee(employee: { nameOfEmployee: string; emailID: string }) {
+    // this.isDropdownOpen = !this.isDropdownOpen;
     this.leaveService.sendEmployeeGreetings().subscribe(
       (response) => {
         console.log(`Message sent successfully:`, response);
@@ -318,8 +382,89 @@ export class DashboardComponent {
     );
   }
 
- 
+  // getStatusColor(status: string): string {
+  //   switch (status) {
+  //     case 'Present':
+  //       return '#4caf50'; // Green
+  //     case 'Absent':
+  //       return '#f44336'; // Red
+  //     case 'Holiday':
+  //       return '#2196f3'; // Blue
+  //     case 'WeekOff':
+  //       return '#0d6efd'; // Orange
+  //     case 'HalfDay':
+  //       return '#ffc107'; // Yellow
+  //     case 'LeaveApproved':
+  //       return '#8bc34a'; // Light Green
+  //     case 'LeaveApplied':
+  //       return '#03a9f4'; // Light Blue
+  //     default:
+  //       return '#e0e0e0'; // Gray for NoStatus or default
+  //   }
+  // }
 
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'Present':
+        return '#4caf50'; // Green for Present
+      case 'Absent':
+        return '#f44336'; // Red for Absent
+      case 'Holiday':
+        return '#673ab7'; // Purple for Holiday
+      case 'WeekOff':
+        return '#0dcaf0'; // Olive for WeekOff (distinct from HalfDay and Absent)
+      case 'HalfDay':
+        return '#ffc107'; // Yellow for HalfDay
+      case 'LeaveApproved':
+        return '#80cbc1'; // Light Green for LeaveApproved (distinct from Present)
+      case 'LeaveApplied':
+        return '#e91e63'; // Cyan for LeaveApplied
+      default:
+        return '#e0e0e0'; // Gray for NoStatus or default
+    }
+  }
+  
+  // checkIn() {
+  //   companyCode: 'KANINFOS',
+  //    employeeCode: string, employeeID: number
+  //   this.attendanceService.handleAttendance(companyCode, employeeCode, employeeID, 1);
+  // }
+
+  // checkOut(companyCode: string, employeeCode: string, employeeID: number) {
+  //   this.attendanceService.handleAttendance(companyCode, employeeCode, employeeID, 2);
+  // }
+  checkIn() {
+    const condition = true; // Replace with your condition logic
+    // const companyCode = condition ? 'KANINFOS' : 'KANINFOSNEW';
+    const companyCode = condition ? 'KANINFOSNEW' : 'KANINFOS';
+  
+    const employeeCode = 'K-101'; // Replace with actual hardcoded value
+    const employeeID = 1; // Replace with actual hardcoded value
+  debugger
+    this.attendanceService.handleAttendance(companyCode, employeeCode, employeeID, 1);
+  }
+
+  // async checkIn() {
+  //   const condition = true; // Replace with your condition logic
+  //   const companyCode = condition ? 'KANINFOS' : 'KANINFOSNEW';
+  
+  //   const employeeCode = 'K-101'; // Replace with actual hardcoded value
+  //   const employeeID = 1; // Replace with actual hardcoded value
+  
+  //   try {
+  //     const response = await this.attendanceService.handleAttendance(companyCode, employeeCode, employeeID, 1);
+  //     this.toastr.success('Check-in successful!', 'Success');
+  //     console.log('Response:', response);
+  //   } catch (error) {
+  //     this.toastr.error('Failed to check-in', 'Error');
+  //     console.error('Error:', error);
+  //   }
+  // }
+  
+  
+  checkOut(){
+    
+  }
 }
 
 

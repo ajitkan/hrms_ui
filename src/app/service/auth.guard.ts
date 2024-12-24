@@ -37,7 +37,9 @@ export class AuthGuard implements CanActivate {
         return true;
     } else
     if (localStorage.getItem("token") != null && Object.keys(route.data).length == 0) {
+        // this.router.navigate(['/home']);
         return true;
+        
     }
     // if(route.data['isLogin']){
     //     this.router.navigate(['/']);
@@ -50,36 +52,4 @@ export class AuthGuard implements CanActivate {
     }
 }
 
-
-    // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
-    //     if (state.url.startsWith('/reset-password')) {
-    //         return true;
-    //     }
-    //     const userLogIn = JSON.parse(localStorage.getItem("user")! as string)
-        
-    //     if (userLogIn !=null) {
-    //         const { data } = route.data;
-    //         if (data && !data.includes(userLogIn.id)) { 
-    //             return false;
-    //         }
-    //         return true;
-    //     }
-    //     else {
-    //         return true;
-    //     }
-    // }
-
-    // canActivateWithRedirect(
-    //     route: ActivatedRouteSnapshot,
-    //     state: RouterStateSnapshot,
-    //     redirectRoute: string
-    //   ): boolean {
-    //     // Condition with redirect
-    //     if (!this.checkCondition()) {
-    //       this.router.navigate([redirectRoute]);
-    //       return false;
-    //     }
-    //     return true;
-    //   }
 }

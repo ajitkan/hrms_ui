@@ -130,7 +130,7 @@
 
               <div class="row">
                 <!-- From Date -->
-                <!-- <div class="col-md-4">
+                <div class="col-md-4">
                   <div class="mb-3">
                     <label for="fromDate" class="form-label">From Date</label>
                     <input type="date" id="fromDate" placeholder="dd/MM/yyyy" class="form-control" formControlName="fromDate">
@@ -142,19 +142,20 @@
                       From Date must be within the last month.
                     </div>
                   </div>
-                </div> -->
+                </div>
 
 
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                   <div class="mb-3">
                     <label for="fromDate" class="form-label">From Date</label>
-                    <input 
-                    type="text" 
-                    id="fromDate" 
-                    class="form-control" 
-                    placeholder="dd/mm/yyyy" 
-                    bsDatepicker 
-                    formControlName="fromDate">
+                    <input
+                    class="form-control"
+                    placeholder="dd/mm/yyyy"
+                    name="d2"
+                   
+                    ngbDatepicker
+                    #d2="ngbDatepicker"
+                  />
                   
                     <div *ngIf="isSubmitted && f['fromDate'].errors?.['required']" class="text-danger">
                       From Date is required.
@@ -163,7 +164,7 @@
                       Please use the format dd/mm/yyyy.
                     </div>
                   </div>
-                </div>
+                </div> -->
                 
 
 
