@@ -36,6 +36,7 @@ export class DashboardComponent {
   selectedDay: any = null; 
   currentYear: number = new Date().getFullYear();
   currentMonth: number = new Date().getMonth(); // Track the displayed month (0-11)
+  years: number[] = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034];
   Month:any;
   attendanceSummary:any;
   attendanceRecords: any[] = [];
@@ -195,6 +196,7 @@ export class DashboardComponent {
       while (week.length < 7) week.push(null);
       this.calendarData.push(week);
     }
+    console.log('Generated Calendar Data:', this.calendarData);
   }
   selectDay(day: any) {
     this.selectedDay = day;  
@@ -436,7 +438,7 @@ export class DashboardComponent {
   checkIn() {
     const condition = true; // Replace with your condition logic
     // const companyCode = condition ? 'KANINFOS' : 'KANINFOSNEW';
-    const companyCode = condition ? 'KANINFOSNEW' : 'KANINFOS';
+    const companyCode = condition ? 'KANINFONEW' : 'KANINFOS';
   
     const employeeCode = 'K-101'; // Replace with actual hardcoded value
     const employeeID = 1; // Replace with actual hardcoded value
@@ -462,9 +464,17 @@ export class DashboardComponent {
   // }
   
   
-  checkOut(){
+  checkOut() {
+    const condition = true; // Replace with your condition logic
+    const companyCode = condition ? 'KANINFONEW' : 'KANINFOS';
     
+    const employeeCode = 'K-101'; // Replace with actual hardcoded value
+    const employeeID = 1; // Replace with actual hardcoded value
+    
+    debugger;
+    this.attendanceService.handleAttendance(companyCode, employeeCode, employeeID, 2);
   }
+  
 }
 
 
