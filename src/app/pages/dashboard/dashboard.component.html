@@ -10,7 +10,7 @@
       <div _ngcontent-muo-c27="" class="card">
         <div _ngcontent-muo-c27="" class="card-header"> {{ Month + " - " + currentYear}}
 
-          
+
           <!-- <div class="d-flex flex-row align-items-center justify-content-end ms-3">
             <button type="button" class="btn btn-primary btn-sm me-2" (click)="checkIn()">Check In</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" (click)="checkOut()">Check Out</button>
@@ -28,7 +28,7 @@
                     <tr>
                       <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
                     </tr>
-                    
+
                   </thead>
 
                   <tbody>
@@ -98,7 +98,7 @@
                 <button type="button" class="btn btn-primary btn-sm me-2" (click)="checkIn()">Check In</button>
                 <button type="button" class="btn btn-outline-secondary btn-sm" (click)="checkOut()">Check Out</button>
               </div>
-             
+
 
             </div>
 
@@ -197,7 +197,7 @@
     </div>
      -->
 
-    <div class="col-md-3">
+ <!-- <div class="col-md-3">
       <div class="card">
         <div class="card-header">Events & Celebrations</div>
         <div class="card-body">
@@ -220,30 +220,6 @@
         </div>
       </div>
       <br>
-
-
-
-      <!-- Dropdown menu for selected category -->
-      <!-- <div class="dropdown-menu-container" *ngIf="isDropdownOpen">
-        <ul id="holidayDropdownMenu" class="dropdown-menu show">
-          <h6 class="dropdown-heading">{{ selectedCategory }} List</h6>
-          <div *ngFor="let employee of filteredEmployees">
-            <div class="holiday-item">
-              <div class="holiday-header d-flex justify-content-between align-items-center">
-                <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
-             
-                <button class="Send-Message-btn btn-sm" (click)="sendMessageToEmployee(employee)">
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="filteredEmployees.length === 0">
-            <p class="no-holidays">No {{ selectedCategory }} available.</p>
-          </div>
-        </ul>
-      </div> -->
-
       <div class="holiday-dropdown-container" *ngIf="isDropdownOpen">
         <ul id="holidayDropdownMenu" class="holiday-dropdown-menu">
           <h6 class="holiday-dropdown-heading">{{ selectedCategory }} List</h6>
@@ -263,8 +239,6 @@
         </ul>
       </div>
 
-
-
       <div class="card">
         <div class="card-header">Upcoming Holiday</div>
         <div class="card-body">
@@ -282,25 +256,6 @@
               View all
               <i class="mdi mdi-chevron-down"></i>
             </button>
-
-
-            <!-- <div class="dropdown-menu-container" *ngIf="isHolidayListOpen">
-              <ul id="holidayDropdownMenu" class="dropdown-menu show">
-                <h6 class="dropdown-heading">Holiday List</h6>
-                <div *ngFor="let holiday of holidays">
-                  <div class="holiday-item">
-                    <div class="holiday-header">
-                      <span class="holiday-name">{{ holiday.name }}</span>
-                      <span class="holiday-date">{{ holiday.date | date }}</span>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="holidays.length === 0">
-                  <p class="no-holidays">No holidays available.</p>
-                </div>
-                <div class="dropdown-arrow"></div>
-              </ul>
-            </div> -->
 
             <div class="holiday-dropdown-container" *ngIf="isHolidayListOpen">
               <div class="holiday-dropdown-menu">
@@ -327,7 +282,578 @@
           </div>
         </div>
       </div>
+    </div> 
+  -->
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">Events & Celebrations</div>
+      <div class="card-body">
+        <ng-container *ngIf="categoryCounts && Object.keys(categoryCounts).length > 0; else noDataMessage">
+          <p *ngIf="categoryCounts['Birthday']" (click)="toggleDropdown('Birthday')">
+            <span class="icon">🎂</span>
+            {{ categoryCounts['Birthday'] }} Birthdays <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Event Invite']" (click)="toggleDropdown('Event Invite')">
+            <span class="icon">📬</span>
+            {{ categoryCounts['Event Invite'] }} Event Invites <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Work Anniversary']" (click)="toggleDropdown('Work Anniversary')">
+            <span class="icon">💼</span>
+            {{ categoryCounts['Work Anniversary'] }} Work Anniversaries <span class="arrow">&#9660;</span>
+          </p>
+          <p *ngIf="categoryCounts['Marriage Anniversary']" (click)="toggleDropdown('Marriage Anniversary')">
+            <span class="icon">💍</span>
+            {{ categoryCounts['Marriage Anniversary'] }} Marriage Anniversaries <span class="arrow">&#9660;</span>
+          </p>
+        </ng-container>
+        <ng-template #noDataMessage>
+          <p class="no-data">No Data Available</p>
+        </ng-template>
+      </div>
     </div>
+    <br>
+    <div class="holiday-dropdown-container" *ngIf="isDropdownOpen">
+      <ul id="holidayDropdownMenu" class="holiday-dropdown-menu">
+        <h6 class="holiday-dropdown-heading">{{ selectedCategory }} List</h6>
+        <div *ngIf="filteredEmployees.length > 0; else noFilteredData">
+          <div *ngFor="let employee of filteredEmployees">
+            <div class="holiday-item">
+              <div class="holiday-row">
+                <span class="holiday-name">{{ employee.nameOfEmployee }}</span>
+                <button class="Send-Message-btn btn-sm" (click)="sendMessageToEmployee(employee)">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noFilteredData>
+          <p class="no-holidays">No {{ selectedCategory }} available.</p>
+        </ng-template>
+      </ul>
+    </div>
+  
+    <div class="card">
+      <div class="card-header">Upcoming Holiday</div>
+      <div class="card-body">
+        <!-- If holidays are present -->
+        <div *ngIf="upcomingHolidays && upcomingHolidays.length > 0; else noDataMessage">
+          <!-- Display first two upcoming holidays -->
+          <div class="holiday-item" *ngFor="let holiday of upcomingHolidays | slice:0:2">
+            <div class="holiday-header">
+              <span class="holiday-name">{{ holiday.name }}</span>
+              <span class="holiday-date">{{ holiday.date | date }}</span>
+            </div>
+          </div>
+    
+          <!-- View All button -->
+          <button class="view-all-btn btn btn-sm" *ngIf="holidays && holidays.length > 2" (click)="toggleHolidayList($event)">
+            View all
+            <i class="mdi mdi-chevron-down"></i>
+          </button>
+    
+          <!-- Holiday dropdown -->
+          <div class="holiday-dropdown-container" *ngIf="isHolidayListOpen">
+            <div class="holiday-dropdown-menu">
+              <h6 class="dropdown-heading">Holiday List</h6>
+              <div *ngFor="let holiday of holidays">
+                <div class="holiday-item">
+                  <div class="holiday-header">
+                    <span class="holiday-name">{{ holiday.name }}</span>
+                    <span class="holiday-date">{{ holiday.date | date }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- No data message -->
+    <ng-template #noDataMessage>
+      <p class="no-holidays">No Available Data</p>
+    </ng-template>
+    
+    
+  </div>
+  
+  
+    
+    <!-- --------------------------- -->
+
+
+
+
+
+
+
+
+    <!-- <div class="buttons-container" *ngIf="payslipData.length > 0">
+      <button class="btn btn-view" (click)="viewPayslipPDF()">View Payslip</button>
+      <button class="btn btn-download" (click)="downloadPayslipPDF()">Download Payslip PDF</button>
+
+    </div>
+   -->
+
+    <!-- <div class="dashboard">
+      <div *ngIf="isLoading" class="loading-message">Loading payslip data...</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <div class="month-year-display">
+        <span>{{ currentMonthYear }}</span> 
+      </div>
+
+      <div class="buttons-container" *ngIf="payslipData.length > 0">
+        <button class="btn btn-download" (click)="downloadPayslipPDF()">Download Payslip PDF</button>
+      </div>
+    </div> -->
+  </div>
+
+    <br>
+
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" style="font-weight: bold; background-color: #f8f9fa;">My Payslip</div>
+            <div class="card-body" style="padding: 5px;">
+              <div class="row">
+                <!-- Month/Year Dropdown -->
+
+                <span class="form-control ml-3" style="width: 58%;">
+                  {{currentMonthYear}}
+                </span>
+           
+             
+              
+                <!-- Download Button -->
+                <button class="btn btn-outline-secondary ml-1" style="width: 30%; padding: 0;" (click)="downloadPDF()">
+                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> 
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div #payslipContainer class="payslip-container">
+      <h1>Payslip</h1>
+      
+      
+      <button (click)="downloadPDF()">Download PDF</button>
+      
+     
+      <div *ngIf="payslipVisible">
+        <div *ngIf="payslipHeader">
+          <div class="header-info">
+            <div class="left-column">
+              <p><strong>Employee Code:</strong> {{ payslipHeader?.EmpCode }}</p>
+              <p><strong>Employee Name:</strong> {{ payslipHeader?.EmpName }}</p>
+              <p><strong>Payroll Month:</strong> {{ payslipHeader?.PayrollMonth }}</p>
+              <p><strong>Payroll Year:</strong> {{ payslipHeader?.PayrollYear }}</p>
+            </div>
+            <div class="right-column">
+              <p><strong>Date of Joining:</strong> {{ payslipHeader?.DateOfJoining }}</p>
+              <p><strong>Designation:</strong> {{ payslipHeader?.Designation }}</p>
+              <p><strong>Department:</strong> {{ payslipHeader?.Department }}</p>
+              <p><strong>Account Number:</strong> {{ payslipHeader?.AccountNumber }}</p>
+            </div>
+          </div>
+        </div>
+      
+        <div *ngIf="!payslipHeader">
+          <p>Payslip Header data is not available.</p>
+        </div>
+      
+        <h2>Allowances</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Field Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allowances">
+              <td>{{ item.fieldCode }}</td>
+              <td>{{ item.fieldValue }}</td>
+            </tr>
+          </tbody>
+          <p><strong>Total Allowances:</strong> {{ summary?.TotalAllowance }}</p>
+        </table>
+      
+        <h2>Deductions</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Field Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of deductions">
+              <td>{{ item.fieldCode }}</td>
+              <td>{{ item.fieldValue }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Total Deductions:</strong> {{ summary?.TotalDeduction }}</p>
+      
+        <p><strong>Net Salary:</strong> {{ summary?.TotalNetSalary }}</p>
+      </div>
+    </div> -->
+    
+    <div  *ngIf="payslipVisible" #payslipContainer class="payslip-container">
+      <h1>Payslip</h1>
+    
+    
+      <!-- <div > -->
+        <div *ngIf="payslipHeader">
+          <div class="header-info">
+            <div class="left-column">
+              <p><strong>Employee Code:</strong> {{ payslipHeader?.EmpCode }}</p>
+              <p><strong>Employee Name:</strong> {{ payslipHeader?.EmpName }}</p>
+              <p><strong>Payroll Month:</strong> {{ payslipHeader?.PayrollMonth }}</p>
+              <p><strong>Payroll Year:</strong> {{ payslipHeader?.PayrollYear }}</p>
+            </div>
+            <div class="right-column">
+              <p><strong>Date of Joining:</strong> {{ payslipHeader?.DateOfJoining }}</p>
+              <p><strong>Designation:</strong> {{ payslipHeader?.Designation }}</p>
+              <p><strong>Department:</strong> {{ payslipHeader?.Department }}</p>
+              <p><strong>Account Number:</strong> {{ payslipHeader?.AccountNumber }}</p>
+            </div>
+          </div>
+        </div>
+    
+        <div *ngIf="!payslipHeader">
+          <p>Payslip Header data is not available.</p>
+        </div>
+    
+        <h2>Allowances</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Field Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allowances">
+              <td>{{ item.fieldCode }}</td>
+              <td>{{ item.fieldValue }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Total Allowances:</strong> {{ summary?.TotalAllowance }}</p>
+    
+        <h2>Deductions</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Field Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of deductions">
+              <td>{{ item.fieldCode }}</td>
+              <td>{{ item.fieldValue }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Total Deductions:</strong> {{ summary?.TotalDeduction }}</p>
+    
+        <p><strong>Net Salary:</strong> {{ summary?.TotalNetSalary }}</p>
+      <!-- </div> -->
+    </div>
+
+    <br><br><br><br><br>
+    
+ <!-- <button (click)="downloadPDF()">Download PDF</button> -->
+
+
+
+ <div #payslipContainer class="payslip-container">
+  <!-- <h6 class="center-text2"> KAN INFOCOM SOLUTION INDIA PRIVATE LIMITED</h6>
+   <h6 class="center-text3">  M0041 GROUND FLOOR
+    
+    AKSHAR BUSINESS PARK, SECTOR 25
+    
+    NAVI MUMBAI 400703</h6>
+  <h4 class="center-text">Payslip </h4>
+ <h6 class="center-text1">{{ payslipHeader?.PayrollMonth }} {{ payslipHeader?.PayrollYear }}</h6>  -->
+
+ <!-- <div class="left-side">
+  <h6 class="center-text2">KAN INFOCOM SOLUTION INDIA PRIVATE LIMITED</h6>
+  <h6 class="center-text3">M0041 GROUND FLOOR<br>AKSHAR BUSINESS PARK, SECTOR 25<br>NAVI MUMBAI 400703</h6>
+</div>
+<div class="right-side">
+  <img src="path-to-your-logo.png" alt="Company Logo" class="logo">
+</div>
+<div class="right-side">
+  <h4 class="center-text">Payslip</h4>
+  <h6 class="center-text1">{{ payslipHeader?.PayrollMonth }} {{ payslipHeader?.PayrollYear }}</h6>
+</div> -->
+
+<div class="header-container">
+  <div class="left-side">
+    <h6 class="center-text2">KAN INFOCOM SOLUTION INDIA PRIVATE LIMITED</h6>
+    <h6 class="center-text3">
+      M0041 GROUND FLOOR<br>AKSHAR BUSINESS PARK, SECTOR 25<br>NAVI MUMBAI 400703
+    </h6>
+  </div>
+  <!-- <img src="assets/images/kanlogo2.png" alt="Company Logo" class="logo">  -->
+  <div class="right-side">
+    <img src="assets/images/kanlogo2.png" alt="Company Logo" class="logo">
+
+    <h4 class="center-text">Payslip</h4>
+    <h6 class="center-text1">{{ payslipHeader?.PayrollMonth }} {{ payslipHeader?.PayrollYear }}</h6>
+  </div>
+</div>
+
+<div *ngIf="payslipHeader" class="header-info">
+  <div class="left-column">
+    <p><strong>Employee Code:</strong> {{ payslipHeader?.EmpCode }}</p>
+    <p><strong>Employee Name:</strong> {{ payslipHeader?.EmpName }}</p>
+    <p><strong>Payroll Month:</strong> {{ payslipHeader?.PayrollMonth }}</p>
+    <p><strong>Payroll Year:</strong> {{ payslipHeader?.PayrollYear }}</p>
+    <p><strong>City:</strong> {{ payslipHeader?.City }}</p>
+    <p><strong>State:</strong> {{ payslipHeader?.State }}</p>
+  </div>
+  <div class="right-column">
+    <p><strong>Date of Joining:</strong> {{ payslipHeader?.DateOfJoining }}</p>
+    <p><strong>Designation:</strong> {{ payslipHeader?.Designation }}</p>
+    <p><strong>Department:</strong> {{ payslipHeader?.Department }}</p>
+    <p><strong>Account Number:</strong> {{ payslipHeader?.AccountNumber }}</p>
+    <!-- <p><strong>Bank Name:</strong> {{ payslipHeader?.BankName }}</p> -->
+    <p><strong>UAN Number:</strong> {{ payslipHeader?.UANNumber }}</p>
+    <p><strong>PAN Number:</strong> {{ payslipHeader?.PANNumber }}</p>
+  </div>
+</div>
+
+<div *ngIf="!payslipHeader">
+  <p class="center-text">Payslip Header data is not available.</p>
+</div>
+
+<!-- Two-column layout for Allowances and Deductions -->
+<div class="flex-container">
+  <div class="allowances-section">
+    <h2>Allowances</h2>
+    <ul>
+      <ng-container *ngFor="let item of allowances">
+        <li *ngIf="item.fieldValue != 0">
+          <strong>{{ item.fieldName }}:</strong> {{ item.fieldValue }}
+        </li>
+      </ng-container>
+    </ul>
+    <p>
+      <strong>Total Allowances:</strong> {{ summary?.TotalAllowance ?? '63000.00' }}
+    </p>
+  </div>
+
+  <div class="deductions-section">
+    <h2>Deductions</h2>
+    <ul>
+      <ng-container *ngFor="let item of deductions">
+        <li *ngIf="item.fieldValue != 0">
+          <strong>{{ item.fieldName }}:</strong> {{ item.fieldValue }}
+        </li>
+      </ng-container>
+    </ul>
+    <p>
+      <strong>Total Deductions:</strong> {{ summary?.TotalDeduction ?? '4500.00' }}
+    </p>
+  </div>
+</div>
+
+<!-- Net Salary Section -->
+<div class="net-salary">
+  <h4>Net Salary: 
+    <span>{{ (summary?.TotalNetSalary ?? 58500.00) | number: '1.2-2' }}</span>
+  </h4>
+  <h5>Net Salary in Words: 
+    <span>{{ getFormattedNetSalaryInWords() ?? 'Not Available' }}</span>
+  </h5>
+</div>
+
+
+</div>
+<button (click)="downloadPDF()">Download PDF</button>
+ 
+    <!-- <div #payslipContainer class="payslip-container">
+      <h1>Payslip</h1>
+    
+      <div *ngIf="payslipHeader">
+        <div class="header-info">
+          <div class="left-column">
+            <p><strong>Employee Code:</strong> {{ payslipHeader?.EmpCode }}</p>
+            <p><strong>Employee Name:</strong> {{ payslipHeader?.EmpName }}</p>
+            <p><strong>Payroll Month:</strong> {{ payslipHeader?.PayrollMonth }}</p>
+            <p><strong>Payroll Year:</strong> {{ payslipHeader?.PayrollYear }}</p>
+          </div>
+          <div class="right-column">
+            <p><strong>Date of Joining:</strong> {{ payslipHeader?.DateOfJoining }}</p>
+            <p><strong>Designation:</strong> {{ payslipHeader?.Designation }}</p>
+            <p><strong>Department:</strong> {{ payslipHeader?.Department }}</p>
+            <p><strong>Account Number:</strong> {{ payslipHeader?.AccountNumber }}</p>
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="!payslipHeader">
+        <p>Payslip Header data is not available.</p>
+      </div>
+    
+      <h2>Allowances</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Field Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of allowances">
+            <td>{{ item.fieldCode }}</td>
+            <td>{{ item.fieldValue }}</td>
+          </tr>
+        </tbody>
+        <p><strong>Total Allowances:</strong> {{ summary?.TotalAllowance }}</p>
+      </table>
+    
+      <h2>Deductions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Field Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of deductions">
+            <td>{{ item.fieldCode }}</td>
+            <td>{{ item.fieldValue }}</td>
+          </tr>
+          <p><strong>Total Deductions:</strong> {{ summary?.TotalDeduction }}</p>
+        </tbody>
+      </table>
+    
+      <h2>Summary</h2> -->
+      <!-- <p><strong>Total Allowances:</strong> {{ summary?.TotalAllowance }}</p>
+      <p><strong>Total Deductions:</strong> {{ summary?.TotalDeduction }}</p>
+      <p><strong>Net Salary:</strong> {{ summary?.TotalNetSalary }}</p>
+    
+      <button (click)="downloadPDF()">Download PDF</button>
+    </div>
+     -->
+
+    <!-- <div #payslipContainer class="payslip-container">
+      <h1>Payslip</h1>
+    
+      <div *ngIf="payslipHeader">
+        <div class="header-info">
+          <div class="left-column">
+            <p><strong>Employee Code:</strong> {{ payslipHeader?.EmpCode }}</p>
+            <p><strong>Employee Name:</strong> {{ payslipHeader?.EmpName }}</p>
+            <p><strong>Payroll Month:</strong> {{ payslipHeader?.PayrollMonth }}</p>
+            <p><strong>Payroll Year:</strong> {{ payslipHeader?.PayrollYear }}</p>
+          </div>
+          <div class="right-column">
+            <p><strong>Date of Joining:</strong> {{ payslipHeader?.DateOfJoining }}</p>
+            <p><strong>Designation:</strong> {{ payslipHeader?.Designation }}</p>
+            <p><strong>Department:</strong> {{ payslipHeader?.Department }}</p>
+            <p><strong>Account Number:</strong> {{ payslipHeader?.AccountNumber }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!payslipHeader">
+        <p>Payslip Header data is not available.</p>
+      </div>
+    
+      
+      <div class="allowance-deduction">
+        <div class="allowance-section">
+          <h2>Allowances</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Field Name</th>
+                <th>Field Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of allowances">
+                <td>{{ item.fieldCode }}</td>
+                <td>{{ item.fieldValue }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>Total Allowances:</strong> {{ summary?.TotalAllowance }}</p>
+        </div>
+    
+        <div class="deduction-section">
+          <h2>Deductions</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Field Name</th>
+                <th>Field Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of deductions">
+                <td>{{ item.fieldCode }}</td>
+                <td>{{ item.fieldValue }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>Total Deductions:</strong> {{ summary?.TotalDeduction }}</p>
+        </div>
+      </div>
+    
+  
+      <p><strong>Net Salary:</strong> {{ summary?.TotalNetSalary }}</p>
+      
+      <button (click)="downloadPDF()">Download PDF</button>
+    </div> -->
+    
+    
+    <!-- <button (click)="downloadPDF()">Download PDF</button> -->
+    
+
+
+   
+    
+    
+    
+    <!-- <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" style="font-weight: bold; background-color: #f8f9fa;">My Payslip</div>
+            <div class="card-body" style="padding: 5px;">
+              <div class="row">
+               
+                <select class="form-control ml-3" style="width: 58%;">
+                  <option *ngFor="let month of monthNames; let i = index" [value]="i + ' ' + currentYear">
+                    {{ month }} {{ currentYear }}
+                  </option>
+                </select>
+                
+           
+                <button class="btn btn-outline-secondary ml-1" style="width: 30%; padding: 0;">
+                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> 
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     -->
 
 
     <!-- My Payslip  Rewards and  -->
@@ -338,7 +864,7 @@
             <div _ngcontent-muo-c27="" class="card-header" style="
 "> My Payslip </div>
             <div _ngcontent-muo-c27="" class="card-body" style="
-  padding: 5px;
+   padding: 5px;
 ">
               <div class="row"><select _ngcontent-muo-c27="" class="form-control ml-3" style="
   width: 58%;
@@ -351,7 +877,19 @@
             </div>
           </div>
         </div>
-        <div _ngcontent-muo-c27="" class="col-md-12" style="margin: 10% 0 0 0;">
+       
+      </div>
+    </div> -->
+
+
+
+
+
+
+  <!-- </div> -->
+  <div _ngcontent-muo-c27="" class="row mt-4"></div>
+
+   <!-- <div _ngcontent-muo-c27="" class="col-md-12" style="margin: 10% 0 0 0;">
           <div _ngcontent-muo-c27="" class="card">
             <div _ngcontent-muo-c27="" class="card-header"> Rewards &amp; Recognition </div>
             <div _ngcontent-muo-c27="" class="card-body" style="padding: 5px;">
@@ -371,11 +909,7 @@
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </div> -->
-  </div>
-  <div _ngcontent-muo-c27="" class="row mt-4"></div>
+        </div> -->
   <div _ngcontent-muo-c27="" class="row">
 
     <!-- HRMS DOCUMENT -->

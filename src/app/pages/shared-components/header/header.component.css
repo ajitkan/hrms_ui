@@ -406,3 +406,162 @@ body {
 #loginDropdownMenu{
   margin-top:20%;
 }
+
+
+/* .fa fa-search {
+  padding: 10px !important;
+} */
+/* .search-icon{
+  padding: 10px !important;
+} */
+
+
+
+/* .search-container .position-relative {
+  position: relative;
+}
+
+.search-container .form-control {
+  padding-left: 2.5rem; /* Add padding for the icon 
+}*/
+/* 
+.search-container .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px; 
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none; 
+}
+
+.dropdown-menu {
+  padding: 0;
+}
+
+.employee-item {
+  padding: 8px 12px;
+}
+
+.employee-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.employee-email, .employee-phone {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.employee-item a {
+  display: block;
+  color: #000;
+}
+
+.employee-item a:hover {
+  background-color: #f4f4f4;
+}
+
+.see-all {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+}
+
+.see-all a {
+  color: #007bff;
+  font-weight: bold;
+} */
+
+
+
+.dropdown-menu {
+  padding: 0;
+  margin: 0;
+}
+
+.employee-item {
+  padding: 0px 0px 0px 30px;  /* Adjust padding to reduce space inside the item */
+  margin: 0; /* Remove additional margin between items */
+  border-bottom: 1px solid #ddd; /* Optional: Add a subtle divider */
+}
+
+.employee-item:last-child {
+  border-bottom: none; /* Remove divider for the last item */
+}
+
+.employee-name {
+  font-weight: bold;
+  margin: 0; /* Remove bottom margin */
+}
+
+.employee-email,
+.employee-phone {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 2px 0; /* Minimal spacing between email and phone number */
+}
+
+.see-all {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+}
+
+.see-all a {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.see-all a:hover {
+  text-decoration: underline;
+}
+
+
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* Adjust based on your desired width */
+  margin: auto;
+}
+
+/* #search-input {
+  width: 100%;
+  padding: 10px 40px 10px 12px; 
+  
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+} */
+
+#search-input {
+  width: 100%;
+  padding: 10px 12px 10px 40px; /* Add more padding to the left */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  text-align: left; /* Ensure text stays left-aligned */
+}
+
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.2rem;
+  pointer-events: none; /* Prevents icon from blocking input interaction */
+}
+
+.search-container .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

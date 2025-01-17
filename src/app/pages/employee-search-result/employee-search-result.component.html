@@ -1,4 +1,4 @@
-
+<!-- 
 <div  class="container content menu-padding">
     <section>
         <div>                   
@@ -7,10 +7,7 @@
             <div class="row">
                 <div class="col">
                     <div class="card" style="width: 66%;margin-left: 131px;">
-                        <!-- <div class="card-header cheader">
-                           
-                            Employee List
-                        </div> -->
+                       
                         <div class="card-body"> 
                             <div>
 
@@ -26,15 +23,13 @@
                                             <div class=" row" style="width: 805px;">
                                                 <div class="entity-result__universal-image col-2">
                                                     <div class="display-flex align-items-center">
-                                                        <a class="app-aware-link  scale-down " aria-hidden="true" tabindex="-1"
-                                                            href="https://www.linkedin.com/in/gaurav-sharma-60341379?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABCc6KMB9AdXw6ilTClhpxYh_yQ03g-onNM"
-                                                            data-test-app-aware-link="">
+                                                       
                             
                                                             <div class="ivm-image-view-model   ">
                             
                                                                 <div class="ivm-view-attr__img-wrapper">
                                                                     <div class="presence-entity presence-entity--size-3">
-                                                                        <img src="https://media.licdn.com/dms/image/D4D35AQG8vrQl2Q8rTA/profile-framedphoto-shrink_100_100/0/1698048555906?e=1722927600&amp;v=beta&amp;t=1Ou_eVdQgHJhAfBF8iPgUc72sT2Cj1Vr_ynOMs_s-m4"
+                                                                        <img src="src\assets\images\dashboard\profileimg.jpg"
                                                                             loading="lazy" alt="Gaurav Sharma" id="ember1311"
                                                                             class="presence-entity__image  ivm-view-attr__img--centered EntityPhoto-circle-3   EntityPhoto-circle-3 evi-image lazy-image ember-view rounded-circle">
                                                                         <div class="presence-entity__indicator         
@@ -46,7 +41,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </a>
+                                                   
                                                     </div>
                                                 </div>
                                                 <div class="pt3 pb3 t-12 t-black--light col-7">
@@ -69,7 +64,7 @@
                                                         </div>
                                                         <div class="entity-result__primary-subtitle t-14 t-black t-normal">
                                                         Employee Code {{employee.EmployeeCode}} | Email {{employee.Email}} | Mobile No. {{employee.PhoneNumber}}
-                                                            <!-- |RM Name :{{employee.RMName}}|RM Email:{{employee.RMEmail}}|{{employee.RMContact}} -->
+                                                           
                                                         
                                                         </div>
                                                         <div class="entity-result__secondary-subtitle t-14 t-normal">
@@ -88,177 +83,156 @@
                             </ul>
                         </div>
 
-                        <!---------------insert single record------------------------------->
-
-                        <!-- <div *ngIf="employee">
-                            <h2>{{ employee.FirstName }} {{ employee.LastName }}</h2>
-                            <p>Employee Code: {{ employee.EmployeeCode }}</p>
-                            <p>Email: {{ employee.Email }}</p>
-                            <p>Mobile No.: {{ employee.PhoneNumber }}</p>
-                           
-                          </div> -->
+                     
                           
 
-                        <ul *ngIf="isIndivisualEmployee"class="reusable-search__entity-result-list list-style-none">
-                            <li class="reusable-search__result-container">
-                                <div class="" data-chameleon-result-urn="urn:li:member:278718627"
-                                    data-view-name="search-entity-result-universal-template">
-                                    <div class="linked-area flex-1
-                                        cursor-pointer">                            
-                                        <div class=" row" style="width: 805px;">
-                                            <div class="entity-result__universal-image col-2">
-                                                <div class="display-flex align-items-center">
-                                                    <a class="app-aware-link  scale-down " aria-hidden="true" tabindex="-1"
-                                                        href="https://www.linkedin.com/in/gaurav-sharma-60341379?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABCc6KMB9AdXw6ilTClhpxYh_yQ03g-onNM"
-                                                        data-test-app-aware-link="">
-                        
-                                                        <div class="ivm-image-view-model   ">
-                        
-                                                            <div class="ivm-view-attr__img-wrapper">
-                                                                <div class="presence-entity presence-entity--size-3">
-                                                                    <!-- <img src="https://media.licdn.com/dms/image/D4D35AQG8vrQl2Q8rTA/profile-framedphoto-shrink_100_100/0/1698048555906?e=1722927600&amp;v=beta&amp;t=1Ou_eVdQgHJhAfBF8iPgUc72sT2Cj1Vr_ynOMs_s-m4"
-                                                                        loading="lazy" alt="Gaurav Sharma" id="ember1311"
-                                                                        class="presence-entity__image  ivm-view-attr__img--centered EntityPhoto-circle-3   EntityPhoto-circle-3 evi-image lazy-image ember-view rounded-circle"> -->
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-88-40a88 88 0 1 0 176 0 88 88 0 1 0 -176 0z"/></svg>
-                                                                    <div class="presence-entity__indicator         
-                                                                            presence-entity__indicator--size-3 presence-indicator
-                                                                        presence-indicator--is-online
-                                                                        presence-indicator--size-3">
-                                                                      
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="pt3 pb3 t-12 t-black--light col-7">
-                                                <div class="mb1">
-                                                    <div class="t-roman t-sans">
-                                                        <div class="display-flex">
-                                                            <span class="entity-result__title-line entity-result__title-line--2-lines ">
-                                                                <span class="entity-result__title-text
-                                                                        t-16">
-                                                                        <a  routerLink="/EmployeeDetail">
-                                                                        <span dir="ltr">
-                                                                            <span aria-hidden="true">
-                                                                                {{(searchResults1 && searchResults1.FirstName)+" "+ (searchResults1 && searchResults1.LastName)}}
-                                                                            </span>
-                                                                        </span>
-                                                                    </a> 
-                                                                </span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="entity-result__primary-subtitle t-14 t-black t-normal">
-                                                        Employee Code {{searchResults1 && searchResults1.EmployeeCode}} | Email {{searchResults1 && searchResults1.Email}} | Mobile No. {{searchResults1 && searchResults1.PhoneNumber}} 
-                                                        <!-- |RM Name :{{employee.RMName}}|RM Email:{{employee.RMEmail}}|{{employee.RMContact}} -->
-                                                       
-                                                    </div>
-                                                    <div class="entity-result__secondary-subtitle t-14 t-normal">
-                                                    </div>
-                                                </div>
-                                                <div class="entity-result__insights t-12">
-                                                    <div class="reusable-search-simple-insight">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+<ul *ngIf="isIndivisualEmployee" class="reusable-search__entity-result-list list-style-none">
+    <li class="reusable-search__result-container">
+        <div class="" data-chameleon-result-urn="urn:li:member:278718627" data-view-name="search-entity-result-universal-template">
+            <div class="linked-area flex-1 cursor-pointer">
+                <div class="row" style="width: 805px;">
+              
+                    <div class="entity-result__universal-image col-2">
+                        <div class="display-flex align-items-center">
+                            <div class="ivm-image-view-model">
+                                <div class="ivm-view-attr__img-wrapper">
+                                    <div class="presence-entity presence-entity--size-3">
+                                        <img src="src/assets/images/dashboard/profileimg.jpg" 
+                                            loading="lazy" 
+                                            alt="Employee Image" 
+                                            class="presence-entity__image ivm-view-attr__img--centered EntityPhoto-circle-3 evi-image lazy-image ember-view rounded-circle">
                                     </div>
                                 </div>
-                            </li>
-                            <hr>
-                        </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul> 
+
                         </div>
                     </div>
                 </div>
             </div>            
         </div>
     </section>
-</div>
-<!-- <div *ngIf="empHistory==null">
-    
-    <div class="row">
-       
-        <div class="col-md-2 order-md-1"></div>        
-        <div class="col-md-8 order-md-2">
-          <h4 class="mb-3 text-center ">Employer Details</h4><hr>
-          <form class="needs-validation">
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" id="companyName" placeholder="" value="" required="" formControlName="companyName">
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="designation">Designation</label>
-                <input type="text" class="form-control" id="designation" placeholder="" value="" formControlName="designation" required="">
-                <div class="invalid-feedback">
-                  Valid Designation is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="rmName">RM Name</label>
-              <div class="input-group">
-                <input type="text" class="form-control" id="rmName" placeholder="rmName" required="" formControlName="rmName">
-                <div class="invalid-feedback" style="width: 100%;">
-                  Name of Reporting Manager is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="mrMail">RM Email </label>
-                    <input type="email" class="form-control" id="mrMail" placeholder="you@example.com" formControlName="rmMail">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address of Reporting Manager.
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label for="rmMob">Contact No of RM</label>
-                    <input type="number" class="form-control" id="rmMob" placeholder="8787877887" required="" formControlName="rmMob">
-                    <div class="invalid-feedback">
-                        Please enter contact no of Reporting Manager.
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="hrName">HR Name</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" id="hrName" placeholder="hrName" required="" formControlName="hrName">
-                  <div class="invalid-feedback" style="width: 100%;">
-                    Name of HR is required.
-                  </div>
-                </div>
-              </div>
-  
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="hrMail">HR Email </label>
-                    <input type="email" class="form-control" id="hrMail" placeholder="you@example.com" formControlName="hrMail">
-                    <div class="invalid-feedback">
-                         Please enter a valid email address HR.
-                    </div>
-                </div>
-  
-                <div class="col-md-6 mb-3">
-                    <label for="hrmob">Contact No of HR</label>
-                    <input type="number" class="form-control" id="hrmob" placeholder="8787877887" required="" formControlName="hrMob">
-                    <div class="invalid-feedback">
-                         Please enter contact no of HR.
-                    </div>
-                </div>
-            </div>
-          
-          </form>
-        </div>
-        <div class="col-md-2 order-md-3"></div>
-
-      </div>
 </div> -->
+
+<div class="container content menu-padding">
+    <section>
+        <div>
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 66%; margin-left: 131px;">
+                        <div class="card-body">
+                            <div>
+                                <label>Employee List</label>
+                            </div>
+                            <div *ngIf="!isIndivisualEmployee">
+                                <ul *ngFor="let employee of searchResults" class="reusable-search__entity-result-list list-style-none">
+                                    <li class="reusable-search__result-container">
+                                        <div class="linked-area flex-1 cursor-pointer">
+                                            <div class="row" style="width: 805px;">
+                                                <!-- Only Image Section -->
+                                                <div class="entity-result__universal-image col-2">
+                                                    <div class="display-flex align-items-center">
+                                                        <div class="ivm-image-view-model">
+                                                            <div class="ivm-view-attr__img-wrapper">
+                                                                <div class="presence-entity presence-entity--size-3">
+                                                                    <img src="./assets/images/dashboard/profileimg.jpg"
+                                                                    loading="lazy" alt="Employee Image"
+                                                                    class="presence-entity__image ivm-view-attr__img--centered rounded-circle"
+                                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                               
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Employee Details -->
+                                                <div class="pt3 pb3 t-12 t-black--light col-7">
+                                                    <div class="mb1">
+                                                        <div class="t-roman t-sans">
+                                                            <div class="display-flex">
+                                                                <span class="entity-result__title-line entity-result__title-line--2-lines">
+                                                                    <span class="entity-result__title-text t-16">
+                                                                        <a routerLink="/EmployeeDetail">
+                                                                            <span dir="ltr">
+                                                                                <span aria-hidden="true">
+                                                                                    {{employee.FirstName + " " + employee.LastName}}
+                                                                                </span>
+                                                                            </span>
+                                                                        </a>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="entity-result__primary-subtitle t-14 t-black t-normal">
+                                                            Employee Code {{employee.EmployeeCode}} | Email {{employee.Email}} | Mobile No. {{employee.PhoneNumber}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+
+                            <ul *ngIf="isIndivisualEmployee" class="reusable-search__entity-result-list list-style-none">
+                                <li class="reusable-search__result-container">
+                                    <div class="linked-area flex-1 cursor-pointer">
+                                        <div class="row" style="width: 805px;">
+                                            <!-- Only Image Section -->
+                                            <div class="entity-result__universal-image col-2">
+                                                <div class="display-flex align-items-center">
+                                                    <div class="ivm-image-view-model">
+                                                        <div class="ivm-view-attr__img-wrapper">
+                                                            <div class="presence-entity presence-entity--size-3">
+                                                                <img src="src/assets/images/dashboard/profileimg.jpg"
+                                                                    loading="lazy" alt="Employee Image"
+                                                                    class="presence-entity__image ivm-view-attr__img--centered rounded-circle">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Employee Details -->
+                                            <div class="pt3 pb3 t-12 t-black--light col-7">
+                                                <div class="mb1">
+                                                    <div class="t-roman t-sans">
+                                                        <div class="display-flex">
+                                                            <span class="entity-result__title-line entity-result__title-line--2-lines">
+                                                                <span class="entity-result__title-text t-16">
+                                                                    <a routerLink="/EmployeeDetail">
+                                                                        <span dir="ltr">
+                                                                            <span aria-hidden="true">
+                                                                                {{(searchResults1 && searchResults1.FirstName) + " " + (searchResults1 && searchResults1.LastName)}}
+                                                                            </span>
+                                                                        </span>
+                                                                    </a>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="entity-result__primary-subtitle t-14 t-black t-normal">
+                                                        Employee Code {{searchResults1 && searchResults1.EmployeeCode}} | Email {{searchResults1 && searchResults1.Email}} | Mobile No. {{searchResults1 && searchResults1.PhoneNumber}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <hr>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -133,7 +133,8 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="fromDate" class="form-label">From Date</label>
-                    <input type="date" id="fromDate" placeholder="dd/MM/yyyy" class="form-control" formControlName="fromDate">
+                    <input type="date" class="form-control" formControlName="fromDate">
+
                    
                     <div *ngIf="isSubmitted && f['fromDate'].errors?.['required']" class="text-danger">
                       From Date is required.

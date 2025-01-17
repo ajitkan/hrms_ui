@@ -38,6 +38,9 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
   selectedRequests: any[] = [];
   username: any;
   token: string | null | undefined;
+
+  successMessage: string = '';
+  errorMessage: string = '';
   constructor(private leaveService: LeaveService) { }
 
   ngOnInit(): void {
@@ -184,11 +187,14 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
       let result =  await this.leaveService.approveLeaveRequest(payload).subscribe({
         next: (response:any) => {
           if(response.code ==1)
-            alert(response.message);
+            // this.successMessage = response.message;
+            // alert(response.message);
           request.leaveStatus = 'Approved'
+          this.successMessage = response.message;
         this.updateRequestStatus(request);
         },
         error: (error:any) => {
+          this.errorMessage= 'Leave Rejected.';
          alert(error.message);
         }
       });
@@ -211,11 +217,12 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
       next: (response:any) => {
         if(response.code ==1){
           request.leaveStatus = 'Reject'
-          alert(response.message);
+          this.errorMessage = 'Leave Rejected.';
           this.updateRequestStatus(request);
         } 
         else
         alert(response.message);
+        // this.successMessage = response.message;
       },
       error: (error:any) => {
        alert(error.message);

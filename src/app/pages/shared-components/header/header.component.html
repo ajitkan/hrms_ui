@@ -4,12 +4,15 @@
     <button id="sidebar-toggler" (click)="toggleSidebar()" class="sidebar-toggle">
       <span class="sr-only">Toggle Sidebar</span>
     </button>
-    <img src="../assets/images/kanlogo1.png" alt="Logo" class="navbar-logo" style="height: 40px; margin-left: 10px;">
+    <!-- <img src="../assets/images/kanlogo1.png" alt="Logo" class="navbar-logo" style="height: 40px; margin-left: 10px;"> -->
+    <a routerLink="/home">
+      <img src="../assets/images/kanlogo1.png" alt="Logo" class="navbar-logo" style="height: 40px; margin-left: 10px;">
+    </a>
     
+<!--     
     <div class="search-container m-auto">
       <div class="row" style="width: 129%;">
-        <!-- <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees"
-               name="query" id="search-input" class="form-control"/> -->
+       
                <input 
     [(ngModel)]="TextFrees" 
     (ngModelChange)="onSearch()" 
@@ -30,39 +33,87 @@
             </li>
         </ul>
       </div>
-    </div> 
-    <div class="navbar-right">
-      <!-- <div class="search-form">
-        <div class="search-container m-auto">
-          <div class="row" style="width: 129%;">
-            <input [(ngModel)]="TextFrees" (ngModelChange)="onSearch()" placeholder="Search employees" name="query"
-              id="search-input" class="form-control" />
-          </div>
-          <div class="row" *ngIf="searchResults.length > 0" style="width: 129%;" [ngClass]="!showDropdown?'d-none':'d-flex'">
-            <ul class="dropdown-menu show" 
-              style="width: 490px; margin-left: -12px;">
-              <li *ngFor="let employee of visibleResults" class="list-group-item">
-                <a (click)="displaySearchResult(employee)" 
-                  style="text-decoration: none;">
-                  {{ employee.FirstName }} {{ employee.LastName }} {{ employee.Email }} {{employee.PhoneNumber}} </a>
-              </li>
-              <li *ngIf="searchResults.length > 0 && !showAll" (click)="displaySearchResult()" class="list-group-item see-all">
-                See all records
-              </li>
-            </ul>
-          </div>
-        </div>
-        <form action="index.html" method="get">
-          <div class="input-group input-group-sm" id="input-group-search">
-            <input type="text" autocomplete="off" name="query" id="search-input" class="form-control"
-              placeholder="Search Employee" />
-            <div class="input-group-append">
-              <button class="btn" type="button">/</button>
-            </div>
-          </div>
-        </form> -->
+    </div>  -->
+
+
+    <div class="search-container m-auto">
+      <div class="search-container ">
+        <input 
+          id="search-input" 
+          [(ngModel)]="TextFrees" 
+          (ngModelChange)="onSearch()" 
+          placeholder="Search employees"
+          name="query" 
+          class="form-control"
+        />
+        <i class="fa fa-search search-icon"></i>
+      </div>
+      <div class="row" *ngIf="searchResults.length > 0 && showDropdown" style="width: 129%;">
+        <!-- <ul class="dropdown-menu show" style="width: 490px; margin-left: -12px;">
+          <li *ngFor="let employee of visibleResults" class="list-group-item">
+            <a 
+              routerLink="/EmployeeList" 
+              [queryParams]="{data: encodedJsonArray(employee)}" 
+              (click)="closeDropdown()" 
+              style="text-decoration: none;">
+              <div class="employee-item">
+                <div class="employee-name">
+                  {{ employee.FirstName }} {{ employee.LastName }}
+                </div>
+                <div class="employee-email">
+                  {{ employee.Email }}
+                </div>
+                <div class="employee-phone">
+                  {{ employee.PhoneNumber }}
+                </div>
+              </div>
+            </a>
+          </li>
+          <li *ngIf="searchResults.length > 0 && !showAll" class="list-group-item see-all">
+            <a 
+              routerLink="/EmployeeList" 
+              [queryParams]="{data: encodedJsonArray()}" 
+              (click)="closeDropdown()" 
+              style="text-decoration: none;">
+              See all records
+            </a>
+          </li>
+        </ul> -->
+        <ul class="dropdown-menu show" style="width: 490px;">
+          <li *ngFor="let employee of visibleResults" class="employee-item">
+            <a 
+              routerLink="/EmployeeList" 
+              [queryParams]="{data: encodedJsonArray(employee)}" 
+              (click)="closeDropdown()">
+              <div>
+                <div class="employee-name">
+                  {{ employee.FirstName }} {{ employee.LastName }}
+                </div>
+                <div class="employee-email">
+                  {{ employee.Email }}
+                </div>
+                <div class="employee-phone">
+                  {{ employee.PhoneNumber }}
+                </div>
+              </div>
+            </a>
+          </li>
+          <li *ngIf="searchResults.length > 0 && !showAll" class="see-all">
+            <a 
+              routerLink="/EmployeeList" 
+              [queryParams]="{data: encodedJsonArray()}" 
+              (click)="closeDropdown()">
+              See all records
+            </a>
+          </li>
+        </ul>
         
-      <!--</div> -->
+      </div>
+    </div>
+    
+    
+    
+    <div class="navbar-right">
       <ul class="nav navbar-nav">
         <li class="dropdown notification">
           <button class="dropdown-toggle nav-link" (click)="toggleNotification()" href="javascript:void(0)">
@@ -110,7 +161,7 @@
           </button>
           <ul id="loginDropdownMenu" class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isCollapsed}">
             <li>
-              <a class="dropdown-link-item" routerLink="/employeeData">
+              <a class="dropdown-link-item" routerLink="/profile">
                 <i class="mdi mdi-account-outline"></i>
                 <span class="nav-text">My Profile</span>
               </a>

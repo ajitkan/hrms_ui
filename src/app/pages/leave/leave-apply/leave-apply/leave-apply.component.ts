@@ -67,9 +67,9 @@ export class LeaveApplyComponent {
     // Initialize the form with validation rules
     this.leaveForm = this.fb.group({
       leaveType: ['', Validators.required],
-      // fromDate: ['', Validators.required],
+       fromDate: ['', Validators.required],
       // toDate: ['', Validators.required],
-      fromDate: ['', [Validators.required, this.fromDateValidator()]],
+      // fromDate: ['', [Validators.required, this.fromDateValidator()]],
       toDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
@@ -456,10 +456,16 @@ export class LeaveApplyComponent {
   applyLeave() {
     this.isSubmitted = true;
 
+Object.keys(this.leaveForm.controls).forEach(key => {
+  const control = this.leaveForm.get(key);
+  console.log(`Control: ${key}, Value: ${control?.value}, Errors: ${control?.errors}`);
+});
+
     // Clear previous messages
     this.successMessage = '';
     this.errorMessage = '';
-
+    console.log(this.leaveForm.value); // Debug the form values
+    console.log(this.leaveForm.valid);
     // Validate the form
     if (this.leaveForm.invalid) {
       console.log('Form is invalid:', this.leaveForm.errors);
@@ -555,6 +561,8 @@ export class LeaveApplyComponent {
   fetchLeaveData(employeeCode: string): void {
     this.leaveService.fetchEmployeeLeaveDetails(employeeCode).subscribe((response: any) => {
       if (response.code === 1) {
+        console.log('FetchLeaveAPI CALL',response);
+        
         this.leaveHistory = response.data.leaveHistory;
         this.leaveSummary = response.data.leaveSummary;
         console.log('leaveSummary', this.leaveSummary)

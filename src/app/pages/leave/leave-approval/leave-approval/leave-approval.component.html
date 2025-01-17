@@ -81,7 +81,15 @@
   -->
 
   
+  <!-- Display success messages -->
+  <div *ngIf="successMessage" class="alert alert-success mt-2">
+    {{ successMessage }}
+  </div>
 
+  <!-- Display error messages -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+    {{ errorMessage }}
+  </div>
   <div class="container-fluid">
     <div class="row">
       <!-- Leave Request Table -->

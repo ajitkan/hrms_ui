@@ -5,13 +5,28 @@ import { Observable, of } from 'rxjs';
 import { LeaveRequestDto } from 'src/app/models/leave-request.dto';
 import { environment } from 'src/environments/environments';
 
+
+interface PayslipRequest {
+  employeeCode: string;
+  attendanceMonth: string;
+  attendanceYear: number;
+}
+
+interface PayslipResponse {
+  code: number;
+  status: string;
+  message: string;
+  attendanceItems: any[];
+}
 @Injectable({
   providedIn: 'root'
 })
 export class LeaveService {
    constructor(private http : HttpClient) { }
 
-
+   getPayslipData(request: PayslipRequest): Observable<PayslipResponse> {
+    return this.http.post<PayslipResponse>(`${environment.apiUrl}/UserDetails/GetPayslip`, request);
+  }
    getDailyEmployeeGreetings(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/UserDetails/GetAllDailyEmployeeGreetings`);
   }
