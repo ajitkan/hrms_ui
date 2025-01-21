@@ -150,32 +150,75 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
     this.selectAll = this.leaveRequests.every(r => r.selected);
   }
 
-   approveLeaves() {    
-     this.selectedRequests.forEach(async request => {      
-      console.log(request);
-      if(request.leaveStatus!='Approved'){
-        let result =  await this.approveSingleLeave(request);
-        console.log("result : ",result)
-      }
-     });
+  //  approveLeaves() {    
+  //    this.selectedRequests.forEach(async request => {      
+  //     console.log(request);
+  //     if(request.leaveStatus!='Approved'){
+  //       let result =  await this.approveSingleLeave(request);
+  //       console.log("result : ",result)
+  //     }
+  //    });
+  //   this.clearSelection();
+  // }
+
+
+  approveLeaves() {
+    // Filter the selected requests to include only those with 'Pending' status
+    const pendingRequests = this.selectedRequests.filter(request => request.leaveStatus === 'Pending');
+    
+    // If there are no pending requests selected, show an alert
+    if (pendingRequests.length === 0) {
+      this.errorMessage = 'No pending leave requests selected for rejection.';
+      // alert('No pending leave requests selected for approval.');
+      return;
+    }
+  
+    // Process each pending request to approve it
+    pendingRequests.forEach(async (request) => {
+      let result = await this.approveSingleLeave(request);
+      console.log("result: ", result);
+    });
+  
+    // Clear the selection after approval
     this.clearSelection();
   }
-
+  
   ngAfterViewInit(): void {
     // Initialize all tooltips on the page
     ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
+  // rejectLeaves() {
+  //   this.selectedRequests.forEach(async request => {
+  //     if(request.leaveStatus!='Reject'){
+  //       let result =  await this.rejectSingleLeave(request);
+  //       console.log("result : ",result)
+  //     }
+  //   });
+  //   this.clearSelection();
+  // }
+
   rejectLeaves() {
-    this.selectedRequests.forEach(async request => {
-      if(request.leaveStatus!='Reject'){
-        let result =  await this.rejectSingleLeave(request);
-        console.log("result : ",result)
-      }
+    // Filter the selected requests to include only those with 'Pending' status
+    const pendingRequests = this.selectedRequests.filter(request => request.leaveStatus === 'Pending');
+    
+    // If there are no pending requests selected, show an alert
+    if (pendingRequests.length === 0) {
+      this.errorMessage = 'No pending leave requests selected for rejection.';
+      // alert('No pending leave requests selected for rejection.');
+      return;
+    }
+  
+    // Process each pending request to reject it
+    pendingRequests.forEach(async (request) => {
+      let result = await this.rejectSingleLeave(request);
+      console.log("result: ", result);
     });
+  
+    // Clear the selection after rejection
     this.clearSelection();
   }
-
+  
    async approveSingleLeave(request: any) {
     if(request.leaveStatus !='Approved'){
       let payload = {
@@ -222,7 +265,7 @@ export class LeaveApprovalComponent implements OnInit, AfterViewInit {
         } 
         else
         alert(response.message);
-        // this.successMessage = response.message;
+        // this.successMessage = response.message;aaaaaaaaaaaaf
       },
       error: (error:any) => {
        alert(error.message);

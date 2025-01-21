@@ -43,7 +43,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
+    
     // localStorage.removeItem('token');
     // localStorage.clear();
     // Retrieve the token from localStorage
@@ -61,7 +61,8 @@ export class AppComponent {
     this.isSnapshot = false;
   } else {
     this.IsLogin = false;
-    this.router.navigate(['/login']); // Redirect to login if no token
+    this.router.navigate(['/login']);
+    // window.location.reload(); // Redirect to login if no token
   }
 
     // Listen for modal state changes and trigger modal open on change
@@ -99,7 +100,9 @@ export class AppComponent {
     if (!screen.tabs || screen.tabs.length === 0) {
       // If it's the Dashboard screen, redirect to home route
       if (screen.screenDisplayName === 'Dashboard') {
-        this.router.navigate(['/home']);  // Redirect to home route
+        // this.router.navigate(['/home']);  // Redirect to home route
+        window.location.href = '/home'; // Full page reload
+        // window.location.reload();
         
       } else {
         screen.expanded = !screen.expanded;

@@ -185,10 +185,13 @@ export class HeaderComponent {
         
         if (res.status === 'Success') {
           this.authService.clearSession();
+          console.log('Session cleared.');
           console.log('Navigating to login page...');
           this.isLogin.emit({ isLoggedIn: false, screens: [], notificationCount: this.notificationCount});
           this.router.navigate(['']).then(() => {
             console.log('Navigation successful!');
+              // Force page reload to ensure clean state
+              window.location.reload();
           }).catch((error) => {
             console.error('Navigation error:', error);
           });

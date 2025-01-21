@@ -140,8 +140,12 @@ export class LeaveApplyComponent {
     this.fetchCompOffLeaves(this.employeeCode);
     this.loadHolidays();
     this.charCount = this.leaveForm.get('reason')?.value?.length || 0;
+    
   }
-
+  refreshPage(): void {
+    // Refresh the page
+    window.location.reload();
+  }
 
   // openDatepicker() {
   //   this.datepicker.show();
@@ -547,11 +551,16 @@ Object.keys(this.leaveForm.controls).forEach(key => {
           this.leaveForm.get('workedDates')?.updateValueAndValidity();
         }
         this.resetForm();
+        // window.location.reload(); 
+        this.fetchLeaveData(this.employeeCode);
+        this.resetForm();
       },
       error: (error: any) => {
         const errorMessage = error.error?.message || 'Error applying leave. Please try again later.';
         console.error('Error applying leave:', error);
         this.errorMessage = errorMessage;
+        this.resetForm();
+        window.location.reload(); 
       }
     });
   }

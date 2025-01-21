@@ -266,7 +266,7 @@
               </td>
               <td>{{ request.leaveReason }}</td>
               <td [ngClass]="getStatusClass(request.leaveStatus)">{{ request.leaveStatus }}</td>
-              <td>
+              <!-- <td>
                 <span data-toggle="tooltip" data-html="true" data-placement="top" [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Reject'">
                   <button class="btn btn-reject" [disabled]="request.leaveStatus == 'Reject'" (click)="rejectSingleLeave(request)">
                     Reject
@@ -277,9 +277,35 @@
                     Approve
                   </button>
                 </span>
-                <!-- <button class="btn btn-reject" data-toggle="tooltip" data-html="true" title="request.leaveStatus =='Reject'" [disabled]="request.leaveStatus =='Reject'" (click)="rejectSingleLeave(request)">Reject</button> -->
-                <!-- <button class="btn btn-approve" data-toggle="tooltip" data-html="true" title="" [disabled]="request.leaveStatus =='Approved'" (click)="approveSingleLeave(request)">Approve</button> -->
+      
+              </td> -->
+
+              <td>
+                <span 
+                  data-toggle="tooltip" 
+                  data-html="true" 
+                  data-placement="top" 
+                  [title]="request.leaveStatus == 'Reject' ? 'Already Rejected' : request.leaveStatus == 'Approved' ? 'Already Approved' : 'Click to Reject'">
+                  <button 
+                    class="btn btn-reject" 
+                    [disabled]="request.leaveStatus == 'Reject' || request.leaveStatus == 'Approved'" 
+                    (click)="rejectSingleLeave(request)">
+                    Reject
+                  </button>
+                </span>
+                <span 
+                  data-toggle="tooltip" 
+                  data-html="true" 
+                  [title]="request.leaveStatus == 'Approved' ? 'Already Approved. You cannot approve it again.' : request.leaveStatus == 'Reject' ? 'Already Rejected' : 'Click to Approve'">
+                  <button 
+                    class="btn btn-approve" 
+                    [disabled]="request.leaveStatus == 'Approved' || request.leaveStatus == 'Reject'" 
+                    (click)="approveSingleLeave(request)">
+                    Approve
+                  </button>
+                </span>
               </td>
+              
             </tr>
             <tr *ngIf="leaveRequests.length<=0">
               <td colspan="7" >No Records Found!!!</td>

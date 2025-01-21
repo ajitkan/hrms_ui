@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { DynamicFormService } from 'src/app/service/DynamicFormService/dynamic-form-service.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-bank-details',
@@ -28,7 +29,7 @@ export class BankDetailsComponent {
     public dynamicFormService: DynamicFormService,
     private route: ActivatedRoute,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,private location: Location
   ) {
     this.bankdetailsForm = this.fb.group({});
   }
@@ -118,22 +119,75 @@ export class BankDetailsComponent {
     this.bankdetailsForm = this.fb.group(formGroup);
   }
 
+  // onButtonClick(fieldTitle: string): void {
+  //   console.log('Button clicked with fieldTitle:', fieldTitle);
+
+  //   // Set recordType based on button clicked
+  //   this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
+
+  //   if (fieldTitle === 'Save & Next') {
+  //     this.onSubmit('Save & Next');
+  //   } else if (fieldTitle === 'Save As Draft') {
+  //     this.onSubmit('Save As Draft');
+  //   } else {
+  //     console.log('Unknown action:', fieldTitle);
+  //   }
+  // }
+
   onButtonClick(fieldTitle: string): void {
     console.log('Button clicked with fieldTitle:', fieldTitle);
-
+  
     // Set recordType based on button clicked
     this.recordType = fieldTitle === 'Save & Next' ? null : 'Staging';
-
-    if (fieldTitle === 'Save & Next') {
-      this.onSubmit('Save & Next');
-    } else if (fieldTitle === 'Save As Draft') {
-      this.onSubmit('Save As Draft');
+  
+    if (fieldTitle === 'Save & Next' || fieldTitle === 'Save As Draft' || fieldTitle === 'Back') {
+      this.onSubmit(fieldTitle);
     } else {
       console.log('Unknown action:', fieldTitle);
     }
   }
 
+  // onSubmit(fieldTitle: string): void {
+  //   if (this.bankdetailsForm.valid || fieldTitle === 'Save As Draft') {
+  //     const formValues = this.bankdetailsForm.getRawValue();
+  //     const extraData = {
+  //       employeeID: formValues.employeeID,
+  //       employeeCode: this.employeeCode,
+  //       createdBy: this.employeeCode
+  //     };
+  //     const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
+
+  //     this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
+  //       next: (response: { message: string | null }) => {
+  //         if (fieldTitle === 'Save & Next') {
+  //           this.alertMessage = response.message || 'Saved successfully';
+  //           this.alertType = 'success';
+  //           // this.contactForm.disable();
+  //           // this.contactForm.reset();
+  //           const nextTabID = this.getNextTabID(this.tabID);
+  //           this.router.navigate(['/education-details'], { queryParams: { tabID: nextTabID } });
+  //         } else if (fieldTitle === 'Save As Draft') {
+  //           this.alertMessage = 'Draft saved successfully.';
+  //           this.alertType = 'success';
+  //         }
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Error:', error);
+  //         this.alertMessage = fieldTitle === 'Save & Next'
+  //           ? 'Something went wrong; please try again later.'
+  //           : 'Failed to save draft; please try again later.';
+  //         this.alertType = 'error';
+  //       }
+  //     });
+  //   } else {
+  //     this.alertMessage = 'Please correct the errors in the form.';
+  //     this.alertType = 'error';
+  //   }
+  // }
   onSubmit(fieldTitle: string): void {
+    console.log('Form Valid:', this.bankdetailsForm.valid);
+    console.log('Form Errors:', this.bankdetailsForm.errors);
+  
     if (this.bankdetailsForm.valid || fieldTitle === 'Save As Draft') {
       const formValues = this.bankdetailsForm.getRawValue();
       const extraData = {
@@ -142,19 +196,24 @@ export class BankDetailsComponent {
         createdBy: this.employeeCode
       };
       const details = this.dynamicFormService.convertFormValuesToDetails(formValues, extraData);
-
+  
       this.dynamicFormService.submitForm(details, this.tabID, this.recordType).subscribe({
         next: (response: { message: string | null }) => {
           if (fieldTitle === 'Save & Next') {
             this.alertMessage = response.message || 'Saved successfully';
             this.alertType = 'success';
-            // this.contactForm.disable();
-            // this.contactForm.reset();
+            this.bankdetailsForm.disable();
+            this.bankdetailsForm.reset(); // This could potentially affect the form validity
             const nextTabID = this.getNextTabID(this.tabID);
-            this.router.navigate(['/education-details'], { queryParams: { tabID: nextTabID } });
+            this.router.navigate(['/bank-details'], { queryParams: { tabID: nextTabID } });
           } else if (fieldTitle === 'Save As Draft') {
             this.alertMessage = 'Draft saved successfully.';
             this.alertType = 'success';
+          } else if (fieldTitle === 'Back') {
+            this.alertMessage = 'Navigating to dashboard.';
+            this.alertType = 'success';
+            // this.router.navigate(['/home']);
+            this.location.back();
           }
         },
         error: (error: any) => {
@@ -170,7 +229,6 @@ export class BankDetailsComponent {
       this.alertType = 'error';
     }
   }
-
 
   fetchEmployeeDetails(): void {
     this.dynamicFormService.fetchEmployeeDetails(this.tabID, this.employeeCode, this.recordType)
