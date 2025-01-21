@@ -37,7 +37,7 @@ approveSingleResignation(request: any): void {
     (response) => {
       console.log('Approval response:', response);
       // Update the status in your local state
-      request.status = 'Approved'; // Update the status locally
+       request.status = 'Approved'; 
     },
     (error) => {
       console.error('Error approving resignation:', error);
@@ -66,8 +66,14 @@ fetchResignationHistory(): void {
       if (response && response.resignationDetails) {
         this.resignationRequests = response.resignationDetails.map((request:any) => ({
           ...request,
-          status: request.finalStatusText || 'Null'  // Use finalStatusText for status
+          status: request.finalStatusText || 'Pending',
+          
+          
+          // Use finalStatusText for status
+          // status: request.status || 'Pending',
         }));
+        console.log('---this.resignationRequests->',this.resignationRequests);
+        
       } else {
         this.resignationRequests = [];
       }

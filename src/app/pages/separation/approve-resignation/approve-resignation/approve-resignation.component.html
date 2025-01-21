@@ -1,25 +1,25 @@
-<!-- <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <div class="full-width" id="table-column">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Resignation Details</h3>
-                <div>
+                <!-- <div>
                     <span data-toggle="tooltip" data-placement="top" data-html="true" title="Click to Reject">
                         <button class="btn btn-reject">Reject</button>
                     </span>
                     <span data-toggle="tooltip" data-placement="top" data-html="true" title="Click to Approve">
                         <button class="btn btn-approve">Approve</button>
                     </span>
-                </div>
+                </div> -->
             </div>
 
            
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <!-- <th scope="col">
                             <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
-                        </th>
+                        </th> -->
                         <th scope="col">Employee Name</th>
                         <th scope="col">Resignation Date</th>
                         <th scope="col">Last Working Day</th>
@@ -28,7 +28,43 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    <tr *ngFor="let request of resignationRequests">
+                      <td>{{ request.fullName }}</td>
+                      <td>{{ request.resignationDate | date: 'MMM dd, yyyy' }}</td>
+                      <td>{{ request.lastWorkingDay | date: 'MMM dd, yyyy' }}</td>
+                      <td>{{ request.resignationReason }}</td>
+                      <td>{{ request.status || 'Pending' }}</td> <!-- Default to 'Pending' if status is not set -->
+                      <td>
+                        <!-- Reject Button -->
+                        <span data-toggle="tooltip" data-placement="top"
+                          [title]="request.status === 'Rejected' || request.status === 'Approved' ? 'Action already taken' : 'Click to Reject'">
+                          <button class="btn btn-reject"
+                            [disabled]="request.status === 'Rejected' || request.status === 'Approved'"
+                            (click)="rejectSingleResignation(request)">
+                            Reject
+                          </button>
+                        </span>
+                  
+                        <!-- Approve Button -->
+                        <span data-toggle="tooltip" data-placement="top"
+                          [title]="request.status === 'Rejected' || request.status === 'Approved' ? 'Action already taken' : 'Click to Approve'">
+                          <button class="btn btn-approve"
+                            [disabled]="request.status === 'Rejected' || request.status === 'Approved'"
+                            (click)="approveSingleResignation(request)">
+                            Approve
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr *ngIf="resignationRequests.length <= 0">
+                      <td colspan="6">No Records Found!!!</td>
+                    </tr>
+                  </tbody>
+                  
+                
+                <!-- <tbody>
                     <tr *ngFor="let request of resignationRequests">
                         <td>
                             <input type="checkbox" [(ngModel)]="request.selected" (change)="onCheckboxChange(request)">
@@ -58,7 +94,7 @@
                     <tr *ngIf="resignationRequests.length <= 0">
                         <td colspan="7">No Records Found!!!</td>
                     </tr>
-                </tbody>
+                </tbody> -->
 
             </table>
 
@@ -74,11 +110,11 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="full-width" id="table-column">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -93,7 +129,7 @@
                 </div>
             </div>
 
-            <!-- Resignation Request Table -->
+           
             <table class="table table-sm">
                 <thead>
                     <tr>
@@ -119,7 +155,7 @@
                         <td>{{ request.resignationReason }}</td>
                         <td>{{ request.status }}</td>
                         <td>
-                            <!-- View Button -->
+                           
                             <span data-toggle="tooltip" data-placement="top" title="Click to View">
                                 <button class="btn btn-view" (click)="viewResignation(request)">
                                     View
@@ -133,7 +169,7 @@
                 </tbody>
             </table>
 
-            <!-- Pagination -->
+         
             <div class="pagination" *ngIf="resignationRequests.length > 1">
                 <button [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">Previous</button>
                 <button *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="goToPage(page)">
@@ -144,4 +180,4 @@
         </div>
     </div>
 </div>
-    
+     -->
