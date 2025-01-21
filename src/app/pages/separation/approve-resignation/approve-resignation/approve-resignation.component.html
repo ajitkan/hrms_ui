@@ -1,5 +1,16 @@
 <div class="container-fluid">
+     <!-- Success Message -->
+     <div *ngIf="successMessage" class="alert alert-success mt-2">
+        {{ successMessage }}
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+        {{ errorMessage }}
+      </div>
     <div class="row">
+
+        
         <div class="full-width" id="table-column">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Resignation Details</h3>
@@ -13,7 +24,7 @@
                 </div> -->
             </div>
 
-           
+               
             <table class="table table-striped">
                 <thead>
                     <tr>

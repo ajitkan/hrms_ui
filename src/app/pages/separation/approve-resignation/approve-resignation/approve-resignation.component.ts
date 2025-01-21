@@ -16,6 +16,8 @@ currentPage = 1;  // For pagination
 selectAll: boolean = false;
 requestId = '1';
 token:any;
+successMessage: string = '';
+  errorMessage: string = '';
 constructor(private resignationService: SeparationService,private router:Router) {}
 
 ngOnInit(): void {
@@ -36,8 +38,10 @@ approveSingleResignation(request: any): void {
   this.resignationService.approveOrRejectResignation(this.employeeCode, this.requestId, 'Approved').subscribe(
     (response) => {
       console.log('Approval response:', response);
-      // Update the status in your local state
+  
        request.status = 'Approved'; 
+      //  this.successMessage = response.message || 'Resignation approved successfully!';
+       this.successMessage = 'Resignation approved successfully!';
     },
     (error) => {
       console.error('Error approving resignation:', error);
@@ -50,8 +54,9 @@ rejectSingleResignation(request: any): void {
   this.resignationService.approveOrRejectResignation(this.employeeCode, this.requestId, 'Reject').subscribe(
     (response) => {
       console.log('Rejection response:', response);
-      // Update the status in your local state
-      request.status = 'Rejected'; // Update the status locally
+      request.status = 'Rejected'; 
+      // this.successMessage = response.message || 'Resignation rejected successfully!';
+      this.successMessage = 'Resignation rejected successfully!';
     },
     (error) => {
       console.error('Error rejecting resignation:', error);
